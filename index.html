@@ -506,24 +506,22 @@ canvas {
 
 .captionMobile {
 	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383);
+	background-image: linear-gradient(to right, #fff, #ff3131);
 	background-clip: text;
 	-webkit-background-clip: text;
-  width: auto; /* Set width to auto to allow the element to take its content's width */
+  width: 130vw; /* Set width to auto to allow the element to take its content's width */
 	line-height: 3vh;
 	font-size: 3vh;
 	position:fixed;
 	z-index: 99;
-  left: 33%; /* Set the left position to 50% */
-  transform: translateX(-50%); /* Use transform to horizontally center the element */
-
+  left: 78vw; /* Set the left position to 50% */
+  transform: translateX(-70vw); /* Use transform to horizontally center the element */
 	padding-top: 23vh;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out; /* Add transition for ease-out effect */
 	visibility: hidden;
 }
 .captionMobile .first-line {
-width: 100vw;
-margin-left: 15vw;
+margin-left: 20vw;
 }
 
 .text-box {
@@ -1598,7 +1596,7 @@ visibility: visible;
   <input type="checkbox" id="menu_trigger" class="menu-trigger">
   <div class="overlay">
     <ul class="menu-links">
-      <li><a  href="#Home">Home</a></li>
+      <li><a id="link1" href="#Home">Home</a></li>
       <li><a  href="#HowItWorks">How it works</a></li>
       <li><a  href="#reachus">learn more</a></li>
       <li><a  class="red" href="#">TRADE</a></li>
