@@ -1461,7 +1461,7 @@ margin-left: 15vw;
   justify-content: center;
   align-items: center;
   transition: width 0s linear var(--overlay-animation-timing), height 0s linear var(--overlay-animation-timing);
-  animation: overlay-hide var(--overlay-animation-timing) ease-out forwards;
+  animation: var(--overlay-animation-timing) ease-out forwards;
 }
 
 .menu-trigger:checked + .overlay {
@@ -1470,28 +1470,9 @@ margin-left: 15vw;
   height: 100%;
   backdrop-filter: blur(10px);
   transition: none;
-  animation: overlay-mask var(--overlay-animation-timing) ease-out forwards;
+  animation:  var(--overlay-animation-timing) ease-out forwards;
 }
 
-@keyframes overlay-mask {
-  to {
-    background-image: radial-gradient(
-      circle at calc(100vw - var(--overlay-starting-position-x)) var(--overlay-starting-position-y),
-      var(--overlay-background-color),
-      transparent
-    );
-  }
-}
-
-@keyframes overlay-hide {
-  to {
-    background-image: radial-gradient(
-      circle at calc(100vw - var(--overlay-starting-position-x)) var(--overlay-starting-position-y),
-      var(--overlay-background-color),
-      transparent
-    );
-  }
-}
 
 /* .menu-links */
 .menu-links {
