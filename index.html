@@ -1455,7 +1455,7 @@ margin-left: 15vw;
   width: 0;
   height: 0;
   position: fixed;
-  z-index: 100;
+  z-index: 200;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -2627,7 +2627,7 @@ vec3 effect(vec2 p) {
   const float fov = tan(TAU / 6.0);
   float mobileMode;
 float mobileRes = iResolution.x/iResolution.y;
-if (mobileRes<1.1){
+if (mobileRes<1.0){
   mobileMode = 1.0;
 }else{
   mobileMode = 0.0;
