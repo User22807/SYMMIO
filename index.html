@@ -2556,6 +2556,7 @@ vec3 groundRender(vec3 col, vec3 ro, vec3 rd) {
   vec3 rcol = outerSkyRender(grr,grr);
   rcol = tradeTriRender(rcol, gp, grr);
 
+
   //ground horizon reflection color filter
   rcol += hsv2rgb(vec3(1.0, 0.2, 0.2)) ;
   
@@ -2591,8 +2592,16 @@ vec3 render(vec3 ro, vec3 rd, vec2 p) {
   vec3 col = outerSkyRender(rd,rd);
   col = groundRender(col, ro, rd);
   col = tradeTriRender(col, ro, rd);
-
-
+  if (iAnimProgress_1.x>0.1&&iAnimProgress_3.x<0.5){
+  col = triRender_left(col, ro, rd);
+  col = triRender_right_4(col, ro, rd);
+  col = triRender_right_3(col, ro, rd);
+  col = triRender_right_2(col, ro, rd);
+  col = triRender_right(col, ro, rd);
+}
+if (iAnimProgress_3.x>0.5&&iAnimProgress_3.y<0.5){
+  col = triRender_Liquidator(col, ro, rd,p);
+}
   return col;
 }
 
