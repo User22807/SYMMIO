@@ -1460,17 +1460,14 @@ margin-left: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: width 0s linear var(--overlay-animation-timing), height 0s linear var(--overlay-animation-timing);
-  animation: var(--overlay-animation-timing) ease-out forwards;
 }
 
 .menu-trigger:checked + .overlay {
-  background-color: #000000ae;
+  background-color: #00000090;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   transition: none;
-  animation:  var(--overlay-animation-timing) ease-out forwards;
 }
 
 
@@ -1486,9 +1483,9 @@ margin-left: 15vw;
 }
 
 .menu-links li a {
-  font-family: Montserrat, sans-serif;
-  color: var(--menu-link-default-color);
-  font-weight: bold;
+  font-family: "Manrope", sans-serif;
+  font-weight: 300;
+  font-size: 8vw;  color: var(--menu-link-default-color);
   display: block;
   text-decoration: none;
   text-shadow: 0 -1px var(--menu-link-emboss-color), 0 0 0 var(--menu-link-shine-color);
