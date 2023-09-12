@@ -509,13 +509,15 @@ canvas {
 	background-image: linear-gradient(to right, #fff, #ff8383);
 	background-clip: text;
 	-webkit-background-clip: text;
-	width: 100vw;
+  width: auto; /* Set width to auto to allow the element to take its content's width */
 	line-height: 3vh;
 	font-size: 3vh;
 	position:fixed;
 	z-index: 99;
-	transform: translate(9vw,-50%);
-	padding-top: 55vh;
+  left: 33%; /* Set the left position to 50% */
+  transform: translateX(-50%); /* Use transform to horizontally center the element */
+
+	padding-top: 23vh;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out; /* Add transition for ease-out effect */
 	visibility: hidden;
 }
@@ -1596,10 +1598,10 @@ visibility: visible;
   <input type="checkbox" id="menu_trigger" class="menu-trigger">
   <div class="overlay">
     <ul class="menu-links">
-      <li><a id="link1" href="#Home">Home</a></li>
-      <li><a id="link2" href="#HowItWorks">How it works</a></li>
-      <li><a id="link3" href="#reachus">learn more</a></li>
-      <li><a id="link4" class="red" href="#">TRADE</a></li>
+      <li><a  href="#Home">Home</a></li>
+      <li><a  href="#HowItWorks">How it works</a></li>
+      <li><a  href="#reachus">learn more</a></li>
+      <li><a  class="red" href="#">TRADE</a></li>
     </ul>
   </div>
   <label for="menu_trigger" class="hamburger-menu">
@@ -2080,6 +2082,31 @@ vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
   col = mix(col,vec3(3.0,2.0,2.0),iAnimProgress_2.y*tradeTextCol*(iAnimProgress_2.z-iAnimProgress_3.x)*(sin((iAnimProgress_2.z)*3.5)));
 
 
+  print_pos -= print_pos;
+  print_pos -= vec2(-23.0,43.0);
+  print_pos.x += iAnimProgress_3.y*13.0;
+  float col2;
+  float ScaleZ = 90.0;
+  col2 += char(ch_P,p*ScaleZ);
+  col2 += char(ch_A,p*ScaleZ);
+  col2 += char(ch_R,p*ScaleZ);
+  col2 += char(ch_T,p*ScaleZ);
+  col2 += char(ch_Y,p*ScaleZ);
+  col2 += char(ch_spc,p*ScaleZ);
+  col2 += char(ch_B,p*ScaleZ);
+  col = mix(col,vec3(3.0,0.3,0.3),col2*(iAnimProgress_3.x-iAnimProgress_3.z));
+ 
+  print_pos -= print_pos;
+  print_pos -= vec2(61.0,43.0);
+  float col3;
+  col3 += char(ch_P,p*ScaleZ);
+  col3 += char(ch_A,p*ScaleZ);
+  col3 += char(ch_R,p*ScaleZ);
+  col3 += char(ch_T,p*ScaleZ);
+  col3 += char(ch_Y,p*ScaleZ);
+  col3 += char(ch_spc,p*ScaleZ);
+  col3 += char(ch_A,p*ScaleZ);
+  col = mix(col,vec3(3.0,1.0,1.0),col3*(iAnimProgress_3.x-iAnimProgress_3.z));
 
     return col;
 }
@@ -2562,11 +2589,10 @@ vec3 groundRender(vec3 col, vec3 ro, vec3 rd) {
   
 //tiles calcs
   col = gcol / max(ggd, 0.25 * dfy) * exp((-0.5-1.0*(iAnimProgress_1.x*0.5-iAnimProgress_3.x*0.5 ))* gpd);
-  //ground horizon reflection color filter
-  rcol += hsv2rgb(vec3(0.0, 0.0, 0.0)) ;
   //ground reflection factor
+  if (iAnimProgress_1.x<=1.0){
   col += rcol * gpfre/(9.0+(iAnimProgress_1.x*9.0)-iAnimProgress_3.x*0.0);
-
+}
   
   return col;
 }
