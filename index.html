@@ -2055,7 +2055,7 @@ vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
       float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
       col = mix(col, rightHalfColor, blendFactor);
   }
-
+if (iAnimProgress_1.x>0.5&& iAnimProgress_3.x<0.1){
   print_pos -= print_pos;
   print_pos -= vec2(32.0,-34.0);
   float colT;
@@ -2072,21 +2072,7 @@ vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
   colT += char(ch_O,p*ScaleT);
   colT += char(ch_L,p*ScaleT);
   col = mix(col,vec3(3.0,2.0,2.0),colT*(iAnimProgress_1.x-(iAnimProgress_1.y*0.8)+(iAnimProgress_1.z*0.8)-iAnimProgress_3.x));
-
-  print_pos -= print_pos;
-  print_pos -= vec2(20.0,-3.0);
-  float tradeTextCol;
-  float ScaleS = 65.0;
-  tradeTextCol += char(ch_E,p*ScaleS);
-  tradeTextCol += char(ch_X,p*ScaleS);
-  tradeTextCol += char(ch_E,p*ScaleS);
-  tradeTextCol += char(ch_C,p*ScaleS);
-  tradeTextCol += char(ch_U,p*ScaleS);
-  tradeTextCol += char(ch_T,p*ScaleS);
-  tradeTextCol += char(ch_E,p*ScaleS);
-  col = mix(col,vec3(3.0,2.0,2.0),iAnimProgress_2.y*tradeTextCol*(iAnimProgress_2.z-iAnimProgress_3.x)*(sin((iAnimProgress_2.z)*3.5)));
-
-
+}
   print_pos -= print_pos;
   print_pos -= vec2(-23.0,43.0);
   print_pos.x += iAnimProgress_3.y*13.0;
@@ -2195,6 +2181,22 @@ vec3 triRender_left(vec3 col, vec3 ro, vec3 rd) {
   colIntentB += char(ch_T,p*ScaleIntentB);
 
   col = mix(col,vec3(3.0,1.0,1.0),colIntentB*(iAnimProgress_2.z-iAnimProgress_3.x));
+
+
+  
+  print_pos -= print_pos;
+  print_pos -= vec2(-20.0,-23.0);
+  float tradeTextCol;
+  float ScaleS = 40.0;
+  tradeTextCol += char(ch_E,p*ScaleS);
+  tradeTextCol += char(ch_X,p*ScaleS);
+  tradeTextCol += char(ch_E,p*ScaleS);
+  tradeTextCol += char(ch_C,p*ScaleS);
+  tradeTextCol += char(ch_U,p*ScaleS);
+  tradeTextCol += char(ch_T,p*ScaleS);
+  tradeTextCol += char(ch_E,p*ScaleS);
+  col = mix(col,vec3(3.0,2.0,2.0),iAnimProgress_2.y*tradeTextCol*(iAnimProgress_2.z-iAnimProgress_3.x)*(sin((iAnimProgress_2.z)*3.5)));
+
 
   return col;
 }
