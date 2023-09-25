@@ -1989,349 +1989,6 @@ float equilateralTriangle(vec2 p) {
 }
 
 
-
-vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
-    // Triangle fill color
-    vec3 fillColor = vec3(0.005, 0.0, 0.0);
-    // triangle calcs
-    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-    vec3 pp = ro + rd * tpd;
-
-  vec2 p2 = pp.xy;
-  p2.x = -p2.x ;
-  // triangle resize
-  p2 *= 0.5;
-  // triangle offset
-  p2.y -= 0.58;
-  p2.x += 0.002;
-  p2.x -= 0.0 + iAnimProgress_3.y * 0.1 - iAnimProgress_3.z * 0.1;
-  // triangle inner glow factor
-  vec3 gcol2 = hsv2rgb(vec3(1.0,
-   0.8-(iAnimProgress_1.x*0.4)+(iAnimProgress_3.x*0.4),
-   0.006-iAnimProgress_1.x*0.0035-iAnimProgress_1.y*0.0015+iAnimProgress_1.z*0.0015));
-  // triangle displacement
-  float dt2 = equilateralTriangle(p2);
-  // Smooth the cut edge of the triangle
-  if (p2.x > 0.0) {
-    // Left half of the triangle
-    vec3 leftHalfColor = dt2 < 0.0 ? fillColor : col;
-    leftHalfColor += (gcol2 / max(abs(dt2), 0.001)) * smoothstep(0.5, 0.0, dt2);
-
-    // Right half of the triangle (unchanged)
-    col = col;
-
-    // Blend the two halves together
-    float blendFactor2 = smoothstep(0.0, 0.003, p2.x); // Adjust the blend factor as needed
-    col = mix(col, leftHalfColor, blendFactor2);
-}
-
-    vec2 p = pp.xy;
-    p.x = -p.x ;
-
-    // triangle resize
-    p *= 0.5;
-    // triangle y offset
-    p.y -= 0.58;
-    p.x -= 0.002;
-
-    p.x += 0.0+iAnimProgress_3.y*0.08-iAnimProgress_3.z*0.08;
-
-     // triangle inner glow factor
-    vec3 gcol = hsv2rgb(vec3(1.0,
-    0.8-(iAnimProgress_1.x*0.4)+(iAnimProgress_3.x*0.4),
-    0.006-iAnimProgress_1.x*0.0035-iAnimProgress_1.y*0.0015+iAnimProgress_1.z*0.0015));
-   // triangle displacement
-    float dt = equilateralTriangle(p);
-    
-    // Split the triangle by adding a condition based on the y-coordinate of the point.
-    // Smooth the right half of the triangle
-    if (p.x < 0.0) {
-      // Right half of the triangle
-      vec3 rightHalfColor = dt < 0.0 ? fillColor : col;
-      rightHalfColor += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt);
-
-      // Blend the two halves together
-      float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
-      col = mix(col, rightHalfColor, blendFactor);
-  }
-if (iAnimProgress_1.x>0.5&& iAnimProgress_3.x<0.1){
-  print_pos -= print_pos;
-  print_pos -= vec2(32.0,-34.0);
-  float colT;
-  float ScaleT = 95.0;
-  colT += char(ch_I,p*ScaleT);
-  colT += char(ch_N,p*ScaleT);
-  colT += char(ch_T,p*ScaleT);
-  colT += char(ch_E,p*ScaleT);
-  colT += char(ch_N,p*ScaleT);
-  colT += char(ch_T,p*ScaleT);
-  colT += char(ch_spc,p*ScaleT);
-  colT += char(ch_P,p*ScaleT);
-  colT += char(ch_O,p*ScaleT);
-  colT += char(ch_O,p*ScaleT);
-  colT += char(ch_L,p*ScaleT);
-  col = mix(col,vec3(3.0,2.0,2.0),colT*(iAnimProgress_1.x-(iAnimProgress_1.y*0.8)+(iAnimProgress_1.z*0.8)-iAnimProgress_3.x));
-}
-  print_pos -= print_pos;
-  print_pos -= vec2(-23.0,43.0);
-  print_pos.x += iAnimProgress_3.y*13.0;
-  float col2;
-  float ScaleZ = 90.0;
-  col2 += char(ch_P,p*ScaleZ);
-  col2 += char(ch_A,p*ScaleZ);
-  col2 += char(ch_R,p*ScaleZ);
-  col2 += char(ch_T,p*ScaleZ);
-  col2 += char(ch_Y,p*ScaleZ);
-  col2 += char(ch_spc,p*ScaleZ);
-  col2 += char(ch_B,p*ScaleZ);
-  col = mix(col,vec3(3.0,0.3,0.3),col2*(iAnimProgress_3.x-iAnimProgress_3.z));
- 
-  print_pos -= print_pos;
-  print_pos -= vec2(61.0,43.0);
-  float col3;
-  col3 += char(ch_P,p*ScaleZ);
-  col3 += char(ch_A,p*ScaleZ);
-  col3 += char(ch_R,p*ScaleZ);
-  col3 += char(ch_T,p*ScaleZ);
-  col3 += char(ch_Y,p*ScaleZ);
-  col3 += char(ch_spc,p*ScaleZ);
-  col3 += char(ch_A,p*ScaleZ);
-  col = mix(col,vec3(3.0,1.0,1.0),col3*(iAnimProgress_3.x-iAnimProgress_3.z));
-
-    return col;
-}
-
-vec3 triRender_left(vec3 col, vec3 ro, vec3 rd) {
-  // Triangle fill color
-  vec3 fillColor = vec3(0.009, 0.0, 0.0);
-  // triangle calcs
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
-  // triangle resize
-  p *= 1.0;
-  // triangle offset
-  p.y -= 0.58;
-  p.x -= 1.0 + iAnimProgress_1.x * 1.00 - iAnimProgress_1.z * 1.0;
-  // triangle inner glow factor
-  p.x = -p.x;
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.8, 0.006));
-  // triangle displacement
-  float dt = equilateralTriangle(p);
-  // Triangle visibility parameter
-  float visibility = 1.0-(iAnimProgress_1.x*0.9)+(iAnimProgress_3.x*0.9);
-  if (dt < 0.0) {col = mix(fillColor, col, visibility);}
-  // triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * (iAnimProgress_1.x*0.8-iAnimProgress_3.x*0.8);
-
-  print_pos -= print_pos;
-  print_pos -= vec2(23.0-(iAnimProgress_2.z*100.0),8.0);
-  float colIntentA;
-  float ScaleIntentA = 50.0;
-  colIntentA += char(ch_I,p*ScaleIntentA);
-  colIntentA += char(ch_N,p*ScaleIntentA);
-  colIntentA += char(ch_T,p*ScaleIntentA);
-  colIntentA += char(ch_E,p*ScaleIntentA);
-  colIntentA += char(ch_N,p*ScaleIntentA);
-  colIntentA += char(ch_T,p*ScaleIntentA);
-  colIntentA += char(ch_spc,p*ScaleIntentA);
-  colIntentA += char(ch_A,p*ScaleIntentA);
-  col = mix(col,vec3(3.0,1.0,1.0),colIntentA*(iAnimProgress_1.y-iAnimProgress_2.z));
-
-  print_pos -= print_pos;
-  print_pos -= vec2(10.0,20.0);
-  float colYOU;
-  float ScaleT = 50.0;
-  colYOU += char(ch_Y,p*ScaleT);
-  colYOU += char(ch_O,p*ScaleT);
-  colYOU += char(ch_U,p*ScaleT);
-  col = mix(col,vec3(3.0,1.0,1.0),colYOU*(iAnimProgress_1.x-iAnimProgress_1.z));
-
-  print_pos -= print_pos;
-  print_pos -= vec2(21.0,20.0);
-  float col2;
-  float ScaleZ = 50.0;
-  col2 += char(ch_P,p*ScaleZ);
-  col2 += char(ch_A,p*ScaleZ);
-  col2 += char(ch_R,p*ScaleZ);
-  col2 += char(ch_T,p*ScaleZ);
-  col2 += char(ch_Y,p*ScaleZ);
-  col2 += char(ch_spc,p*ScaleZ);
-  col2 += char(ch_A,p*ScaleZ);
-  col = mix(col,vec3(3.0,1.0,1.0),col2*(iAnimProgress_1.z-iAnimProgress_3.z));
-
-  print_pos -= print_pos;
-  print_pos -= vec2(15.0-(iAnimProgress_2.z*100.0),8.0);
-  float colIntentB;
-  float ScaleIntentB = 60.0;
-  
-  colIntentB += char(ch_crs,p*ScaleIntentB);
-  colIntentB += char(ch_1,p*ScaleIntentB);
-  colIntentB += char(ch_spc,p*ScaleIntentB);
-  colIntentB += char(ch_B,p*ScaleIntentB);
-  colIntentB += char(ch_T,p*ScaleIntentB);
-  colIntentB += char(ch_C,p*ScaleIntentB);
-  colIntentB += char(ch_spc,p*ScaleIntentB);
-  colIntentB += char(ch_S,p*ScaleIntentB);
-  colIntentB += char(ch_H,p*ScaleIntentB);
-  colIntentB += char(ch_O,p*ScaleIntentB);
-  colIntentB += char(ch_R,p*ScaleIntentB);
-  colIntentB += char(ch_T,p*ScaleIntentB);
-
-  col = mix(col,vec3(3.0,1.0,1.0),colIntentB*(iAnimProgress_2.z-iAnimProgress_3.x));
-
-
-  
-  print_pos -= print_pos;
-  print_pos -= vec2(-20.0,-23.0);
-  float tradeTextCol;
-  float ScaleS = 40.0;
-  tradeTextCol += char(ch_E,p*ScaleS);
-  tradeTextCol += char(ch_X,p*ScaleS);
-  tradeTextCol += char(ch_E,p*ScaleS);
-  tradeTextCol += char(ch_C,p*ScaleS);
-  tradeTextCol += char(ch_U,p*ScaleS);
-  tradeTextCol += char(ch_T,p*ScaleS);
-  tradeTextCol += char(ch_E,p*ScaleS);
-  col = mix(col,vec3(3.0,2.0,2.0),iAnimProgress_2.y*tradeTextCol*(iAnimProgress_2.z-iAnimProgress_3.x)*(sin((iAnimProgress_2.z)*3.5)));
-
-
-  return col;
-}
-
-vec3 triRender_right(vec3 col, vec3 ro, vec3 rd) {
-  // Triangle fill color
-  vec3 fillColor = vec3(0.005, 0.0, 0.0);
-  // Triangle calcs
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
-  // Triangle resize
-  p *= 1.0;
-  // Triangle y offset
-  p.y -= 0.58;
-  p.x += 2.0-iAnimProgress_2.y;
-  p.x = -p.x;
-  // Triangle inner glow factor
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.9-(iAnimProgress_3.x*0.1), 0.006));
-  // Triangle displacement
-  float dt = equilateralTriangle(p);
-  // Triangle visibility parameter
-  float visibility = 1.0-(iAnimProgress_1.x*0.9)+(iAnimProgress_2.z*0.9);
-  if (dt < 0.0) {col = mix(fillColor, col, visibility);}
-
-  // triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x*0.8)- (iAnimProgress_1.y*0.6)+ (iAnimProgress_2.y*0.8) - (iAnimProgress_3 .x*1.0));
-  
-  print_pos -= print_pos;
-  print_pos -= vec2(55.0+(iAnimProgress_2.z*100.0),8.0);
-  float colCVAA;
-  float scaleCVAA = 60.0;
-  
-  colCVAA += char(ch_crs,p*scaleCVAA);
-  colCVAA += char(ch_1,p*scaleCVAA);
-  colCVAA += char(ch_spc,p*scaleCVAA);
-  colCVAA += char(ch_B,p*scaleCVAA);
-  colCVAA += char(ch_T,p*scaleCVAA);
-  colCVAA += char(ch_C,p*scaleCVAA);
-  colCVAA += char(ch_spc,p*scaleCVAA);
-  colCVAA += char(ch_L,p*scaleCVAA);
-  colCVAA += char(ch_O,p*scaleCVAA);
-  colCVAA += char(ch_N,p*scaleCVAA);
-  colCVAA += char(ch_G,p*scaleCVAA);
-
-  col = mix(col,vec3(3.0,0.3,0.3),colCVAA*(iAnimProgress_2.z-iAnimProgress_3.x));
-  
-    
-  print_pos -= print_pos;
-  print_pos -= vec2(23.0+(iAnimProgress_2.z*100.0),8.0);
-  float colIntentB;
-  float scalecolIntentB = 50.0;
-  colIntentB += char(ch_I,p*scalecolIntentB);
-  colIntentB += char(ch_N,p*scalecolIntentB);
-  colIntentB += char(ch_T,p*scalecolIntentB);
-  colIntentB += char(ch_E,p*scalecolIntentB);
-  colIntentB += char(ch_N,p*scalecolIntentB);
-  colIntentB += char(ch_T,p*scalecolIntentB);
-  colIntentB += char(ch_spc,p*scalecolIntentB);
-  colIntentB += char(ch_B,p*scalecolIntentB);
-
-  col = mix(col,vec3(3.0,0.3,0.3),colIntentB*(iAnimProgress_2.x-iAnimProgress_2.z));
-  
-
-  print_pos -= print_pos;
-  print_pos -= vec2(18.0,20.0);
-  float colT;
-  float ScaleT = 50.0;
-  colT += char(ch_H,p*ScaleT);
-  colT += char(ch_E,p*ScaleT);
-  colT += char(ch_D,p*ScaleT);
-  colT += char(ch_G,p*ScaleT);
-  colT += char(ch_E,p*ScaleT);
-  colT += char(ch_R,p*ScaleT);
-  col = mix(col,vec3(3.0,0.3,0.3),colT*(iAnimProgress_1.x- (iAnimProgress_1.y*0.7)+ (iAnimProgress_2.x*0.7)-iAnimProgress_2.y));
-  
-  print_pos -= print_pos;
-  print_pos -= vec2(20.0,20.0);
-  float col2;
-  float ScaleZ = 50.0;
-  col2 += char(ch_P,p*ScaleZ);
-  col2 += char(ch_A,p*ScaleZ);
-  col2 += char(ch_R,p*ScaleZ);
-  col2 += char(ch_T,p*ScaleZ);
-  col2 += char(ch_Y,p*ScaleZ);
-  col2 += char(ch_spc,p*ScaleZ);
-  col2 += char(ch_B,p*ScaleZ);
-  col = mix(col,vec3(3.0,0.3,0.3),col2*(iAnimProgress_2.y-iAnimProgress_3.z));
- 
-  return col;
-}
-
-vec3 renderTriangle(vec3 col, vec3 ro, vec3 rd, float scaleFactor, float xOffset) {
-  // Triangle fill color
-  vec3 fillColor = vec3(0.009, 0.0, 0.0);
-  // Triangle dimensions
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  // Calculate intersection with the triangle
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
-  // Resize and offset the triangle
-  p *= scaleFactor;
-  p.x += xOffset;
-  p.y -= 0.58;
-  p.x += 1.0 + iAnimProgress_1.x * 1.0;
-  float a;
-
-  // Triangle inner glow factor
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
-  // Calculate triangle displacement
-  float dt = equilateralTriangle(p);
-  // Triangle visibility parameter
-  float visibility = 1.0 - (iAnimProgress_1.x * scaleFactor * 0.2) + (iAnimProgress_1.y * scaleFactor * 0.1) + (iAnimProgress_2.y * scaleFactor * 0.1);
-  if (dt < 0.0) {
-    col = mix(fillColor, col, visibility);
-  }
-  // Triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * scaleFactor * 0.1) - (iAnimProgress_1.y * scaleFactor * 0.05) - (iAnimProgress_2.y * scaleFactor * 0.05));
-  return col;
-}
-
-vec3 triRender_right_4(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.25, 1.22);
-}
-
-vec3 triRender_right_3(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.16, 0.8);
-}
-
-vec3 triRender_right_2(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.08, 0.4);
-}
-
 vec3 eyeRender(vec3 col, vec2 p, float vis)
 {
     // Calculate blink
@@ -2395,7 +2052,7 @@ vec3 triRender_Liquidator(vec3 col, vec3 ro, vec3 rd,vec2 p) {
     vec2 p = pp.xy;
     // Circular motion parameters
     float speed = float(i);
-    float angle = (iTime* (8.0 / 8.0) ) + speed; // 240 degrees rotation
+    float angle = (iTime* (0.7) ) + speed; // 240 degrees rotation
 
     float tradeAnim = (sin(angle) + 1.0) / 2.0;
 
@@ -2538,6 +2195,324 @@ vec3 triRender_Liquidator(vec3 col, vec3 ro, vec3 rd,vec2 p) {
   }
   
   return col;
+}
+
+
+vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
+    // Triangle fill color
+    vec3 fillColor = vec3(0.005, 0.0, 0.0);
+    // triangle calcs
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+
+  vec2 p2 = pp.xy;
+  p2.x = -p2.x ;
+  // triangle resize
+  p2 *= 0.5;
+  // triangle offset
+  p2.y -= 0.58;
+  p2.x += 0.002;
+  p2.x -= 0.0 + iAnimProgress_3.y * 0.1 - iAnimProgress_3.z * 0.1;
+  // triangle inner glow factor
+  vec3 gcol2 = hsv2rgb(vec3(1.0,
+   0.8-(iAnimProgress_1.x*0.4)+(iAnimProgress_3.x*0.4),
+   0.006-iAnimProgress_1.x*0.0035-iAnimProgress_1.y*0.0015+iAnimProgress_1.z*0.0015));
+  // triangle displacement
+  float dt2 = equilateralTriangle(p2);
+  // Smooth the cut edge of the triangle
+  if (p2.x > 0.0) {
+    // Left half of the triangle
+    vec3 leftHalfColor = dt2 < 0.0 ? fillColor : col;
+    leftHalfColor += (gcol2 / max(abs(dt2), 0.001)) * smoothstep(0.5, 0.0, dt2);
+
+    // Right half of the triangle (unchanged)
+    col = col;
+
+    // Blend the two halves together
+    float blendFactor2 = smoothstep(0.0, 0.003, p2.x); // Adjust the blend factor as needed
+    col = mix(col, leftHalfColor, blendFactor2);
+}
+
+    vec2 p = pp.xy;
+    p.x = -p.x ;
+
+    // triangle resize
+    p *= 0.5;
+    // triangle y offset
+    p.y -= 0.58;
+    p.x -= 0.002;
+
+    p.x += 0.0+iAnimProgress_3.y*0.08-iAnimProgress_3.z*0.08;
+
+     // triangle inner glow factor
+    vec3 gcol = hsv2rgb(vec3(1.0,
+    0.8-(iAnimProgress_1.x*0.4)+(iAnimProgress_3.x*0.4),
+    0.006-iAnimProgress_1.x*0.0035-iAnimProgress_1.y*0.0015+iAnimProgress_1.z*0.0015));
+   // triangle displacement
+    float dt = equilateralTriangle(p);
+    
+    // Split the triangle by adding a condition based on the y-coordinate of the point.
+    // Smooth the right half of the triangle
+    if (p.x < 0.0) {
+      // Right half of the triangle
+      vec3 rightHalfColor = dt < 0.0 ? fillColor : col;
+      rightHalfColor += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt);
+
+      // Blend the two halves together
+      float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
+      col = mix(col, rightHalfColor, blendFactor);
+  }
+if (iAnimProgress_1.x>0.5&& iAnimProgress_3.x<0.1){
+  print_pos -= print_pos;
+  print_pos -= vec2(32.0,-34.0);
+  float colT;
+  float ScaleT = 95.0;
+  colT += char(ch_I,p*ScaleT);
+  colT += char(ch_N,p*ScaleT);
+  colT += char(ch_T,p*ScaleT);
+  colT += char(ch_E,p*ScaleT);
+  colT += char(ch_N,p*ScaleT);
+  colT += char(ch_T,p*ScaleT);
+  colT += char(ch_spc,p*ScaleT);
+  colT += char(ch_P,p*ScaleT);
+  colT += char(ch_O,p*ScaleT);
+  colT += char(ch_O,p*ScaleT);
+  colT += char(ch_L,p*ScaleT);
+  col = mix(col,vec3(3.0,2.0,2.0),colT*(iAnimProgress_1.x-(iAnimProgress_1.y*0.8)+(iAnimProgress_1.z*0.8)-iAnimProgress_3.x));
+}
+  print_pos -= print_pos;
+  print_pos -= vec2(-30.0,49.0);
+  print_pos.x += iAnimProgress_3.y*13.0;
+  float col2;
+  float ScaleZ = 100.0;
+  col2 += char(ch_P,p*ScaleZ);
+  col2 += char(ch_A,p*ScaleZ);
+  col2 += char(ch_R,p*ScaleZ);
+  col2 += char(ch_T,p*ScaleZ);
+  col2 += char(ch_Y,p*ScaleZ);
+  col2 += char(ch_spc,p*ScaleZ);
+  col2 += char(ch_B,p*ScaleZ);
+  col = mix(col,vec3(3.0,0.3,0.3),col2*(iAnimProgress_2.y-iAnimProgress_3.z));
+
+
+  print_pos -= print_pos;
+  print_pos -= vec2(69.0,49.0);
+  float col3;
+  col3 += char(ch_P,p*ScaleZ);
+  col3 += char(ch_A,p*ScaleZ);
+  col3 += char(ch_R,p*ScaleZ);
+  col3 += char(ch_T,p*ScaleZ);
+  col3 += char(ch_Y,p*ScaleZ);
+  col3 += char(ch_spc,p*ScaleZ);
+  col3 += char(ch_A,p*ScaleZ);
+  col = mix(col,vec3(3.0,1.0,1.0),col3*(iAnimProgress_1.z-iAnimProgress_3.z));
+ 
+  print_pos -= print_pos;
+  print_pos -= vec2(-9.0+(iAnimProgress_2.z*100.0),40.0);
+  float colCVAA;
+  float scaleCVAA = 115.0;
+  
+  colCVAA += char(ch_crs,p*scaleCVAA);
+  colCVAA += char(ch_1,p*scaleCVAA);
+  colCVAA += char(ch_spc,p*scaleCVAA);
+  colCVAA += char(ch_B,p*scaleCVAA);
+  colCVAA += char(ch_T,p*scaleCVAA);
+  colCVAA += char(ch_C,p*scaleCVAA);
+  colCVAA += char(ch_spc,p*scaleCVAA);
+  colCVAA += char(ch_L,p*scaleCVAA);
+  colCVAA += char(ch_O,p*scaleCVAA);
+  colCVAA += char(ch_N,p*scaleCVAA);
+  colCVAA += char(ch_G,p*scaleCVAA);
+
+  col = mix(col,vec3(3.0,3.0,3.0),colCVAA*(iAnimProgress_2.z-iAnimProgress_3.z));
+  
+  print_pos -= print_pos;
+  print_pos -= vec2(79.0-(iAnimProgress_2.z*100.0),40.0);
+  float colIntentB;
+  float ScaleIntentB = 115.0;
+  
+  colIntentB += char(ch_crs,p*ScaleIntentB);
+  colIntentB += char(ch_1,p*ScaleIntentB);
+  colIntentB += char(ch_spc,p*ScaleIntentB);
+  colIntentB += char(ch_B,p*ScaleIntentB);
+  colIntentB += char(ch_T,p*ScaleIntentB);
+  colIntentB += char(ch_C,p*ScaleIntentB);
+  colIntentB += char(ch_spc,p*ScaleIntentB);
+  colIntentB += char(ch_S,p*ScaleIntentB);
+  colIntentB += char(ch_H,p*ScaleIntentB);
+  colIntentB += char(ch_O,p*ScaleIntentB);
+  colIntentB += char(ch_R,p*ScaleIntentB);
+  colIntentB += char(ch_T,p*ScaleIntentB);
+
+  col = mix(col,vec3(3.0,0.3,0.3),colIntentB*(iAnimProgress_2.z-iAnimProgress_3.z));
+
+
+    return col;
+}
+
+vec3 triRender_left(vec3 col, vec3 ro, vec3 rd) {
+  // Triangle fill color
+  vec3 fillColor = vec3(0.009, 0.0, 0.0);
+  // triangle calcs
+  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+  vec3 pp = ro + rd * tpd;
+  vec2 p = pp.xy;
+  // triangle resize
+  p *= 1.0;
+  // triangle offset
+  p.y -= 0.58;
+  p.x -= 1.0 + iAnimProgress_1.x * 1.00 - iAnimProgress_1.z * 1.0;
+  // triangle inner glow factor
+  p.x = -p.x;
+  vec3 gcol = hsv2rgb(vec3(1.0, 0.8, 0.006));
+  // triangle displacement
+  float dt = equilateralTriangle(p);
+  // Triangle visibility parameter
+  float visibility = 1.0-(iAnimProgress_1.x*0.9)+(iAnimProgress_1.z*0.9);
+  if (dt < 0.0) {col = mix(fillColor, col, visibility);}
+  // triangle edge glow mod
+  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * (iAnimProgress_1.x*0.8-iAnimProgress_3.x*0.8);
+
+  print_pos -= print_pos;
+  print_pos -= vec2(23.0-(iAnimProgress_2.z*100.0),8.0);
+  float colIntentA;
+  float ScaleIntentA = 50.0;
+  colIntentA += char(ch_I,p*ScaleIntentA);
+  colIntentA += char(ch_N,p*ScaleIntentA);
+  colIntentA += char(ch_T,p*ScaleIntentA);
+  colIntentA += char(ch_E,p*ScaleIntentA);
+  colIntentA += char(ch_N,p*ScaleIntentA);
+  colIntentA += char(ch_T,p*ScaleIntentA);
+  colIntentA += char(ch_spc,p*ScaleIntentA);
+  colIntentA += char(ch_A,p*ScaleIntentA);
+  col = mix(col,vec3(3.0,1.0,1.0),colIntentA*(iAnimProgress_1.y-iAnimProgress_2.z));
+
+  print_pos -= print_pos;
+  print_pos -= vec2(10.0,20.0);
+  float colYOU;
+  float ScaleT = 50.0;
+  colYOU += char(ch_Y,p*ScaleT);
+  colYOU += char(ch_O,p*ScaleT);
+  colYOU += char(ch_U,p*ScaleT);
+  col = mix(col,vec3(3.0,1.0,1.0),colYOU*(iAnimProgress_1.x-iAnimProgress_1.z));
+
+  print_pos -= print_pos;
+  print_pos -= vec2(-20.0,-23.0);
+  float tradeTextCol;
+  float ScaleS = 40.0;
+  tradeTextCol += char(ch_E,p*ScaleS);
+  tradeTextCol += char(ch_X,p*ScaleS);
+  tradeTextCol += char(ch_E,p*ScaleS);
+  tradeTextCol += char(ch_C,p*ScaleS);
+  tradeTextCol += char(ch_U,p*ScaleS);
+  tradeTextCol += char(ch_T,p*ScaleS);
+  tradeTextCol += char(ch_E,p*ScaleS);
+  col = mix(col,vec3(3.0,2.0,2.0),iAnimProgress_2.y*tradeTextCol*(iAnimProgress_2.z-iAnimProgress_3.x)*(sin((iAnimProgress_2.z)*3.5)));
+
+
+  return col;
+}
+
+vec3 triRender_right(vec3 col, vec3 ro, vec3 rd) {
+  // Triangle fill color
+  vec3 fillColor = vec3(0.005, 0.0, 0.0);
+  // Triangle calcs
+  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+  vec3 pp = ro + rd * tpd;
+  vec2 p = pp.xy;
+  // Triangle resize
+  p *= 1.0;
+  // Triangle y offset
+  p.y -= 0.58;
+  p.x += 2.0-iAnimProgress_2.y;
+  p.x = -p.x;
+  // Triangle inner glow factor
+  vec3 gcol = hsv2rgb(vec3(1.0, 0.9-(iAnimProgress_3.x*0.1), 0.006));
+  // Triangle displacement
+  float dt = equilateralTriangle(p);
+  // Triangle visibility parameter
+  float visibility = 1.0-(iAnimProgress_1.x*0.9)+(iAnimProgress_2.y*0.9);
+  if (dt < 0.0) {col = mix(fillColor, col, visibility);}
+
+  // triangle edge glow mod
+  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x*0.8)- (iAnimProgress_1.y*0.6)+ (iAnimProgress_2.y*0.8) - (iAnimProgress_3 .x*1.0));
+ 
+    
+  print_pos -= print_pos;
+  print_pos -= vec2(23.0+(iAnimProgress_2.z*100.0),8.0);
+  float colIntentB;
+  float scalecolIntentB = 50.0;
+  colIntentB += char(ch_I,p*scalecolIntentB);
+  colIntentB += char(ch_N,p*scalecolIntentB);
+  colIntentB += char(ch_T,p*scalecolIntentB);
+  colIntentB += char(ch_E,p*scalecolIntentB);
+  colIntentB += char(ch_N,p*scalecolIntentB);
+  colIntentB += char(ch_T,p*scalecolIntentB);
+  colIntentB += char(ch_spc,p*scalecolIntentB);
+  colIntentB += char(ch_B,p*scalecolIntentB);
+
+  col = mix(col,vec3(3.0,0.3,0.3),colIntentB*(iAnimProgress_2.x-iAnimProgress_2.z));
+  
+
+  print_pos -= print_pos;
+  print_pos -= vec2(18.0,20.0);
+  float colT;
+  float ScaleT = 50.0;
+  colT += char(ch_H,p*ScaleT);
+  colT += char(ch_E,p*ScaleT);
+  colT += char(ch_D,p*ScaleT);
+  colT += char(ch_G,p*ScaleT);
+  colT += char(ch_E,p*ScaleT);
+  colT += char(ch_R,p*ScaleT);
+  col = mix(col,vec3(3.0,0.3,0.3),colT*(iAnimProgress_1.x- (iAnimProgress_1.y*0.7)+ (iAnimProgress_2.x*0.7)-iAnimProgress_2.y));
+  
+
+  return col;
+}
+
+vec3 renderTriangle(vec3 col, vec3 ro, vec3 rd, float scaleFactor, float xOffset) {
+  // Triangle fill color
+  vec3 fillColor = vec3(0.009, 0.0, 0.0);
+  // Triangle dimensions
+  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+  // Calculate intersection with the triangle
+  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+  vec3 pp = ro + rd * tpd;
+  vec2 p = pp.xy;
+  // Resize and offset the triangle
+  p *= scaleFactor;
+  p.x += xOffset;
+  p.y -= 0.58;
+  p.x += 1.0 + iAnimProgress_1.x * 1.0;
+  float a;
+
+  // Triangle inner glow factor
+  vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
+  // Calculate triangle displacement
+  float dt = equilateralTriangle(p);
+  // Triangle visibility parameter
+  float visibility = 1.0 - (iAnimProgress_1.x * scaleFactor * 0.2) + (iAnimProgress_1.y * scaleFactor * 0.1) + (iAnimProgress_2.y * scaleFactor * 0.1);
+  if (dt < 0.0) {
+    col = mix(fillColor, col, visibility);
+  }
+  // Triangle edge glow mod
+  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * scaleFactor * 0.1) - (iAnimProgress_1.y * scaleFactor * 0.05) - (iAnimProgress_2.y * scaleFactor * 0.05));
+  return col;
+}
+
+vec3 triRender_right_4(vec3 col, vec3 ro, vec3 rd) {
+  return renderTriangle(col, ro, rd, 1.25, 1.22);
+}
+
+vec3 triRender_right_3(vec3 col, vec3 ro, vec3 rd) {
+  return renderTriangle(col, ro, rd, 1.16, 0.8);
+}
+
+vec3 triRender_right_2(vec3 col, vec3 ro, vec3 rd) {
+  return renderTriangle(col, ro, rd, 1.08, 0.4);
 }
 
 
