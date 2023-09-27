@@ -1968,583 +1968,588 @@ float print_number(float number, vec2 pos, vec2 uv) {
 }
 
 //BackGround ----------------------------------------------------
-
 const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 vec3 hsv2rgb(vec3 c) {
-  vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www);
-  return c.z * mix(hsv2rgb_K.xxx, clamp(p - hsv2rgb_K.xxx, 0.0, 1.0), c.y);
+    vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www);
+    return c.z * mix(hsv2rgb_K.xxx, clamp(p - hsv2rgb_K.xxx, 0.0, 1.0), c.y);
 }
 
 //Triangle calcs
 float equilateralTriangle(vec2 p) {
-  const float k = sqrt(3.0);
-  p.x = abs(p.x) - 1.0;
-  p.y = p.y + 1.0 / k;
-  if(p.x + k * p.y > 0.0)
-      p = vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0;
-  p.x -= clamp(p.x, -2.0, 0.0);
-  return -length(p) * sign(p.y);
+    const float k = sqrt(3.0);
+    p.x = abs(p.x) - 1.0;
+    p.y = p.y + 1.0 / k;
+    if(p.x + k * p.y > 0.0)
+        p = vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0;
+    p.x -= clamp(p.x, -2.0, 0.0);
+    return -length(p) * sign(p.y);
 }
 
 vec3 eyeRender(vec3 col, vec2 p, float vis) {
   // Calculate blink
-  float eyeBlink = smoothstep(-0.28, 0.2, mod(iTime, 0.0));
-  eyeBlink -= smoothstep(0.28, 0.4, mod(iTime, 2.5));
+    float eyeBlink = smoothstep(-0.28, 0.2, mod(iTime, 0.0));
+    eyeBlink -= smoothstep(0.28, 0.4, mod(iTime, 2.5));
   // REPLACEMENT
-  vec2 rotatedP = vec2(-p.y + 0.2, p.x);
+    vec2 rotatedP = vec2(-p.y + 0.2, p.x);
   // Calculate Almond Eye
-  float bl = 1.0;
-  bl *= vis;
-  float k = -clamp(bl * bl, 0.06, 1.0);
-  vec2 pos = vec2(-4.0 * rotatedP.y, 4.0 * rotatedP.x);
-  pos = abs(pos);
-  float ik = 1.0 / k;
-  float parabola_p = ik * (pos.y - 1.1 * ik) / 3.0;
-  float parabola_q = 0.25 * ik * ik * pos.x;
-  float parabola_h = parabola_q * parabola_q - parabola_p * parabola_p * parabola_p;
-  float parabola_r = sqrt(abs(parabola_h));
-  float parabola_x = (parabola_h > 0.0) ? pow(parabola_q + parabola_r, 1.0 / 3.0) - pow(abs(parabola_q - parabola_r), 1.0 / 3.0) * sign(parabola_r - parabola_q) : 2.0 * cos(atan(parabola_r, parabola_q) / 3.0) * sqrt(parabola_p);
+    float bl = 1.0;
+    bl *= vis;
+    float k = -clamp(bl * bl, 0.06, 1.0);
+    vec2 pos = vec2(-4.0 * rotatedP.y, 4.0 * rotatedP.x);
+    pos = abs(pos);
+    float ik = 1.0 / k;
+    float parabola_p = ik * (pos.y - 1.1 * ik) / 3.0;
+    float parabola_q = 0.25 * ik * ik * pos.x;
+    float parabola_h = parabola_q * parabola_q - parabola_p * parabola_p * parabola_p;
+    float parabola_r = sqrt(abs(parabola_h));
+    float parabola_x = (parabola_h > 0.0) ? pow(parabola_q + parabola_r, 1.0 / 3.0) - pow(abs(parabola_q - parabola_r), 1.0 / 3.0) * sign(parabola_r - parabola_q) : 2.0 * cos(atan(parabola_r, parabola_q) / 3.0) * sqrt(parabola_p);
 
-  float sdEye = length(pos - vec2(parabola_x, k * parabola_x * parabola_x)) * sign(pos.x - parabola_x) - bl + 0.06;
+    float sdEye = length(pos - vec2(parabola_x, k * parabola_x * parabola_x)) * sign(pos.x - parabola_x) - bl + 0.06;
 
   // Apply smoothstep to color using sdEye
-  col += smoothstep(0.015, 0.025, abs(sdEye));
+    col += smoothstep(0.015, 0.025, abs(sdEye));
   // Eye core creation and reposition
-  vec2 adjustedMousePos = vec2(-mousePos.y, 1.1 * (mousePos.x - 0.07)) * 2.0;
-  vec2 diff = 2.0 * rotatedP - adjustedMousePos;
-  float distance = length(diff) - 0.3 - 2.0 * smoothstep(0.895, 0.9, 0.0);
-  float eyeMask = max(distance, sdEye);
-  col = min(col, smoothstep(-0.01, 0.0, eyeMask * vis));
-  return col;
+    vec2 adjustedMousePos = vec2(-mousePos.y, 1.1 * (mousePos.x - 0.07)) * 2.0;
+    vec2 diff = 2.0 * rotatedP - adjustedMousePos;
+    float distance = length(diff) - 0.3 - 2.0 * smoothstep(0.895, 0.9, 0.0);
+    float eyeMask = max(distance, sdEye);
+    col = min(col, smoothstep(-0.01, 0.0, eyeMask * vis));
+    return col;
 }
 float animSpeed = (iTime * (0.7)); // 240 degrees rotation
 
-
-
 vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
 // Triangle fill color
-  vec3 fillColor = vec3(0.005, 0.0, 0.0);
-  float isleftHalf;
+    vec3 fillColor = vec3(0.005, 0.0, 0.0);
+    float isleftHalf;
 
 // Triangle calcs
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec3 triColor;
-  vec3 eyeColor;
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+    vec3 triColor;
+    vec3 eyeColor;
     //...................Triangle Static
-  vec2 pTriStatic = pp.xy;
-  pTriStatic.x = -pTriStatic.x;
+    vec2 position_triangle = pp.xy;
+    // triangle x offset
+    position_triangle.x = -position_triangle.x;
     // triangle resize
-  pTriStatic *= 0.5;
+    position_triangle *= 0.5;
     // triangle y offset
-  pTriStatic.y -= 0.58;
-  pTriStatic.x -= 0.0001;
-  pTriStatic.x += 0.0;
+    position_triangle.y -= 0.58;
+    position_triangle.x -= 0.0001;
+    position_triangle.x += 0.0;
     // triangle displacement
-  float dtS = equilateralTriangle(pTriStatic);
+    float dtS = equilateralTriangle(position_triangle);
 
     //...................Triangle Liquidators
 
-  vec2 p2 = pp.xy;
-  p2.x = -p2.x;
+    vec2 p2 = pp.xy;
+    p2.x = -p2.x;
 // triangle resize
-  p2 *= 0.5;
+    p2 *= 0.5;
 // triangle offset
-  p2.y -= 0.58;
-  p2.x += 0.002;
-  p2.x -= 0.0 + iAnimProgress_3.y * 0.1 - iAnimProgress_3.z * 0.1;
+    p2.y -= 0.58;
+    p2.x += 0.002;
+    p2.x -= 0.0 + iAnimProgress_3.y * 0.1 - iAnimProgress_3.z * 0.1;
 // triangle inner glow factor
-  vec3 gcol2 = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
+    vec3 gcol2 = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
 // triangle displacement
-  float dt2 = equilateralTriangle(p2);
+    float dt2 = equilateralTriangle(p2);
 // Smooth the cut edge of the triangle
-  if(p2.x > 0.0) {
+    if(p2.x > 0.0) {
   // Left half of the triangle
-      vec3 leftHalfColor = dt2 < 0.0 ? fillColor : col;
-      leftHalfColor += (gcol2 / max(abs(dt2), 0.001)) * smoothstep(0.5, 0.0, dt2);
-
+        vec3 leftHalfColor = dt2 < 0.0 ? fillColor : col;
+        leftHalfColor += (gcol2 / max(abs(dt2), 0.001)) * smoothstep(0.5, 0.0, dt2);
 
   // Blend the two halves together
-      float blendFactor2 = smoothstep(0.0, 0.003, p2.x); // Adjust the blend factor as needed
-      col = mix(col, leftHalfColor, blendFactor2);
-  }
+        float blendFactor2 = smoothstep(0.0, 0.003, p2.x); // Adjust the blend factor as needed
+        col = mix(col, leftHalfColor, blendFactor2);
+    }
 
-  vec2 p = pp.xy;
-  p.x = -p.x;
+    vec2 p = pp.xy;
+    p.x = -p.x;
 
   // triangle resize
-  p *= 0.5;
+    p *= 0.5;
   // triangle y offset
-  p.y -= 0.58;
-  p.x -= 0.002;
+    p.y -= 0.58;
+    p.x -= 0.002;
 
-  p.x += 0.0 + iAnimProgress_3.y * 0.08 - iAnimProgress_3.z * 0.08;
+    p.x += 0.0 + iAnimProgress_3.y * 0.08 - iAnimProgress_3.z * 0.08;
 
    // triangle inner glow factor
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
+    vec3 gcol = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
  // triangle displacement
-  float dt = equilateralTriangle(p);
+    float dt = equilateralTriangle(p);
 
   // Split the triangle by adding a condition based on the y-coordinate of the point.
   // Smooth the right half of the triangle
-  if(p.x < 0.0) {
+    if(p.x < 0.0) {
     // Right half of the triangle
-      vec3 rightHalfColor = dt < 0.0 ? fillColor : col;
-      rightHalfColor += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt);
+        vec3 rightHalfColor = dt < 0.0 ? fillColor : col;
+        rightHalfColor += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt);
 
     // Blend the two halves together
-      float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
-      col = mix(col, rightHalfColor, blendFactor);
-  }
+        float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
+        col = mix(col, rightHalfColor, blendFactor);
+    }
 
   //...................Text How it works
-  if(iAnimProgress_1.x > 0.5 && iAnimProgress_3.x < 0.1) {
-      print_pos -= print_pos;
-      print_pos -= vec2(32.0, -34.0);
-      float colT;
-      float ScaleT = 95.0;
-      colT += char(ch_I, p * ScaleT);
-      colT += char(ch_N, p * ScaleT);
-      colT += char(ch_T, p * ScaleT);
-      colT += char(ch_E, p * ScaleT);
-      colT += char(ch_N, p * ScaleT);
-      colT += char(ch_T, p * ScaleT);
-      colT += char(ch_spc, p * ScaleT);
-      colT += char(ch_P, p * ScaleT);
-      colT += char(ch_O, p * ScaleT);
-      colT += char(ch_O, p * ScaleT);
-      colT += char(ch_L, p * ScaleT);
-      col = mix(col, vec3(3.0, 2.0, 2.0), colT * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.8) + (iAnimProgress_1.z * 0.8) - iAnimProgress_3.x));
-  }
+    if(iAnimProgress_1.x > 0.5 && iAnimProgress_3.x < 0.1) {
+        print_pos -= print_pos;
+        print_pos -= vec2(32.0, -34.0);
+        float col_text_INTENTPOOL;
+        float scale_text_INTENTPOOL = 95.0;
+        col_text_INTENTPOOL += char(ch_I, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_N, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_T, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_E, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_N, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_T, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_spc, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_P, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_O, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_O, p * scale_text_INTENTPOOL);
+        col_text_INTENTPOOL += char(ch_L, p * scale_text_INTENTPOOL);
+        col = mix(col, vec3(3.0, 2.0, 2.0), col_text_INTENTPOOL * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.8) + (iAnimProgress_1.z * 0.8) - iAnimProgress_3.x));
+    }
+    if(iAnimProgress_1.z > 0.5 && iAnimProgress_3.z < 0.1) {
+        print_pos -= print_pos;
+        print_pos -= vec2(-28.0, 49.0);
+        print_pos.x += iAnimProgress_3.y * 13.0;
+        float col_text_PARTYB;
+        float scale_text_PARTY = 100.0;
+        col_text_PARTYB += char(ch_P, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_A, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_R, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_T, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_Y, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_spc, p * scale_text_PARTY);
+        col_text_PARTYB += char(ch_B, p * scale_text_PARTY);
+        col = mix(col, vec3(3.0, 0.3, 0.3), col_text_PARTYB * (iAnimProgress_2.y - iAnimProgress_3.z));
 
-  print_pos -= print_pos;
-  print_pos -= vec2(-28.0, 49.0);
-  print_pos.x += iAnimProgress_3.y * 13.0;
-  float col2;
-  float ScaleZ = 100.0;
-  col2 += char(ch_P, p * ScaleZ);
-  col2 += char(ch_A, p * ScaleZ);
-  col2 += char(ch_R, p * ScaleZ);
-  col2 += char(ch_T, p * ScaleZ);
-  col2 += char(ch_Y, p * ScaleZ);
-  col2 += char(ch_spc, p * ScaleZ);
-  col2 += char(ch_B, p * ScaleZ);
-  col = mix(col, vec3(3.0, 0.3, 0.3), col2 * (iAnimProgress_2.y - iAnimProgress_3.z));
+        float col_text_PARTYA;
+        print_pos -= print_pos;
+        print_pos -= vec2(69.0, 49.0);
+        col_text_PARTYA += char(ch_P, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_A, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_R, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_T, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_Y, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_spc, p * scale_text_PARTY);
+        col_text_PARTYA += char(ch_A, p * scale_text_PARTY);
+        col = mix(col, vec3(3.0, 1.0, 1.0), col_text_PARTYA * (iAnimProgress_1.z - iAnimProgress_3.z));
+    }
 
-  print_pos -= print_pos;
-  print_pos -= vec2(69.0, 49.0);
-  float col3;
-  col3 += char(ch_P, p * ScaleZ);
-  col3 += char(ch_A, p * ScaleZ);
-  col3 += char(ch_R, p * ScaleZ);
-  col3 += char(ch_T, p * ScaleZ);
-  col3 += char(ch_Y, p * ScaleZ);
-  col3 += char(ch_spc, p * ScaleZ);
-  col3 += char(ch_A, p * ScaleZ);
-  col = mix(col, vec3(3.0, 1.0, 1.0), col3 * (iAnimProgress_1.z - iAnimProgress_3.z));
 
-  for(int i = 1; i <= 6; i++) {
   //...................Triangle Liquidators
 
-      vec2 p = pp.xy;
-  // Circular motion parameters
-      float startTime = float(i);
-      float angle = animSpeed + startTime; // 240 degrees rotation
+    if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.z < 0.5) {
+        for(int i = 1; i <= 6; i++) {
 
-      float tradeAnim = (sin(angle) + 1.0) / 2.0;
+            vec2 p = pp.xy;
+  // Circular motion parameters
+            float startTime = float(i);
+            float angle = animSpeed + startTime; // 240 degrees rotation
+
+            float tradeAnim = (sin(angle) + 1.0) / 2.0;
 
   // Triangle y offset
-      p.y -= 3.8;
+            p.y -= 3.8;
 
-      float calSin = sin(angle);
-      float calCos = cos(angle);
+            float calSin = sin(angle);
+            float calCos = cos(angle);
 
-      if(calCos > 0.0) {
-          p.x += calCos * 2.5;
-          p.y += calSin * 1.5;
-          p *= 0.5 + (tradeAnim / 2.0);
-          isleftHalf = 0.0;
-          if(startTime == 1.0) {
-              triColor = vec3(1.0, 0.1, 0.006);
-              eyeColor = vec3(1.5, 1.5, 1.5);
-          } else {
-              triColor = vec3(1.0, 0.1, 0.006);
-              eyeColor = vec3(1.5, 1.5, 1.5);
-          }
-      } else {
-          p.x += 0.0;
-          p.y += 1.5;
-          tradeAnim = 1.0;
-          tradeAnim = max((sin(angle) * 10.0) - 9.0, 0.0);
-          isleftHalf = 1.0;
-          if(startTime == 1.0) {
+            if(calCos > 0.0) {
+                p.x += calCos * 2.5;
+                p.y += calSin * 1.5;
+                p *= 0.5 + (tradeAnim / 2.0);
+                isleftHalf = 0.0;
+                if(startTime == 1.0) {
+                    triColor = vec3(1.0, 0.1, 0.006);
+                    eyeColor = vec3(1.5, 1.5, 1.5);
+                } else {
+                    triColor = vec3(1.0, 0.1, 0.006);
+                    eyeColor = vec3(1.5, 1.5, 1.5);
+                }
+            } else {
+                p.x += 0.0;
+                p.y += 1.5;
+                tradeAnim = 1.0;
+                tradeAnim = max((sin(angle) * 10.0) - 9.0, 0.0);
+                isleftHalf = 1.0;
+                if(startTime == 1.0) {
 
-              triColor = vec3(1.0, 0.9, 0.006);
-              eyeColor = vec3(3.5, 0.5, 0.5);
-          } else {
-              triColor = vec3(1.0, 0.1, 0.006);
-              eyeColor = vec3(1.5, 1.5, 1.5);
-          }
-      }
+                    triColor = vec3(1.0, 0.9, 0.006);
+                    eyeColor = vec3(3.5, 0.5, 0.5);
+                } else {
+                    triColor = vec3(1.0, 0.1, 0.006);
+                    eyeColor = vec3(1.5, 1.5, 1.5);
+                }
+            }
 
   // Invert Triangle 
-      p.x = -p.x;
+            p.x = -p.x;
 
   // Triangle displacement
-      float dt = equilateralTriangle(p);
+            float dt = equilateralTriangle(p);
 
   //...Text Liquidators
-      print_pos -= print_pos;
-      print_pos -= vec2(30.0, 15.0);
-      float charCol;
-      float Scale = 50.0;
-      charCol += char(ch_L, p * Scale);
-      charCol += char(ch_I, p * Scale);
-      charCol += char(ch_Q, p * Scale);
-      charCol += char(ch_U, p * Scale);
-      charCol += char(ch_I, p * Scale);
-      charCol += char(ch_D, p * Scale);
-      charCol += char(ch_A, p * Scale);
-      charCol += char(ch_T, p * Scale);
-      charCol += char(ch_O, p * Scale);
-      charCol += char(ch_R, p * Scale);
+            print_pos -= print_pos;
+            print_pos -= vec2(30.0, 15.0);
+            float col_text_LIQUIDATOR;
+            float scale_text_LIQUIDATOR = 50.0;
+            col_text_LIQUIDATOR += char(ch_L, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_I, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_Q, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_U, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_I, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_D, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_A, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_T, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_O, p * scale_text_LIQUIDATOR);
+            col_text_LIQUIDATOR += char(ch_R, p * scale_text_LIQUIDATOR);
 
-      float staticTextColSolve;
-      float ScaleS = 65.0;
-      float staticTextCol;
-      if(startTime == 1.0) {
+            float col_text_SOLVENT;
+            float scale_text_tradestate = 65.0;
+            float col_text_liquidate;
+
+            if(startTime == 1.0) {
       //...Text Liquidate party
-          print_pos -= print_pos;
-          print_pos -= vec2(18.0, 15.0);
-          float ScaleLiquidParty = 25.0;
-          staticTextCol += char(ch_dsh, pTriStatic * ScaleLiquidParty);
-          staticTextCol += char(ch_dsh, pTriStatic * ScaleLiquidParty);
+                print_pos -= print_pos;
+                print_pos -= vec2(18.0, 15.0);
+                float ScaleLiquidParty = 25.0;
+                col_text_liquidate += char(ch_dsh, position_triangle * ScaleLiquidParty);
+                col_text_liquidate += char(ch_dsh, position_triangle * ScaleLiquidParty);
       //...Text Liquidate party number
-          print_pos -= print_pos;
-          print_pos -= vec2(55.0, 27.0 * tradeAnim);
-          float ScaleLiquidPartyNum = 85.0;
-          staticTextCol += char(ch_dsh, pTriStatic * ScaleLiquidPartyNum);
-          staticTextCol += char(ch_dol, pTriStatic * ScaleLiquidPartyNum);
-          staticTextCol += char(ch_1, pTriStatic * ScaleLiquidPartyNum);
-          staticTextCol += char(ch_B, pTriStatic * ScaleLiquidPartyNum);
-          staticTextCol += char(ch_T, pTriStatic * ScaleLiquidPartyNum);
-          staticTextCol += char(ch_C, pTriStatic * ScaleLiquidPartyNum);
+                print_pos -= print_pos;
+                print_pos -= vec2(55.0, 27.0 * tradeAnim);
+                float scale_text_minus1BTC = 85.0;
+                col_text_liquidate += char(ch_dsh, position_triangle * scale_text_minus1BTC);
+                col_text_liquidate += char(ch_dol, position_triangle * scale_text_minus1BTC);
+                col_text_liquidate += char(ch_1, position_triangle * scale_text_minus1BTC);
+                col_text_liquidate += char(ch_B, position_triangle * scale_text_minus1BTC);
+                col_text_liquidate += char(ch_T, position_triangle * scale_text_minus1BTC);
+                col_text_liquidate += char(ch_C, position_triangle * scale_text_minus1BTC);
 
       //...Text Liquidate
-          print_pos -= print_pos;
-          print_pos -= vec2(27.0, -3.0);
-          staticTextCol += char(ch_L, pTriStatic * ScaleS);
-          staticTextCol += char(ch_I, pTriStatic * ScaleS);
-          staticTextCol += char(ch_Q, pTriStatic * ScaleS);
-          staticTextCol += char(ch_U, pTriStatic * ScaleS);
-          staticTextCol += char(ch_I, pTriStatic * ScaleS);
-          staticTextCol += char(ch_D, pTriStatic * ScaleS);
-          staticTextCol += char(ch_A, pTriStatic * ScaleS);
-          staticTextCol += char(ch_T, pTriStatic * ScaleS);
-          staticTextCol += char(ch_E, pTriStatic * ScaleS);
-      } else {
+                print_pos -= print_pos;
+                print_pos -= vec2(27.0, -3.0);
+                col_text_liquidate += char(ch_L, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_I, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_Q, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_U, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_I, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_D, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_A, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_T, position_triangle * scale_text_tradestate);
+                col_text_liquidate += char(ch_E, position_triangle * scale_text_tradestate);
+            } else {
 
       //reset print position
-          print_pos -= print_pos;
-          if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
-              print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-          }
-          else {
-            print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-          }
+                print_pos -= print_pos;
+                if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
+                    print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
+                } else {
+                    print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
+                }
      //set print position
+                if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.z < 0.5) {
+                    float col_text_plus1BTCLONG;
+                    float scale_text_plus_minus_1BTC = 57.0;
 
-          float colCVAA2;
-          float scaleCVAA2 = 57.0;
+                    col_text_plus1BTCLONG += char(ch_crs, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_1, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_B, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_T, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_C, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_L, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_O, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_N, p * scale_text_plus_minus_1BTC);
+                    col_text_plus1BTCLONG += char(ch_G, p * scale_text_plus_minus_1BTC);
+                    col = mix(col, vec3(3.0, 3.0, 3.0), col_text_plus1BTCLONG * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
 
-          colCVAA2 += char(ch_crs, p * scaleCVAA2);
-          colCVAA2 += char(ch_1, p * scaleCVAA2);
-          colCVAA2 += char(ch_spc, p * scaleCVAA2);
-          colCVAA2 += char(ch_B, p * scaleCVAA2);
-          colCVAA2 += char(ch_T, p * scaleCVAA2);
-          colCVAA2 += char(ch_C, p * scaleCVAA2);
-          colCVAA2 += char(ch_spc, p * scaleCVAA2);
-          colCVAA2 += char(ch_L, p * scaleCVAA2);
-          colCVAA2 += char(ch_O, p * scaleCVAA2);
-          colCVAA2 += char(ch_N, p * scaleCVAA2);
-          colCVAA2 += char(ch_G, p * scaleCVAA2);
-          col = mix(col, vec3(3.0, 3.0, 3.0), colCVAA2 * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
+                    print_pos -= print_pos;
+                    if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
+                        print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
+                    } else {
+                        print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
+                    }
+                    float col_text_minus1BTCSHORT;
+                    col_text_minus1BTCSHORT += char(ch_dsh, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_1, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_B, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_T, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_C, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_S, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_H, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_O, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_R, p * scale_text_plus_minus_1BTC);
+                    col_text_minus1BTCSHORT += char(ch_T, p * scale_text_plus_minus_1BTC);
 
-          print_pos -= print_pos;
-          if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
-            print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-          } else {
-            print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-          }
-          float colIntentB;
-          colIntentB += char(ch_dsh, p * scaleCVAA2);
-          colIntentB += char(ch_1, p * scaleCVAA2);
-          colIntentB += char(ch_spc, p * scaleCVAA2);
-          colIntentB += char(ch_B, p * scaleCVAA2);
-          colIntentB += char(ch_T, p * scaleCVAA2);
-          colIntentB += char(ch_C, p * scaleCVAA2);
-          colIntentB += char(ch_spc, p * scaleCVAA2);
-          colIntentB += char(ch_S, p * scaleCVAA2);
-          colIntentB += char(ch_H, p * scaleCVAA2);
-          colIntentB += char(ch_O, p * scaleCVAA2);
-          colIntentB += char(ch_R, p * scaleCVAA2);
-          colIntentB += char(ch_T, p * scaleCVAA2);
+                    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_minus1BTCSHORT * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
 
-          col = mix(col, vec3(3.0, 0.3, 0.3), colIntentB * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
+                }
 
     //...Text Solvent
-          print_pos -= print_pos;
-          print_pos -= vec2(20.0, -3.0);
-          staticTextColSolve += char(ch_S, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_O, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_L, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_V, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_E, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_N, pTriStatic * ScaleS);
-          staticTextColSolve += char(ch_T, pTriStatic * ScaleS);
-      }
+                print_pos -= print_pos;
+                print_pos -= vec2(20.0, -3.0);
+                col_text_SOLVENT += char(ch_S, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_O, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_L, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_V, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_E, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_N, position_triangle * scale_text_tradestate);
+                col_text_SOLVENT += char(ch_T, position_triangle * scale_text_tradestate);
+            }
 
-      float vis = max(tradeAnim * (iAnimProgress_3.x - iAnimProgress_3.y), 0.0);
+            float vis = max(tradeAnim * (iAnimProgress_3.x - iAnimProgress_3.y), 0.0);
   // Triangle visibility parameter
-      if(dt < 0.0) {
-          col = mix(fillColor, col, 1.0 - vis);
-      }
+            if(dt < 0.0) {
+                col = mix(fillColor, col, 1.0 - vis);
+            }
 
   // Triangle liquidator glow color
-      vec3 tricol = hsv2rgb(triColor);
+            vec3 tricol = hsv2rgb(triColor);
 
   // Triangle static trade  glow factor
-      vec3 gcolS = hsv2rgb(triColor);
+            vec3 gcolS = hsv2rgb(triColor);
+
+            if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.y < 0.5) {
+  //add text Liquidator to col
+                col = mix(col, eyeColor, col_text_LIQUIDATOR * vis);
 
   //add triangle static to col
-      col += (gcolS / max(abs(dtS), 0.001)) * smoothstep(0.5, 0.0, dtS) * isleftHalf * vis / 2.0;
+                col += (gcolS / max(abs(dtS), 0.001)) * smoothstep(0.5, 0.0, dtS) * isleftHalf * vis / 2.0;
 
   // add triangle liquidators to col
-      col += (tricol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * vis;
-  //add text Liquidator to col
-      col = mix(col, eyeColor, charCol * vis);
-
+                col += (tricol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * vis;
   //add text static to col
-      col += staticTextColSolve * isleftHalf * vis;
-
+                col += col_text_SOLVENT * isleftHalf * vis;
   //add text liquidate to col
-      col = mix(col, vec3(3.0, 0.3, 0.3), staticTextCol * isleftHalf * vis);
+                col = mix(col, vec3(3.0, 0.3, 0.3), col_text_liquidate * isleftHalf * vis);
 
   // add eye to col
-      col = mix(vis * iAnimProgress_3.x * (eyeColor), col, eyeRender(col, p, vis));
+                col = mix(vis * iAnimProgress_3.x * (eyeColor), col, eyeRender(col, p, vis));
 
-  }
+            }
 
-  if(iAnimProgress_2.z > 0.5 && iAnimProgress_3.x < 0.5) {
-      print_pos -= print_pos;
-      print_pos -= vec2(-9.0 + (iAnimProgress_2.z * 100.0), 40.0);
+        }
+    }
 
-      float colCVAA;
-      float scaleCVAA = 115.0;
+    if(iAnimProgress_2.z > 0.5 && iAnimProgress_3.x < 0.5) {
+        print_pos -= print_pos;
+        print_pos -= vec2(-9.0 + (iAnimProgress_2.z * 100.0), 40.0);
 
-      colCVAA += char(ch_crs, p * scaleCVAA);
-      colCVAA += char(ch_1, p * scaleCVAA);
-      colCVAA += char(ch_spc, p * scaleCVAA);
-      colCVAA += char(ch_B, p * scaleCVAA);
-      colCVAA += char(ch_T, p * scaleCVAA);
-      colCVAA += char(ch_C, p * scaleCVAA);
-      colCVAA += char(ch_spc, p * scaleCVAA);
-      colCVAA += char(ch_L, p * scaleCVAA);
-      colCVAA += char(ch_O, p * scaleCVAA);
-      colCVAA += char(ch_N, p * scaleCVAA);
-      colCVAA += char(ch_G, p * scaleCVAA);
+        float col_text_plus1BTCLONG;
+        float scale_text_plus1BTCLONG = 115.0;
 
+        col_text_plus1BTCLONG += char(ch_crs, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_1, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_B, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_T, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_C, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_L, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_O, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_N, p * scale_text_plus1BTCLONG);
+        col_text_plus1BTCLONG += char(ch_G, p * scale_text_plus1BTCLONG);
 
-      print_pos -= print_pos;
-      print_pos -= vec2(79.0 - (iAnimProgress_2.z * 100.0) - iAnimProgress_3.y * 15.0, 40.0);
-      float colIntentB;
-      float ScaleIntentB = 115.0;
+        print_pos -= print_pos;
+        print_pos -= vec2(79.0 - (iAnimProgress_2.z * 100.0) - iAnimProgress_3.y * 15.0, 40.0);
+        float col_text_minus1BTCSHORT;
+        float scale_text_minus1BTCSHORT = 115.0;
 
-      colIntentB += char(ch_dsh, p * ScaleIntentB);
-      colIntentB += char(ch_1, p * ScaleIntentB);
-      colIntentB += char(ch_spc, p * ScaleIntentB);
-      colIntentB += char(ch_B, p * ScaleIntentB);
-      colIntentB += char(ch_T, p * ScaleIntentB);
-      colIntentB += char(ch_C, p * ScaleIntentB);
-      colIntentB += char(ch_spc, p * ScaleIntentB);
-      colIntentB += char(ch_S, p * ScaleIntentB);
-      colIntentB += char(ch_H, p * ScaleIntentB);
-      colIntentB += char(ch_O, p * ScaleIntentB);
-      colIntentB += char(ch_R, p * ScaleIntentB);
-      colIntentB += char(ch_T, p * ScaleIntentB);
+        col_text_minus1BTCSHORT += char(ch_dsh, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_1, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_B, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_T, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_C, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_S, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_H, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_O, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_R, p * scale_text_minus1BTCSHORT);
+        col_text_minus1BTCSHORT += char(ch_T, p * scale_text_minus1BTCSHORT);
 
-      if (iAnimProgress_2.z > 0.5 && iAnimProgress_3.z < 0.5){
-        col = mix(col, vec3(3.0, 3.0, 3.0), colCVAA * (iAnimProgress_2.z - iAnimProgress_3.z));
-        col = mix(col, vec3(3.0, 0.3, 0.3), colIntentB * (iAnimProgress_2.z - iAnimProgress_3.z));
-      }
+        if(iAnimProgress_2.z > 0.5 && iAnimProgress_3.z < 0.5) {
+            col = mix(col, vec3(3.0, 3.0, 3.0), col_text_plus1BTCLONG * (iAnimProgress_2.z - iAnimProgress_3.z));
+            col = mix(col, vec3(3.0, 0.3, 0.3), col_text_minus1BTCSHORT * (iAnimProgress_2.z - iAnimProgress_3.z));
+        }
 
-  }
-  return col;
+    }
+    return col;
 }
 
 vec3 triRender_left(vec3 col, vec3 ro, vec3 rd) {
 // Triangle fill color
-  vec3 fillColor = vec3(0.009, 0.0, 0.0);
+    vec3 fillColor = vec3(0.009, 0.0, 0.0);
 // triangle calcs
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+    vec2 p = pp.xy;
 // triangle resize
-  p *= 1.0;
+    p *= 1.0;
 // triangle offset
-  p.y -= 0.58;
-  p.x -= 1.0 + iAnimProgress_1.x * 1.00 - iAnimProgress_1.z * 1.0;
+    p.y -= 0.58;
+    p.x -= 1.0 + iAnimProgress_1.x * 1.00 - iAnimProgress_1.z * 1.0;
 // triangle inner glow factor
-  p.x = -p.x;
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.8, 0.006));
+    p.x = -p.x;
+    vec3 gcol = hsv2rgb(vec3(1.0, 0.8, 0.006));
 // triangle displacement
-  float dt = equilateralTriangle(p);
+    float dt = equilateralTriangle(p);
 // Triangle visibility parameter
-  float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_1.z * 0.9);
-  if(dt < 0.0) {
-      col = mix(fillColor, col, visibility);
-  }
+    float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_1.z * 0.9);
+    if(dt < 0.0) {
+        col = mix(fillColor, col, visibility);
+    }
 // triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * (iAnimProgress_1.x * 0.8 - iAnimProgress_3.x * 0.8);
+    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * (iAnimProgress_1.x * 0.8 - iAnimProgress_3.x * 0.8);
 
-  print_pos -= print_pos;
-  print_pos -= vec2(23.0 - (iAnimProgress_2.z * 100.0), 8.0);
-  float colIntentA;
-  float ScaleIntentA = 50.0;
-  colIntentA += char(ch_I, p * ScaleIntentA);
-  colIntentA += char(ch_N, p * ScaleIntentA);
-  colIntentA += char(ch_T, p * ScaleIntentA);
-  colIntentA += char(ch_E, p * ScaleIntentA);
-  colIntentA += char(ch_N, p * ScaleIntentA);
-  colIntentA += char(ch_T, p * ScaleIntentA);
-  colIntentA += char(ch_spc, p * ScaleIntentA);
-  colIntentA += char(ch_A, p * ScaleIntentA);
-  col = mix(col, vec3(3.0, 1.0, 1.0), colIntentA * (iAnimProgress_1.y - iAnimProgress_2.z));
+    print_pos -= print_pos;
+    print_pos -= vec2(23.0 - (iAnimProgress_2.z * 100.0), 8.0);
+    float col_text_INTENTA;
+    float scale_text_INTENTA = 50.0;
+    col_text_INTENTA += char(ch_I, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_N, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_T, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_E, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_N, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_T, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_spc, p * scale_text_INTENTA);
+    col_text_INTENTA += char(ch_A, p * scale_text_INTENTA);
+    col = mix(col, vec3(3.0, 1.0, 1.0), col_text_INTENTA * (iAnimProgress_1.y - iAnimProgress_2.z));
 
-  print_pos -= print_pos;
-  print_pos -= vec2(10.0, 20.0);
-  float colYOU;
-  float ScaleT = 50.0;
-  colYOU += char(ch_Y, p * ScaleT);
-  colYOU += char(ch_O, p * ScaleT);
-  colYOU += char(ch_U, p * ScaleT);
-  col = mix(col, vec3(3.0, 1.0, 1.0), colYOU * (iAnimProgress_1.x - iAnimProgress_1.z));
+    print_pos -= print_pos;
+    print_pos -= vec2(10.0, 20.0);
+    float col_text_YOU;
+    float scale_text_YOU = 50.0;
+    col_text_YOU += char(ch_Y, p * scale_text_YOU);
+    col_text_YOU += char(ch_O, p * scale_text_YOU);
+    col_text_YOU += char(ch_U, p * scale_text_YOU);
+    col = mix(col, vec3(3.0, 1.0, 1.0), col_text_YOU * (iAnimProgress_1.x - iAnimProgress_1.z));
 
-  print_pos -= print_pos;
-  print_pos -= vec2(-20.0, -23.0);
-  float tradeTextCol;
-  float ScaleS = 40.0;
-  tradeTextCol += char(ch_E, p * ScaleS);
-  tradeTextCol += char(ch_X, p * ScaleS);
-  tradeTextCol += char(ch_E, p * ScaleS);
-  tradeTextCol += char(ch_C, p * ScaleS);
-  tradeTextCol += char(ch_U, p * ScaleS);
-  tradeTextCol += char(ch_T, p * ScaleS);
-  tradeTextCol += char(ch_E, p * ScaleS);
-  col = mix(col, vec3(3.0, 2.0, 2.0), iAnimProgress_2.y * tradeTextCol * (iAnimProgress_2.z - iAnimProgress_3.x) * (sin((iAnimProgress_2.z) * 3.5)));
+    print_pos -= print_pos;
+    print_pos -= vec2(-20.0, -23.0);
+    float col_text_EXECUTE;
+    float scale_text_EXECUTE = 40.0;
+    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_X, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_C, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_U, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_T, p * scale_text_EXECUTE);
+    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
+    col = mix(col, vec3(3.0, 2.0, 2.0), iAnimProgress_2.y * col_text_EXECUTE * (iAnimProgress_2.z - iAnimProgress_3.x) * (sin((iAnimProgress_2.z) * 3.5)));
 
-  return col;
+    return col;
 }
 
 vec3 triRender_right(vec3 col, vec3 ro, vec3 rd) {
 // Triangle fill color
-  vec3 fillColor = vec3(0.005, 0.0, 0.0);
+    vec3 fillColor = vec3(0.005, 0.0, 0.0);
 // Triangle calcs
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+    vec2 p = pp.xy;
 // Triangle resize
-  p *= 1.0;
+    p *= 1.0;
 // Triangle y offset
-  p.y -= 0.58;
-  p.x += 2.0 - iAnimProgress_2.y;
-  p.x = -p.x;
+    p.y -= 0.58;
+    p.x += 2.0 - iAnimProgress_2.y;
+    p.x = -p.x;
 // Triangle inner glow factor
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
+    vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
 // Triangle displacement
-  float dt = equilateralTriangle(p);
+    float dt = equilateralTriangle(p);
 // Triangle visibility parameter
-  float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_2.y * 0.9);
-  if(dt < 0.0) {
-      col = mix(fillColor, col, visibility);
-  }
+    float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_2.y * 0.9);
+    if(dt < 0.0) {
+        col = mix(fillColor, col, visibility);
+    }
 
 // triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * 0.8) - (iAnimProgress_1.y * 0.6) + (iAnimProgress_2.y * 0.8) - (iAnimProgress_3.x * 1.0));
+    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * 0.8) - (iAnimProgress_1.y * 0.6) + (iAnimProgress_2.y * 0.8) - (iAnimProgress_3.x * 1.0));
 
-  print_pos -= print_pos;
-  print_pos -= vec2(23.0 + (iAnimProgress_2.z * 100.0), 8.0);
-  float colIntentB;
-  float scalecolIntentB = 50.0;
-  colIntentB += char(ch_I, p * scalecolIntentB);
-  colIntentB += char(ch_N, p * scalecolIntentB);
-  colIntentB += char(ch_T, p * scalecolIntentB);
-  colIntentB += char(ch_E, p * scalecolIntentB);
-  colIntentB += char(ch_N, p * scalecolIntentB);
-  colIntentB += char(ch_T, p * scalecolIntentB);
-  colIntentB += char(ch_spc, p * scalecolIntentB);
-  colIntentB += char(ch_B, p * scalecolIntentB);
+    print_pos -= print_pos;
+    print_pos -= vec2(23.0 + (iAnimProgress_2.z * 100.0), 8.0);
+    float col_text_INTENTB;
+    float scale_text_INTENTB = 50.0;
+    col_text_INTENTB += char(ch_I, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_N, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_T, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_E, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_N, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_T, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_spc, p * scale_text_INTENTB);
+    col_text_INTENTB += char(ch_B, p * scale_text_INTENTB);
 
-  col = mix(col, vec3(3.0, 0.3, 0.3), colIntentB * (iAnimProgress_2.x - iAnimProgress_2.z));
+    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_INTENTB * (iAnimProgress_2.x - iAnimProgress_2.z));
 
-  print_pos -= print_pos;
-  print_pos -= vec2(18.0, 20.0);
-  float colT;
-  float ScaleT = 50.0;
-  colT += char(ch_H, p * ScaleT);
-  colT += char(ch_E, p * ScaleT);
-  colT += char(ch_D, p * ScaleT);
-  colT += char(ch_G, p * ScaleT);
-  colT += char(ch_E, p * ScaleT);
-  colT += char(ch_R, p * ScaleT);
-  col = mix(col, vec3(3.0, 0.3, 0.3), colT * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.7) + (iAnimProgress_2.x * 0.7) - iAnimProgress_2.y));
+    print_pos -= print_pos;
+    print_pos -= vec2(18.0, 20.0);
+    float col_text_HEDGER;
+    float scale_text_HEDGER = 50.0;
+    col_text_HEDGER += char(ch_H, p * scale_text_HEDGER);
+    col_text_HEDGER += char(ch_E, p * scale_text_HEDGER);
+    col_text_HEDGER += char(ch_D, p * scale_text_HEDGER);
+    col_text_HEDGER += char(ch_G, p * scale_text_HEDGER);
+    col_text_HEDGER += char(ch_E, p * scale_text_HEDGER);
+    col_text_HEDGER += char(ch_R, p * scale_text_HEDGER);
+    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_HEDGER * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.7) + (iAnimProgress_2.x * 0.7) - iAnimProgress_2.y));
 
-  return col;
+    return col;
 }
 
 vec3 renderTriangle(vec3 col, vec3 ro, vec3 rd, float scaleFactor, float xOffset) {
 // Triangle fill color
-  vec3 fillColor = vec3(0.009, 0.0, 0.0);
+    vec3 fillColor = vec3(0.009, 0.0, 0.0);
 // Triangle dimensions
-  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
 // Calculate intersection with the triangle
-  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-  vec3 pp = ro + rd * tpd;
-  vec2 p = pp.xy;
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+    vec2 p = pp.xy;
 // Resize and offset the triangle
-  p *= scaleFactor;
-  p.x += xOffset;
-  p.y -= 0.58;
-  p.x += 1.0 + iAnimProgress_1.x * 1.0;
-  float a;
+    p *= scaleFactor;
+    p.x += xOffset;
+    p.y -= 0.58;
+    p.x += 1.0 + iAnimProgress_1.x * 1.0;
+    float a;
 
 // Triangle inner glow factor
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
+    vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
 // Calculate triangle displacement
-  float dt = equilateralTriangle(p);
+    float dt = equilateralTriangle(p);
 // Triangle visibility parameter
-  float visibility = 1.0 - (iAnimProgress_1.x * scaleFactor * 0.2) + (iAnimProgress_1.y * scaleFactor * 0.1) + (iAnimProgress_2.y * scaleFactor * 0.1);
-  if(dt < 0.0) {
-      col = mix(fillColor, col, visibility);
-  }
+    float visibility = 1.0 - (iAnimProgress_1.x * scaleFactor * 0.2) + (iAnimProgress_1.y * scaleFactor * 0.1) + (iAnimProgress_2.y * scaleFactor * 0.1);
+    if(dt < 0.0) {
+        col = mix(fillColor, col, visibility);
+    }
 // Triangle edge glow mod
-  col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * scaleFactor * 0.1) - (iAnimProgress_1.y * scaleFactor * 0.05) - (iAnimProgress_2.y * scaleFactor * 0.05));
-  return col;
+    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * scaleFactor * 0.1) - (iAnimProgress_1.y * scaleFactor * 0.05) - (iAnimProgress_2.y * scaleFactor * 0.05));
+    return col;
 }
 
 vec3 triRender_right_4(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.25, 1.22);
+    return renderTriangle(col, ro, rd, 1.25, 1.22);
 }
 
 vec3 triRender_right_3(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.16, 0.8);
+    return renderTriangle(col, ro, rd, 1.16, 0.8);
 }
 
 vec3 triRender_right_2(vec3 col, vec3 ro, vec3 rd) {
-  return renderTriangle(col, ro, rd, 1.08, 0.4);
+    return renderTriangle(col, ro, rd, 1.08, 0.4);
 }
 
 //-----Outer Sky
@@ -2554,16 +2559,16 @@ vec3 sunDir = normalize(vec3(-mousePos.x * 4.0, -2.0 + (mousePos.y * 2.0) + iAni
 const vec3 sunCol = HSV2RGB(vec3(0.00, 0.7, 0.002));
 
 vec3 outerSkyRender(vec3 ro, vec3 rd) {
-  vec3 col;
+    vec3 col;
 //sun settings
-  col += sunCol / pow((1.002 - ((dot(sunDir, rd)))), 1.9 - iAnimProgress_1.x + iAnimProgress_3.x * 0.5 + iAnimProgress_3.y * 0.5);
+    col += sunCol / pow((1.002 - ((dot(sunDir, rd)))), 1.9 - iAnimProgress_1.x + iAnimProgress_3.x * 0.5 + iAnimProgress_3.y * 0.5);
 //horizon light modifier
-  vec3 gcol = hsv2rgb(vec3(1.0, 0.0, 0.002 - iAnimProgress_1.x * 0.0018 + iAnimProgress_3.y * 0.004));
-  gcol = mix(gcol, vec3(0.0), smoothstep(0.5, 1.0, abs(rd.y)));
+    vec3 gcol = hsv2rgb(vec3(1.0, 0.0, 0.002 - iAnimProgress_1.x * 0.0018 + iAnimProgress_3.y * 0.004));
+    gcol = mix(gcol, vec3(0.0), smoothstep(0.5, 1.0, abs(rd.y)));
 //atmosphere air color
-  col += vec3(0.1);
-  col += gcol / abs(rd.y);
-  return col;
+    col += vec3(0.1);
+    col += gcol / abs(rd.y);
+    return col;
 }
 
 //-----Ground
