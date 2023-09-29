@@ -2335,7 +2335,7 @@ vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
                 col = mix(col, vec3(3.0, 0.3, 0.3), col_text_liquidate * isleftHalf * vis);
 
   // add eye to col
-                col = mix(vis * iAnimProgress_3.x * (eyeColor), col, eyeRender(col, p, vis));
+                 col = mix(vis * iAnimProgress_3.x * (eyeColor), col, eyeRender(col, p, vis));
 
             }
 
