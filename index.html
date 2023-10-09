@@ -1775,14 +1775,11 @@
 
 
 // ---------------------------------------------------- Settings
+precision lowp float; // Reduce precision further if needed
 
 #extension GL_OES_standard_derivatives : enable
-#ifdef GL_ES
-precision lowp float;
-#endif
 
-uniform sampler2D myTexture;
-varying vec2 texcoord;
+
 uniform vec2 iResolution;
 uniform float iTime;
 uniform vec2 iMousePos;
@@ -1792,907 +1789,483 @@ uniform vec3 iAnimProgress_1;
 uniform vec3 iAnimProgress_2;
 uniform vec3 iAnimProgress_3;
 
-#define PI          3.141592654
-#define TAU         (2.0*PI)
-#define SCA(a)      vec2(sin(a), cos(a))
-#define HSV2RGB(c)  (c.z * mix(hsv2rgb_K.xxx, clamp(abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www) - hsv2rgb_K.xxx, 0.0, 1.0), c.y))
+const ivec2 char_space = ivec2(0, 0);
+const ivec2 char_exclam = ivec2(-2147352576, 135274560);
+const ivec2 char_quotedbl = ivec2(0, 338186240);
+const ivec2 char_numbersign = ivec2(-494600192, 338229411);
+const ivec2 char_dollar = ivec2(-2058944512, 475277538);
+const ivec2 char_percent = ivec2(1179385856, 105660480);
+const ivec2 char_ampersand = ivec2(-1572143104, 68429858);
+const ivec2 char_quoteright = ivec2(0, 135270400);
+const ivec2 char_parenleft = ivec2(1090781184, 269488160);
+const ivec2 char_parenright = ivec2(16842752, 68173953);
+const ivec2 char_asterisk = ivec2(-985530368, 139751489);
+const ivec2 char_plus = ivec2(-2130706432, 1057264);
+const ivec2 char_comma = ivec2(16908800, 0);
+const ivec2 char_hyphen = ivec2(0, 224);
+const ivec2 char_period = ivec2(131072, 0);
+const ivec2 char_slash = ivec2(1077936128, 4210752);
+const ivec2 char_zero = ivec2(578945024, 136874258);
+const ivec2 char_one = ivec2(-2130247680, 135798848);
+const ivec2 char_two = ivec2(1078951936, 474251456);
+const ivec2 char_three = ivec2(71761920, 1044398274);
+const ivec2 char_four = ivec2(-503054336, 271601811);
+const ivec2 char_five = ivec2(71761920, 1040480514);
+const ivec2 char_six = ivec2(608632832, 403179762);
+const ivec2 char_seven = ivec2(1082195968, 1044398144);
+const ivec2 char_eight = ivec2(608632832, 474253538);
+const ivec2 char_nine = ivec2(33751040, 474253794);
+const ivec2 char_colon = ivec2(131072, 8192);
+const ivec2 char_semicolon = ivec2(16908800, 8192);
+const ivec2 char_less = ivec2(1090781184, 269488144);
+const ivec2 char_equal = ivec2(-536870912, 63491);
+const ivec2 char_greater = ivec2(16842752, 68174081);
+const ivec2 char_question = ivec2(-2147352576, 474234944);
+const ivec2 char_at = ivec2(-1605959680, 474278227);
+const ivec2 char_A = ivec2(-465010688, 136874259);
+const ivec2 char_B = ivec2(608665600, 507807986);
+const ivec2 char_C = ivec2(608632832, 474220560);
+const ivec2 char_D = ivec2(608665600, 507808018);
+const ivec2 char_E = ivec2(542081024, 1040451824);
+const ivec2 char_F = ivec2(541097984, 1040451824);
+const ivec2 char_G = ivec2(609157120, 474220563);
+const ivec2 char_H = ivec2(608731136, 574917106);
+const ivec2 char_I = ivec2(-2130247680, 470818880);
+const ivec2 char_J = ivec2(71761920, 541098242);
+const ivec2 char_K = ivec2(-1572306944, 572794928);
+const ivec2 char_L = ivec2(542081024, 33818640);
+const ivec2 char_M = ivec2(608731136, 577546578);
+const ivec2 char_N = ivec2(608731136, 574921043);
+const ivec2 char_O = ivec2(608632832, 474253586);
+const ivec2 char_P = ivec2(541097984, 507807984);
+const ivec2 char_Q = ivec2(-1572143104, 474253586);
+const ivec2 char_R = ivec2(-1572306944, 507807984);
+const ivec2 char_S = ivec2(71761920, 474220770);
+const ivec2 char_T = ivec2(-2130575360, 1041244224);
+const ivec2 char_U = ivec2(608632832, 574916882);
+const ivec2 char_V = ivec2(1090650112, 574916769);
+const ivec2 char_W = ivec2(-1522204672, 574916946);
+const ivec2 char_X = ivec2(1145602048, 574902337);
+const ivec2 char_Y = ivec2(-2130575360, 574902336);
+const ivec2 char_Z = ivec2(1078951936, 1044398144);
+const ivec2 char_bracketleft = ivec2(1083113472, 1007161376);
+const ivec2 char_backslash = ivec2(67108864, 266305);
+const ivec2 char_bracketright = ivec2(34045952, 505430145);
+const ivec2 char_asciicircum = ivec2(0, 136873984);
+const ivec2 char_underscore = ivec2(1015808, 0);
+const ivec2 char_quotereversed = ivec2(0, 135282688);
+const ivec2 char_a = ivec2(-1001455616, 28931);
+const ivec2 char_b = ivec2(608665600, 33847570);
+const ivec2 char_c = ivec2(542048256, 61456);
+const ivec2 char_d = ivec2(609157120, 541126930);
+const ivec2 char_e = ivec2(-532217856, 28947);
+const ivec2 char_f = ivec2(-2130575360, 269492448);
+const ivec2 char_g = ivec2(609161244, 61714);
+const ivec2 char_h = ivec2(608731136, 33847570);
+const ivec2 char_i = ivec2(-2130247680, 134230080);
+const ivec2 char_j = ivec2(-2130574332, 134225984);
+const ivec2 char_k = ivec2(-1031208960, 67670176);
+const ivec2 char_l = ivec2(-2130247680, 202383424);
+const ivec2 char_m = ivec2(-1521844224, 22866);
+const ivec2 char_n = ivec2(608731136, 30994);
+const ivec2 char_o = ivec2(608632832, 28946);
+const ivec2 char_p = ivec2(608665858, 30994);
+const ivec2 char_q = ivec2(609161248, 61714);
+const ivec2 char_r = ivec2(1082195968, 53344);
+const ivec2 char_s = ivec2(-1006141440, 61457);
+const ivec2 char_t = ivec2(-2130444288, 135295040);
+const ivec2 char_u = ivec2(609157120, 35090);
+const ivec2 char_v = ivec2(1115815936, 35089);
+const ivec2 char_w = ivec2(-1522204672, 35090);
+const ivec2 char_x = ivec2(-2104983552, 34976);
+const ivec2 char_y = ivec2(609161244, 35090);
+const ivec2 char_z = ivec2(-2138079232, 63616);
+const ivec2 char_braceleft = ivec2(-2129920000, 806363168);
+const ivec2 char_brokenbar = ivec2(-2130575360, 135274496);
+const ivec2 char_braceright = ivec2(-2130608128, 101720192);
+const ivec2 char_asciitilde = ivec2(0, 72630272);
+const ivec2 char_filledbox = ivec2(-405831680, 1048377843);
+const ivec2 char_sterling = ivec2(1083146240, 407375984);
+const ivec2 char_quotesingle = ivec2(0, 135274496);
+const ivec2 char_arrowleft = ivec2(1090519040, 1053168);
+const ivec2 char_onehalf = ivec2(-1543240648, 33818641);
+const ivec2 char_arrowright = ivec2(16777216, 1065457);
+const ivec2 char_arrowup = ivec2(-2130706432, 1077584);
+const ivec2 char_emdash = ivec2(0, 496);
+const ivec2 char_onequarter = ivec2(1175067680, 67637282);
+const ivec2 char_dblverticalbar = ivec2(1116012544, 338186401);
+const ivec2 char_threequarters = ivec2(1711938592, 101718082);
+const ivec2 char_divide = ivec2(16777216, 1049072);
+const ivec2 char_comma_saa5051 = ivec2(8454400, 0);
+const ivec2 char_period_saa5051 = ivec2(25362432, 0);
+const ivec2 char_colon_saa5051 = ivec2(65536, 32);
+const ivec2 char_semicolon_saa5051 = ivec2(8454400, 4096);
+const ivec2 char_section = ivec2(596119836, 474220770);
+const ivec2 char_Adieresis = ivec2(-465010688, 335573267);
+const ivec2 char_Odieresis = ivec2(608632832, 335573266);
+const ivec2 char_Udieresis = ivec2(608632832, 335579410);
+const ivec2 char_degree = ivec2(0, 407396352);
+const ivec2 char_adieresis = ivec2(-1001455616, 335573251);
+const ivec2 char_odieresis = ivec2(608632832, 2621666);
+const ivec2 char_udieresis = ivec2(609157120, 2621714);
+const ivec2 char_germandbls = ivec2(608600322, 203704530);
+const ivec2 char_currency = ivec2(1133019136, 35041);
+const ivec2 char_Eacute = ivec2(-531660800, 269547537);
+const ivec2 char_D_saa5052 = ivec2(1149698048, 474517794);
+const ivec2 char_L_saa5052 = ivec2(1083113472, 67637280);
+const ivec2 char_Aring = ivec2(-465010688, 134246675);
+const ivec2 char_eacute = ivec2(-532217856, 269512979);
+const ivec2 char_aring = ivec2(-1001455616, 134246659);
+const ivec2 char_ccedilla = ivec2(542050312, 61456);
+const ivec2 char_ugrave = ivec2(609157120, 68192530);
+const ivec2 char_agrave = ivec2(-1001455616, 68186371);
+const ivec2 char_ograve = ivec2(608632832, 68157666);
+const ivec2 char_egrave = ivec2(-532217856, 68186387);
+const ivec2 char_igrave = ivec2(-2130247680, 68157536);
+const ivec2 char_idieresis = ivec2(-2130247680, 335556672);
+const ivec2 char_edieresis = ivec2(-532217856, 335573267);
+const ivec2 char_ecircumflex = ivec2(-532217856, 136868115);
+const ivec2 char_ugrave_saa5054 = ivec2(609157120, 136349970);
+const ivec2 char_icircumflex = ivec2(-2130247680, 136839264);
+const ivec2 char_acircumflex = ivec2(-1001455616, 136868099);
+const ivec2 char_ocircumflex_saa5054 = ivec2(608632832, 136868114);
+const ivec2 char_ucircumflex = ivec2(609157120, 136839442);
+const ivec2 char_ccedilla_saa5054 = ivec2(542050328, 61456);
 
-// ---------------------------------------------------- Font
-#define CHAR_SIZE vec2(6, 7)
-#define CHAR_SPACING vec2(6, 9)
 
-#define STRWIDTH(c) (c * CHAR_SPACING.x)
-#define STRHEIGHT(c) (c * CHAR_SPACING.y)
+float draw_char(vec2 coord, ivec2 char) {
 
-vec2 ch_spc = vec2(0.0, 0.0);
-vec2 ch_exc = vec2(276705.0, 32776.0);
-vec2 ch_quo = vec2(1797408.0, 0.0);
-vec2 ch_hsh = vec2(10738.0, 1134484.0);
-vec2 ch_dol = vec2(538883.0, 19976.0);
-vec2 ch_pct = vec2(1664033.0, 68006.0);
-vec2 ch_amp = vec2(545090.0, 174362.0);
-vec2 ch_apo = vec2(798848.0, 0.0);
-vec2 ch_lbr = vec2(270466.0, 66568.0);
-vec2 ch_rbr = vec2(528449.0, 33296.0);
-vec2 ch_ast = vec2(10471.0, 1688832.0);
-vec2 ch_crs = vec2(4167.0, 1606144.0);
-vec2 ch_per = vec2(0.0, 1560.0);
-vec2 ch_dsh = vec2(7.0, 1572864.0);
-vec2 ch_com = vec2(0.0, 1544.0);
-vec2 ch_lsl = vec2(1057.0, 67584.0);
-vec2 ch_0 = vec2(935221.0, 731292.0);
-vec2 ch_1 = vec2(274497.0, 33308.0);
-vec2 ch_2 = vec2(934929.0, 1116222.0);
-vec2 ch_3 = vec2(934931.0, 1058972.0);
-vec2 ch_4 = vec2(137380.0, 1302788.0);
-vec2 ch_5 = vec2(2048263.0, 1058972.0);
-vec2 ch_6 = vec2(401671.0, 1190044.0);
-vec2 ch_7 = vec2(2032673.0, 66576.0);
-vec2 ch_8 = vec2(935187.0, 1190044.0);
-vec2 ch_9 = vec2(935187.0, 1581336.0);
-vec2 ch_col = vec2(195.0, 1560.0);
-vec2 ch_scl = vec2(195.0, 1544.0);
-vec2 ch_les = vec2(135300.0, 66052.0);
-vec2 ch_equ = vec2(496.0, 3968.0);
-vec2 ch_grt = vec2(528416.0, 541200.0);
-vec2 ch_que = vec2(934929.0, 1081352.0);
-vec2 ch_ats = vec2(935285.0, 714780.0);
-vec2 ch_A = vec2(935188.0, 780450.0);
-vec2 ch_B = vec2(1983767.0, 1190076.0);
-vec2 ch_C = vec2(935172.0, 133276.0);
-vec2 ch_D = vec2(1983764.0, 665788.0);
-vec2 ch_E = vec2(2048263.0, 1181758.0);
-vec2 ch_F = vec2(2048263.0, 1181728.0);
-vec2 ch_G = vec2(935173.0, 1714334.0);
-vec2 ch_H = vec2(1131799.0, 1714338.0);
-vec2 ch_I = vec2(921665.0, 33308.0);
-vec2 ch_J = vec2(66576.0, 665756.0);
-vec2 ch_K = vec2(1132870.0, 166178.0);
-vec2 ch_L = vec2(1065220.0, 133182.0);
-vec2 ch_M = vec2(1142100.0, 665762.0);
-vec2 ch_N = vec2(1140052.0, 1714338.0);
-vec2 ch_O = vec2(935188.0, 665756.0);
-vec2 ch_P = vec2(1983767.0, 1181728.0);
-vec2 ch_Q = vec2(935188.0, 698650.0);
-vec2 ch_R = vec2(1983767.0, 1198242.0);
-vec2 ch_S = vec2(935171.0, 1058972.0);
-vec2 ch_T = vec2(2035777.0, 33288.0);
-vec2 ch_U = vec2(1131796.0, 665756.0);
-vec2 ch_V = vec2(1131796.0, 664840.0);
-vec2 ch_W = vec2(1131861.0, 699028.0);
-vec2 ch_X = vec2(1131681.0, 84130.0);
-vec2 ch_Y = vec2(1131794.0, 1081864.0);
-vec2 ch_Z = vec2(1968194.0, 133180.0);
-vec2 ch_lsb = vec2(925826.0, 66588.0);
-vec2 ch_rsl = vec2(16513.0, 16512.0);
-vec2 ch_rsb = vec2(919584.0, 1065244.0);
-vec2 ch_pow = vec2(272656.0, 0.0);
-vec2 ch_usc = vec2(0.0, 62.0);
-vec2 ch_a = vec2(224.0, 649374.0);
-vec2 ch_b = vec2(1065444.0, 665788.0);
-vec2 ch_c = vec2(228.0, 657564.0);
-vec2 ch_d = vec2(66804.0, 665758.0);
-vec2 ch_e = vec2(228.0, 772124.0);
-vec2 ch_f = vec2(401543.0, 1115152.0);
-vec2 ch_g = vec2(244.0, 665474.0);
-vec2 ch_h = vec2(1065444.0, 665762.0);
-vec2 ch_i = vec2(262209.0, 33292.0);
-vec2 ch_j = vec2(131168.0, 1066252.0);
-vec2 ch_k = vec2(1065253.0, 199204.0);
-vec2 ch_l = vec2(266305.0, 33292.0);
-vec2 ch_m = vec2(421.0, 698530.0);
-vec2 ch_n = vec2(452.0, 1198372.0);
-vec2 ch_o = vec2(228.0, 665756.0);
-vec2 ch_p = vec2(484.0, 667424.0);
-vec2 ch_q = vec2(244.0, 665474.0);
-vec2 ch_r = vec2(354.0, 590904.0);
-vec2 ch_s = vec2(228.0, 114844.0);
-vec2 ch_t = vec2(8674.0, 66824.0);
-vec2 ch_u = vec2(292.0, 1198868.0);
-vec2 ch_v = vec2(276.0, 664840.0);
-vec2 ch_w = vec2(276.0, 700308.0);
-vec2 ch_x = vec2(292.0, 1149220.0);
-vec2 ch_y = vec2(292.0, 1163824.0);
-vec2 ch_z = vec2(480.0, 1148988.0);
-vec2 ch_lpa = vec2(401542.0, 66572.0);
-vec2 ch_bar = vec2(266304.0, 33288.0);
-vec2 ch_rpa = vec2(788512.0, 1589528.0);
-vec2 ch_tid = vec2(675840.0, 0.0);
-vec2 ch_lar = vec2(8387.0, 1147904.0);
-vec2 res;
-//Extracts bit b from the given number.
-//Shifts bits right (num / 2^bit) then ANDs the result with 1 (mod(result,2.0)).
-float extract_bit(float n, float b) {
-  b = clamp(b, -1.0, 22.0); //Fixes small artefacts on my nexus 7
-  return floor(mod(floor(n / pow(2.0, floor(b))), 2.0));
-}
-//Returns the pixel at uv in the given bit-packed sprite.
-float sprite(vec2 spr, vec2 size, vec2 uv) {
-  uv = floor(uv);
-  //Calculate the bit to extract (x + y * width) (flipped on x-axis)
-  float bit = (size.x - uv.x - 1.0) + uv.y * size.x;
+    int pos_id = int(coord.x * 7.0) + int(coord.y * 9.0) * 7;
 
-  //Clipping bound to remove garbage outside the sprite's boundaries.
-  bool bounds = all(greaterThanEqual(uv, vec2(0)));
-  bounds = bounds && all(lessThan(uv, size));
+    int num = pos_id < 32 ? char.x : char.y;
+    int val;
 
-  return bounds ? extract_bit(spr.x, bit - 21.0) + extract_bit(spr.y, bit) : 0.0;
-}
-vec2 print_pos = vec2(0);
-//Prints a character and moves the print position forward by 1 character width.
-float char(vec2 ch, vec2 uv) {
-  float px = sprite(ch, CHAR_SIZE, uv - print_pos);
-  print_pos.x += CHAR_SPACING.x;
-  return px;
-}
-//Returns the digit sprite for the given number.
-vec2 get_digit(float d) {
-  d = floor(d);
-  if(d == 0.0)
-      return ch_0;
-  if(d == 1.0)
-      return ch_1;
-  if(d == 2.0)
-      return ch_2;
-  if(d == 3.0)
-      return ch_3;
-  if(d == 4.0)
-      return ch_4;
-  if(d == 5.0)
-      return ch_5;
-  if(d == 6.0)
-      return ch_6;
-  if(d == 7.0)
-      return ch_7;
-  if(d == 8.0)
-      return ch_8;
-  if(d == 9.0)
-      return ch_9;
-  return vec2(0.0);
-}
-//Prints out the given number starting at pos.
-float print_number(float number, vec2 pos, vec2 uv) {
-  vec2 dec_pos = pos;
-  float result = 0.0;
-  for(int i = 3; i >= -2; i--) {
-      float clip = float(abs(number) > pow(10.0, float(i)) || i == 0); //Clip off leading zeros.
-      float digit = mod(number / pow(10.0, float(i)), 10.0);
-      if(i == -1) {
-          result += sprite(ch_per, CHAR_SIZE, uv - dec_pos) * clip;
-          dec_pos.x += CHAR_SPACING.x * clip;
-      }
-      result += sprite(get_digit(digit), CHAR_SIZE, uv - dec_pos) * clip;
-      dec_pos.x += CHAR_SPACING.x * clip;
-  }
-  return result;
+    if (pos_id < 32) {
+        val = int(mod(float(num) / pow(2.0, float(pos_id)), 2.0));
+    } else {
+        // Handle the case where pos_id is greater than or equal to 32
+        // by using a different bit manipulation technique.
+        int shifted_pos_id = pos_id - 32;
+        int pow_val = int(pow(2.0, float(shifted_pos_id)));
+        val = (num / pow_val);
+        val = val - (val / 2) * 2; // Use arithmetic to ensure val is 0 or 1
+    }
+
+
+    float col = val == 0 ? 0.0 : 1.0;
+
+    return col;
 }
 
-//BackGround ----------------------------------------------------
-const vec4 hsv2rgb_K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-vec3 hsv2rgb(vec3 c) {
-    vec3 p = abs(fract(c.xxx + hsv2rgb_K.xyz) * 6.0 - hsv2rgb_K.www);
-    return c.z * mix(hsv2rgb_K.xxx, clamp(p - hsv2rgb_K.xxx, 0.0, 1.0), c.y);
-}
+vec2 text_pos = vec2(0.4, 0.8);
+vec2 text_size = vec2(1000.0, 1000.0);
 
-//Triangle calcs
-float equilateralTriangle(vec2 p) {
-    const float k = sqrt(3.0);
+vec3 draw_text_pool(vec2 pt, ivec2 text_box) {
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 coord = pt / iResolution.xy;
+    coord.x *=iResolution.x/iResolution.y;
+    coord.x *= -text_size.x;
+    coord.y *= text_size.y;
+    coord += text_pos;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[13];
+    text_string_2[1] = ivec2(char_I);
+    text_string_2[2] = ivec2(char_N);
+    text_string_2[3] = ivec2(char_T);
+    text_string_2[4] = ivec2(char_E);
+    text_string_2[5] = ivec2(char_N);
+    text_string_2[6] = ivec2(char_T);
+    text_string_2[7] = ivec2(char_space);
+    text_string_2[8] = ivec2(char_P);
+    text_string_2[9] = ivec2(char_O);
+    text_string_2[10] = ivec2(char_O);
+    text_string_2[11] = ivec2(char_L);
+
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    else if (charIndex == 7) current_char = text_string_2[7];
+    else if (charIndex == 8) current_char = text_string_2[8];
+    else if (charIndex == 9) current_char = text_string_2[9];
+    else if (charIndex == 10) current_char = text_string_2[10];
+    else if (charIndex == 11) current_char = text_string_2[11];
+
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+    return col;
+}
+vec3 draw_text_you(vec2 pt, ivec2 text_box) {
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 coord = pt / iResolution.xy;
+    coord.x *= -text_size.x;
+    coord.y *= text_size.y;
+    coord.x *=iResolution.x/iResolution.y;
+    coord += text_pos;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[4];
+    text_string_2[1] = ivec2(char_Y);
+    text_string_2[2] = ivec2(char_O);
+    text_string_2[3] = ivec2(char_U);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+vec3 draw_text_hedger(vec2 pt, ivec2 text_box) {
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 coord = pt / iResolution.xy;
+    coord.x *= -text_size.x;
+    coord.y *= text_size.y;
+    coord.x *=iResolution.x/iResolution.y;
+    coord += text_pos;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[7];
+    text_string_2[1] = ivec2(char_H);
+    text_string_2[2] = ivec2(char_E);
+    text_string_2[3] = ivec2(char_D);
+    text_string_2[4] = ivec2(char_G);
+    text_string_2[5] = ivec2(char_E);
+    text_string_2[6] = ivec2(char_R);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+const vec3 gpn = normalize(vec3(0.0, 1.0, 0.0));
+const vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+const float k = sqrt(3.0);
+vec2 tilesSize = vec2(1.0);
+const vec4 gpdim = vec4(gpn, 0.0);
+vec3 sunDir = normalize(vec3(0.0, -2.0, 20.0));
+const vec3 sunCol = vec3(0.0015, 0.001, 0.001);
+
+ivec2 text_box_chars = ivec2(13, 7);
+
+vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_anim, vec2 tri_pos, float tri_scl, float tri_vis, vec3 glow_color) {
+    vec3 fillColor = vec3(0.005, 0.0, 0.0);
+    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+    vec3 pp = ro + rd * tpd;
+    vec2 p = pp.xy * 0.5;
+    p.y -= 0.58;
+    p += tri_pos;
+    p *= tri_scl;
+    vec2 text_pos = p;
+    vec3 gcol = glow_color*tri_vis;
     p.x = abs(p.x) - 1.0;
     p.y = p.y + 1.0 / k;
-    if(p.x + k * p.y > 0.0)
-        p = vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0;
+    p = (p.x + k * p.y > 0.0) ? vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0 : p;
     p.x -= clamp(p.x, -2.0, 0.0);
-    return -length(p) * sign(p.y);
-}
+    float dt = -length(p) * sign(p.y);
+    col = mix((dt < -0.0) ? fillColor : col, col, 1.0 - tri_vis);
+    vec3 tri_col = col;
+    col += gcol / max(abs(dt), 0.001);
 
-vec3 eyeRender(vec3 col, vec2 p, float vis) {
-  // Calculate blink
-    float eyeBlink = smoothstep(-0.28, 0.2, mod(iTime, 0.0));
-    eyeBlink -= smoothstep(0.28, 0.4, mod(iTime, 2.5));
-  // REPLACEMENT
-    vec2 rotatedP = vec2(-p.y + 0.2, p.x);
-  // Calculate Almond Eye
-    float bl = 1.0;
-    bl *= vis;
-    float k = -clamp(bl * bl, 0.06, 1.0);
-    vec2 pos = vec2(-4.0 * rotatedP.y, 4.0 * rotatedP.x);
-    pos = abs(pos);
-    float ik = 1.0 / k;
-    float parabola_p = ik * (pos.y - 1.1 * ik) / 3.0;
-    float parabola_q = 0.25 * ik * ik * pos.x;
-    float parabola_h = parabola_q * parabola_q - parabola_p * parabola_p * parabola_p;
-    float parabola_r = sqrt(abs(parabola_h));
-    float parabola_x = (parabola_h > 0.0) ? pow(parabola_q + parabola_r, 1.0 / 3.0) - pow(abs(parabola_q - parabola_r), 1.0 / 3.0) * sign(parabola_r - parabola_q) : 2.0 * cos(atan(parabola_r, parabola_q) / 3.0) * sqrt(parabola_p);
-
-    float sdEye = length(pos - vec2(parabola_x, k * parabola_x * parabola_x)) * sign(pos.x - parabola_x) - bl + 0.06;
-
-  // Apply smoothstep to color using sdEye
-    col += smoothstep(0.015, 0.025, abs(sdEye));
-  // Eye core creation and reposition
-    vec2 adjustedMousePos = vec2(-mousePos.y, 1.1 * (mousePos.x - 0.07)) * 2.0;
-    vec2 diff = 2.0 * rotatedP - adjustedMousePos;
-    float distance = length(diff) - 0.3 - 2.0 * smoothstep(0.895, 0.9, 0.0);
-    float eyeMask = max(distance, sdEye);
-    col = min(col, smoothstep(-0.01, 0.0, eyeMask * vis));
-    return col;
-}
-float animSpeed = (iTime * (0.7)); // 240 degrees rotation
-
-vec3 tradeTriRender(vec3 col, vec3 ro, vec3 rd) {
-// Triangle fill color
-    vec3 fillColor = vec3(0.005, 0.0, 0.0);
-    float isleftHalf;
-
-// Triangle calcs
-    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-    vec3 pp = ro + rd * tpd;
-    vec3 triColor;
-    vec3 eyeColor;
-    //...................Triangle Static
-    vec2 position_triangle = pp.xy;
-    // triangle x offset
-    position_triangle.x = -position_triangle.x;
-    // triangle resize
-    position_triangle *= 0.5;
-    // triangle y offset
-    position_triangle.y -= 0.58;
-    position_triangle.x -= 0.0001;
-    position_triangle.x += 0.0;
-    // triangle displacement
-    float dtS = equilateralTriangle(position_triangle);
-
-    //...................Triangle Liquidators
-
-    vec2 p2 = pp.xy;
-    p2.x = -p2.x;
-// triangle resize
-    p2 *= 0.5;
-// triangle offset
-    p2.y -= 0.58;
-    p2.x += 0.002;
-    p2.x -= 0.0 + iAnimProgress_3.y * 0.1 - iAnimProgress_3.z * 0.1;
-// triangle inner glow factor
-    vec3 gcol2 = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
-// triangle displacement
-    float dt2 = equilateralTriangle(p2);
-// Smooth the cut edge of the triangle
-    if(p2.x > 0.0) {
-  // Left half of the triangle
-        vec3 leftHalfColor = dt2 < 0.0 ? fillColor : col;
-        leftHalfColor += (gcol2 / max(abs(dt2), 0.001)) * smoothstep(0.5, 0.0, dt2);
-
-  // Blend the two halves together
-        float blendFactor2 = smoothstep(0.0, 0.003, p2.x); // Adjust the blend factor as needed
-        col = mix(col, leftHalfColor, blendFactor2);
-    }
-
-    vec2 p = pp.xy;
-    p.x = -p.x;
-
-  // triangle resize
-    p *= 0.5;
-  // triangle y offset
-    p.y -= 0.58;
-    p.x -= 0.002;
-
-    p.x += 0.0 + iAnimProgress_3.y * 0.08 - iAnimProgress_3.z * 0.08;
-
-   // triangle inner glow factor
-    vec3 gcol = hsv2rgb(vec3(1.0, 0.8 - (iAnimProgress_1.x * 0.4) + (iAnimProgress_3.x * 0.4), 0.006 - iAnimProgress_1.x * 0.0035 - iAnimProgress_1.y * 0.0015 + iAnimProgress_1.z * 0.0015));
- // triangle displacement
-    float dt = equilateralTriangle(p);
-
-  // Split the triangle by adding a condition based on the y-coordinate of the point.
-  // Smooth the right half of the triangle
-    if(p.x < 0.0) {
-    // Right half of the triangle
-        vec3 rightHalfColor = dt < 0.0 ? fillColor : col;
-        rightHalfColor += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt);
-
-    // Blend the two halves together
-        float blendFactor = smoothstep(0.0, 0.003, -p.x); // Adjust the blend factor as needed
-        col = mix(col, rightHalfColor, blendFactor);
-    }
-
-  //...................Text How it works
-    if(iAnimProgress_1.x > 0.5 && iAnimProgress_3.x < 0.1) {
-        print_pos -= print_pos;
-        print_pos -= vec2(32.0, -34.0);
-        float col_text_INTENTPOOL;
-        float scale_text_INTENTPOOL = 95.0;
-        col_text_INTENTPOOL += char(ch_I, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_N, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_T, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_E, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_N, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_T, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_spc, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_P, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_O, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_O, p * scale_text_INTENTPOOL);
-        col_text_INTENTPOOL += char(ch_L, p * scale_text_INTENTPOOL);
-        col = mix(col, vec3(3.0, 2.0, 2.0), col_text_INTENTPOOL * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.8) + (iAnimProgress_1.z * 0.8) - iAnimProgress_3.x));
-    }
-    if(iAnimProgress_1.z > 0.5 && iAnimProgress_3.z < 0.1) {
-        print_pos -= print_pos;
-        print_pos -= vec2(-28.0, 49.0);
-        print_pos.x += iAnimProgress_3.y * 13.0;
-        float col_text_PARTYB;
-        float scale_text_PARTY = 100.0;
-        col_text_PARTYB += char(ch_P, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_A, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_R, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_T, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_Y, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_spc, p * scale_text_PARTY);
-        col_text_PARTYB += char(ch_B, p * scale_text_PARTY);
-        col = mix(col, vec3(3.0, 0.3, 0.3), col_text_PARTYB * (iAnimProgress_2.y - iAnimProgress_3.z));
-
-        float col_text_PARTYA;
-        print_pos -= print_pos;
-        print_pos -= vec2(69.0, 49.0);
-        col_text_PARTYA += char(ch_P, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_A, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_R, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_T, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_Y, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_spc, p * scale_text_PARTY);
-        col_text_PARTYA += char(ch_A, p * scale_text_PARTY);
-        col = mix(col, vec3(3.0, 1.0, 1.0), col_text_PARTYA * (iAnimProgress_1.z - iAnimProgress_3.z));
-    }
-
-
-  //...................Triangle Liquidators
-
-    if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.z < 0.5) {
-        for(int i = 1; i <= 6; i++) {
-
-            vec2 p = pp.xy;
-  // Circular motion parameters
-            float startTime = float(i);
-            float angle = animSpeed + startTime; // 240 degrees rotation
-
-            float tradeAnim = (sin(angle) + 1.0) / 2.0;
-
-  // Triangle y offset
-            p.y -= 3.8;
-
-            float calSin = sin(angle);
-            float calCos = cos(angle);
-
-            if(calCos > 0.0) {
-                p.x += calCos * 2.5;
-                p.y += calSin * 1.5;
-                p *= 0.5 + (tradeAnim / 2.0);
-                isleftHalf = 0.0;
-                if(startTime == 1.0) {
-                    triColor = vec3(1.0, 0.1, 0.006);
-                    eyeColor = vec3(1.5, 1.5, 1.5);
-                } else {
-                    triColor = vec3(1.0, 0.1, 0.006);
-                    eyeColor = vec3(1.5, 1.5, 1.5);
-                }
-            } else {
-                p.x += 0.0;
-                p.y += 1.5;
-                tradeAnim = 1.0;
-                tradeAnim = max((sin(angle) * 10.0) - 9.0, 0.0);
-                isleftHalf = 1.0;
-                if(startTime == 1.0) {
-
-                    triColor = vec3(1.0, 0.9, 0.006);
-                    eyeColor = vec3(3.5, 0.5, 0.5);
-                } else {
-                    triColor = vec3(1.0, 0.1, 0.006);
-                    eyeColor = vec3(1.5, 1.5, 1.5);
-                }
-            }
-
-  // Invert Triangle 
-            p.x = -p.x;
-
-  // Triangle displacement
-            float dt = equilateralTriangle(p);
-
-  //...Text Liquidators
-            print_pos -= print_pos;
-            print_pos -= vec2(30.0, 15.0);
-            float col_text_LIQUIDATOR;
-            float scale_text_LIQUIDATOR = 50.0;
-            col_text_LIQUIDATOR += char(ch_L, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_I, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_Q, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_U, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_I, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_D, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_A, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_T, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_O, p * scale_text_LIQUIDATOR);
-            col_text_LIQUIDATOR += char(ch_R, p * scale_text_LIQUIDATOR);
-
-            float col_text_SOLVENT;
-            float scale_text_tradestate = 65.0;
-            float col_text_liquidate;
-
-            if(startTime == 1.0) {
-      //...Text Liquidate party
-                print_pos -= print_pos;
-                print_pos -= vec2(18.0, 15.0);
-                float ScaleLiquidParty = 25.0;
-                col_text_liquidate += char(ch_dsh, position_triangle * ScaleLiquidParty);
-                col_text_liquidate += char(ch_dsh, position_triangle * ScaleLiquidParty);
-      //...Text Liquidate party number
-                print_pos -= print_pos;
-                print_pos -= vec2(55.0, 27.0 * tradeAnim);
-                float scale_text_minus1BTC = 85.0;
-                col_text_liquidate += char(ch_dsh, position_triangle * scale_text_minus1BTC);
-                col_text_liquidate += char(ch_dol, position_triangle * scale_text_minus1BTC);
-                col_text_liquidate += char(ch_1, position_triangle * scale_text_minus1BTC);
-                col_text_liquidate += char(ch_B, position_triangle * scale_text_minus1BTC);
-                col_text_liquidate += char(ch_T, position_triangle * scale_text_minus1BTC);
-                col_text_liquidate += char(ch_C, position_triangle * scale_text_minus1BTC);
-
-      //...Text Liquidate
-                print_pos -= print_pos;
-                print_pos -= vec2(27.0, -3.0);
-                col_text_liquidate += char(ch_L, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_I, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_Q, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_U, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_I, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_D, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_A, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_T, position_triangle * scale_text_tradestate);
-                col_text_liquidate += char(ch_E, position_triangle * scale_text_tradestate);
-            } else {
-
-      //reset print position
-                print_pos -= print_pos;
-                if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
-                    print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-                } else {
-                    print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-                }
-     //set print position
-                if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.z < 0.5) {
-                    float col_text_plus1BTCLONG;
-                    float scale_text_plus_minus_1BTC = 57.0;
-
-                    col_text_plus1BTCLONG += char(ch_crs, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_1, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_B, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_T, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_C, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_L, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_O, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_N, p * scale_text_plus_minus_1BTC);
-                    col_text_plus1BTCLONG += char(ch_G, p * scale_text_plus_minus_1BTC);
-                    col = mix(col, vec3(3.0, 3.0, 3.0), col_text_plus1BTCLONG * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
-
-                    print_pos -= print_pos;
-                    if(startTime == 2.0 || startTime == 4.0 || startTime == 6.0) {
-                        print_pos -= vec2(-17.0 - (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-                    } else {
-                        print_pos -= vec2(87.0 + (iAnimProgress_3.y * 10.0), 97.0 + (10.0 * tradeAnim));
-                    }
-                    float col_text_minus1BTCSHORT;
-                    col_text_minus1BTCSHORT += char(ch_dsh, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_1, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_B, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_T, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_C, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_S, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_H, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_O, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_R, p * scale_text_plus_minus_1BTC);
-                    col_text_minus1BTCSHORT += char(ch_T, p * scale_text_plus_minus_1BTC);
-
-                    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_minus1BTCSHORT * tradeAnim * isleftHalf * (iAnimProgress_3.x - iAnimProgress_3.z));
-
-                }
-
-    //...Text Solvent
-                print_pos -= print_pos;
-                print_pos -= vec2(20.0, -3.0);
-                col_text_SOLVENT += char(ch_S, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_O, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_L, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_V, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_E, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_N, position_triangle * scale_text_tradestate);
-                col_text_SOLVENT += char(ch_T, position_triangle * scale_text_tradestate);
-            }
-
-            float vis = max(tradeAnim * (iAnimProgress_3.x - iAnimProgress_3.y), 0.0);
-  // Triangle visibility parameter
-            if(dt < 0.0) {
-                col = mix(fillColor, col, 1.0 - vis);
-            }
-
-  // Triangle liquidator glow color
-            vec3 tricol = hsv2rgb(triColor);
-
-  // Triangle static trade  glow factor
-            vec3 gcolS = hsv2rgb(triColor);
-
-            if(iAnimProgress_3.x > 0.5 && iAnimProgress_3.y < 0.5) {
-  //add text Liquidator to col
-                col = mix(col, eyeColor, col_text_LIQUIDATOR * vis);
-
-  //add triangle static to col
-                col += (gcolS / max(abs(dtS), 0.001)) * smoothstep(0.5, 0.0, dtS) * isleftHalf * vis / 2.0;
-
-  // add triangle liquidators to col
-                col += (tricol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * vis;
-  //add text static to col
-                col += col_text_SOLVENT * isleftHalf * vis;
-  //add text liquidate to col
-                col = mix(col, vec3(3.0, 0.3, 0.3), col_text_liquidate * isleftHalf * vis);
-
-  // add eye to col
-                 col = mix(vis * iAnimProgress_3.x * (eyeColor), col, eyeRender(col, p, vis));
-
-            }
-
-        }
-    }
-
-    if(iAnimProgress_2.z > 0.5 && iAnimProgress_3.x < 0.5) {
-        print_pos -= print_pos;
-        print_pos -= vec2(-9.0 + (iAnimProgress_2.z * 100.0), 40.0);
-
-        float col_text_plus1BTCLONG;
-        float scale_text_plus1BTCLONG = 115.0;
-
-        col_text_plus1BTCLONG += char(ch_crs, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_1, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_B, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_T, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_C, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_spc, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_L, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_O, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_N, p * scale_text_plus1BTCLONG);
-        col_text_plus1BTCLONG += char(ch_G, p * scale_text_plus1BTCLONG);
-
-        print_pos -= print_pos;
-        print_pos -= vec2(79.0 - (iAnimProgress_2.z * 100.0) - iAnimProgress_3.y * 15.0, 40.0);
-        float col_text_minus1BTCSHORT;
-        float scale_text_minus1BTCSHORT = 115.0;
-
-        col_text_minus1BTCSHORT += char(ch_dsh, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_1, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_B, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_T, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_C, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_spc, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_S, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_H, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_O, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_R, p * scale_text_minus1BTCSHORT);
-        col_text_minus1BTCSHORT += char(ch_T, p * scale_text_minus1BTCSHORT);
-
-        if(iAnimProgress_2.z > 0.5 && iAnimProgress_3.z < 0.5) {
-            col = mix(col, vec3(3.0, 3.0, 3.0), col_text_plus1BTCLONG * (iAnimProgress_2.z - iAnimProgress_3.z));
-            col = mix(col, vec3(3.0, 0.3, 0.3), col_text_minus1BTCSHORT * (iAnimProgress_2.z - iAnimProgress_3.z));
-        }
-
-    }
-    return col;
-}
-
-vec3 triRender_left(vec3 col, vec3 ro, vec3 rd) {
-// Triangle fill color
-    vec3 fillColor = vec3(0.009, 0.0, 0.0);
-// triangle calcs
-    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-    vec3 pp = ro + rd * tpd;
-    vec2 p = pp.xy;
-// triangle resize
-    p *= 1.0;
-// triangle offset
-    p.y -= 0.58;
-    p.x -= 1.0 + iAnimProgress_1.x * 1.00 - iAnimProgress_1.z * 1.0;
-// triangle inner glow factor
-    p.x = -p.x;
-    vec3 gcol = hsv2rgb(vec3(1.0, 0.8, 0.006));
-// triangle displacement
-    float dt = equilateralTriangle(p);
-// Triangle visibility parameter
-    float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_1.z * 0.9);
-    if(dt < 0.0) {
-        col = mix(fillColor, col, visibility);
-    }
-// triangle edge glow mod
-    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * (iAnimProgress_1.x * 0.8 - iAnimProgress_3.x * 0.8);
-
-    print_pos -= print_pos;
-    print_pos -= vec2(23.0 - (iAnimProgress_2.z * 100.0), 8.0);
-    float col_text_INTENTA;
-    float scale_text_INTENTA = 50.0;
-    col_text_INTENTA += char(ch_I, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_N, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_T, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_E, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_N, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_T, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_spc, p * scale_text_INTENTA);
-    col_text_INTENTA += char(ch_A, p * scale_text_INTENTA);
-    col = mix(col, vec3(3.0, 1.0, 1.0), col_text_INTENTA * (iAnimProgress_1.y - iAnimProgress_2.z));
-
-    print_pos -= print_pos;
-    print_pos -= vec2(10.0, 20.0);
-    float col_text_YOU;
-    float scale_text_YOU = 50.0;
-    col_text_YOU += char(ch_Y, p * scale_text_YOU);
-    col_text_YOU += char(ch_O, p * scale_text_YOU);
-    col_text_YOU += char(ch_U, p * scale_text_YOU);
-    col = mix(col, vec3(3.0, 1.0, 1.0), col_text_YOU * (iAnimProgress_1.x - iAnimProgress_1.z));
-
-    print_pos -= print_pos;
-    print_pos -= vec2(-20.0, -23.0);
-    float col_text_EXECUTE;
-    float scale_text_EXECUTE = 40.0;
-    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_X, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_C, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_U, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_T, p * scale_text_EXECUTE);
-    col_text_EXECUTE += char(ch_E, p * scale_text_EXECUTE);
-    col = mix(col, vec3(3.0, 2.0, 2.0), iAnimProgress_2.y * col_text_EXECUTE * (iAnimProgress_2.z - iAnimProgress_3.x) * (sin((iAnimProgress_2.z) * 3.5)));
+    if (text_anim==1.0){
+        col = mix(col,vec3(1.0),draw_text_you(text_pos*0.6+vec2(0.18,0.05), text_box_chars)*tri_vis);
+    }else if (text_anim==2.0){
+        col = mix(col,vec3(1.0,0.3,0.3),draw_text_hedger(text_pos*0.6+vec2(0.08,0.05), text_box_chars)*tri_vis);
+    }else if (text_anim==3.0){
+        col = mix(col,vec3(1.0),draw_text_pool(text_pos+vec2(-0.06,-0.25), text_box_chars)*tri_vis);
+    }else {
+    };
 
     return col;
 }
 
-vec3 triRender_right(vec3 col, vec3 ro, vec3 rd) {
-// Triangle fill color
-    vec3 fillColor = vec3(0.005, 0.0, 0.0);
-// Triangle calcs
-    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-    vec3 pp = ro + rd * tpd;
-    vec2 p = pp.xy;
-// Triangle resize
-    p *= 1.0;
-// Triangle y offset
-    p.y -= 0.58;
-    p.x += 2.0 - iAnimProgress_2.y;
-    p.x = -p.x;
-// Triangle inner glow factor
-    vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
-// Triangle displacement
-    float dt = equilateralTriangle(p);
-// Triangle visibility parameter
-    float visibility = 1.0 - (iAnimProgress_1.x * 0.9) + (iAnimProgress_2.y * 0.9);
-    if(dt < 0.0) {
-        col = mix(fillColor, col, visibility);
+vec3 glow_color;
+float text_anim = 0.0;
+vec2 tri_pos;
+float tri_scl=1.0;
+float tri_vis=1.0;
+
+vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
+//Section Animation 1.x
+    if (iAnimProgress_1.x>=0.0 && iAnimProgress_1.x <0.5){
+        //middle triangle
+        tri_vis=1.0;
+        tri_scl=1.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 0.0;
+        tri_pos=vec2(0.0,0.0);
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
+        
     }
 
-// triangle edge glow mod
-    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * 0.8) - (iAnimProgress_1.y * 0.6) + (iAnimProgress_2.y * 0.8) - (iAnimProgress_3.x * 1.0));
+//Section Animation 1.y
+    else if (iAnimProgress_1.x>=0.5 && iAnimProgress_1.y <0.5){
+        //middle triangle
+        tri_vis=1.0;
+        tri_scl=1.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 3.0;
+        tri_pos=vec2(0.0,0.0);
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
+        
+        //right triangle
+        tri_pos=vec2(0.0+iAnimProgress_1.x,0.29);
+        tri_vis=0.0+iAnimProgress_1.x;
+        tri_scl=2.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 2.0;
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
 
-    print_pos -= print_pos;
-    print_pos -= vec2(23.0 + (iAnimProgress_2.z * 100.0), 8.0);
-    float col_text_INTENTB;
-    float scale_text_INTENTB = 50.0;
-    col_text_INTENTB += char(ch_I, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_N, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_T, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_E, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_N, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_T, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_spc, p * scale_text_INTENTB);
-    col_text_INTENTB += char(ch_B, p * scale_text_INTENTB);
+        //left triangle
+        tri_pos=vec2(0.0-iAnimProgress_1.x,0.29);
+        tri_vis=0.0+iAnimProgress_1.x;
+        tri_scl=2.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 1.0;
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
 
-    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_INTENTB * (iAnimProgress_2.x - iAnimProgress_2.z));
+    }
+//Section Animation 1.x
 
-    print_pos -= print_pos;
-    print_pos -= vec2(18.0, 20.0);
-    float col_text_HEDGER;
-    float scale_text_HEDGER = 50.0;
-    col_text_HEDGER += char(ch_H, p * scale_text_HEDGER);
-    col_text_HEDGER += char(ch_E, p * scale_text_HEDGER);
-    col_text_HEDGER += char(ch_D, p * scale_text_HEDGER);
-    col_text_HEDGER += char(ch_G, p * scale_text_HEDGER);
-    col_text_HEDGER += char(ch_E, p * scale_text_HEDGER);
-    col_text_HEDGER += char(ch_R, p * scale_text_HEDGER);
-    col = mix(col, vec3(3.0, 0.3, 0.3), col_text_HEDGER * (iAnimProgress_1.x - (iAnimProgress_1.y * 0.7) + (iAnimProgress_2.x * 0.7) - iAnimProgress_2.y));
+    else if (iAnimProgress_1.y>=0.5 && iAnimProgress_1.z <0.5){
+        //middle triangle
+        tri_vis=1.0;
+        tri_scl=1.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 3.0;
+        tri_pos=vec2(0.0,0.0);
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
+        
+        //right triangle
+        tri_pos=vec2(0.0+iAnimProgress_1.x,0.29);
+        tri_vis=1.0-iAnimProgress_1.y/8.0;
+        tri_scl=2.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 2.0;
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
 
+        //left triangle
+        tri_pos=vec2(0.0-iAnimProgress_1.x,0.29);
+        tri_vis=0.0+iAnimProgress_1.x;
+        tri_scl=2.0;
+        glow_color = vec3(0.008, 0.001, 0.001);
+        text_anim = 1.0;
+        col = triRender(col, ro, rd, text_anim,tri_pos,tri_scl,tri_vis,glow_color);
+}
+        
+        
     return col;
 }
 
-vec3 renderTriangle(vec3 col, vec3 ro, vec3 rd, float scaleFactor, float xOffset) {
-// Triangle fill color
-    vec3 fillColor = vec3(0.009, 0.0, 0.0);
-// Triangle dimensions
-    const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
-// Calculate intersection with the triangle
-    float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
-    vec3 pp = ro + rd * tpd;
-    vec2 p = pp.xy;
-// Resize and offset the triangle
-    p *= scaleFactor;
-    p.x += xOffset;
-    p.y -= 0.58;
-    p.x += 1.0 + iAnimProgress_1.x * 1.0;
-    float a;
 
-// Triangle inner glow factor
-    vec3 gcol = hsv2rgb(vec3(1.0, 0.9 - (iAnimProgress_3.x * 0.1), 0.006));
-// Calculate triangle displacement
-    float dt = equilateralTriangle(p);
-// Triangle visibility parameter
-    float visibility = 1.0 - (iAnimProgress_1.x * scaleFactor * 0.2) + (iAnimProgress_1.y * scaleFactor * 0.1) + (iAnimProgress_2.y * scaleFactor * 0.1);
-    if(dt < 0.0) {
-        col = mix(fillColor, col, visibility);
-    }
-// Triangle edge glow mod
-    col += (gcol / max(abs(dt), 0.001)) * smoothstep(0.5, 0.0, dt) * ((iAnimProgress_1.x * scaleFactor * 0.1) - (iAnimProgress_1.y * scaleFactor * 0.05) - (iAnimProgress_2.y * scaleFactor * 0.05));
-    return col;
-}
-
-vec3 triRender_right_4(vec3 col, vec3 ro, vec3 rd) {
-    return renderTriangle(col, ro, rd, 1.25, 1.22);
-}
-
-vec3 triRender_right_3(vec3 col, vec3 ro, vec3 rd) {
-    return renderTriangle(col, ro, rd, 1.16, 0.8);
-}
-
-vec3 triRender_right_2(vec3 col, vec3 ro, vec3 rd) {
-    return renderTriangle(col, ro, rd, 1.08, 0.4);
-}
-
-//-----Outer Sky
-
-//sun dir right-left , up-down , back forth
-vec3 sunDir = normalize(vec3(-mousePos.x * 4.0, -2.0 + (mousePos.y * 2.0) + iAnimProgress_3.x * 0.0 - iAnimProgress_3.z * 4.0, 20.0));
-const vec3 sunCol = HSV2RGB(vec3(0.00, 0.7, 0.002));
 
 vec3 outerSkyRender(vec3 ro, vec3 rd) {
-    vec3 col;
-//sun settings
-    col += sunCol / pow((1.002 - ((dot(sunDir, rd)))), 1.9 - iAnimProgress_1.x + iAnimProgress_3.x * 0.5 + iAnimProgress_3.y * 0.5);
-//horizon light modifier
-    vec3 gcol = hsv2rgb(vec3(1.0, 0.0, 0.002 - iAnimProgress_1.x * 0.0018 + iAnimProgress_3.y * 0.004));
-    gcol = mix(gcol, vec3(0.0), smoothstep(0.5, 1.0, abs(rd.y)));
-//atmosphere air color
-    col += vec3(0.1);
-    col += gcol / abs(rd.y);
+    vec3 col = vec3(0.1, 0.1, 0.1);
+    float sunDot = dot(sunDir, rd);
+    if (sunDot > 0.0) {
+        col += sunCol / pow(1.002 - sunDot, 1.9);
+    }
+    vec3 gcol = vec3(0.003-iAnimProgress_1.x*0.0025);
+    col +=  gcol / max(abs(rd.y), 0.0001);
     return col;
 }
 
-//-----Ground
-vec2 tilesSize = vec2(1.0);
-
 vec3 groundRender(vec3 col, vec3 ro, vec3 rd) {
-  const vec3 gpn = normalize(vec3(0.0, 1.0, 0.0));
-  float gpd = -(dot(ro, vec4(gpn, 0.0).xyz) + vec4(gpn, 0.0).w) / dot(rd, vec4(gpn, 0.0).xyz);
-  if(gpd < 1.0) {
-      return col;
-  }
-  // Tiles reflection mod
-  vec3 gp = ro + rd * gpd;
-  float gpfre = pow(1.15 + dot(rd, gpn), 18.0);
-
-  // Calculate reflected ray
-  vec3 grr = reflect(rd, gpn);
-
-  // Calculate ggp and its properties
-  vec2 ggp = gp.xz + vec2(0.0, iTime); // Only modify the time component
-  float dfy = dFdy(ggp.y);
-
-  // Tiles lines color modifier
-  vec2 c = floor((ggp));
-  ggp = mod(ggp + tilesSize * 0.5, tilesSize) - tilesSize * 0.5;
-  float ggd = min(abs(ggp.x), abs(ggp.y));
-  vec3 gcol = hsv2rgb(vec3(0.0, 0.7, 0.005));
-
-  // Calculate reflections
-  vec3 rcol = outerSkyRender(grr, grr);
-  rcol = tradeTriRender(rcol, gp, grr);
-
-  //Floor calcs
-  col = gcol / max(ggd, 0.25 * dfy) * exp((-0.5 - 1.0 * (iAnimProgress_1.x * 0.5 - iAnimProgress_3.x * 0.5)) * gpd);
-  //ground reflection factor
-  if(iAnimProgress_1.x <= 1.0) {
-      col += rcol * gpfre / (9.0 + (iAnimProgress_1.x * 9.0) - iAnimProgress_3.x * 0.0);
-  }
-  return col;
-}
-
-vec3 render(vec3 ro, vec3 rd, vec2 p) {
-
-  vec3 col = outerSkyRender(rd, rd);
-  col = groundRender(col, ro, rd);
-  col = tradeTriRender(col, ro, rd);
-
-  if(iAnimProgress_1.x > 0.1 && iAnimProgress_3.x < 0.5) {
-      col = triRender_left(col, ro, rd);
-      col = triRender_right_4(col, ro, rd);
-      col = triRender_right_3(col, ro, rd);
-      col = triRender_right_2(col, ro, rd);
-      col = triRender_right(col, ro, rd);
-  }
-
-  return col;
-}
-
-vec3 effect(vec2 p) {
-  const float fov = tan(TAU / 6.0);
-  float mobileMode;
-  float mobileRes = iResolution.x / iResolution.y;
-  if(mobileRes < 1.0) {
-      mobileMode = 1.0;
-  } else {
-      mobileMode = 0.0;
-  }
-  vec3 ro;
-  if(mobileMode == 0.0) {
-
-  //-------------camera location 
-      ro = 1.0 * vec3(
-  //right-left,
-      iAnimProgress_1.x * 1.8 + iAnimProgress_3.x * 0.9 - iAnimProgress_3.z * 1.4,
-  //up-down,
-      0.5 + iAnimProgress_1.x * 0.25 - (iAnimProgress_3.x * 0.0) - iAnimProgress_3.y * 0.3,
-  //front-back
-      -5.0 + (iAnimProgress_1.x * 2.0) + iAnimProgress_3.z * 3.5);
-  } else {
-      ro = 1.0 * vec3(
-  //right-left,
-      0.0,
-  //up-down,
-      0.5 + iAnimProgress_1.x * 0.25 - (iAnimProgress_3.x * 0.0) - iAnimProgress_3.y * 0.3,
-  //front-back
-      -12.0 + (iAnimProgress_1.x * 2.0) + iAnimProgress_3.z * 9.5 + iAnimProgress_3.y * 2.5);
-  }
-
-  //camera look at right-left,up-down,front-back
-  vec3 la;
-  if(mobileMode == 0.0) {
-      la = vec3(
-  //right-left,
-      0.0 - (iAnimProgress_3.x * 40.0),
-  //up-down,
-      225.0,
-  //front-back
-      1000.0);
-  } else {
-      la = vec3(
-  //right-left,
-      0.0,
-  //up-down,
-      225.0 + (iAnimProgress_3.x * 100.0) - (iAnimProgress_3.z * 240.0),
-  //front-back
-      1000.0);
-  }
-  //camera rotation x-y-z
-  vec3 up = vec3(0.0, 1.0, 0.0);
-
-  vec3 ww = normalize(la - ro);
-  vec3 uu = normalize(cross(up, ww));
-  vec3 vv = cross(ww, uu);
-  vec3 rd = normalize(-p.x * uu + p.y * vv + fov * ww);
-  vec3 col = render(ro, rd, p);
-  return col;
+    float gpd = -(dot(ro, gpdim.xyz) + gpdim.w) / dot(rd, gpdim.xyz);
+    if (gpd < 0.0) {
+        return col;
+    }
+    vec3 gp = ro + rd * gpd;
+    float gpfre = 1.15 + dot(rd, gpn);
+    gpfre *= gpfre * gpfre * gpfre; // Reduce power operations
+    vec3 grr = reflect(rd, gpn);
+    vec2 ggp = gp.xz;
+    ggp.y += iTime;
+    float dfy = dFdy(ggp.y);
+    float gcf = sin(ggp.x) * sin(ggp.y);
+    ggp = mod(ggp + tilesSize * 0.5, tilesSize) - tilesSize * 0.5;
+    float ggd = min(abs(ggp.x), abs(ggp.y));
+    vec3 gcol = vec3(0.002, 0.001, 0.001);
+    vec3 rcol = outerSkyRender(grr, grr);
+    rcol = anim_render(rcol, gp, grr);
+    
+    col = gcol / max(ggd, 0.0 + 0.25 * dfy);
+    rcol += vec3(0.0, 0.0, 0.0);
+    col += rcol * gpfre / 2.0;
+    return col;
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-  vec2 p = -1. + (2. * fragCoord / iResolution.xy);
-  p.x *= iResolution.x / iResolution.y;
-  vec3 col = effect(p);
-  fragColor = vec4(col, 1.0);
+    vec2 q = fragCoord / iResolution.xy;
+    vec2 p = -1.0 + 2.0 * q;
+    p.x *= iResolution.x / iResolution.y;
+    const float fov = 2.0;
+    vec3 ro = vec3(0.0, 0.5, -5.0);
+    const vec3 la = vec3(0.0, 1.5, 0.0);
+    const vec3 up = vec3(0.0, 1.0, 0.0);
+    vec3 ww = normalize(la - ro);
+    vec3 uu = normalize(cross(up, ww));
+    vec3 vv = cross(ww, uu);
+    vec3 rd = normalize(-p.x * uu + p.y * vv + fov * ww);
+    vec3 col = outerSkyRender(rd, rd);
+    col = groundRender(col, ro, rd);
+    col = anim_render(col, ro, rd);
+    fragColor = vec4(col, 1.0);
 }
+
+
+
 void main() {
   mainImage(gl_FragColor, gl_FragCoord.xy);
 }

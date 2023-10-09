@@ -1,0 +1,321 @@
+  
+  
+  
+.red {
+	-webkit-text-fill-color: rgb(255, 94, 94) !important;
+}
+
+  
+  /* Variables */
+  :root {
+    --white: #FFFFFF;
+    --red: #FF4444;
+    --blue: #FFAAAA;
+  }
+
+
+  
+  /* Global styles */
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  
+  /* Menu styles */
+  .menu__list {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2vh;
+    margin-right: 2vh;
+    padding: 0;
+    list-style: none;
+    z-index: 100;
+    right: 0; /* Add this line to position it to the right */
+}
+
+  
+
+.menu__item {
+    display: block;
+    margin: 1em 0;
+    margin: 0 .5em;
+  }
+  
+
+  /* Link and Reset button styles */
+  nav[role="custom-dropdown"] ul > li > a,
+  .menu__link,
+  .reset {
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+    font-size: 1vw;
+    display: block;
+    padding: .4em 1em;
+    cursor: pointer;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    background: none;
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  
+.menu__link:hover,
+  .menu__link:focus,
+  .reset:hover,
+  .reset:focus,nav[role="custom-dropdown"] ul > li:hover {
+    outline: none;
+    color: var(--red);
+  }
+
+/* Remove color change on :active state */
+.menu__link:active {
+  color: inherit; /* Use the default text color */
+}
+
+.menu__item--current .menu__link {
+  color: var(--blue);
+}
+  
+.menu__item--current .menu__link:before,
+  .menu__item--current .menu__link:after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  
+.menu__link:before,
+  .menu__link:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    border: 2px solid var(--red);
+    transition: transform 0.3s, opacity 0.3s;
+    transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
+  }
+  .menu__link.active-span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    border: 2px solid var(--red);
+    transition: transform 0.3s, opacity 0.3s;
+    transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
+  }
+
+  
+  .menu__link:before {
+    top: 0;
+    left: 0;
+    border-width: 2px 0 0 2px;
+    transform: translate3d(10px, 10px, 0);
+  }
+  
+  .menu__link:after {
+    right: 0;
+    bottom: 0;
+    border-width: 0 2px 2px 0;
+    transform: translate3d(-10px, -10px, 0);
+  }
+  
+  /* Reset button styles */
+  .reset {
+    border: solid 2px var(--red);
+    border-radius: 6px;
+    margin: 0 auto;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+  /*------------------------- custom-dropdown */
+
+ /* Variables */
+:root {
+  --number-of-links: 5;
+  --hamburger-menu-width: 1.5vw;
+  --hamburger-menu-height: 4vh;
+  --hamburger-menu-x-position: 60px;
+  --hamburger-menu-y-position: 20px;
+  --hamburger-icon-background-color: #ffffff;
+  --hamburger-icon-width: 10vw;
+  --hamburger-icon-height: 2px;
+  --hamburger-icon-rotate-deg: 45deg;
+  --hamburger-icon-transform-time: 350ms;
+  --overlay-background-color: rgba(0, 0, 0, 0.5);
+  --menu-link-default-color: #e2e2e2;
+  --menu-link-hover-color: #ffffff;
+  --menu-link-emboss-color: rgba(0, 0, 0, 0.8);
+  --menu-link-shine-color: #ffffff;
+  --menu-link-font-size: 3em;
+  --menu-link-spacing: 25px;
+  --menu-link-shine-size: 25px;
+  --menu-link-hover-transition-time: 175ms;
+  --menu-link-hover-transition-time-scale: 275ms;
+  --menu-link-show-transition-time: 350ms;
+}
+
+
+/* .menu-trigger */
+.menu-trigger {
+  display: none;
+}
+  
+/* .overlay */
+.overlay {
+  width: 0;
+  height: 0;
+  position: fixed;
+  z-index: 100;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0s linear var(--overlay-animation-timing), height 0s linear var(--overlay-animation-timing);
+  animation: overlay-hide var(--overlay-animation-timing) ease-out forwards;
+}
+
+.menu-trigger:checked + .overlay {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  transition: none;
+  animation: overlay-mask var(--overlay-animation-timing) ease-out forwards;
+}
+
+@keyframes overlay-mask {
+  to {
+    background-image: radial-gradient(
+      circle at calc(100vw - var(--overlay-starting-position-x)) var(--overlay-starting-position-y),
+      var(--overlay-background-color),
+      transparent
+    );
+  }
+}
+
+@keyframes overlay-hide {
+  to {
+    background-image: radial-gradient(
+      circle at calc(100vw - var(--overlay-starting-position-x)) var(--overlay-starting-position-y),
+      var(--overlay-background-color),
+      transparent
+    );
+  }
+}
+
+/* .menu-links */
+.menu-links {
+  font-size: var(--menu-link-font-size);
+  list-style-type: none;
+}
+
+.menu-links li {
+  text-align: center;
+  margin: var(--menu-link-spacing) 0;
+}
+
+.menu-links li a {
+  font-family: Montserrat, sans-serif;
+  color: var(--menu-link-default-color);
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+  text-shadow: 0 -1px var(--menu-link-emboss-color), 0 0 0 var(--menu-link-shine-color);
+  opacity: 0;
+  transform: translateX(-25%);
+  transition: color var(--menu-link-hover-transition-time) ease-out, text-shadow var(--menu-link-hover-transition-time) ease-out, opacity var(--menu-link-hover-transition-time) ease-out, transform var(--menu-link-hover-transition-time-scale) cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.menu-links li:hover {
+  transform: scale(1.2);
+}
+
+.menu-links li:hover a {
+  color: var(--menu-link-hover-color);
+  text-shadow: 0 -1px var(--menu-link-emboss-color), 0 0 var(--menu-link-shine-size) var(--menu-link-shine-color);
+}
+
+.menu-trigger:checked + .overlay .menu-links li a {
+  transform: translateX(0);
+  opacity: 1;
+  transition: opacity var(--menu-link-show-transition-time) ease-out, transform var(--menu-link-show-transition-time) ease-out var(--overlay-animation-timing) calc(0.5 * (var(--menu-link-show-transition-time) / var(--number-of-links)));
+}
+
+
+
+/* .hamburger-menu */
+.hamburger-menu {
+  width: var(--hamburger-menu-width);
+  height: var(--hamburger-menu-height);
+  position: fixed;
+  z-index: 999;
+  top: var(--hamburger-menu-y-position);
+  right: var(--hamburger-menu-x-position);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  visibility: hidden;
+
+}
+
+.hamburger-menu span {
+  background-color: var(--hamburger-icon-background-color);
+  width: var(--hamburger-icon-width);
+  height: var(--hamburger-icon-height);
+  flex-grow: 0;
+  display: block;
+  transition: transform var(--hamburger-icon-transform-time) ease-out;
+  transform-origin: center;
+}
+
+.menu-trigger:checked ~ .hamburger-menu span:nth-child(1) {
+  transform: translateY(calc((var(--hamburger-menu-height) / 2) - (var(--hamburger-icon-height) / 2))) rotate(var(--hamburger-icon-rotate-deg));
+}
+
+.menu-trigger:checked ~ .hamburger-menu span:nth-child(2) {
+  transform: scale(1, 0) translateX(-100%);
+}
+
+.menu-trigger:checked ~ .hamburger-menu span:nth-child(3) {
+  transform: translateY(calc(-1 * (var(--hamburger-menu-height) / 2) + (var(--hamburger-icon-height) / 2))) rotate(calc(-1 * var(--hamburger-icon-rotate-deg)));
+}
+
+
+/* -------------------------------------------------------------small screens */
+@media screen and (max-width: 900px) {
+ /* Menu styles */
+ .menu__list {
+visibility: hidden;
+}
+
+.hamburger-menu {
+visibility: visible;
+}
+}
+
+
+
+
+
+
+
