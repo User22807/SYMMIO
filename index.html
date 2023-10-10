@@ -1957,8 +1957,9 @@ float draw_char(vec2 coord, ivec2 char) {
     return col;
 }
 
-vec2 p_text;
-vec2 text_size = vec2(0.2);
+// --------------------------------------------- Draw words
+
+
 
 vec3 draw_text_pool(vec2 p, ivec2 text_box, vec4 text_coord) {
     // Normalized pixel coordinates (from 0 to 1)
@@ -2012,6 +2013,11 @@ vec3 draw_text_pool(vec2 p, ivec2 text_box, vec4 text_coord) {
     
     return col;
 }
+
+
+
+
+
 vec3 draw_text_you(vec2 p, ivec2 text_box, vec4 text_coord) {
   // Normalized pixel coordinates (from 0 to 1)
   vec2 coord = p;
@@ -2047,6 +2053,11 @@ vec3 draw_text_you(vec2 p, ivec2 text_box, vec4 text_coord) {
 
     return col;
 }
+
+
+
+
+
 vec3 draw_text_hedger(vec2 p, ivec2 text_box, vec4 text_coord) {
   // Normalized pixel coordinates (from 0 to 1)
   vec2 coord = p;
@@ -2088,10 +2099,224 @@ vec3 draw_text_hedger(vec2 p, ivec2 text_box, vec4 text_coord) {
 
     return col;
 }
+
+
+
+
+
+
+vec3 draw_text_party_a(vec2 p, ivec2 text_box, vec4 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[8];
+    text_string_2[1] = ivec2(char_P);
+    text_string_2[2] = ivec2(char_A);
+    text_string_2[3] = ivec2(char_R);
+    text_string_2[4] = ivec2(char_T);
+    text_string_2[5] = ivec2(char_Y);
+    text_string_2[6] = ivec2(char_space);
+    text_string_2[7] = ivec2(char_A);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    else if (charIndex == 7) current_char = text_string_2[7];
+
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+
+
+
+
+
+vec3 draw_text_party_b(vec2 p, ivec2 text_box, vec4 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[8];
+    text_string_2[1] = ivec2(char_P);
+    text_string_2[2] = ivec2(char_A);
+    text_string_2[3] = ivec2(char_R);
+    text_string_2[4] = ivec2(char_T);
+    text_string_2[5] = ivec2(char_Y);
+    text_string_2[6] = ivec2(char_space);
+    text_string_2[7] = ivec2(char_B);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    else if (charIndex == 7) current_char = text_string_2[7];
+
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+
+
+vec3 draw_text_intent_a(vec2 p, ivec2 text_box, vec4 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[9];
+    text_string_2[1] = ivec2(char_I);
+    text_string_2[2] = ivec2(char_N);
+    text_string_2[3] = ivec2(char_T);
+    text_string_2[4] = ivec2(char_E);
+    text_string_2[5] = ivec2(char_N);
+    text_string_2[6] = ivec2(char_T);
+    text_string_2[7] = ivec2(char_space);
+    text_string_2[8] = ivec2(char_A);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    else if (charIndex == 7) current_char = text_string_2[7];
+    else if (charIndex == 8) current_char = text_string_2[8];
+
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+vec3 draw_text_intent_b(vec2 p, ivec2 text_box, vec4 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
+
+    // Check if the character is outside the visible area
+    if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+        return vec3(0.0); // Return transparent color for characters outside the screen
+    }
+
+    coord.x *= float(text_box.x);
+    coord.y *= float(text_box.y);
+    int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+    coord.x -= float(int(coord.x));
+    coord.y -= float(int(coord.y));
+
+    ivec2 text_string_2[9];
+    text_string_2[1] = ivec2(char_I);
+    text_string_2[2] = ivec2(char_N);
+    text_string_2[3] = ivec2(char_T);
+    text_string_2[4] = ivec2(char_E);
+    text_string_2[5] = ivec2(char_N);
+    text_string_2[6] = ivec2(char_T);
+    text_string_2[7] = ivec2(char_space);
+    text_string_2[8] = ivec2(char_B);
+
+    ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+    if (charIndex == 1) current_char = text_string_2[1];
+    else if (charIndex == 2) current_char = text_string_2[2];
+    else if (charIndex == 3) current_char = text_string_2[3];
+    else if (charIndex == 4) current_char = text_string_2[4];
+    else if (charIndex == 5) current_char = text_string_2[5];
+    else if (charIndex == 6) current_char = text_string_2[6];
+    else if (charIndex == 7) current_char = text_string_2[7];
+    else if (charIndex == 8) current_char = text_string_2[8];
+
+    vec3 col = vec3(draw_char(coord, current_char));
+    
+
+    return col;
+}
+//-------------------------------------------- Triangles and animation Rendering
+
 const float k = sqrt(3.0);
 
 ivec2 text_box_chars = ivec2(13, 7);
 vec4 text_coord; // Scale.xy   Position.zw
+
+
+
+vec3 triRender2(vec3 col, vec2 p, vec3 text) {
+  vec3 fillColor = vec3(0.005, 0.0, 0.0);
+
+  vec3 glow_col = vec3(0.008, 0.001, 0.001);
+  p.x = abs(p.x) - 1.0;
+  p.y = p.y + 1.0 / k;
+  p = (p.x + k * p.y > 0.0) ? vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0 : p;
+  p.x -= clamp(p.x, -2.0, 0.0);
+  float dt = -length(p) * sign(p.y);
+  col = mix((dt < -0.0) ? fillColor : col, col, 0.0);
+  col += glow_col / max(abs(dt), 0.001);
+  col = mix(col,vec3(1.0,0.4,0.4),text);
+
+return col;
+}
+
 vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_selector, vec2 tri_pos, float tri_scl, float tri_vis, vec3 glow_color) {
     vec3 fillColor = vec3(0.005, 0.0, 0.0);
     const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
@@ -2102,7 +2327,7 @@ vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_selector, vec2 tri_pos, fl
     p += tri_pos;
     p *= tri_scl;
     vec2 p_text = p;
-    vec3 glow_col = glow_color*tri_vis;
+    vec3 glow_col = glow_color;
     p.x = abs(p.x) - 1.0;
     p.y = p.y + 1.0 / k;
     p = (p.x + k * p.y > 0.0) ? vec2(p.x - k * p.y, -k * p.x - p.y) / 2.0 : p;
@@ -2112,17 +2337,70 @@ vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_selector, vec2 tri_pos, fl
     vec3 tri_col = col;
     col += glow_col / max(abs(dt), 0.001);
 
+
+    //  YOU
     if (text_selector==1.0){
-        text_coord = vec4(1.3, 0.25, 0.75, 0.0); // Scale.x   Position.yz
-        col = mix(col,vec3(1.0),draw_text_you(p_text, text_box_chars, text_coord)*tri_vis);
-    }else if (text_selector==2.0){
-        text_coord = vec4(1.3, 0.25, 0.75, 0.0); // Scale.x   Position.yz
-        col = mix(col,vec3(1.0,0.3,0.3),draw_text_hedger(p_text, text_box_chars, text_coord)*tri_vis);
-    }else if (text_selector==3.0){
-      text_coord = vec4(0.9, 0.5, 0.5, 0.0); // Scale.x   Position.yz
-        col = mix(col,vec3(1.0),draw_text_pool(p_text, text_box_chars, text_coord)*tri_vis);
-    }else {
-    };
+        text_coord = vec4(1.3, 0.2, 0.95, 0.0); // Scale.x   Position.yz
+        col = mix(col,vec3(1.0),draw_text_you(p_text, text_box_chars, text_coord));
+    }
+    // HEDGER
+    else if (text_selector==2.0){
+        text_coord = vec4(1.3, 0.3, 0.95, 0.0); // Scale.x   Position.yz
+        col = mix(col,vec3(1.0,0.2,0.2),draw_text_hedger(p_text, text_box_chars, text_coord));
+    }
+
+    //  INTENT POOL
+    else if (text_selector==3.0){
+        text_coord = vec4(0.9, 0.48, 0.5, 0.0); // Scale.x   Position.yz
+        col = mix(col,vec3(1.0,0.4,0.4),draw_text_pool(p_text, text_box_chars, text_coord));
+    }
+
+    //  PARTY A
+    else if (text_selector==4.0){
+      text_coord = vec4(1.3, 0.34, 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_party_a(p_text, text_box_chars, text_coord));
+    }
+
+    //  PARTY B
+    else if (text_selector==5.0){
+      text_coord = vec4(1.3, 0.34, 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0,0.2,0.2),draw_text_party_b(p_text, text_box_chars, text_coord));
+    }
+
+    //  INTENT A
+    else if (text_selector==6.0){
+      text_coord = vec4(1.3, 0.35, 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0,0.2,0.2),draw_text_intent_a(p_text, text_box_chars, text_coord));
+    }
+
+    //  INTENT B
+    else if (text_selector==7.0){
+      text_coord = vec4(1.3, 0.34, 0.95, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0,0.2,0.2),draw_text_intent_b(p_text, text_box_chars, text_coord));
+    }
+
+    // YOU   +    INTENT A
+    else if (text_selector==23.0){
+      text_coord = vec4(1.3, 0.35, 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_intent_a(p_text, text_box_chars, text_coord));
+      text_coord = vec4(1.3, 0.2, 0.95, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_you(p_text, text_box_chars, text_coord));
+  }
+    // PARTY A   +    INTENT A
+    else if (text_selector==24.0){
+      text_coord = vec4(1.3, 0.38-(iAnimProgress_2.z*1.5), 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_intent_a(p_text, text_box_chars, text_coord));
+      text_coord = vec4(1.3, 0.35, 0.95, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_party_a(p_text, text_box_chars, text_coord));
+    }
+
+    // PARTY B   +    INTENT B
+    else if (text_selector==25.0){
+      text_coord = vec4(1.3, 0.38+(iAnimProgress_2.z*1.55), 0.75, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0,0.2,0.2),draw_text_intent_b(p_text, text_box_chars, text_coord));
+      text_coord = vec4(1.3, 0.34, 0.95, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0,0.2,0.2),draw_text_party_b(p_text, text_box_chars, text_coord));
+    }
     return col;
 }
 
@@ -2133,7 +2411,12 @@ float tri_scl=1.0;
 float tri_vis=1.0;
 
 vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
-//Section Animation 1.x
+  vec3 fillColor = vec3(0.005, 0.0, 0.0);
+  const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
+  float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
+  vec3 pp = ro + rd * tpd;
+  vec2 p = pp.xy;
+  //Section Animation 1.x
     if (iAnimProgress_1.x>=0.0 && iAnimProgress_1.x <0.5){
         //middle triangle
         tri_vis=1.0;
@@ -2150,7 +2433,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=1.0;
         tri_scl=1.0;
         glow_color = vec3(0.008, 0.001, 0.001);
-        text_selector = 3.0;
+        text_selector = 3.0; //draw_text_pool
         tri_pos=vec2(0.0,0.0);
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
         
@@ -2159,7 +2442,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=1.0;
         tri_scl=2.0;
         glow_color = vec3(0.01, 0.0005, 0.0005)-iAnimProgress_1.x*vec3(0.008, 0.0004, 0.0004);
-        text_selector = 2.0;
+        text_selector = 2.0; //draw_text_hedger
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
         //left triangle
@@ -2167,7 +2450,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=0.0+iAnimProgress_1.x;
         tri_scl=2.0;
         glow_color = vec3(0.005, 0.005, 0.005)-iAnimProgress_1.x*vec3(0.004);
-        text_selector = 1.0;
+        text_selector = 1.0; //draw_text_you
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
     }
@@ -2178,7 +2461,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=1.0;
         tri_scl=1.0;
         glow_color = vec3(0.008, 0.001, 0.001);
-        text_selector = 3.0;
+        text_selector = 3.0; //draw_text_pool
         tri_pos=vec2(0.0,0.0);
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
         
@@ -2187,7 +2470,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=1.0;
         tri_scl=2.0;
         glow_color = vec3(0.01, 0.0005, 0.0005)-iAnimProgress_1.x*vec3(0.008, 0.0004, 0.0004);
-        text_selector = 2.0;
+        text_selector = 2.0; //draw_text_hedger
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
         //left triangle
@@ -2195,7 +2478,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
         tri_vis=0.0+iAnimProgress_1.x;
         tri_scl=2.0;
         glow_color = vec3(0.005, 0.005, 0.005);
-        text_selector = 1.0;
+        text_selector = 23.0; //draw_text_you   +   intent a
         col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 }
 
@@ -2205,7 +2488,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
       tri_vis=1.0;
       tri_scl=1.0;
       glow_color = vec3(0.008, 0.001, 0.001);
-      text_selector = 3.0;
+      text_selector = 3.0; //draw_text_pool
       tri_pos=vec2(0.0,0.0);
       col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
       
@@ -2214,7 +2497,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
       tri_vis=1.0;
       tri_scl=2.0;
       glow_color = vec3(0.01, 0.0005, 0.0005)-iAnimProgress_1.x*vec3(0.008, 0.0004, 0.0004);
-      text_selector = 2.0;
+      text_selector = 2.0; //draw_text_hedger
       col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
       //left triangle
@@ -2222,7 +2505,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
       tri_vis=1.0;
       tri_scl=2.0;
       glow_color = vec3(0.005, 0.005, 0.005);
-      text_selector = 1.0;
+      text_selector = 24.0; //draw_text_part_a  +   _intent_a
       col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 }  
   //Section Animation 2.y
@@ -2231,7 +2514,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
     tri_vis=1.0;
     tri_scl=1.0;
     glow_color = vec3(0.008, 0.001, 0.001);
-    text_selector = 3.0;
+    text_selector = 3.0; //draw_text_pool
     tri_pos=vec2(0.0,0.0);
     col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
     
@@ -2239,8 +2522,8 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
     tri_pos=vec2(1.0-iAnimProgress_2.y*0.5,0.29);
     tri_vis=1.0;
     tri_scl=2.0;
-    glow_color = vec3(0.008, 0.001, 0.001);
-    text_selector = 2.0;
+    glow_color = vec3(0.006, 0.0001, 0.0001);
+    text_selector = 2.0; //draw_text_hedger
     col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
     //left triangle
@@ -2248,36 +2531,76 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
     tri_vis=1.0;
     tri_scl=2.0;
     glow_color = vec3(0.005, 0.005, 0.005);
-    text_selector = 1.0;
+    text_selector = 24.0; //draw_text_part_a  +   _intent_a
     col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
-} else if (iAnimProgress_2.y >= 0.5 && iAnimProgress_2.z < 0.5){
+}
+
+
+
+  //Section Animation 2.y
+else if (iAnimProgress_2.y >= 0.5 && iAnimProgress_2.z < 0.5){
   //middle triangle
   tri_vis=1.0;
   tri_scl=1.0;
   glow_color = vec3(0.008, 0.001, 0.001);
-  text_selector = 3.0;
+  text_selector = 3.0; //draw_text_pool
   tri_pos=vec2(0.0,0.0);
   col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
   
   //right triangle
   tri_pos=vec2(1.0-iAnimProgress_2.y*0.5,0.29);
-  tri_vis=1.0;
+  tri_vis=1.0-iAnimProgress_2.z;
   tri_scl=2.0;
+  glow_color = vec3(0.006, 0.0001, 0.0001);
+  text_selector = 25.0; //draw_text_part_b
+  col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
+
+  //left triangle
+  tri_pos=vec2(-0.5,0.29);
+  tri_vis=1.0-iAnimProgress_2.z;
+  tri_scl=2.0;
+  glow_color = vec3(0.005, 0.005, 0.005);
+  text_selector = 24.0; //draw_text_part_a
+  col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
+}
+
+
+//Section Animation 2.z
+else if (iAnimProgress_2.z >= 0.5 && iAnimProgress_3.x < 0.5){
+  //middle triangle
+  tri_vis=1.0;
+  tri_scl=1.0;
   glow_color = vec3(0.008, 0.001, 0.001);
-  text_selector = 2.0;
+  text_selector = 3.0; //draw_text_pool
+  tri_pos=vec2(0.0,0.0);
+  col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
+  
+  //right triangle
+  tri_pos=vec2(1.0-iAnimProgress_2.y*0.5,0.29);
+  tri_vis=0.0;
+  tri_scl=2.0;
+  glow_color = vec3(0.006, 0.0001, 0.0001);
+  text_selector = 25.0; //draw_text_part_b
   col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
   //left triangle
   tri_pos=vec2(-1.0+(iAnimProgress_1.z*0.5),0.29);
-  tri_vis=1.0;
+  tri_vis=0.0;
   tri_scl=2.0;
   glow_color = vec3(0.005, 0.005, 0.005);
-  text_selector = 1.0;
+  text_selector = 24.0; //draw_text_part_a
   col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
-}               
+} 
+
+              
     return col;
 }
 
+
+
+
+
+//-------------------------------------------- Sky and ground rendering
 vec2 tilesSize = vec2(1.0);
 const vec3 gpn = normalize(vec3(0.0, 1.0, 0.0));
 const vec4 gpdim = vec4(gpn, 0.0);
@@ -2310,12 +2633,11 @@ vec3 groundRender(vec3 col, vec3 ro, vec3 rd) {
     float gcf = sin(ggp.x) * sin(ggp.y);
     ggp = mod(ggp + tilesSize * 0.5, tilesSize) - tilesSize * 0.5;
     float ggd = min(abs(ggp.x), abs(ggp.y));
-    vec3 glow_col = vec3(0.002, 0.001, 0.001);
+    vec3 glow_col = vec3(0.002, 0.001, 0.001)-(iAnimProgress_1.x*0.001);
     vec3 rcol = outerSkyRender(grr, grr);
     rcol = anim_render(rcol, gp, grr);
     
     col = glow_col / max(ggd, 0.0 + 0.25 * dfy);
-    rcol += vec3(0.0, 0.0, 0.0);
     col += rcol * gpfre / 2.0;
     return col;
 }
