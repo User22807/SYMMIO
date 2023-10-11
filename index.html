@@ -2292,6 +2292,61 @@ vec3 draw_text_intent_b(vec2 p, ivec2 text_box, vec4 text_coord) {
 
     return col;
 }
+
+
+
+
+
+vec3 draw_text_liquidator(vec2 p, ivec2 text_box, vec4 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
+
+  // Check if the character is outside the visible area
+  if (coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+      return vec3(0.0); // Return transparent color for characters outside the screen
+  }
+
+  coord.x *= float(text_box.x);
+  coord.y *= float(text_box.y);
+  int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+  coord.x -= float(int(coord.x));
+  coord.y -= float(int(coord.y));
+
+  ivec2 text_string_2[11];
+  text_string_2[1] = ivec2(char_L);
+  text_string_2[2] = ivec2(char_I);
+  text_string_2[3] = ivec2(char_Q);
+  text_string_2[4] = ivec2(char_U);
+  text_string_2[5] = ivec2(char_I);
+  text_string_2[6] = ivec2(char_D);
+  text_string_2[7] = ivec2(char_A);
+  text_string_2[8] = ivec2(char_T);
+  text_string_2[9] = ivec2(char_O);
+  text_string_2[10] = ivec2(char_R);
+
+
+  ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+  //  using [charIndex]
+  if (charIndex == 1) current_char = text_string_2[1];
+  else if (charIndex == 2) current_char = text_string_2[2];
+  else if (charIndex == 3) current_char = text_string_2[3];
+  else if (charIndex == 4) current_char = text_string_2[4];
+  else if (charIndex == 5) current_char = text_string_2[5];
+  else if (charIndex == 6) current_char = text_string_2[6];
+  else if (charIndex == 7) current_char = text_string_2[7];
+  else if (charIndex == 8) current_char = text_string_2[8];
+  else if (charIndex == 9) current_char = text_string_2[9];
+  else if (charIndex == 10) current_char = text_string_2[10];
+
+  vec3 col = vec3(draw_char(coord, current_char));
+  
+  return col;
+}
 //-------------------------------------------- Triangles and animation Rendering
 
 const float k = sqrt(3.0);
@@ -2300,7 +2355,37 @@ ivec2 text_box_chars = ivec2(13, 7);
 vec4 text_coord; // Scale.xy   Position.zw
 
 
+vec3 eyeRender(vec3 col, vec2 p, float vis) {
+  // Calculate blink
+  float eyeBlink = smoothstep(-0.28, 0.2, mod(iTime, 0.0));
+  eyeBlink -= smoothstep(0.28, 0.4, mod(iTime, 2.5));
+  // REPLACEMENT
+  vec2 rotatedP = vec2(-p.y + 0.2, p.x);
+  // Calculate Almond Eye
+  float bl = 1.0;
+  bl *= vis;
+  float k = -clamp(bl * bl, 0.06, 1.0);
+  vec2 pos = vec2(-4.0 * rotatedP.y, 4.0 * rotatedP.x);
+  pos = abs(pos);
+  float ik = 1.0 / k;
+  float parabola_p = ik * (pos.y - 1.1 * ik) / 3.0;
+  float parabola_q = 0.25 * ik * ik * pos.x;
+  float parabola_h = parabola_q * parabola_q - parabola_p * parabola_p * parabola_p;
+  float parabola_r = sqrt(abs(parabola_h));
+  float parabola_x = (parabola_h > 0.0) ? pow(parabola_q + parabola_r, 1.0 / 3.0) - pow(abs(parabola_q - parabola_r), 1.0 / 3.0) * sign(parabola_r - parabola_q) : 2.0 * cos(atan(parabola_r, parabola_q) / 3.0) * sqrt(parabola_p);
 
+  float sdEye = length(pos - vec2(parabola_x, k * parabola_x * parabola_x)) * sign(pos.x - parabola_x) - bl + 0.06;
+
+  // Apply smoothstep to color using sdEye
+  col += smoothstep(0.015, 0.025, abs(sdEye));
+  // Eye core creation and reposition
+  vec2 adjustedMousePos = vec2(-mousePos.y, 1.1 * (mousePos.x - 0.07)) * 2.0;
+  vec2 diff = 2.0 * rotatedP - adjustedMousePos;
+  float distance = length(diff) - 0.3 - 2.0 * smoothstep(0.895, 0.9, 0.0);
+  float eyeMask = max(distance, sdEye);
+  col = min(col, smoothstep(-0.01, 0.0, eyeMask * vis));
+  return col;
+}
 vec3 triRender2(vec3 col, vec2 p, vec3 text) {
   vec3 fillColor = vec3(0.005, 0.0, 0.0);
 
@@ -2336,7 +2421,6 @@ vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_selector, vec2 tri_pos, fl
     col = mix((dt < -0.0) ? fillColor : col, col, 1.0 - tri_vis);
     vec3 tri_col = col;
     col += glow_col / max(abs(dt), 0.001);
-
 
     //  YOU
     if (text_selector==1.0){
@@ -2379,6 +2463,14 @@ vec3 triRender(vec3 col, vec3 ro, vec3 rd, float text_selector, vec2 tri_pos, fl
       col = mix(col,vec3(1.0,0.2,0.2),draw_text_intent_b(p_text, text_box_chars, text_coord));
     }
 
+    //  LIQUIDATOR
+    else if (text_selector==8.0){
+      text_coord = vec4(1.3, 0.45, 1.0, 0.0); // Scale.x   Position.yz
+      col = mix(col,vec3(1.0),draw_text_liquidator(p_text, text_box_chars, text_coord)*tri_vis);
+      col = mix(glow_color*1000.0, col, eyeRender(col, p_text, 1.0));
+
+    }
+    
     // YOU   +    INTENT A
     else if (text_selector==23.0){
       text_coord = vec4(1.3, 0.35, 0.75, 0.0); // Scale.x   Position.yz
@@ -2409,6 +2501,7 @@ float text_selector = 0.0;
 vec2 tri_pos;
 float tri_scl=1.0;
 float tri_vis=1.0;
+float tri2_vis=1.0;
 
 vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
   vec3 fillColor = vec3(0.005, 0.0, 0.0);
@@ -2416,6 +2509,7 @@ vec3 anim_render(vec3 col,vec3 ro, vec3 rd){
   float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
   vec3 pp = ro + rd * tpd;
   vec2 p = pp.xy;
+
   //Section Animation 1.x
     if (iAnimProgress_1.x>=0.0 && iAnimProgress_1.x <0.5){
         //middle triangle
@@ -2557,7 +2651,7 @@ else if (iAnimProgress_2.y >= 0.5 && iAnimProgress_2.z < 0.5){
 
   //left triangle
   tri_pos=vec2(-0.5,0.29);
-  tri_vis=1.0-iAnimProgress_2.z;
+  tri_vis=1.0;
   tri_scl=2.0;
   glow_color = vec3(0.005, 0.005, 0.005);
   text_selector = 24.0; //draw_text_part_a
@@ -2579,21 +2673,95 @@ else if (iAnimProgress_2.z >= 0.5 && iAnimProgress_3.x < 0.5){
   tri_pos=vec2(1.0-iAnimProgress_2.y*0.5,0.29);
   tri_vis=0.0;
   tri_scl=2.0;
-  glow_color = vec3(0.006, 0.0001, 0.0001);
+  glow_color = vec3(0.006, 0.0001, 0.0001)*(1.0-iAnimProgress_3.x);
   text_selector = 25.0; //draw_text_part_b
   col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 
   //left triangle
   tri_pos=vec2(-1.0+(iAnimProgress_1.z*0.5),0.29);
-  tri_vis=0.0;
+  tri_vis=0.0-iAnimProgress_2.y;
   tri_scl=2.0;
-  glow_color = vec3(0.005, 0.005, 0.005);
+  glow_color = vec3(0.005, 0.005, 0.005)*(1.0-iAnimProgress_3.x);
   text_selector = 24.0; //draw_text_part_a
   col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
 } 
 
-              
-    return col;
+
+//Section Animation 3.x
+else if (iAnimProgress_3.x >= 0.5 && iAnimProgress_3.y < 0.5){
+  //middle triangle
+  tri_vis=1.0;
+  tri_scl=1.0;
+  glow_color = vec3(0.008, 0.001, 0.001);
+  text_selector = 0.0; //draw_text_pool
+  tri_pos=vec2(0.0,0.0);
+  col = triRender(col, ro, rd, text_selector,tri_pos,tri_scl,tri_vis,glow_color);
+
+  //Liquidator triangle
+  tri_pos=vec2(0.0+sin(iTime),-1.57+cos(iTime));
+  tri_vis=1.0;
+  tri_scl=2.0;
+  glow_color = vec3(0.005, 0.005, 0.005);
+  text_selector = 8.0; //draw_text_part_a
+  vec2 anim = vec2(cos(iTime+0.0),sin(iTime+0.0));
+  vec2 anim2 = vec2(cos(iTime+3.14),sin(iTime+3.14));
+
+  //---------------------Tri 1 Animation
+  //   Quadrant I
+  if ((anim.x > 0.0 && anim.y < 0.0)){
+    tri_vis=1.0*anim.x;
+    glow_color = vec3(0.005, 0.005, 0.005)*anim.x;
+    col = triRender(col, ro, rd, text_selector,vec2(anim.x,anim.y-1.57),tri_scl,tri_vis,glow_color);
+    }
+  
+    //   Quadrant II
+    else if ((anim.x < 0.0 && anim.y < 0.0)){
+  
+    }
+      //   Quadrant III
+    else if ((anim.x < 0.0 && anim.y > 0.0)){
+      glow_color = vec3(0.005, 0.005, 0.005)*(sin(iTime));
+      tri_vis=1.0*(sin(iTime));
+      anim.x = 0.0;
+      anim.y = 1.0;
+      col = triRender(col, ro, rd, text_selector,vec2(anim.x,anim.y-1.57),tri_scl,tri_vis,glow_color);
+    }
+  
+    //   Quadrant IV
+    else if ((anim.x > 0.0 && anim.y > 0.0)){
+    col = triRender(col, ro, rd, text_selector,vec2(anim.x,anim.y-1.57),tri_scl,tri_vis,glow_color);
+    }
+  
+  //---------------------Tri 2 Animation
+  //Quadrant I
+  if ((anim2.x > 0.0 && anim2.y < 0.0)){
+  tri_vis=1.0*anim2.x;
+  glow_color = vec3(0.005, 0.005, 0.005)*anim2.x;
+  col = triRender(col, ro, rd, text_selector,vec2(anim2.x,anim2.y-1.57),tri_scl,tri_vis,glow_color);
+    
+  //Quadrant II
+  }else if ((anim2.x < 0.0 && anim2.y < 0.0)){
+
+  //Quadrant III
+  }else if ((anim2.x < 0.0 && anim2.y > 0.0)){
+  glow_color = vec3(0.005, 0.005, 0.005)*(sin(iTime+3.14));
+  tri_vis=1.0*(sin(iTime+3.14));
+  anim2.x = 0.0;
+  anim2.y = 1.0;
+  col = triRender(col, ro, rd, text_selector,vec2(anim2.x,anim2.y-1.57),tri_scl,tri_vis,glow_color);
+  
+  //Quadrant IV Tri 2
+  }else if ((anim2.x > 0.0 && anim2.y > 0.0)){
+  col = triRender(col, ro, rd, text_selector,vec2(anim2.x,anim2.y-1.57),tri_scl,tri_vis,glow_color);
+
+}  
+
+
+  
+
+
+} 
+  return col;
 }
 
 
@@ -2633,12 +2801,15 @@ vec3 groundRender(vec3 col, vec3 ro, vec3 rd) {
     float gcf = sin(ggp.x) * sin(ggp.y);
     ggp = mod(ggp + tilesSize * 0.5, tilesSize) - tilesSize * 0.5;
     float ggd = min(abs(ggp.x), abs(ggp.y));
-    vec3 glow_col = vec3(0.002, 0.001, 0.001)-(iAnimProgress_1.x*0.001);
+    vec3 glow_col = vec3(0.002, 0.001, 0.001);
     vec3 rcol = outerSkyRender(grr, grr);
     rcol = anim_render(rcol, gp, grr);
     
     col = glow_col / max(ggd, 0.0 + 0.25 * dfy);
     col += rcol * gpfre / 2.0;
+
+    //change the reflection value
+    col *= 1.0-(iAnimProgress_1.x*0.7);
     return col;
 }
 
