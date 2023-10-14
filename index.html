@@ -2765,11 +2765,12 @@ vec3 tri_half_left(vec3 col, vec3 ro, vec3 rd, vec3 text, vec2 tri_pos) {
 }
 
 
-vec3 tri_half_right(vec3 col, vec3 ro, vec3 rd, vec3 text, vec2 tri_pos) {
+vec3 tri_half_right(vec3 col, vec3 ro, vec3 rd, vec3 text, vec2 tri_pos ,vec2 text_vis_pos) {
   const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
   float tpd = -(dot(ro, tpdim.xyz) + tpdim.w) / dot(rd, tpdim.xyz);
   vec3 pp = ro + rd * tpd;
   vec2 p = pp.xy * 0.5;
+  vec2 p_text = p;
   p += tri_pos;
   p.x = -p.x;
   p.y -= 0.58;
@@ -2787,11 +2788,19 @@ vec3 tri_half_right(vec3 col, vec3 ro, vec3 rd, vec3 text, vec2 tri_pos) {
     col = mix((dt < -0.0) ? fillColor : col, col, 0.0);
     col += glow_col / max(abs(dt), 0.001);
     col = mix(col, vec3(1.0, 0.4, 0.4), text);
-  } else {
-    // Calculate the right half
-    // Modify the right half calculations here as needed
-    // You can use a different set of equations to create the right half effect
-  }
+  } 
+
+  text_coord = vec4(0.85, -0.32+text_vis_pos.y, 0.4, 0.0); // Scale.x   Position.yz
+  col = mix(col, vec3(1.0, 0.0, 0.0), draw_text_minus100(p_text, text_box_chars, text_coord)*text_vis_pos.x );
+
+  text_coord = vec4(0.85, 0.95-text_vis_pos.y, 0.4, 0.0); // Scale.x   Position.yz
+  col = mix(col, vec3(1.0, 1.0, 1.0), draw_text_plus100(p_text, text_box_chars, text_coord)*text_vis_pos.x );
+
+  text_coord = vec4(0.85, 1.0, 0.60, 0.0); // Scale.x   Position.yz
+  col = mix(col, vec3(1.0, 1.0, 1.0), draw_text_party_a(p_text, text_box_chars, text_coord)*(1.0-iAnimProgress_3.z));
+  text_coord = vec4(0.85, -0.3, 0.60, 0.0); // Scale.x   Position.yz
+  col = mix(col, vec3(1.0, 1.0, 1.0), draw_text_party_b(p_text, text_box_chars, text_coord)*(1.0-iAnimProgress_3.z));
+
 
   return col;
 }
@@ -3280,8 +3289,25 @@ vec3 anim_render(vec3 col, vec3 ro, vec3 rd) {
 
 //Section Animation 3.y
   else if(iAnimProgress_3.y >= 0.5 && iAnimProgress_3.z < 0.5) {
+    vec2 text_vis_pos = vec2(0.0,0.0);
+    if (cos(iTime) < 0.0 && sin(iTime) > 0.0) {
+      text_vis_pos.x = sin(iTime);
+    } else if (cos(iTime) > 0.0 && sin(iTime) < 0.0) {
+      text_vis_pos.x = -sin(iTime);
+      text_vis_pos.y = 1.25;
+    }
   col = tri_half_left(col, ro,rd, vec3(0.0),vec2(0.0-(iAnimProgress_3.y*0.1),0.0));
-  col = tri_half_right(col, ro,rd, vec3(0.0),vec2(0.0+(iAnimProgress_3.y*0.1),0.0));
+  col = tri_half_right(col, ro,rd, vec3(0.0),vec2(0.0+(iAnimProgress_3.y*0.1),0.0), text_vis_pos);
+
+  }
+
+
+  //Section Animation 3.z
+  else if(iAnimProgress_3.z >= 0.5 ) {
+    vec2 text_vis_pos = vec2(0.0,0.0);
+    text_vis_pos.x = 0.0;
+    col = tri_half_left(col, ro,rd, vec3(0.0),vec2((iAnimProgress_3.z*0.1)-(iAnimProgress_3.y*0.1),0.0));
+    col = tri_half_right(col, ro,rd, vec3(0.0),vec2(0.0+(iAnimProgress_3.y*0.1)-(iAnimProgress_3.z*0.1),0.0), text_vis_pos);
 
   }
   
