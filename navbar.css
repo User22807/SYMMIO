@@ -162,7 +162,7 @@ nav[role="custom-dropdown"] ul>li:hover {
   --hamburger-icon-height: 0.5vw;
   --hamburger-icon-rotate-deg: 45deg;
   --hamburger-icon-transform-time: 350ms;
-  --overlay-background-color: rgba(0, 0, 0, 0.5);
+  --overlay-background-color: rgba(0, 0, 0, 0.812);
   --menu-link-default-color: #e2e2e2;
   --menu-link-hover-color: #ffffff;
   --menu-link-emboss-color: rgba(0, 0, 0, 0.8);
@@ -194,10 +194,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .menu-trigger:checked+.overlay {
-  background-color: #00000072;
+  background-color: var(--overlay-background-color);
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(5px);
   transition: none;
 }
 
