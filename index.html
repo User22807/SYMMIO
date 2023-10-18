@@ -225,7 +225,7 @@
 </html>
 
 
-<script src="./webGl.glsl" id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment">
 
 
 // ---------------------------------------------------- Settings
@@ -1970,11 +1970,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 // Camera location
     ro = vec3(
       //Right, Left
-      0.0,
+      0.0+iAnimProgress_4.x*2.0,
       //Up, Down
       0.5,
       //Forth ,Back 
-      -8.0-iAnimProgress_1.x*2.0+iAnimProgress_4.x*8.0);
+      -8.0-iAnimProgress_1.x*3.0+iAnimProgress_4.x*8.0);
   
 
   //***************-------Desktop/Horizontal mode
