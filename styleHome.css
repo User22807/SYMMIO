@@ -95,6 +95,18 @@ canvas {
 
 }
 
+.box__text .learn_more_top {
+	font-size: 4vh;
+	position: fixed;
+	left: 10%;
+	top: 20%;
+	width: 40%;
+	-webkit-text-fill-color: transparent;
+	background-image: linear-gradient(to right, #fff, #ff8383) !important;
+	background-clip: text;
+	-webkit-background-clip: text;
+  
+  }
 .box__text .list_top .head-span {
 
   font-size: 4vh;
