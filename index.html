@@ -1349,7 +1349,7 @@ vec3 anim_2(vec3 col, vec3 ro, vec3 rd) {
   text_coord = vec3(1.5, 0.3, 1.05); // Scale.x   Position.yz
   col = mix(col, HSV2RGB(vec3(0.00, 1.0, 1.0-animSection2*0.2+animSection4*0.2)), draw_text_hedger(p_text, text_box_chars, text_coord)*(fadein_fadeout.x-animSection5));
   text_coord = vec3(1.5, 0.33, 1.05); // Scale.x   Position.yz
-  col = mix(col, HSV2RGB(vec3(0.00, 1.0, 1.0)), draw_text_party_b(p_text, text_box_chars, text_coord)*animSection5);
+  col = mix(col, HSV2RGB(vec3(0.00, 1.0-fadein_fadeout.y, 1.0)), draw_text_party_b(p_text, text_box_chars, text_coord)*animSection5);
   text_coord = vec3(1.5, 0.39+(sin(animSection6*3.142))*0.5, 0.87); // Scale.x   Position.yz
   col = mix(col, HSV2RGB(vec3(0.00, 1.0, 1.0)), draw_text_intent_b(p_text, text_box_chars, text_coord)*(animSection5-animSection6));
   text_coord = vec3(1.5, 0.46+(sin(animSection6*3.142))*0.5, 0.87); // Scale.x   Position.yz
@@ -1491,7 +1491,7 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_liquidator(p_rota_2, text_box_chars, vec3(1.5, 0.45, 1.0)) * tri_vis_2);
   //text   EXECUTE
   col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0 )), (draw_text_execute(p, text_box_chars, vec3(1.5, 0.35, 0.35))*(1.0-anim_time_2.y)*quad3_2)),
-  //text   PLUS100
+  //text   BTC PLUS
     col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.32, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2)),
   //text   MINUS100
     col = mix(col, HSV2RGB(vec3(0.0, 1.2, 1.5)), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, 1.0, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2));
@@ -1500,6 +1500,15 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   return col;
 }
 vec3 anim_4(vec3 col, vec3 ro, vec3 rd) {
+
+  vec2 anim_time_1 = vec2(sin(iTime), cos(iTime));
+  vec2 quad_helper = vec2(smoothstep(anim_time_1.x,0.0,1.0),smoothstep(anim_time_1.y,0.0,1.0));
+  float quad1 = (1.0-quad_helper.x)*quad_helper.y;
+  float quad2 = quad_helper.x*quad_helper.y;
+  float quad3 = quad_helper.x*(1.0-quad_helper.y);
+  float quad4 = (1.0-quad_helper.x)*(1.0-quad_helper.y);
+
+
   glow_color = vec3(0.008, 0.001, 0.001);
   vec3 fillColor = vec3(0.005, 0.0, 0.0);
   const vec4 tpdim = vec4(0.0, 0.0, 1.0, -2.0);
@@ -1509,12 +1518,9 @@ vec3 anim_4(vec3 col, vec3 ro, vec3 rd) {
 
   // Half right
   p = pp.xy * 0.5;
-    //text   PARTY A
-
-    //text   PARTY B
 
   p.y -= 0.58;
-  p.x -= ((animSection9-0.1)-(animSection10-0.1))*0.1;
+  p.x -= ((animSection9-0.1)-(animSection10-0.09))*0.1;
   float smoothStepRight = 1.0 - smoothstep(0.0, 0.002, abs(p.x));
   if (p.x > 0.0) {
     p = vec2(abs(p.x) - 1.0, p.y + 1.0 / k);
@@ -1530,9 +1536,11 @@ vec2 p2;
   // Half left
   p2 = pp.xy * 0.5;
   col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_a(p2, text_box_chars, vec3(0.75, 0.985+((animSection9/7.0)-(animSection10/3.0)), 0.66)));
+  col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p2, text_box_chars, vec3(0.75, 1.08, 0.46 - anim_time_1.y / 6.0))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10))),
+  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p2, text_box_chars, vec3(0.75, 1.08, 0.46 + anim_time_1.y / 6.0))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10))),
 
   p2.y -= 0.58;
-  p2.x += ((animSection9-0.1)-(animSection10-0.1))*0.1;
+  p2.x += ((animSection9-0.1)-(animSection10-0.09))*0.1;
   float smoothStepLeft = 1.0 - smoothstep(0.0, 0.002, abs(p2.x));
   if(p2.x < 0.0){
     p2 = vec2(abs(p2.x) - 1.0, p2.y + 1.0 / k);
@@ -1541,6 +1549,8 @@ vec2 p2;
     dt = -length(p2) * sign(p2.y);
     col = mix((dt < 0.0) ? fillColor : col, col, smoothStepLeft);
     col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_b(p, text_box_chars, vec3(0.75, -0.32-((animSection9/4.0)-(animSection10/3.0)), 1.43)));
+    col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.58, 1.26 - anim_time_1.y / 6.0))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10))),
+    col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, -0.58, 1.26 + anim_time_1.y / 6.0))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10))),
 
     col += glow_col / max(abs(dt), 0.001) ;
  
@@ -1552,17 +1562,37 @@ vec2 p2;
 
 // Precompute constant values
 const vec3 sunDir = normalize(vec3(0.0, -2.0, 20.0));
-const vec3 sunCol = HSV2RGB(vec3(0.01, 0.5, 0.002));
+vec3 sunCol = HSV2RGB(vec3(0.01, 0.5, 0.002-(animSection1*0.002)+(animSection9*0.00015)));
 const vec3 skyBaseCol = HSV2RGB(vec3(1.0, 0.00, 0.008));
 const vec3 gcol = HSV2RGB(vec3(1.0, 0.4, 0.008));
 const vec3 airColor = HSV2RGB(vec3(0.97, 0.0, 0.1));
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
   const float fov = 2.0;
-  vec3 ro = 1.0 * vec3(0.0, 0.5, -5.0);
-  vec3 la = vec3(0.0, 1.5, 0.0);
-  vec3 up = vec3(0.0, 1.0, 0.0);
+  vec3 ro;
+  vec3 la;
+if (iResolution.x>iResolution.y){
+  // Camera location right - left
+  ro = vec3(0.0+animSection1*3.0+animSection8*0.9-animSection9*0.9-animSection10*2.0,
+  //Camera location up - down
+   0.5+animSection10*0.5,
+   //Camera location forth - back
+   -5.0-animSection8*0.9+animSection9*0.9+animSection10*4.6);
+  // Camrea look right - left
+  la = vec3(0.0+animSection1*3.0+animSection8*0.9-animSection9*0.9-animSection10*2.0,
+  // Camrea look up - down
+   1.5+animSection8*0.9-animSection9*0.9-animSection10*0.48,
+  // Camrea look forth - back
+   0.0);
 
+}else{
+  // Camera location
+  ro = 1.0 * vec3(0.0, 0.5, -5.0);
+  la = vec3(0.0, 1.5, 0.0);
+};
+
+
+  vec3 up = vec3(0.0, 1.0, 0.0);
   vec3 ww = normalize(la - ro);
   vec3 uu = normalize(cross(up, ww));
   vec3 vv = cross(ww, uu);
@@ -1591,7 +1621,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     col = col;
   } else {
     vec3 gp = ro + rd * gpd;
-    float gpfre = 1.15 + gpdimDot;
+    float gpfre = 1.15-(animSection1*0.2)+(animSection9*0.2) + gpdimDot;
     gpfre = gpfre * gpfre * gpfre * gpfre;
 
     vec3 grr = reflect(rd, gpn);
@@ -1606,15 +1636,15 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     float ggd = min(abs(ggp.x), abs(ggp.y));
 
-    vec3 gcol = HSV2RGB(vec3(0.01 * gcf, 0.7, 0.005));
+    vec3 gcol = HSV2RGB(vec3(0.01 * gcf, 0.7, 0.005-(animSection1*0.004)));
 
     vec3 rcol = skyBaseCol;
+
+
 
     float rsunDot = dot(sunDir, grr);
     rcol += sunCol / pow(1.002 - rsunDot, 1.9);
 
-    rcol += gcol * 0.3 / max(abs(grr.y), 0.001);
-    rcol += airColor;
     if(animSection9<0.1)
     rcol = anim_1(rcol, gp, grr);
     if(animSection1>0.1 && animSection8<0.5)
@@ -1623,6 +1653,11 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     rcol = anim_3(rcol, gp, grr);
     else if(animSection9>=0.1)
     rcol = anim_4(rcol, gp, grr);
+
+
+    rcol += gcol * 0.3 / max(abs(grr.y), 0.001);
+    rcol += airColor;
+
 
     float maxVal = max(ggd, 0.0 + 0.25 * dfy);
     float expVal = exp(-0.25 * gpd);
