@@ -144,7 +144,6 @@ function updateScrollProgress() {
         subtitle: "",
         list_top: "<span class= head-span>PartyA and PartyB are SYMMETRICAL</span> "
           + "</br></br>"
-
           + " <span class=active-span>exact mirrors of the same position.</span></br>"
           + " <span class=active-span>one Side LONGs 1 BTC,</span></br>"
           + " <span class=active-span>other side SHORTs 1 BTC,</span></br>"
@@ -154,10 +153,9 @@ function updateScrollProgress() {
         selector: ".section.ten"
       },
       {
-        titleSYMM: "",
-        title: "",
-        subtitle: "",
-        list_top: "<span class= head-span>INTENT to know more?</span> ",
+        learn_one: "<span class= head-span>Intent to know more?</span> ",
+        learn_two: "<span class= head-span>or Intent to take action?</span> ",
+        learn_three: "<span class= head-span>connect with us</span> ",
         selector: ".section.eleven"
       }
       // ... (add more content sections as needed)
@@ -203,7 +201,34 @@ function updateScrollProgress() {
         )
         .to(
           `${item.selector} .list_top`,
-          { text: `${item.list_top}`, ease: "linear", duration: 0, onUpdate },
+          { text: `${item.list_top}`,
+          ease: "linear",
+          duration: 0,
+          onUpdate },
+          0
+        )
+        .to(
+          `${item.selector} .learn_one`,
+          { text: `${item.learn_one}`,
+          ease: "linear",
+          duration: 0,
+          onUpdate },
+          0
+        )
+        .to(
+          `${item.selector} .learn_two`,
+          { text: `${item.learn_two}`,
+          ease: "linear",
+          duration: 0,
+          onUpdate },
+          0
+        )
+        .to(
+          `${item.selector} .learn_three`,
+          { text: `${item.learn_three}`,
+          ease: "linear",
+          duration: 0,
+          onUpdate },
           0
         );
 
