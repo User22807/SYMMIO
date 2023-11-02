@@ -63,6 +63,7 @@ canvas {
 }
 
 .about .button_box {
+	align-items: center;
 	width: 100%;
 	z-index: 2;
 	display: flex;
@@ -87,6 +88,10 @@ canvas {
 	font-size: 1rem;
 
 }
+.button_box .socialicon {
+margin: 15px;
+}
+
 .button_box .about_text {
 	font-size: 2rem;
 	letter-spacing: 0;
