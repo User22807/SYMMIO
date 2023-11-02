@@ -7,7 +7,6 @@
 :root {
   --white: #FFFFFF;
   --red: #FF4444;
-  --blue: #FFAAAA;
 }
 
 
@@ -46,7 +45,7 @@
 /* Link and Reset button styles */
 nav[role="custom-dropdown"] ul>li>a,
 .menu__link,
-.reset {
+.menubtn {
   font-family: "Manrope", sans-serif;
   font-weight: 300;
   font-size: 1vw;
@@ -84,7 +83,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .menu__item--current .menu__link {
-  color: var(--blue);
+  color: #FFAAAA;
 }
 
 .menu__item--current .menu__link:before,
@@ -98,20 +97,10 @@ nav[role="custom-dropdown"] ul>li:hover {
 .menu__link:after {
   content: '';
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 1vw;
+  height: 1vw;
   opacity: 0;
-  border: 2px solid var(--red);
-  transition: transform 0.3s, opacity 0.3s;
-  transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
-}
-
-.menu__link.active-span {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  opacity: 0;
-  border: 2px solid var(--red);
+  border: 1vw solid var(--red);
   transition: transform 0.3s, opacity 0.3s;
   transition-timing-function: cubic-bezier(0.17, 0.67, 0.05, 1.29);
 }
@@ -132,14 +121,14 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 /* Reset button styles */
-.reset {
+.menubtn {
   border: solid 2px;
   border-color: #FF4444;
   border-radius: 0px;
   margin: 0 auto;
 }
 
-.reset:hover { border: solid 2px var(--red);
+.menubtn:hover { border: solid 2px var(--red);
 border-color: #ff5c5c;
 border-radius: 0px;
 margin: 0 auto;
