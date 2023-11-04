@@ -46,13 +46,15 @@ canvas {
 
 /*---------------------About Us----------------------  */
 
-
-.about {
+.about_section {
 	padding-top: 15%;
 	font-family: 'Manrope', sans-serif;
-	text-align: center;
-	color: white !important;
 	z-index: 2;
+
+}
+
+.about {
+	padding-bottom: 10%;
 	display: flex;
 	flex-direction: row;
 }
@@ -761,10 +763,14 @@ canvas {
 
 @media screen and (max-width: 900px) {
 	/*---------------------About Us----------------------  */
-
-
-	.about {
+	.about_section {
 		padding-top: 25%;
+		font-family: 'Manrope', sans-serif;
+		z-index: 2;
+	
+	}
+	.about {
+		padding-bottom: 10%;
 		font-family: 'Manrope', sans-serif;
 		text-align: center;
 		color: white !important;
@@ -791,8 +797,7 @@ canvas {
 		transition: all .2s ease-in-out;
 		text-decoration: none;
 		position: relative;
-		padding: 1vh 2vh 0vh 2vw;
-		margin: 2vh 30vw 2vh 30vw;
+		margin: 2vh 3vw 2vh 3vw;
 		text-align: left;
 		border: solid 1px;
 		border-color: #FFF;
@@ -805,61 +810,9 @@ canvas {
 
 	}
 
-	.button_box .socialicon {
-		color: #ffffff;
-		margin: 4vw;
-		height: 50%;
-	}
-
-	.socialicon:hover {
-		transition: all .2s ease-in-out;
-		transform: translateY(-2px);
-		cursor: pointer;
-		border-color: rgb(255, 92, 92);
-		color: #ffbaba;
-	}
-
 	.button_box .about_text {
+		font-family: 'Manrope', sans-serif;
 		font-size: 3vh;
-		letter-spacing: 0;
-		-webkit-text-fill-color: transparent;
-		background-image: linear-gradient(to right, #fff, #ff8383) !important;
-		background-clip: text;
-		-webkit-background-clip: text;
-		margin-top: 0;
-		font-weight: 600;
-		line-height: 1.25;
-	}
-
-	.button-icon {
-		margin-right: 16px;
-		height: 10vh;
-		width: 15vw;
-		top: 0;
-		
-	}
-
-	.button:hover {
-		border-color: rgb(255, 92, 92);
-		color: #ffbaba;
-		transform: translateY(-2px);
-	}
-
-	.button:active {
-		transform: translateY(0);
-	}
-
-	.button:before {
-		animation: pulse 2s ease infinite;
-		border: 4px;
-		border-color: white;
-		position: absolute;
-		content: "";
-		z-index: -1;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		top: 0;
 	}
 
 	.box__text .titleSYMM {
@@ -1184,7 +1137,7 @@ canvas {
 
 	.box__text .list_top .head-span {
 
-		font-size: 4vh;
+		font-size: 2.5vh;
 		letter-spacing: 0;
 		-webkit-text-fill-color: transparent;
 		background-image: linear-gradient(to right, #fff, #ff8383) !important;

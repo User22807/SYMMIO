@@ -27,7 +27,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.two",
@@ -43,7 +43,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.three",
@@ -59,7 +59,7 @@ function setupContentScrollTrigger() {
         " <span class=active-span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.four",
@@ -75,7 +75,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span class=active-span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.five",
@@ -91,7 +91,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span class=active-span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.six",
@@ -107,7 +107,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span class=active-span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span class=active-span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
       selector: ".section.seven",
@@ -123,7 +123,7 @@ function setupContentScrollTrigger() {
         " <span>• SEND your INTENT to the onchain pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
-        " <span>• claimed INTENTs CREATE a trade</span></br>" +
+        " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span class=active-span>• Both parties LOCK collateral</span>",
 
       selector: ".section.eight",
@@ -147,15 +147,19 @@ function setupContentScrollTrigger() {
       list_top:
         "<span class= head-span>PartyA and PartyB are SYMMETRICAL</span> " +
         "</br></br>" +
-        " <span class=active-span>exact mirrors of the same position.</span></br>" +
-        " <span class=active-span>one Side LONGs 1 BTC,</span></br>" +
-        " <span class=active-span>other side SHORTs 1 BTC,</span></br>" +
-        " <span class=active-span>no PartyA & B pair = no trade.</span></br>" +
+        " <span class=active-span>Exact mirrors of the same position.</span></br>" +
+        " <span class=active-span>One Side LONGs 1 BTC,</span></br>" +
+        " <span class=active-span>Other side SHORTs 1 BTC,</span></br>" +
+        " <span class=active-span>No PartyA & B pair = no trade.</span></br>" +
         " <span class=active-span>Loss of A = Win of B,</span></br>" +
         " <span class=active-span>SYMMETRICAL TRADING.</span>",
       selector: ".section.ten",
     },
     {
+      titleSYMM: "",
+      title: "",
+      subtitle: "",
+      list_top:"",
       selector: ".section.eleven",
     }
   ];
