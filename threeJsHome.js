@@ -43,7 +43,6 @@ function init() {
   renderer = new THREE.WebGLRenderer;
   container.appendChild(renderer.domElement);
 
-  renderer.setPixelRatio(window.devicePixelRatio);
   // Set up content scroll triggers
 
   // Handle window resizing
@@ -69,16 +68,16 @@ function render() {
 
 // Handle window resize
 function handleResize() {
-  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
-  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
+  uniforms.iResolution.value.x = window.innerWidth ;
+  uniforms.iResolution.value.y = window.innerHeight ;
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 // Update mouse position uniform
 function handleMouseMove(event) {
-  uniforms.iMousePos.value.x = event.clientX * window.devicePixelRatio;
+  uniforms.iMousePos.value.x = event.clientX;
   uniforms.iMousePos.value.y =
-    (window.innerHeight - event.clientY) * window.devicePixelRatio;
+    (window.innerHeight - event.clientY) ;
 }
 
 gsap.to(uniforms.iAnimProgress_1.value, {
