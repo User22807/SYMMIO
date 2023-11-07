@@ -3,20 +3,19 @@ let container, camera, scene, renderer, uniforms, startTime, scrollProgress;
 // Initialize the scene
 init();
 animate();
+setupContentScrollTrigger();
 
 // Initialize the Three.js scene
 function init() {
-  // Setup gsap plugins
-  gsap.registerPlugin(ScrollTrigger);
-
   container = document.getElementById("webgl-container");
+
+  // Setup gsap plugins
+
   startTime = Date.now();
-  camera = new THREE.OrthographicCamera();
+  camera = new THREE.Camera();
   scene = new THREE.Scene();
-  const geometry = new THREE.PlaneBufferGeometry(
-    window.innerWidth,
-    window.innerHeight
-  );
+  var geometry = new THREE.PlaneBufferGeometry(16, 9);
+
 
   // Define uniforms
   uniforms = {
@@ -29,25 +28,23 @@ function init() {
     iAnimProgress_4: { type: "v3", value: new THREE.Vector3() },
   };
 
-  // Create the shader material
-  const material = new THREE.ShaderMaterial({
+  var material = new THREE.ShaderMaterial( {
+
     uniforms: uniforms,
-    vertexShader: `void main() {gl_Position = vec4(position, 1.0);}`,
-    fragmentShader: document.getElementById("fragmentShader").textContent,
-  });
+    vertexShader: document.getElementById('vertexShader').textContent,
+    fragmentShader: document.getElementById('fragmentShader').textContent
+
+  } );
 
   // Create and add mesh to the scene
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
   // Create the renderer
-  renderer = new THREE.WebGLRenderer({
-    precision: "lowp", // Set precision for smooth gradients and better precision
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer = new THREE.WebGLRenderer;
   container.appendChild(renderer.domElement);
 
+  renderer.setPixelRatio(window.devicePixelRatio);
   // Set up content scroll triggers
-  setupContentScrollTrigger();
 
   // Handle window resizing
   handleResize();

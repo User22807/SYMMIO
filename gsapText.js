@@ -6,6 +6,8 @@ function updateScrollProgress() {
 
 // Set up content scroll triggers
 function setupContentScrollTrigger() {
+  gsap.registerPlugin(ScrollTrigger);
+
   const content = [
     {
       list_top: "",
@@ -159,9 +161,9 @@ function setupContentScrollTrigger() {
       titleSYMM: "",
       title: "",
       subtitle: "",
-      list_top:"",
+      list_top: "",
       selector: ".section.eleven",
-    }
+    },
   ];
 
   content.forEach((item, i, arr) => {
