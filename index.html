@@ -1585,9 +1585,9 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   //text   LIQUIDATOR
   col = mix(col, HSV2RGB(vec3(0.0, 0.0+(quad3/1.2), 1.0*(animSection8-animSection9))), draw_text_liquidator(p_rota, text_box_chars, vec3(1.5, 0.45, 1.0))* tri_vis_1);
   //text   LIQUIDATE
-  col = mix(col, HSV2RGB(vec3(0.0, 0.9, 1.0*(animSection8-animSection9) )), (draw_text_liquidate(p, text_box_chars, vec3(1.0, 0.42, 0.15))*(1.0-anim_time_1.y)*quad3)),
+  col = mix(col, HSV2RGB(vec3(0.0, 0.9, 1.0*(animSection8-animSection9) )), (draw_text_liquidate(p, text_box_chars, vec3(1.0, 0.42, 0.15))*(1.0-anim_time_1.y)*quad3));
   //text   PLUS1000
-    col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5*(animSection8-animSection9))), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, 1.0, 0.46 - anim_time_1.y / 6.0))*anim_time_1.x*quad3*liq_quad1*liq_quad3)),
+    col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5*(animSection8-animSection9))), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, 1.0, 0.46 - anim_time_1.y / 6.0))*anim_time_1.x*quad3*liq_quad1*liq_quad3));
   //text   MINUS1000
     col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5*(animSection8-animSection9))), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, -0.32, 0.46 - anim_time_1.y / 6.0))*anim_time_1.x*quad3*liq_quad3)+(draw_text_dash(p, text_box_chars, vec3(1.75, -0.05, 0.74 ))*anim_time_1.x*quad3*liq_quad3));
   //text   MINUS1000
@@ -1626,7 +1626,7 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   //text   EXECUTE
   col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0 )), (draw_text_execute(p, text_box_chars, vec3(1.0, 0.35, 0.15))*(1.0-anim_time_2.y)*quad3_2)),
   //text   BTC PLUS
-  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.32, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2)),
+  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.32, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2));
   //text   MINUS100
   col = mix(col, HSV2RGB(vec3(0.0, 1.2, 1.5)), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, 1.0, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2));
 
@@ -1635,7 +1635,9 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
 }
 vec3 anim_4(vec3 col, vec3 ro, vec3 rd) {
 
-  vec2 anim_time_1 = vec2(sin(iTime), cos(iTime));
+  vec2 anim_time_1 = vec2(sin(iTime/2.0), cos(iTime/2.0));
+  vec2 anim_time_x2 = vec2(sin(iTime), cos(iTime));
+
   vec2 quad_helper = vec2(smoothstep(anim_time_1.x,0.0,1.0),smoothstep(anim_time_1.y,0.0,1.0));
   float quad1 = (1.0-quad_helper.x)*quad_helper.y;
   float quad2 = quad_helper.x*quad_helper.y;
@@ -1669,9 +1671,11 @@ vec3 anim_4(vec3 col, vec3 ro, vec3 rd) {
 vec2 p2;
   // Half left
   p2 = pp.xy * 0.5;
-  col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_a(p2, text_box_chars, vec3(0.75, 0.985+((animSection9/7.0)-(animSection10/3.0)), 0.66)));
-  col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p2, text_box_chars, vec3(0.75, 1.08, 0.46 - anim_time_1.y / 6.0))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10))),
-  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p2, text_box_chars, vec3(0.75, 1.08, 0.46 + anim_time_1.y / 6.0))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10))),
+  col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_a(p2, text_box_chars, vec3(0.75, 0.9+((animSection9/7.0)-(animSection10/3.0)), 0.65)));
+  col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p2, text_box_chars, vec3(0.75, 1.0, 0.26 - (anim_time_1.y / 6.0)))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10)));
+  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p2, text_box_chars, vec3(0.75, 1.0, 0.26 + (anim_time_1.y / 6.0)))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10)));
+  col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), (draw_text_btc_long(p2, text_box_chars, vec3(0.75, 1.15, 0.46))*(1.0-(anim_time_x2.y))*(quad2+quad3)*(animSection9-animSection10)));
+  col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), (draw_text_btc_short(p2, text_box_chars, vec3(0.75, 1.15, 0.46))*(1.0-(anim_time_x2.y))*(quad1+quad4)*(animSection9-animSection10)));
 
   p2.y -= 0.58;
   p2.x += ((animSection9-0.1)-(animSection10-0.09))*0.1;
@@ -1682,9 +1686,11 @@ vec2 p2;
     p2.x -= clamp(p2.x, -2.0, 0.0);
     dt = -length(p2) * sign(p2.y);
     col = mix((dt < 0.0) ? fillColor : col, col, smoothStepLeft);
-    col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_b(p, text_box_chars, vec3(0.75, -0.32-((animSection9/4.0)-(animSection10/3.0)), 1.43)));
-    col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.58, 1.26 - anim_time_1.y / 6.0))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10))),
-    col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, -0.58, 1.26 + anim_time_1.y / 6.0))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10))),
+    col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0-min(animSection10*2.0,1.0))), draw_text_party_b(p, text_box_chars, vec3(0.75, -0.25-((animSection9/4.0)-(animSection10/3.0)), 1.43)));
+    col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.5, 1.06 - anim_time_1.y / 6.0))*(1.0-anim_time_1.y)*quad3*(animSection9-animSection10)));
+    col = mix(col, HSV2RGB(vec3(0.0, 1.0, 1.5)), (draw_text_minus_btc(p, text_box_chars, vec3(0.75, -0.5, 1.06 + anim_time_1.y / 6.0))*(1.0+anim_time_1.y)*quad1*(animSection9-animSection10)));
+    col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), (draw_text_btc_short(p, text_box_chars, vec3(0.75, -0.4, 1.26))*(1.0-(anim_time_x2.y))*(quad2+quad3)*(animSection9-animSection10)));
+    col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), (draw_text_btc_long(p, text_box_chars, vec3(0.75, -0.4, 1.26))*((1.0-anim_time_x2.y))*(quad1+quad4)*(animSection9-animSection10)));
 
     col += glow_col / max(abs(dt), 0.001) ;
  
