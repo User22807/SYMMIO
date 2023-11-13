@@ -985,42 +985,32 @@ vec3 draw_text_solvent(vec2 p, ivec2 text_box, vec3 text_coord) {
 
   coord.x *= float(text_box.x);
   coord.y *= float(text_box.y);
-  int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+  int charIndex = int(coord.x) + text_box.y - int(coord.y);
   coord.x -= float(int(coord.x));
-  coord.y -= float(int(coord.y));
 
   ivec2 text_string_2[8];
-  text_string_2[1] = ivec2(char_S);
-  text_string_2[2] = ivec2(char_O);
-  text_string_2[3] = ivec2(char_L);
-  text_string_2[4] = ivec2(char_V);
-  text_string_2[5] = ivec2(char_E);
-  text_string_2[6] = ivec2(char_N);
-  text_string_2[7] = ivec2(char_T);
-
   ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
 
     //  using [charIndex]
   if(charIndex == 1)
-    current_char = text_string_2[1];
+    current_char = ivec2(char_S);
   else if(charIndex == 2)
-    current_char = text_string_2[2];
+    current_char = ivec2(char_O);
   else if(charIndex == 3)
-    current_char = text_string_2[3];
+    current_char = ivec2(char_L);
   else if(charIndex == 4)
-    current_char = text_string_2[4];
+    current_char = ivec2(char_V);
   else if(charIndex == 5)
-    current_char = text_string_2[5];
+    current_char = ivec2(char_E);
   else if(charIndex == 6)
-    current_char = text_string_2[6];
+    current_char = ivec2(char_N);
   else if(charIndex == 7)
-    current_char = text_string_2[7];
+    current_char = ivec2(char_T);
 
   vec3 col = vec3(draw_char(coord, current_char));
 
   return col;
 }
-
 vec3 draw_text_liquidate(vec2 p, ivec2 text_box, vec3 text_coord) {
   // Normalized pixel coordinates (from 0 to 1)
   vec2 coord = p;
@@ -1432,6 +1422,7 @@ vec3 draw_text_dash(vec2 p, ivec2 text_box, vec3 text_coord) {
 
 
 ivec2 text_box_chars = ivec2(13, 7);
+vec3 text_coord; // Scale.xy   Position.zw
 
 
 vec3 glow_color;
@@ -1484,16 +1475,14 @@ vec3 anim_2(vec3 col, vec3 ro, vec3 rd) {
   // Triangle positions and scales
   vec3 glow_col = HSV2RGB(vec3(0.005, 0.9, 0.01));
   float t = -(dot(ro, vec3(0.0, 0.0, 1.0)) - 2.0) / dot(rd, vec3(0.0, 0.0, 1.0));
-  p_text = (gl_FragCoord.xy / iResolution.xy * 1.5);
-  p_text.y -= 0.25;
-  p_text.x -= 0.85;
-
+  p_text = (ro + rd * t).xy * 0.5;
+  p_text.y -= 0.55;
   //text   INTETNT POOL
   col = mix(col, HSV2RGB(vec3(0.0, 0.6, 1.0)), draw_text_pool(p_text, text_box_chars, vec3(1.0, 0.49, 0.47))*(fadein_fadeout.x-fadein_fadeout.y));
   //text   EXECUTE
   col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0*animSection6-animSection7)), (draw_text_execute(p_text, text_box_chars, vec3(1.0, 0.35, 0.73)))),
   /////YOU TRI
-  p = (ro + rd * t).xy;
+  p = (ro + rd * t).xy * 1.0;
   p.y -= 0.58;
   p.x -= 1.0+fadein_fadeout.x-animSection3;
   p_text = p;
