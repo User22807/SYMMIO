@@ -1484,8 +1484,10 @@ vec3 anim_2(vec3 col, vec3 ro, vec3 rd) {
   // Triangle positions and scales
   vec3 glow_col = HSV2RGB(vec3(0.005, 0.9, 0.01));
   float t = -(dot(ro, vec3(0.0, 0.0, 1.0)) - 2.0) / dot(rd, vec3(0.0, 0.0, 1.0));
-  p_text = (ro + rd * t).xy * 0.5;
-  p_text.y -= 0.55;
+  p_text = (gl_FragCoord.xy / iResolution.xy * 1.5);
+  p_text.y -= 0.25;
+  p_text.x -= 0.85;
+
   //text   INTETNT POOL
   col = mix(col, HSV2RGB(vec3(0.0, 0.6, 1.0)), draw_text_pool(p_text, text_box_chars, vec3(1.0, 0.49, 0.47))*(fadein_fadeout.x-fadein_fadeout.y));
   //text   EXECUTE
