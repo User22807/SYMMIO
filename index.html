@@ -14,8 +14,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
 
-  <script src="https://unpkg.com/gsap@3.5.1/dist/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/gsap@3.5.1/dist/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/TextPlugin.min.js"></script>
   <script src="./gsapText.js"></script>
 
@@ -868,7 +868,7 @@ vec3 draw_text_intent_b(vec2 p, ivec2 text_box, vec3 text_coord) {
   return col;
 }
 
-vec3 draw_text_liquidator(vec2 p, ivec2 text_box, vec3 text_coord) {
+vec3 draw_text_arbiter(vec2 p, ivec2 text_box, vec3 text_coord) {
   // Normalized pixel coordinates (from 0 to 1)
   vec2 coord = p;
   coord.x = -coord.x;
@@ -887,17 +887,14 @@ vec3 draw_text_liquidator(vec2 p, ivec2 text_box, vec3 text_coord) {
   coord.x -= float(int(coord.x));
   coord.y -= float(int(coord.y));
 
-  ivec2 text_string_2[11];
-  text_string_2[1] = ivec2(char_L);
-  text_string_2[2] = ivec2(char_I);
-  text_string_2[3] = ivec2(char_Q);
-  text_string_2[4] = ivec2(char_U);
-  text_string_2[5] = ivec2(char_I);
-  text_string_2[6] = ivec2(char_D);
-  text_string_2[7] = ivec2(char_A);
-  text_string_2[8] = ivec2(char_T);
-  text_string_2[9] = ivec2(char_O);
-  text_string_2[10] = ivec2(char_R);
+  ivec2 text_string_2[8];
+  text_string_2[1] = ivec2(char_A);
+  text_string_2[2] = ivec2(char_R);
+  text_string_2[3] = ivec2(char_B);
+  text_string_2[4] = ivec2(char_I);
+  text_string_2[5] = ivec2(char_T);
+  text_string_2[6] = ivec2(char_E);
+  text_string_2[7] = ivec2(char_R);
 
   ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
 
@@ -916,12 +913,7 @@ vec3 draw_text_liquidator(vec2 p, ivec2 text_box, vec3 text_coord) {
     current_char = text_string_2[6];
   else if(charIndex == 7)
     current_char = text_string_2[7];
-  else if(charIndex == 8)
-    current_char = text_string_2[8];
-  else if(charIndex == 9)
-    current_char = text_string_2[9];
-  else if(charIndex == 10)
-    current_char = text_string_2[10];
+
 
   vec3 col = vec3(draw_char(coord, current_char));
 
@@ -978,7 +970,56 @@ vec3 draw_text_execute(vec2 p, ivec2 text_box, vec3 text_coord) {
 
   return col;
 }
+vec3 draw_text_solvent(vec2 p, ivec2 text_box, vec3 text_coord) {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 coord = p;
+  coord.x = -coord.x;
+  coord /= text_coord.x;
+  coord.x += text_coord.y;
+  coord.y += text_coord.z;
 
+    // Check if the character is outside the visible area
+  if(coord.x < 0.0 || coord.x >= 1.0 || coord.y < 0.0 || coord.y >= 1.0) {
+    return vec3(0.0); // Return transparent color for characters outside the screen
+  }
+
+  coord.x *= float(text_box.x);
+  coord.y *= float(text_box.y);
+  int charIndex = int(coord.x) + (text_box.y - int(coord.y) - 2) * text_box.x;
+  coord.x -= float(int(coord.x));
+  coord.y -= float(int(coord.y));
+
+  ivec2 text_string_2[8];
+  text_string_2[1] = ivec2(char_S);
+  text_string_2[2] = ivec2(char_O);
+  text_string_2[3] = ivec2(char_L);
+  text_string_2[4] = ivec2(char_V);
+  text_string_2[5] = ivec2(char_E);
+  text_string_2[6] = ivec2(char_N);
+  text_string_2[7] = ivec2(char_T);
+
+  ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
+
+    //  using [charIndex]
+  if(charIndex == 1)
+    current_char = text_string_2[1];
+  else if(charIndex == 2)
+    current_char = text_string_2[2];
+  else if(charIndex == 3)
+    current_char = text_string_2[3];
+  else if(charIndex == 4)
+    current_char = text_string_2[4];
+  else if(charIndex == 5)
+    current_char = text_string_2[5];
+  else if(charIndex == 6)
+    current_char = text_string_2[6];
+  else if(charIndex == 7)
+    current_char = text_string_2[7];
+
+  vec3 col = vec3(draw_char(coord, current_char));
+
+  return col;
+}
 vec3 draw_text_liquidate(vec2 p, ivec2 text_box, vec3 text_coord) {
   // Normalized pixel coordinates (from 0 to 1)
   vec2 coord = p;
@@ -1057,11 +1098,11 @@ vec3 draw_text_minus_btc(vec2 p, ivec2 text_box, vec3 text_coord) {
 
   ivec2 text_string_2[7];
   text_string_2[1] = ivec2(char_emdash);
-  text_string_2[2] = ivec2(char_one);
-  text_string_2[3] = ivec2(char_space);
-  text_string_2[4] = ivec2(char_B);
-  text_string_2[5] = ivec2(char_T);
-  text_string_2[6] = ivec2(char_C);
+  text_string_2[2] = ivec2(char_dollar);
+  text_string_2[3] = ivec2(char_one);
+  text_string_2[4] = ivec2(char_zero);
+  text_string_2[5] = ivec2(char_zero);
+  text_string_2[6] = ivec2(char_zero);
 
   ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
 
@@ -1105,11 +1146,11 @@ vec3 draw_text_plus_btc(vec2 p, ivec2 text_box, vec3 text_coord) {
 
   ivec2 text_string_2[7];
   text_string_2[1] = ivec2(char_plus);
-  text_string_2[2] = ivec2(char_one);
-  text_string_2[3] = ivec2(char_space);
-  text_string_2[4] = ivec2(char_B);
-  text_string_2[5] = ivec2(char_T);
-  text_string_2[6] = ivec2(char_C);
+  text_string_2[2] = ivec2(char_dollar);
+  text_string_2[3] = ivec2(char_one);
+  text_string_2[4] = ivec2(char_zero);
+  text_string_2[5] = ivec2(char_zero);
+  text_string_2[6] = ivec2(char_zero);
 
   ivec2 current_char = text_string_2[0]; // Initialize with a default character (e.g., space)
 
@@ -1580,7 +1621,9 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
 
   col = mix(HSV2RGB(vec3(0.0, 0.0+(quad3/1.2), 1.0)), col, eyeRender(col, p_rota, tri_vis_1));
   //text   LIQUIDATOR
-  col = mix(col, HSV2RGB(vec3(0.0, 0.0+(quad3/1.2), 1.0*(animSection8-animSection9))), draw_text_liquidator(p_rota, text_box_chars, vec3(1.5, 0.45, 1.0))* tri_vis_1);
+  col = mix(col,
+   HSV2RGB(vec3(0.0, 0.0+(quad3/1.2), 1.0*(animSection8-animSection9))),
+   draw_text_arbiter(p_rota, text_box_chars, vec3(1.5, 0.34, 1.0))* tri_vis_1);
   //text   LIQUIDATE
   col = mix(col, HSV2RGB(vec3(0.0, 0.9, 1.0*(animSection8-animSection9) )), (draw_text_liquidate(p, text_box_chars, vec3(1.0, 0.42, 0.15))*(1.0-anim_time_1.y)*quad3));
   //text   PLUS1000
@@ -1619,9 +1662,9 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   col += glow_col_2 / max(abs(dt), 0.001);
   col = mix(HSV2RGB(vec3(0.0, 0.0, 1.0)), col, eyeRender(col, p_rota_2, tri_vis_2));
   //text   LIQUIDATOR
-  col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_liquidator(p_rota_2, text_box_chars, vec3(1.5, 0.45, 1.0)) * tri_vis_2);
+  col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_arbiter(p_rota_2, text_box_chars, vec3(1.5, 0.34, 1.0)) * tri_vis_2);
   //text   EXECUTE
-  col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0 )), (draw_text_execute(p, text_box_chars, vec3(1.0, 0.35, 0.15))*(1.0-anim_time_2.y)*quad3_2)),
+  col = mix(col, HSV2RGB(vec3(1.0, 0.0, 1.0 )), (draw_text_solvent(p, text_box_chars, vec3(1.0, 0.35, 0.15))*(1.0-anim_time_2.y)*quad3_2)),
   //text   BTC PLUS
   col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_btc(p, text_box_chars, vec3(0.75, -0.32, 0.46 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2));
   //text   MINUS100
