@@ -1,20 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
 
 html {
+	font-family: "Manrope", sans-serif;
 	scroll-snap-type: y mandatory;
 	overflow: auto;
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-
 }
 
-
+body {
+	margin: 0;
+	padding: 0;
+}
 
 /*------------------------------------------- Scroll bar */
 html::-webkit-scrollbar {
 	width: 8px;
 	padding-right: 10px;
-	/* Adjust as needed */
 }
 
 /* Style the track (optional) */
@@ -39,7 +41,6 @@ html .section {
 
 
 canvas {
-	font-family: "Manrope", sans-serif;
 	display: block;
 	position: fixed !important;
 }
@@ -48,7 +49,6 @@ canvas {
 
 .about_section {
 	padding-top: 15%;
-	font-family: 'Manrope', sans-serif;
 	z-index: 2;
 
 }
@@ -72,7 +72,7 @@ canvas {
 	flex-direction: column;
 }
 
- .button {
+.button {
 	background-color: #000000a5;
 	transition: all .2s ease-in-out;
 	text-decoration: none;
@@ -87,13 +87,16 @@ canvas {
 	display: flex;
 	outline: none;
 	color: #fff;
-	font-size: 2vh;
+	font-size: 1.5vw;
 
 }
 
- .socialicon {
+.socialicon {
 	color: #ffffff;
-	margin: 4vh;
+	margin-top: 4vh;
+	margin-bottom: 4vh;
+	margin-left: 2vw;
+	margin-right: 2vw;
 	height: 4vh;
 	width: 4vh;
 }
@@ -107,13 +110,10 @@ canvas {
 }
 
 .about_text {
-	font-size: 4vh;
+	font-size: 2vw;
 	letter-spacing: 0;
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
-	background-clip: text;
-	-webkit-background-clip: text;
 	margin-top: 0;
+	margin-bottom: 1vw;
 	font-weight: 600;
 	line-height: 1.25;
 }
@@ -160,86 +160,18 @@ canvas {
 	text-align: left;
 }
 
-.learn_more_style .learn_one .head-span {
-
-	font-size: 4vh;
-	letter-spacing: 0;
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
-	background-clip: text;
-	-webkit-background-clip: text;
-	margin-top: 0;
-	font-weight: 600;
-	line-height: 1.25;
-}
-
-.learn_more_style .learn_one .active-span {
-	color: white;
-}
-
-.learn_more_style .learn_two {
-	font-size: 2vh;
-	position: fixed;
-	right: 5%;
-	top: 20%;
-	width: 40%;
-	color: rgb(255, 69, 69);
-	text-align: left;
-
-}
-
-.learn_more_style .learn_two .head-span {
-
-	font-size: 4vh;
-	letter-spacing: 0;
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
-	background-clip: text;
-	-webkit-background-clip: text;
-	margin-top: 0;
-	font-weight: 600;
-	line-height: 1.25;
-}
-
-.learn_more_style .learn_three {
-	font-size: 2vh;
-	position: fixed;
-	right: 5%;
-	top: 60%;
-	width: 40%;
-	color: rgb(255, 69, 69);
-	text-align: left;
-
-}
-
-.learn_more_style .learn_three .head-span {
-
-	font-size: 4vh;
-	letter-spacing: 0;
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
-	background-clip: text;
-	-webkit-background-clip: text;
-	margin-top: 0;
-	font-weight: 600;
-	line-height: 1.25;
-}
-
 .box__text {
-	font-family: 'Manrope', sans-serif;
 	text-align: center;
 	top: 0vh;
 	margin-bottom: 5vh;
 	color: white !important;
 	position: fixed;
 	width: 100%;
-
 	z-index: 2;
 	display: flex;
 	flex-direction: column;
 
 }
-
 
 .box__text .subtitle {
 	padding-top: 22vh;
@@ -264,7 +196,7 @@ canvas {
 }
 
 .box__text .list_top {
-	font-size: 2vh;
+	font-size: 1.4vw;
 	position: fixed;
 	left: 10%;
 	top: 20%;
@@ -276,87 +208,51 @@ canvas {
 
 
 .box__text .list_top .head-span {
-
-	font-size: 4vh;
-	letter-spacing: 0;
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
+	background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
 	background-clip: text;
-	-webkit-background-clip: text;
-	margin-top: 0;
+	-webkit-background-clip: text !important;
+	-webkit-text-fill-color: transparent;
+
 	font-weight: 600;
+	font-size: 2vw;
+	margin-top: 0;
 	line-height: 1.25;
 }
 
 .box__text .list_top .active-span {
 	color: white;
+	font-size: 1.43vw;
 }
-
-
 
 .gradiant {
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383) !important;
+	background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
 	background-clip: text;
-	-webkit-background-clip: text;
-
+	-webkit-background-clip: text !important;
+	-webkit-text-fill-color: transparent;
 }
 
-
 .caption {
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff8383);
-	background-clip: text;
-	-webkit-background-clip: text;
-	width: 80vw;
-	line-height: 6vh;
-	font-size: 6vh;
+	font-size: 3vw;
 	position: relative;
 	position: fixed;
 	z-index: 99;
 	top: 0;
-	transform: translateY(-50%);
+	left: 40%;
+	transform: translate(-50%, -50%);
 	padding-top: 32vh;
-	padding-left: 20vw;
-
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
 
 }
 
-.captionMobile {
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #fff, #ff3131);
-	background-clip: text;
-	-webkit-background-clip: text;
-	width: 130vw;
-	/* Set width to auto to allow the element to take its content's width */
-	line-height: 3vh;
-	font-size: 3vh;
-	position: fixed;
-	z-index: 99;
-	left: 78vw;
-	/* Set the left position to 50% */
-	transform: translateX(-70vw);
-	/* Use transform to horizontally center the element */
-	padding-top: 23vh;
-	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
-	/* Add transition for ease-out effect */
-	visibility: hidden;
-}
-
-.captionMobile .first-line {
-	margin-left: 20vw;
-}
 
 .text-box {
-	-webkit-text-fill-color: rgb(255, 171, 171) !important;
+	-webkit-text-fill-color: rgb(230, 92, 92) !important;
 	display: inline-block;
 	position: relative;
 }
 
 .text-box div {
-	display: inline-block;
 	position: absolute;
 	transform: rotateX(-90deg);
 	opacity: 0;
@@ -403,102 +299,108 @@ canvas {
 	animation: rollDown10 20s forwards infinite;
 }
 
+:root {
+	--textroll-top: -6vw;
+	--textroll-mid: calc(-3.0vw - 0.15rem);
+	--textroll-bot: 0vw;
+}
 
 @keyframes rollDown {
 	0% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	1% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	8% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	9% {
-		top: 16vh;
-		transform: rotateX(30deg);
+		top: var(--textroll-bot);
+		transform: rotateX(90deg);
 		opacity: 0;
 	}
 }
 
 @keyframes rollDown2 {
 	9% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	10% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	18% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	19% {
-		top: 16vh;
-		transform: rotateX(30deg);
+		top: var(--textroll-bot);
+		transform: rotateX(90deg);
 		opacity: 0;
 	}
 }
 
 @keyframes rollDown3 {
 	19% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	20% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	28% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	29% {
-		top: 16vh;
-		transform: rotateX(30deg);
+		top: var(--textroll-bot);
+		transform: rotateX(90deg);
 		opacity: 0;
 	}
 }
 
 @keyframes rollDown4 {
 	29% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	30% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	38% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	39% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -506,24 +408,24 @@ canvas {
 
 @keyframes rollDown5 {
 	39% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	40% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	48% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	49% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -531,24 +433,24 @@ canvas {
 
 @keyframes rollDown6 {
 	49% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	50% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	58% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	59% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -556,24 +458,24 @@ canvas {
 
 @keyframes rollDown7 {
 	59% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	60% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	68% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	69% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -581,24 +483,24 @@ canvas {
 
 @keyframes rollDown8 {
 	70% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	71% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	78% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	79% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -606,24 +508,24 @@ canvas {
 
 @keyframes rollDown9 {
 	80% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	81% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	88% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	89% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -631,24 +533,24 @@ canvas {
 
 @keyframes rollDown10 {
 	89% {
-		top: -16vh;
+		top: var(--textroll-top);
 		transform: rotateX(-90deg);
 	}
 
 	90% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	98% {
-		top: -5.5vh;
+		top: var(--textroll-mid);
 		transform: rotateX(0deg);
 		opacity: 1;
 	}
 
 	99% {
-		top: 16vh;
+		top: var(--textroll-bot);
 		transform: rotateX(30deg);
 		opacity: 0;
 	}
@@ -758,20 +660,34 @@ canvas {
 
 
 
+.captionMobile {
+	/* Set width to auto to allow the element to take its content's width */
+	line-height: 5vw;
+	font-size: 5vw;
+	position: fixed;
+	z-index: 2;
+	left: 40%;
+	transform: translate(-50%, -50%);
+	/* Use transform to horizontally center the element */
+	padding-top: 53vh;
+	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+	/* Add transition for ease-out effect */
+	visibility: hidden;
+}
 
 /*------------------------- small screens */
 
 @media screen and (max-width: 900px) {
+
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 25%;
-		font-family: 'Manrope', sans-serif;
 		z-index: 2;
-	
+
 	}
+
 	.about {
 		padding-bottom: 10%;
-		font-family: 'Manrope', sans-serif;
 		text-align: center;
 		color: white !important;
 		z-index: 2;
@@ -785,14 +701,14 @@ canvas {
 		flex-direction: column;
 	}
 
-	 .button_box {
+	.button_box {
 		align-items: center;
 		z-index: 2;
 		display: flex;
 		flex-direction: column;
 	}
 
-	 .button {
+	.button {
 		background-color: #000000a5;
 		transition: all .2s ease-in-out;
 		text-decoration: none;
@@ -811,10 +727,13 @@ canvas {
 	}
 
 	.button_box .about_text {
-		font-family: 'Manrope', sans-serif;
 		font-size: 3vh;
 	}
 
+
+
+
+	
 	.box__text .titleSYMM {
 		width: 100%;
 		letter-spacing: 5vw;
@@ -857,10 +776,7 @@ canvas {
 		animation: move 3s ease-out infinite;
 	}
 
-	.text {
-		margin-right: 56vw;
-		visibility: hidden;
-	}
+
 
 	.caption {
 		visibility: hidden;
@@ -871,101 +787,109 @@ canvas {
 	}
 
 
+
+	:root {
+		--textroll-top: -6vw;
+		--textroll-mid: calc(-2.8vw - 3px);
+		--textroll-bot: 0vw;
+	}
+
 	@keyframes rollDown {
 		0% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
+			opacity: 0;
 		}
 
 		1% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		8% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		9% {
-			top: 16vh;
-			transform: rotateX(30deg);
+			top: var(--textroll-bot);
+			transform: rotateX(90deg);
 			opacity: 0;
 		}
 	}
 
 	@keyframes rollDown2 {
 		9% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		10% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		18% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		19% {
-			top: 16vh;
-			transform: rotateX(30deg);
+			top: var(--textroll-bot);
+			transform: rotateX(90deg);
 			opacity: 0;
 		}
 	}
 
 	@keyframes rollDown3 {
 		19% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		20% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		28% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		29% {
-			top: 16vh;
-			transform: rotateX(30deg);
+			top: var(--textroll-bot);
+			transform: rotateX(90deg);
 			opacity: 0;
 		}
 	}
 
 	@keyframes rollDown4 {
 		29% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		30% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		38% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		39% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -973,24 +897,24 @@ canvas {
 
 	@keyframes rollDown5 {
 		39% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		40% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		48% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		49% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -998,24 +922,24 @@ canvas {
 
 	@keyframes rollDown6 {
 		49% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		50% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		58% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		59% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -1023,24 +947,24 @@ canvas {
 
 	@keyframes rollDown7 {
 		59% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		60% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		68% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		69% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -1048,24 +972,24 @@ canvas {
 
 	@keyframes rollDown8 {
 		70% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		71% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		78% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		79% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -1073,24 +997,24 @@ canvas {
 
 	@keyframes rollDown9 {
 		80% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		81% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		88% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		89% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -1098,24 +1022,24 @@ canvas {
 
 	@keyframes rollDown10 {
 		89% {
-			top: -16vh;
+			top: var(--textroll-top);
 			transform: rotateX(-90deg);
 		}
 
 		90% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		98% {
-			top: -2.6vh;
+			top: var(--textroll-mid);
 			transform: rotateX(0deg);
 			opacity: 1;
 		}
 
 		99% {
-			top: 16vh;
+			top: var(--textroll-bot);
 			transform: rotateX(30deg);
 			opacity: 0;
 		}
@@ -1124,8 +1048,9 @@ canvas {
 
 
 
+
 	.box__text .list_top {
-		font-size: 2vh;
+		font-size: 3vw;
 		position: fixed;
 		left: 10%;
 		top: 10%;
@@ -1134,15 +1059,18 @@ canvas {
 		text-align: left;
 
 	}
-
+	.box__text .list_top .active-span {
+		color: white;
+		font-size: 3.1vw;
+	}
 	.box__text .list_top .head-span {
 
 		font-size: 2.5vh;
 		letter-spacing: 0;
-		-webkit-text-fill-color: transparent;
-		background-image: linear-gradient(to right, #fff, #ff8383) !important;
+		background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
 		background-clip: text;
-		-webkit-background-clip: text;
+		-webkit-background-clip: text !important;
+		-webkit-text-fill-color: transparent;
 		margin-top: 0;
 		font-weight: 600;
 		line-height: 1.25;
