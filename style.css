@@ -12,7 +12,6 @@ body {
 	margin: 0;
 	padding: 0;
 }
-
 /*------------------------------------------- Scroll bar */
 html::-webkit-scrollbar {
 	width: 8px;
@@ -208,10 +207,10 @@ canvas {
 
 
 .box__text .list_top .head-span {
-	background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
-	background-clip: text;
-	-webkit-background-clip: text !important;
-	-webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #ffffff, #e75454);
+    background-clip: text;
+    -webkit-background-clip: text;
 
 	font-weight: 600;
 	font-size: 2vw;
@@ -224,11 +223,13 @@ canvas {
 	font-size: 1.43vw;
 }
 
-.gradiant {
-	background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
+.gradiant{
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #ffffff, #e75454);
+    background-clip: text;
+    -webkit-background-clip: text;
 	background-clip: text;
-	-webkit-background-clip: text !important;
-	-webkit-text-fill-color: transparent;
+    color: rgb(230, 92, 92); /* Fallback color */
 }
 
 .caption {
@@ -242,7 +243,6 @@ canvas {
 	padding-top: 32vh;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
-
 }
 
 
@@ -557,10 +557,6 @@ canvas {
 }
 
 
-
-
-
-
 .scrollDown {
 	position: absolute;
 	position: fixed;
@@ -571,9 +567,6 @@ canvas {
 	text-decoration: none;
 	bottom: 4.5vh;
 }
-
-
-
 
 
 .chevron {
@@ -683,7 +676,6 @@ canvas {
 	.about_section {
 		padding-top: 25%;
 		z-index: 2;
-
 	}
 
 	.about {
@@ -723,7 +715,6 @@ canvas {
 		outline: none;
 		color: #fff;
 		font-size: 2vh;
-
 	}
 
 	.button_box .about_text {
