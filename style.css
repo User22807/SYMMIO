@@ -1058,10 +1058,12 @@ canvas {
 
 		font-size: 2.5vh;
 		letter-spacing: 0;
-		background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 87, 87) 100%);
-		background-clip: text;
-		-webkit-background-clip: text !important;
 		-webkit-text-fill-color: transparent;
+		background-image: linear-gradient(to right, #ffffff, #e75454);
+		background-clip: text;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: rgb(230, 92, 92); /* Fallback color */
 		margin-top: 0;
 		font-weight: 600;
 		line-height: 1.25;
