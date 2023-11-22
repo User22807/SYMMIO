@@ -122,25 +122,26 @@ nav[role="custom-dropdown"] ul>li:hover {
 .menubtn {
   font-family: "Manrope", sans-serif;
   text-transform: uppercase;
-    background-color: #000000a5;
-    transition: all .2s ease-in-out;
-    text-decoration: none;
-    position: relative;
-    padding: 0.5vh 1.5vh;
-    text-align: left;
-    border: solid 1px;
-    appearance: none;
-    cursor: pointer;
-    display: flex;
-    outline: none;
-    font-size: 2vh;
+  background-color: #000000a5;
+  transition: all .2s ease-in-out;
+  text-decoration: none;
+  position: relative;
+  padding: 0.5vh 1.5vh;
+  text-align: left;
+  border: solid 1px;
+  appearance: none;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  font-size: 2vh;
   border-color: #FFF;
-    color: #fff;
+  color: #fff;
 }
 
-.menubtn:hover { border: solid 2px var(--red);
-    border-color: rgb(255, 92, 92);
-    color: #ffbaba;
+.menubtn:hover {
+  border: solid 2px var(--red);
+  border-color: rgb(255, 92, 92);
+  color: #ffbaba;
 }
 
 

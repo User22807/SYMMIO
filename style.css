@@ -12,6 +12,7 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
 /*------------------------------------------- Scroll bar */
 html::-webkit-scrollbar {
 	width: 8px;
@@ -207,10 +208,10 @@ canvas {
 
 
 .box__text .list_top .head-span {
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #e75454);
-    background-clip: text;
-    -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-image: linear-gradient(to right, #ffffff, #e75454);
+	background-clip: text;
+	-webkit-background-clip: text;
 
 	font-weight: 600;
 	font-size: 2vw;
@@ -223,13 +224,14 @@ canvas {
 	font-size: 1.43vw;
 }
 
-.gradiant{
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #e75454);
-    background-clip: text;
-    -webkit-background-clip: text;
+.gradiant {
+	-webkit-text-fill-color: transparent;
+	background-image: linear-gradient(to right, #ffffff, #e75454);
 	background-clip: text;
-    color: rgb(230, 92, 92); /* Fallback color */
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: rgb(230, 92, 92);
+	/* Fallback color */
 }
 
 .caption {
@@ -724,7 +726,7 @@ canvas {
 
 
 
-	
+
 	.box__text .titleSYMM {
 		width: 100%;
 		letter-spacing: 5vw;
@@ -1050,10 +1052,12 @@ canvas {
 		text-align: left;
 
 	}
+
 	.box__text .list_top .active-span {
 		color: white;
 		font-size: 3.1vw;
 	}
+
 	.box__text .list_top .head-span {
 
 		font-size: 2.5vh;
@@ -1063,7 +1067,8 @@ canvas {
 		background-clip: text;
 		-webkit-background-clip: text;
 		background-clip: text;
-		color: rgb(230, 92, 92); /* Fallback color */
+		color: rgb(230, 92, 92);
+		/* Fallback color */
 		margin-top: 0;
 		font-weight: 600;
 		line-height: 1.25;

@@ -1,16 +1,13 @@
-
 let camera, scene, renderer, uniforms, scrollProgress;
-
 
 init();
 animate();
 setupContentScrollTrigger();
 
 function init() {
+  const container = document.getElementById("container");
 
-  const container = document.getElementById('container');
-
-  camera = new THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1);
+  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
   scene = new THREE.Scene();
 
@@ -23,15 +20,13 @@ function init() {
     iAnimProgress_1: { type: "v3", value: new THREE.Vector3() },
     iAnimProgress_2: { type: "v3", value: new THREE.Vector3() },
     iAnimProgress_3: { type: "v3", value: new THREE.Vector3() },
-    iAnimProgress_4: { type: "v3", value: new THREE.Vector3() }
+    iAnimProgress_4: { type: "v3", value: new THREE.Vector3() },
   };
 
   const material = new THREE.ShaderMaterial({
-
     uniforms: uniforms,
-    vertexShader: document.getElementById('vertexShader').textContent,
-    fragmentShader: document.getElementById('fragmentShader').textContent
-
+    vertexShader: document.getElementById("vertexShader").textContent,
+    fragmentShader: document.getElementById("fragmentShader").textContent,
   });
 
   const mesh = new THREE.Mesh(geometry, material);
@@ -42,13 +37,10 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
   window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener('resize', onWindowResize);
-
+  window.addEventListener("resize", onWindowResize);
 }
 
 function onWindowResize() {
-
-
   uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
   uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
 
@@ -57,8 +49,7 @@ function onWindowResize() {
 // Update mouse position uniform
 function handleMouseMove(event) {
   uniforms.iMousePos.value.x = event.clientX;
-  uniforms.iMousePos.value.y =
-    (window.innerHeight - event.clientY);
+  uniforms.iMousePos.value.y = window.innerHeight - event.clientY;
 }
 
 //
@@ -67,7 +58,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   // Update time
-  uniforms['iTime'].value = performance.now() / 1000;
+  uniforms["iTime"].value = performance.now() / 1000;
 
   // Update resolution if needed
   uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
@@ -178,4 +169,3 @@ gsap.to(uniforms.iAnimProgress_4.value, {
     scrub: true,
   },
 });
-
