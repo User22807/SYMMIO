@@ -1811,10 +1811,7 @@ vec3 anim_3(vec3 col, vec3 ro, vec3 rd) {
   col = mix(col,HSV2RGB(vec3(0.0, 0.0, 1.0*(iAnimProgress_3.y-iAnimProgress_3.z))), draw_text_arbiter(p_tri_arbit_2, vec2(1.0, 0.5))*iAnimProgress_1.z*tri_vis_2);
   // Add text to triangle
   col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_solvent(p, vec2(0.88, -1.2))*(1.0-anim_time_2.y)*quad3_2);
-  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_onethousand(p, vec2(1.75, -0.3 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2*liq_quad3));
-  col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.5)), (draw_text_minus_onethousand(p, vec2(-0.22, -0.3 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2*liq_quad3));
-  col = mix(col, HSV2RGB(vec3(0.4, 1.0, 1.5)), (draw_text_plus_onethousand(p, vec2(-0.22, -0.3 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2*liq_quad2));
-  col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.5)), (draw_text_minus_onethousand(p, vec2(1.75, -0.3 - anim_time_2.y / 6.0))*(1.0-anim_time_2.y)*quad3_2*liq_quad2));
+
   return col;
 }
 
