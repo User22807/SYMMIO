@@ -244,7 +244,6 @@ canvas {
 	transform: translate(-50%, -50%);
 	padding-top: 32vh;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
-	/* Add transition for ease-out effect */
 }
 
 
@@ -650,11 +649,6 @@ canvas {
 }
 
 
-
-
-
-
-
 .captionMobile {
 	/* Set width to auto to allow the element to take its content's width */
 	line-height: 5vw;
@@ -681,13 +675,7 @@ canvas {
 	}
 
 	.about {
-		padding-bottom: 10%;
-		text-align: center;
-		color: white !important;
-		z-index: 2;
-		display: flex;
 		flex-direction: column;
-		width: 100%;
 	}
 
 	.button_spilit {
@@ -695,45 +683,21 @@ canvas {
 		flex-direction: column;
 	}
 
-	.button_box {
-		align-items: center;
-		z-index: 2;
-		display: flex;
-		flex-direction: column;
-	}
 
 	.button {
-		background-color: #000000a5;
-		transition: all .2s ease-in-out;
-		text-decoration: none;
-		position: relative;
 		margin: 2vh 3vw 2vh 3vw;
-		text-align: left;
-		border: solid 1px;
-		border-color: #FFF;
-		appearance: none;
-		cursor: pointer;
-		display: flex;
-		outline: none;
-		color: #fff;
 		font-size: 2vh;
 	}
 
 	.button_box .about_text {
 		font-size: 3vh;
 	}
-
-
-
+	/*---------------------Home----------------------  */
 
 
 	.box__text .titleSYMM {
-		width: 100%;
 		letter-spacing: 5vw;
-		position: fixed;
-		text-align: center;
 		font-size: 16vw;
-		margin-left: 2vw;
 		top: 8.5vh;
 	}
 
@@ -742,34 +706,17 @@ canvas {
 		padding-right: 2vw;
 		padding-left: 2vw;
 		font-size: 3.5vw;
-		align-self: center;
-		text-align: center;
-		/* Add this line */
-		text-shadow: 5px 5px 8px #000000;
 	}
 
 	.scrollDown {
-		position: absolute;
-		position: fixed;
-		z-index: 99;
-		transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-		/* Add transition for ease-out effect */
-		text-decoration: none;
-		/* Remove underline */
 		bottom: 0.0vh;
-		right: 0.0vw;
-
+		left: 40.5%;
+		-webkit-text-fill-color: transparent;
 	}
 
 	.chevron {
-		position: absolute;
 		width: 20vw;
-		height: 0.4vh;
-		opacity: 0;
-		animation: move 3s ease-out infinite;
 	}
-
-
 
 	.caption {
 		visibility: hidden;
@@ -779,298 +726,23 @@ canvas {
 		visibility: visible;
 	}
 
-
-
 	:root {
 		--textroll-top: -6vw;
 		--textroll-mid: calc(-2.8vw - 3px);
 		--textroll-bot: 0vw;
 	}
 
-	@keyframes rollDown {
-		0% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-			opacity: 0;
-		}
-
-		1% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		8% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		9% {
-			top: var(--textroll-bot);
-			transform: rotateX(90deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown2 {
-		9% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		10% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		18% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		19% {
-			top: var(--textroll-bot);
-			transform: rotateX(90deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown3 {
-		19% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		20% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		28% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		29% {
-			top: var(--textroll-bot);
-			transform: rotateX(90deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown4 {
-		29% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		30% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		38% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		39% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown5 {
-		39% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		40% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		48% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		49% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown6 {
-		49% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		50% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		58% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		59% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown7 {
-		59% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		60% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		68% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		69% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown8 {
-		70% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		71% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		78% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		79% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown9 {
-		80% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		81% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		88% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		89% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-	@keyframes rollDown10 {
-		89% {
-			top: var(--textroll-top);
-			transform: rotateX(-90deg);
-		}
-
-		90% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		98% {
-			top: var(--textroll-mid);
-			transform: rotateX(0deg);
-			opacity: 1;
-		}
-
-		99% {
-			top: var(--textroll-bot);
-			transform: rotateX(30deg);
-			opacity: 0;
-		}
-	}
-
-
-
-
-
 	.box__text .list_top {
-		font-size: 3vw;
-		position: fixed;
-		left: 10%;
+		font-size: 2.8vw;
 		top: 10%;
 		width: 80%;
-		color: gray;
-		text-align: left;
-
 	}
 
 	.box__text .list_top .active-span {
-		color: white;
-		font-size: 3.1vw;
+		font-size: 2.9vw;
 	}
 
 	.box__text .list_top .head-span {
-
-		font-size: 2.5vh;
-		letter-spacing: 0;
-		-webkit-text-fill-color: transparent;
-		background-image: linear-gradient(to right, #ffffff, #e75454);
-		background-clip: text;
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: rgb(230, 92, 92);
-		/* Fallback color */
-		margin-top: 0;
-		font-weight: 600;
-		line-height: 1.25;
+		font-size: 3.5vw;
 	}
 }
