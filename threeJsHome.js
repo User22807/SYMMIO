@@ -1,3 +1,4 @@
+
 let camera, scene, renderer, uniforms, scrollProgress;
 
 
@@ -55,11 +56,11 @@ function onWindowResize() {
 }
 // Update mouse position uniform
 function handleMouseMove(event) {
-    uniforms.iMousePos.value.x = event.clientX;
-    uniforms.iMousePos.value.y =
-      (window.innerHeight - event.clientY) ;
-  }
-  
+  uniforms.iMousePos.value.x = event.clientX;
+  uniforms.iMousePos.value.y =
+    (window.innerHeight - event.clientY);
+}
+
 //
 
 function animate() {
@@ -78,103 +79,103 @@ function animate() {
 }
 
 gsap.to(uniforms.iAnimProgress_1.value, {
-    x: 1,
-    scrollTrigger: {
-      trigger: ".section.one",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_1.value, {
-    y: 1,
-    scrollTrigger: {
-      trigger: ".section.two",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_1.value, {
-    z: 1,
-    scrollTrigger: {
-      trigger: ".section.three",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_2.value, {
-    x: 1,
-    scrollTrigger: {
-      trigger: ".section.four",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_2.value, {
-    y: 1,
-    scrollTrigger: {
-      trigger: ".section.five",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_2.value, {
-    z: 1,
-    scrollTrigger: {
-      trigger: ".section.six",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  
-  gsap.to(uniforms.iAnimProgress_3.value, {
-    x: 1,
-    scrollTrigger: {
-      trigger: ".section.seven",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_3.value, {
-    y: 1,
-    scrollTrigger: {
-      trigger: ".section.eight",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_3.value, {
-    z: 1,
-    scrollTrigger: {
-      trigger: ".section.nine",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_4.value, {
-    x: 1,
-    scrollTrigger: {
-      trigger: ".section.ten",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  gsap.to(uniforms.iAnimProgress_4.value, {
-    y: 1,
-    scrollTrigger: {
-      trigger: ".section.eleven",
-      start: "0%",
-      end: "100%",
-      scrub: true,
-    },
-  });
-  
+  x: 1,
+  scrollTrigger: {
+    trigger: ".section.one",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_1.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".section.two",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_1.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".section.three",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".section.four",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".section.five",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".section.six",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+
+gsap.to(uniforms.iAnimProgress_3.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".section.seven",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_3.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".section.eight",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_3.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".section.nine",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_4.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".section.ten",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_4.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".section.eleven",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+
