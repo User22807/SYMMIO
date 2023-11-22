@@ -1294,7 +1294,7 @@
         vec2 p_hedger_text = p_tri_hedger;
 
     // Triangle glow color
-        gcol = HSV2RGB(vec3(0.0, 0.9, 0.006-((iAnimProgress_1.x-iAnimProgress_2.x)*0.003)));
+        gcol = HSV2RGB(vec3(0.0, 0.9, 0.006*(fadein_fadeout.x-fadein_fadeout.y)-((iAnimProgress_1.x-iAnimProgress_2.x)*0.003)));
     // Triangle resize
         p_tri_hedger *= 1.0;
     // Triangle y offset
@@ -1302,9 +1302,8 @@
         p_tri_hedger.x -= 1.0;
     // Triangle displacement
         float dt_hedger = equilateralTriangle(p_tri_hedger);
-    // Triangle to scene visibility ratio
-        col = dt_hedger < 0.0 ? fillColor : col;
-    // Triangle edge glow modification
+    // Triangle  visibility ratio
+        if (dt_hedger < 0.0) {col = mix(fillColor, col, 1.0-fadein_fadeout.x);}    // Triangle edge glow modification
         col += (gcol / max(abs(dt_hedger), 0.001)) * smoothstep(0.5, 0.0, dt_hedger);
         col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_hedger(p_hedger_text, vec2(0.0, -0.03)) * (fadein_fadeout.x - iAnimProgress_2.y));
         col = mix(col, HSV2RGB(vec3(0.0, 0.7 - (iAnimProgress_3.y), 1.0)), draw_text_party_b(p_hedger_text, vec2(0.1, -0.03)) * iAnimProgress_2.y);
@@ -1318,7 +1317,7 @@
         vec2 p_you_text = p_tri_you;
 
     // Triangle glow color
-        gcol = HSV2RGB(vec3(0.0, 0.4, 0.006-((iAnimProgress_1.x-iAnimProgress_1.y)*0.003)));
+        gcol = HSV2RGB(vec3(0.0, 0.4, 0.006*(fadein_fadeout.x-fadein_fadeout.y)-((iAnimProgress_1.x-iAnimProgress_1.y)*0.003)));
     // Triangle resize
         p_tri_you *= 1.0;
     // Triangle y offset
@@ -1327,7 +1326,7 @@
     // Triangle displacement
         float dt_you = equilateralTriangle(p_tri_you);
     // Triangle to scene visibility ratio
-        col = dt_you < 0.0 ? fillColor : col;
+        if (dt_you < 0.0) {col = mix(fillColor, col, 1.0-fadein_fadeout.x);}    // Triangle edge glow modification
     // Triangle edge glow modification
         col += (gcol / max(abs(dt_you), 0.001)) * smoothstep(0.5, 0.0, dt_you);
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_you(p_you_text, vec2(1.7, -0.03)) * (fadein_fadeout.x - iAnimProgress_1.z));
