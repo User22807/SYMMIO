@@ -640,10 +640,10 @@ canvas {
 .captionMobile {
 	/* Set width to auto to allow the element to take its content's width */
 	line-height: 1.4em;
-	font-size: 3em;
+	font-size: 1.4em;
 	position: fixed;
 	z-index: 2;
-	left: 40%;
+	left: 35%;
 	transform: translate(-50%, -50%);
 	/* Use transform to horizontally center the element */
 	padding-top: 53vh;
@@ -674,11 +674,11 @@ canvas {
 
 	.button {
 		margin: 2vh 3vw 2vh 3vw;
-		font-size: 2em;
+		font-size: 1em;
 	}
 
 	.button_box .about_text {
-		font-size: 3em;
+		font-size: 1.5em;
 	}
 
 	/*---------------------Home----------------------  */
@@ -686,7 +686,7 @@ canvas {
 
 	.box__text .titleSYMM {
 		letter-spacing: 0.5em;
-		font-size: 8em;
+		font-size: 3em;
 		top: 8.5vh;
 	}
 
@@ -694,7 +694,7 @@ canvas {
 		padding-top: 32vh;
 		padding-right: 2vw;
 		padding-left: 2vw;
-		font-size: 2.0em;
+		font-size: 0.8em;
 	}
 
 	.scrollDown {
@@ -722,9 +722,9 @@ canvas {
 	}
 
 	.box__text .list_top {
-		font-size: 2.0em;
+		font-size: 0.7em;
 		top: 10%;
-		width: 90%;
+		width: 80%;
 	}
 
 	.box__text .list_top .head-span {
