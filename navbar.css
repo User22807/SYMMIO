@@ -218,7 +218,6 @@ nav[role="custom-dropdown"] ul>li:hover {
 .menu-links li a {
   font-family: "Manrope", sans-serif;
   font-weight: 300;
-  font-size: 8vw;
   color: var(--menu-link-default-color);
   display: block;
   text-decoration: none;

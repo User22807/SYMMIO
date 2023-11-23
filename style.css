@@ -201,6 +201,9 @@ canvas {
 	background-image: linear-gradient(to right, #ffffff, #e75454);
 	background-clip: text;
 	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	/* Fallback color if gradient is not supported */
+	color: #e75454;
 	letter-spacing: 0.1em;
 	font-weight: 600;
 	font-size: 1.5em;
@@ -213,13 +216,21 @@ canvas {
 }
 
 .gradiant {
-	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #ffffff, #e75454);
-	background-clip: text;
-	-webkit-background-clip: text;
-	background-clip: text;
-	color: rgb(230, 92, 92);
-	/* Fallback color */
+	-webkit-text-fill-color: transparent !important;
+	background-image: linear-gradient(to right, #ffffff, #e75454) !important;
+	background-clip: text !important;
+	-webkit-background-clip: text !important;
+	-moz-background-clip: text !important;
+	/* Fallback color if gradient is not supported */
+	color: #e75454 !important;
+	  /* Fallback for Samsung devices */
+}
+
+@media (-webkit-device-pixel-ratio: 2) {
+	.gradiant {
+		background-image: none !important;
+		color: #e75454 !important;
+	}
 }
 
 .caption {
