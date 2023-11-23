@@ -133,9 +133,8 @@ function setupContentScrollTrigger() {
     {
       titleSYMM: "",
       list_top: "",
-      title: /*"Neutral Parties as WATCHDOGS"*/ "",
-      subtitle:
-        /*"Liquidators make sure that all PartyA and PartyB pairs are playing by the rules, and are constantly ensuring their solvency. Otherwise they will get liquidated, which makes the system trustless as well as capital efficient."*/ "",
+      title: "",
+      subtitle: "",
       list_top:
         "<span class= head-span>Neutral Parties as WATCHDOGS</span> " +
         "</br></br>" +

@@ -46,7 +46,7 @@ nav[role="custom-dropdown"] ul>li>a,
 .menu__link {
   font-family: "Manrope", sans-serif;
   font-weight: 300;
-  font-size: 1vw;
+  font-size: 0.8em;
   display: block;
   padding: .4em 1em;
   cursor: pointer;
@@ -133,7 +133,6 @@ nav[role="custom-dropdown"] ul>li:hover {
   cursor: pointer;
   display: flex;
   outline: none;
-  font-size: 2vh;
   border-color: #FFF;
   color: #fff;
 }
@@ -171,7 +170,7 @@ nav[role="custom-dropdown"] ul>li:hover {
   --menu-link-hover-color: #ffffff;
   --menu-link-emboss-color: rgba(0, 0, 0, 0.8);
   --menu-link-shine-color: #ffffff;
-  --menu-link-font-size: 3em;
+  --menu-link-font-size: 2em;
   --menu-link-spacing: 25px;
   --menu-link-shine-size: 25px;
   --menu-link-hover-transition-time: 175ms;

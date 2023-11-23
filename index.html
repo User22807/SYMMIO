@@ -1329,9 +1329,9 @@
         if (dt_you < 0.0) {col = mix(fillColor, col, 1.0-fadein_fadeout.x);}    // Triangle edge glow modification
     // Triangle edge glow modification
         col += (gcol / max(abs(dt_you), 0.001)) * smoothstep(0.5, 0.0, dt_you);
+
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_you(p_you_text, vec2(1.7, -0.03)) * (fadein_fadeout.x - iAnimProgress_1.z));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_party_a(p_you_text, vec2(2.1, -0.03)) * iAnimProgress_1.z);
-
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_intent_a(p_you_text, vec2(1.97 - (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_1.y - iAnimProgress_2.z));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_btc_long(p_you_text, vec2(1.91 - (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_2.z - fadein_fadeout.y));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 0.7)), draw_text_plus_onethousand(p_you_text, vec2(1.78, -0.55)) * (iAnimProgress_3.x - fadein_fadeout.y));

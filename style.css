@@ -87,7 +87,7 @@ canvas {
 	display: flex;
 	outline: none;
 	color: #fff;
-	font-size: 1.5vw;
+	font-size: 1.0em;
 
 }
 
@@ -110,7 +110,7 @@ canvas {
 }
 
 .about_text {
-	font-size: 2vw;
+	font-size: 2em;
 	letter-spacing: 0;
 	margin-top: 0;
 	margin-bottom: 1vw;
@@ -149,17 +149,6 @@ canvas {
 }
 
 
-
-.learn_more_style .learn_one {
-	font-size: 2vh;
-	position: fixed;
-	left: 5%;
-	top: 20%;
-	width: 40%;
-	color: rgb(255, 69, 69);
-	text-align: left;
-}
-
 .box__text {
 	text-align: center;
 	top: 0vh;
@@ -177,7 +166,7 @@ canvas {
 	padding-top: 22vh;
 	padding-right: 10vh;
 	padding-left: 10vh;
-	font-size: 1.5vw;
+	font-size: 1.5em;
 	align-self: center;
 	text-align: center;
 	/* Add this line */
@@ -187,16 +176,16 @@ canvas {
 
 .box__text .titleSYMM {
 	width: 100%;
-	letter-spacing: 7vw;
+	letter-spacing: 1em;
 	position: fixed;
 	text-align: center;
-	font-size: 8vw;
+	font-size: 8em;
 	margin-left: 4vw;
 	bottom: 0.1vh;
 }
 
 .box__text .list_top {
-	font-size: 1.4vw;
+	font-size: 1.0em;
 	position: fixed;
 	left: 10%;
 	top: 20%;
@@ -212,16 +201,15 @@ canvas {
 	background-image: linear-gradient(to right, #ffffff, #e75454);
 	background-clip: text;
 	-webkit-background-clip: text;
-
+	letter-spacing: 0.1em;
 	font-weight: 600;
-	font-size: 2vw;
+	font-size: 1.5em;
 	margin-top: 0;
-	line-height: 1.25;
 }
 
 .box__text .list_top .active-span {
 	color: white;
-	font-size: 1.43vw;
+	font-size: 1.01em;
 }
 
 .gradiant {
@@ -235,7 +223,7 @@ canvas {
 }
 
 .caption {
-	font-size: 3vw;
+	font-size: 3em;
 	position: relative;
 	position: fixed;
 	z-index: 99;
@@ -301,9 +289,9 @@ canvas {
 }
 
 :root {
-	--textroll-top: -6vw;
-	--textroll-mid: calc(-3.0vw - 0.15rem);
-	--textroll-bot: 0vw;
+	--textroll-top: -2em;
+	--textroll-mid: -1.07em;
+	--textroll-bot: 0.0em;
 }
 
 @keyframes rollDown {
@@ -631,7 +619,7 @@ canvas {
 .text {
 	display: block;
 	margin-top: 5vh;
-	font-size: 1vw;
+	font-size: 1em;
 	color: #fff;
 	text-transform: uppercase;
 	white-space: nowrap;
@@ -651,8 +639,8 @@ canvas {
 
 .captionMobile {
 	/* Set width to auto to allow the element to take its content's width */
-	line-height: 5vw;
-	font-size: 5vw;
+	line-height: 1.4em;
+	font-size: 3em;
 	position: fixed;
 	z-index: 2;
 	left: 40%;
@@ -666,7 +654,7 @@ canvas {
 
 /*------------------------- small screens */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 
 	/*---------------------About Us----------------------  */
 	.about_section {
@@ -686,18 +674,19 @@ canvas {
 
 	.button {
 		margin: 2vh 3vw 2vh 3vw;
-		font-size: 2vh;
+		font-size: 2em;
 	}
 
 	.button_box .about_text {
-		font-size: 3vh;
+		font-size: 3em;
 	}
+
 	/*---------------------Home----------------------  */
 
 
 	.box__text .titleSYMM {
-		letter-spacing: 5vw;
-		font-size: 16vw;
+		letter-spacing: 0.5em;
+		font-size: 8em;
 		top: 8.5vh;
 	}
 
@@ -705,7 +694,7 @@ canvas {
 		padding-top: 32vh;
 		padding-right: 2vw;
 		padding-left: 2vw;
-		font-size: 3.5vw;
+		font-size: 2.0em;
 	}
 
 	.scrollDown {
@@ -727,22 +716,18 @@ canvas {
 	}
 
 	:root {
-		--textroll-top: -6vw;
-		--textroll-mid: calc(-2.8vw - 3px);
-		--textroll-bot: 0vw;
+		--textroll-top: -1.5em;
+		--textroll-mid: -1.05em;
+		--textroll-bot: -0.5em;
 	}
 
 	.box__text .list_top {
-		font-size: 2.8vw;
+		font-size: 2.0em;
 		top: 10%;
-		width: 80%;
-	}
-
-	.box__text .list_top .active-span {
-		font-size: 2.9vw;
+		width: 90%;
 	}
 
 	.box__text .list_top .head-span {
-		font-size: 3.5vw;
+		font-size: 1.5em;
 	}
 }
