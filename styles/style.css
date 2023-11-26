@@ -223,12 +223,12 @@ canvas {
 	-moz-background-clip: text !important;
 	/* Fallback color if gradient is not supported */
 	color: #e75454 !important;
-	  /* Fallback for Samsung devices */
 }
 
 @media (-webkit-device-pixel-ratio: 2) {
+	  /* Fallback for Samsung devices */
 	.gradiant {
-		background-image: none !important;
+		background-image: none;
 		color: #e75454 !important;
 	}
 }
