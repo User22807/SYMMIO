@@ -556,8 +556,8 @@ canvas {
 	transition: all .2s ease-in-out;
 	text-decoration: none;
 	position: relative;
-	padding: 2em 2em 1em 2em;
-	margin: 2em;
+	padding: 2vh 2vh 1vh 2vh;
+	margin: 2vh;
 	text-align: left;
 	border: solid 1px;
 	border-color: #FFF;
@@ -566,10 +566,10 @@ canvas {
 	display: flex;
 	outline: none;
 	color: #fff;
+	font-size: 1.0em;
+
 }
-.button-text{
-	font-size: 2em;
-}
+
 .socialicon {
 	color: #ffffff;
 	margin-top: 4vh;
@@ -589,7 +589,7 @@ canvas {
 }
 
 .about_text {
-	font-size: 4em;
+	font-size: 2em;
 	letter-spacing: 0;
 	margin-top: 0;
 	margin-bottom: 1vw;
@@ -598,9 +598,10 @@ canvas {
 }
 
 .button-icon {
-	margin-right: 1em;
-	height: 4em;
-	width: 4em;
+	margin-right: 16px;
+	height: 4vh;
+	width: 4vh;
+	top: 0;
 }
 
 .button:hover {
@@ -643,14 +644,11 @@ canvas {
 }
 
 
-.footer {
-	position: absolute;
-	font-size: 2em;
-	color: #8a8a8a;
-	left: 50%;
-	transform: translateX(-50%);
-	bottom: 1%;
-}
+
+
+
+
+
 
 
 @media screen and (max-width: 1000px) {
@@ -737,6 +735,13 @@ canvas {
 		font-size: 1.3em;
 	}
 
-
+	.footer {
+		position: absolute;
+		font-size: 2em;
+		color: #8a8a8a;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 1%;
+	}
 
 }
