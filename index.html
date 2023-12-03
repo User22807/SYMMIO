@@ -1,7 +1,5 @@
 <html lang="en">
-<meta name="viewport"
-    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
     <title>SYMMIO</title>
@@ -13,13 +11,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/TextPlugin.min.js"></script>
 
-    <script src="./script/gsapText.js">  </script>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/navbar.css">
 
 
     <nav>
+
         <ul class="menu__list">
+            <img href="#" src="./assets/SYMMIO-Logo.png" class="logo" />
             <li class="menu__item">
                 <button class="menu__link" href="#Home">Home</button>
             </li>
@@ -35,7 +34,9 @@
     </nav>
 
     <input type="checkbox" id="menu_trigger" class="menu-trigger">
+
     <div class="overlay">
+
         <ul class="menu-links">
             <li><a id="link" href="#Home">Home</a></li>
             <li><a id="link" href="#HowItWorks">How it works</a></li>
@@ -43,12 +44,15 @@
             <li><a id="link" class="red" href="#">TRADE</a></li>
         </ul>
     </div>
+
     <label for="menu_trigger" class="hamburger-menu">
         <span></span>
         <span></span>
         <span></span>
+        <img href="#" src="./assets/SYMMIO-Logo.png" class="logo-smallscreen" />
     </label>
     <script src="./script/homestyle.js"></script>
+
 </head>
 
 
@@ -61,42 +65,31 @@
             <span class="chevron"></span>
             <span class="chevron"></span>
             <span class="chevron"></span>
-            <span class="text">[ more ]</span>
         </a>
 
-        <div class="caption">
-            <span class="gradiant">A protocol for SYMMETRICAL </span>
-            <div class="text-box">
-                <div>CRYPTOS</div>
-                <div>COMMODITIES</div>
-                <div>AGREEMENTS</div>
-                <div>FUTURES</div>
-                <div>TRADING</div>
-                <div>OPTIONS</div>
-                <div>DERIVATIVES</div>
-                <div>PERPETUALS</div>
-                <div>BONDS</div>
-                <div>STOCKS</div>
-            </div>
-        </div>
 
-        <div class="captionMobile">
-            <span class="gradiant">               A protocol for<br>SYMMETRICAL</span>
-            <div class="text-box gradiant">
-                <div>CRYPTOS</div>
-                <div>COMMODITIES</div>
-                <div>AGREEMENTS</div>
-                <div>FUTURES</div>
-                <div>TRADING</div>
-                <div>OPTIONS</div>
-                <div>DERIVATIVES</div>
-                <div>PERPETUALS</div>
-                <div>BONDS</div>
-                <div>STOCKS</div>
-            </div>
-        </div>
 
         <div class="box__text">
+
+            <div class="caption ">
+                <div class="gradiant">A protocol for</div>
+                <div class="testmargin">
+                    <span class="gradiant">SYMMETRICAL</span>
+                    <div class="text-box ">
+                        <div>CRYPTOS</div>
+                        <div>COMMODITIES</div>
+                        <div>AGREEMENTS</div>
+                        <div>FUTURES</div>
+                        <div>TRADING</div>
+                        <div>OPTIONS</div>
+                        <div>DERIVATIVES</div>
+                        <div>PERPETUALS</div>
+                        <div>BONDS</div>
+                        <div>STOCKS</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="list_top"></div>
             <div class="titleSYMM "></div>
             <div class="title "></div>
@@ -257,8 +250,8 @@
                                         opacity=".5" />
                                 </g>
                             </svg>
-                            BUILD on SYMMIO
-                            </span>
+                            <span class="button-text">
+                                BUILD on SYMMIO
                             </span>
                         </a>
                     </div>
@@ -299,6 +292,7 @@
                     </div>
                 </div>
             </div>
+            <div class="footer">© SYMMIO 2023</div>
         </div>
 
     </div>
@@ -1215,13 +1209,13 @@
     // Function for rendering the outer sky
     vec3 outerSkyRender(vec3 ro, vec3 rd) {
         vec3 col = HSV2RGB(vec3(1.0, 0.00, 0.008));
-        sunCol = HSV2RGB(vec3(0.01, 0.5, 0.002 - (iAnimProgress_1.x * 0.002) + (iAnimProgress_3.y * 0.0006)));
+        sunCol = HSV2RGB(vec3(0.01, 0.5, 0.0000005*iResolution.x-(iAnimProgress_4.z * (0.0000002*iResolution.x)*(1.0-iAnimProgress_1.x)) - (iAnimProgress_1.x * (0.0000005*iResolution.x)) + (iAnimProgress_3.y * 0.0002)));
     //(iAnimProgress_1.x*0.002)+(iAnimProgress_3.y*0.0006);
     // Sun settings
         col += sunCol / pow((1.002 - dot(sunDir, rd)), 1.9);
 
     // Horizon light modifier
-        vec3 gcol = HSV2RGB(vec3(1.0, 0.4, 0.008 - (iAnimProgress_1.x * 0.0075) + (iAnimProgress_3.y * 0.0006)));
+        vec3 gcol = HSV2RGB(vec3(1.0, 0.4, 0.008 - (iAnimProgress_4.z * 0.004*(1.0-iAnimProgress_1.x)) - (iAnimProgress_1.x * 0.0075) + (iAnimProgress_3.y * 0.0006)));
         gcol = gcol * 0.3;
 
     // Atmosphere air color
@@ -1263,7 +1257,7 @@
         p.y -= 0.58;
 
     // Triangle inner glow factor
-        vec3 gcol = HSV2RGB(vec3(1.0, 0.8, 0.006-((iAnimProgress_1.x-iAnimProgress_1.z)*0.004)));
+        vec3 gcol = HSV2RGB(vec3(1.0, 0.8, 0.006*(1.0-(iAnimProgress_4.z*(1.0-iAnimProgress_1.x)))-((iAnimProgress_1.x-iAnimProgress_1.z)*0.004)));
 
     // Triangle displacement
         float dt = equilateralTriangle(p);
@@ -1556,7 +1550,7 @@
             rcol = anim_2(rcol, gp, grr);
         else if(iAnimProgress_3.y >= 0.5 && iAnimProgress_3.z < 0.1)
             rcol = anim_3(rcol, gp, grr);
-        else if(iAnimProgress_3.z >= 0.1 && iAnimProgress_4.z < 0.1)
+        else if(iAnimProgress_3.z >= 0.1)
             rcol = anim_4(rcol, gp, grr);
         rcol *= 1.0 - (iAnimProgress_1.x * 0.7);
         // Tiles calculations
@@ -1576,27 +1570,27 @@
 
         vec3 ro;  // Camera location
         vec3 la;  // Camera look at
-        if(iResolution.x > iResolution.y) {
+        if(iResolution.x > 1250.0&&iResolution.x > iResolution.y) {
             // Camera location right - left
             ro = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 - iAnimProgress_3.z * 0.9 - iAnimProgress_4.x * 1.0,
             //Camera location up - down
-            0.5 + iAnimProgress_4.x * 0.5,
+            0.5 + iAnimProgress_4.x * 0.5+ (iAnimProgress_4.z*2.0*(1.0-iAnimProgress_1.x)),
             //Camera location forth - back
             -5.0 - iAnimProgress_3.y * 0.5 + iAnimProgress_3.z * 0.5 + iAnimProgress_4.x * 5.6);
             // Camrea look right - left
             la = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 - iAnimProgress_3.z * 0.9,
             // Camrea look up - down
-            1.6 + iAnimProgress_3.y * 0.5 - iAnimProgress_3.z * 0.5 - iAnimProgress_4.x * 0.48,
+            1.75 + iAnimProgress_3.y * 0.5 - iAnimProgress_3.z * 0.5 - iAnimProgress_4.x * 0.48,
             // Camrea look forth - back
             0.0 + iAnimProgress_4.x * 10.0);
             // -------------------Vertical mode
         } else {
             // Camera location right - left
-            ro = 1.0 * vec3(0.0 + iAnimProgress_4.x * 1.2,
+            ro = 1.0 * vec3(0.0   + iAnimProgress_4.x * 1.2,
             //Camera location up - down
-            0.5,
+            0.5+ (iAnimProgress_4.z * 3.0*(1.0-iAnimProgress_1.x)),
             //Camera location forth - back
-            -11.0 + iAnimProgress_3.y * 2.9 + iAnimProgress_4.x * 7.2);
+            -12.0 + iAnimProgress_3.y * 2.9 + iAnimProgress_4.x * 7.2);
             // Camrea look right - left
             la = vec3(0.0 + iAnimProgress_4.x * 1.2,
             // Camrea look up - down
@@ -1626,7 +1620,7 @@
             col = anim_2(col, ro, rd);
         else if(iAnimProgress_3.y >= 0.5 && iAnimProgress_3.z < 0.1)
             col = anim_3(col, ro, rd);
-        else if(iAnimProgress_3.z >= 0.1 && iAnimProgress_4.z < 0.1)
+        else if(iAnimProgress_3.z >= 0.1 )
             col = anim_4(col, ro, rd);
 
         gl_FragColor = vec4(col, 1.0);
@@ -1635,7 +1629,7 @@
 
 </script>
 
-<script type="module" src="./script/threeJsHome.js"></script>
+<script type="module" src="./script/scripts.js"></script>
 </body>
 
 </html>

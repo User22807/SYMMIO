@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
 
 html {
+	font-size: 1vh;
 	font-family: "Manrope", sans-serif;
 	scroll-snap-type: y mandatory;
 	overflow: auto;
@@ -13,7 +14,7 @@ body {
 	padding: 0;
 }
 
-/*------------------------------------------- Scroll bar */
+/*-- Scroll bar */
 html::-webkit-scrollbar {
 	width: 8px;
 	padding-right: 10px;
@@ -30,8 +31,6 @@ html::-webkit-scrollbar-thumb {
 }
 
 
-/*-------------------------------------------  */
-
 html .section {
 	scroll-snap-align: start;
 	height: 100vh;
@@ -39,114 +38,11 @@ html .section {
 	position: relative;
 }
 
-
 canvas {
 	display: block;
 	position: fixed !important;
 }
 
-/*---------------------About Us----------------------  */
-
-.about_section {
-	padding-top: 15%;
-	z-index: 2;
-
-}
-
-.about {
-	padding-bottom: 10%;
-	display: flex;
-	flex-direction: row;
-}
-
-.button_spilit {
-	display: flex;
-	flex-direction: row;
-}
-
-.about .button_box {
-	align-items: center;
-	width: 100%;
-	z-index: 2;
-	display: flex;
-	flex-direction: column;
-}
-
-.button {
-	background-color: #000000a5;
-	transition: all .2s ease-in-out;
-	text-decoration: none;
-	position: relative;
-	padding: 2vh 2vh 1vh 2vh;
-	margin: 2vh;
-	text-align: left;
-	border: solid 1px;
-	border-color: #FFF;
-	appearance: none;
-	cursor: pointer;
-	display: flex;
-	outline: none;
-	color: #fff;
-	font-size: 1.0em;
-
-}
-
-.socialicon {
-	color: #ffffff;
-	margin-top: 4vh;
-	margin-bottom: 4vh;
-	margin-left: 2vw;
-	margin-right: 2vw;
-	height: 4vh;
-	width: 4vh;
-}
-
-.socialicon:hover {
-	transition: all .2s ease-in-out;
-	transform: translateY(-2px);
-	cursor: pointer;
-	border-color: rgb(255, 92, 92);
-	color: #ffbaba;
-}
-
-.about_text {
-	font-size: 2em;
-	letter-spacing: 0;
-	margin-top: 0;
-	margin-bottom: 1vw;
-	font-weight: 600;
-	line-height: 1.25;
-}
-
-.button-icon {
-	margin-right: 16px;
-	height: 4vh;
-	width: 4vh;
-	top: 0;
-}
-
-.button:hover {
-	border-color: rgb(255, 92, 92);
-	color: #ffbaba;
-	transform: translateY(-2px);
-}
-
-.button:active {
-	transform: translateY(0);
-}
-
-.button:before {
-	animation: pulse 2s ease infinite;
-	border: 4px;
-	border-color: white;
-	position: absolute;
-	content: "";
-	z-index: -1;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	top: 0;
-}
 
 
 .box__text {
@@ -163,29 +59,29 @@ canvas {
 }
 
 .box__text .subtitle {
-	padding-top: 22vh;
+	padding-top: 25vh;
 	padding-right: 10vh;
 	padding-left: 10vh;
-	font-size: 1.5em;
+	font-size: 2em;
 	align-self: center;
 	text-align: center;
 	/* Add this line */
-	text-shadow: 5px 5px 8px #000000;
+	width: 60%;
 }
 
 
 .box__text .titleSYMM {
 	width: 100%;
-	letter-spacing: 1em;
+	letter-spacing: 1.2em;
 	position: fixed;
 	text-align: center;
-	font-size: 8em;
+	font-size: 12em;
 	margin-left: 4vw;
 	bottom: 0.1vh;
 }
 
 .box__text .list_top {
-	font-size: 1.0em;
+	font-size: 2.2em;
 	position: fixed;
 	left: 10%;
 	top: 20%;
@@ -198,7 +94,7 @@ canvas {
 
 .box__text .list_top .head-span {
 	-webkit-text-fill-color: transparent;
-	background-image: linear-gradient(to right, #ffffff, #e75454);
+	background: linear-gradient(to right, #ffffff, #e75454);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-moz-background-clip: text;
@@ -216,35 +112,19 @@ canvas {
 }
 
 .gradiant {
-	-webkit-text-fill-color: transparent !important;
-	background-image: linear-gradient(to right, #ffffff, #e75454) !important;
-	background-clip: text !important;
-	-webkit-background-clip: text !important;
-	-moz-background-clip: text !important;
+	-webkit-text-fill-color: transparent;
+	background: linear-gradient(to right, #ffffff, #e75454);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
 	/* Fallback color if gradient is not supported */
-	color: #e75454 !important;
+	color: #e75454;
 }
 
-@media (-webkit-device-pixel-ratio: 2) {
-	  /* Fallback for Samsung devices */
-	.gradiant {
-		background-image: none;
-		color: #e75454 !important;
-	}
-}
 
-.caption {
-	font-size: 3em;
-	position: relative;
-	position: fixed;
-	z-index: 99;
-	top: 0;
-	left: 40%;
-	transform: translate(-50%, -50%);
-	padding-top: 32vh;
-	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+.testmargin {
+	padding-right: 7em;
 }
-
 
 .text-box {
 	-webkit-text-fill-color: rgb(230, 92, 92) !important;
@@ -335,6 +215,7 @@ canvas {
 	9% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	10% {
@@ -360,6 +241,7 @@ canvas {
 	19% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	20% {
@@ -385,6 +267,7 @@ canvas {
 	29% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	30% {
@@ -410,6 +293,7 @@ canvas {
 	39% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	40% {
@@ -435,6 +319,7 @@ canvas {
 	49% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	50% {
@@ -460,6 +345,7 @@ canvas {
 	59% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	60% {
@@ -485,6 +371,7 @@ canvas {
 	70% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	71% {
@@ -510,6 +397,7 @@ canvas {
 	80% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	81% {
@@ -535,6 +423,7 @@ canvas {
 	89% {
 		top: var(--textroll-top);
 		transform: rotateX(-90deg);
+		opacity: 0;
 	}
 
 	90% {
@@ -556,22 +445,22 @@ canvas {
 	}
 }
 
-
+/*-------------scroll down icon*/
 .scrollDown {
 	position: absolute;
 	position: fixed;
 	z-index: 99;
-	right: 3.0vw;
+	right: 7.0vw;
 	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
 	text-decoration: none;
-	bottom: 4.5vh;
+	bottom: 9vh;
 }
 
 
 .chevron {
 	position: absolute;
-	width: 4vw;
+	width: 6vh;
 	height: 0.4vh;
 	opacity: 0;
 	animation: move 3s ease-out infinite;
@@ -627,19 +516,7 @@ canvas {
 	}
 }
 
-.text {
-	display: block;
-	margin-top: 5vh;
-	font-size: 1em;
-	color: #fff;
-	text-transform: uppercase;
-	white-space: nowrap;
-	opacity: .25;
-	animation: pulse 2s linear alternate infinite;
-	text-decoration: none;
-	/* Remove underline */
 
-}
 
 @keyframes pulse {
 	to {
@@ -647,23 +524,134 @@ canvas {
 	}
 }
 
+/*---------------------About Us----------------------  */
 
-.captionMobile {
-	/* Set width to auto to allow the element to take its content's width */
-	line-height: 1.4em;
-	font-size: 1.4em;
-	position: fixed;
+.about_section {
+	padding-top: 15%;
 	z-index: 2;
-	left: 35%;
-	transform: translate(-50%, -50%);
-	/* Use transform to horizontally center the element */
-	padding-top: 53vh;
-	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
-	/* Add transition for ease-out effect */
-	visibility: hidden;
+
 }
 
+.about {
+	padding-bottom: 10%;
+	display: flex;
+	flex-direction: row;
+}
+
+.button_spilit {
+	display: flex;
+	flex-direction: row;
+}
+
+.about .button_box {
+	align-items: center;
+	width: 100%;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+}
+
+.button {
+	background-color: #000000a5;
+	transition: all .2s ease-in-out;
+	text-decoration: none;
+	position: relative;
+	padding: 2em 2em 1em 2em;
+	margin: 2em;
+	text-align: left;
+	border: solid 1px;
+	border-color: #FFF;
+	appearance: none;
+	cursor: pointer;
+	display: flex;
+	outline: none;
+	color: #fff;
+}
+.button-text{
+	font-size: 2em;
+}
+.socialicon {
+	color: #ffffff;
+	margin-top: 4vh;
+	margin-bottom: 4vh;
+	margin-left: 2vw;
+	margin-right: 2vw;
+	height: 4vh;
+	width: 4vh;
+}
+
+.socialicon:hover {
+	transition: all .2s ease-in-out;
+	transform: translateY(-2px);
+	cursor: pointer;
+	border-color: rgb(255, 92, 92);
+	color: #ffbaba;
+}
+
+.about_text {
+	font-size: 4em;
+	letter-spacing: 0;
+	margin-top: 0;
+	margin-bottom: 1vw;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.button-icon {
+	margin-right: 1em;
+	height: 4em;
+	width: 4em;
+}
+
+.button:hover {
+	border-color: rgb(255, 92, 92);
+	color: #ffbaba;
+	transform: translateY(-2px);
+}
+
+.button:active {
+	transform: translateY(0);
+}
+
+.button:before {
+	animation: pulse 2s ease infinite;
+	border: 4px;
+	border-color: white;
+	position: absolute;
+	content: "";
+	z-index: -1;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	top: 0;
+}
+
+
 /*------------------------- small screens */
+
+
+.caption {
+	align-self: center;
+	/* Set width to auto to allow the element to take its content's width */
+	font-size: 5em;
+	position: fixed;
+	z-index: 2;
+	/* Use transform to horizontally center the element */
+	padding-top: 10vh;
+	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+	/* Add transition for ease-out effect */
+}
+
+
+.footer {
+	position: absolute;
+	font-size: 2em;
+	color: #8a8a8a;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1%;
+}
+
 
 @media screen and (max-width: 1000px) {
 
@@ -697,20 +685,34 @@ canvas {
 
 	.box__text .titleSYMM {
 		letter-spacing: 0.5em;
+		font-size: 6em;
+		top: 0;
+		margin-top: 10vh;
+	}
+
+	.caption {
+		align-self: center;
+		/* Set width to auto to allow the element to take its content's width */
 		font-size: 3em;
-		top: 8.5vh;
+		position: fixed;
+		z-index: 2;
+		/* Use transform to horizontally center the element */
+		padding-top: 20vh;
+		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+		/* Add transition for ease-out effect */
 	}
 
 	.box__text .subtitle {
 		padding-top: 32vh;
 		padding-right: 2vw;
 		padding-left: 2vw;
-		font-size: 0.8em;
+		font-size: 2em;
+		width: 90%;
 	}
 
 	.scrollDown {
-		bottom: 0.0vh;
-		left: 40.5%;
+		bottom: 6.0vh;
+		left: 40.6%;
 		-webkit-text-fill-color: transparent;
 	}
 
@@ -718,13 +720,6 @@ canvas {
 		width: 20vw;
 	}
 
-	.caption {
-		visibility: hidden;
-	}
-
-	.captionMobile {
-		visibility: visible;
-	}
 
 	:root {
 		--textroll-top: -1.5em;
@@ -733,12 +728,15 @@ canvas {
 	}
 
 	.box__text .list_top {
-		font-size: 0.7em;
+		font-size: 1.6em;
 		top: 10%;
 		width: 80%;
 	}
 
 	.box__text .list_top .head-span {
-		font-size: 1.5em;
+		font-size: 1.3em;
 	}
+
+
+
 }

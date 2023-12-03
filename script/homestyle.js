@@ -15,7 +15,7 @@ menuLinks.forEach((link) => {
   });
 });
 
-// ---------------Caption visibility scroll
+// ---------------CaptionMobile visibility scroll
 window.addEventListener("scroll", function () {
   var scrollPosition = window.scrollY || document.documentElement.scrollTop;
   var scrollThreshold1 = window.innerHeight * 0.2; // page number to lower oppacity
@@ -27,25 +27,13 @@ window.addEventListener("scroll", function () {
     document.querySelector(".caption").style.opacity = "0.0";
   }
 });
-// ---------------CaptionMobile visibility scroll
-window.addEventListener("scroll", function () {
-  var scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  var scrollThreshold1 = window.innerHeight * 0.2; // page number to lower oppacity
-
-  if (scrollPosition <= scrollThreshold1) {
-    // If scrolled 50% or more, hide the element with an ease-out effect
-    document.querySelector(".captionMobile").style.opacity = "1.0";
-  } else {
-    document.querySelector(".captionMobile").style.opacity = "0.0";
-  }
-});
 
 /*--------ScrollDown visibility-------*/
 
 window.addEventListener("scroll", function () {
   var scrollPosition = window.scrollY || document.documentElement.scrollTop;
   var scrollThreshold1 = window.innerHeight * 0.5; // page number to lower oppacity
-  var scrollThreshold2 = window.innerHeight * 8.0; // page number to hide
+  var scrollThreshold2 = window.innerHeight * 10.0; // page number to hide
 
   if (scrollPosition <= scrollThreshold1) {
     // If scrolled 50% or more, hide the element with an ease-out effect
