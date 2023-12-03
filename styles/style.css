@@ -638,10 +638,14 @@ canvas {
 }
 
 
-
-
-
-
+.footer {
+	position: absolute;
+	font-size: 2em;
+	color: #8a8a8a;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1%;
+}
 
 
 
@@ -729,13 +733,5 @@ canvas {
 		font-size: 1.3em;
 	}
 
-	.footer {
-		position: absolute;
-		font-size: 2em;
-		color: #8a8a8a;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: 1%;
-	}
 
 }
