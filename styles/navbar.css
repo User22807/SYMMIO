@@ -139,23 +139,23 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*------------------------- mobile menu */
 .logo-smallscreen {
-  height: 5vw;
+  height: 3vh;
   position: fixed;
-  left: 2vw;
-  top: 2vw;
+  left: 2vh;
+  top: 2vh;
   display: block;
 }
 
 /* Variables */
 :root {
   --number-of-links: 4;
-  --hamburger-menu-width: 5.0vw;
-  --hamburger-menu-height: 3vw;
-  --hamburger-menu-x-position: 7vw;
-  --hamburger-menu-y-position: 3vw;
+  --hamburger-menu-width: 3.0vh;
+  --hamburger-menu-height: 2vh;
+  --hamburger-menu-x-position: 4vh;
+  --hamburger-menu-y-position: 1vh;
   --hamburger-icon-background-color: linear-gradient(to right, #ffffff, #e75454);
-  --hamburger-icon-width: 8vw;
-  --hamburger-icon-height: 0.4vw;
+  --hamburger-icon-width: 6vh;
+  --hamburger-icon-height: 0.3vh;
   --hamburger-icon-rotate-deg: 45deg;
   --hamburger-icon-transform-time: 350ms;
   --overlay-background-color: rgba(0, 0, 0, 0.812);
@@ -163,7 +163,7 @@ nav[role="custom-dropdown"] ul>li:hover {
   --menu-link-hover-color: #ffffff;
   --menu-link-emboss-color: rgba(0, 0, 0, 0.8);
   --menu-link-shine-color: #ffffff;
-  --menu-link-font-size: 10vw;
+  --menu-link-font-size: 5vh;
   --menu-link-spacing: 25px;
   --menu-link-shine-size: 25px;
   --menu-link-hover-transition-time: 175ms;
