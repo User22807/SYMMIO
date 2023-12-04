@@ -318,9 +318,9 @@ function setupContentScrollTrigger() {
       title: "",
       subtitle: "",
       list_top:
-        "<span class= head-span>Neutral Parties as WATCHDOGS</span> " +
+        "<span class= head-span>Neutral parties as Arbiters</span> " +
         "</br></br>" +
-        " <span class=active-span>Liquidators make sure that all PartyA and PartyB pairs are playing by the rules, and are constantly ensuring their solvency. Otherwise they will get liquidated, which makes the system trustless as well as capital efficient.</span></br>",
+        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. As both sides can be liquidated and dispute decisions, the system is trustless and highly capital efficient.</span></br>",
       selector: ".section.nine",
     },
     {
