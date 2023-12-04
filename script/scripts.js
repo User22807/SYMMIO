@@ -208,7 +208,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -224,7 +224,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span class=active-span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -240,7 +240,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span class=active-span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span class=active-span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -256,7 +256,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span class=active-span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -272,7 +272,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span class=active-span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -288,7 +288,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span class=active-span>• Claimed INTENTs CREATE a trade</span></br>" +
@@ -304,7 +304,7 @@ function setupContentScrollTrigger() {
         "<span class= head-span>HOW TO TRADE DERIVATIVES<br>with INTENTs using SYMMIO.</span> " +
         "</br></br>" +
         " <span>• FORMULATE your INTENT via 3rd party frontend</span></br>" +
-        " <span>• SEND your INTENT to the onchain pool</span></br>" +
+        " <span>• SEND your INTENT to the pool</span></br>" +
         " <span>• Counterparties (Hedgers) SEE your INTENT in the pool</span></br>" +
         " <span>• Counterparty (Hedger) CLAIMs your intent</span></br>" +
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
