@@ -195,7 +195,7 @@ function setupContentScrollTrigger() {
       list_top: "",
       title: "",
       subtitle:
-        "Reimagining bilateral OTC Derivatives by combining them with Intent-Based execution. Allowing permissionless leverage trading of any asset, with hyperefficient just-in-time liquidity.",
+        "Reimagining bilateral OTC Derivatives by combining them with Intent-Based execution.<br/>Allowing permissionless leverage trading of any asset, with hyperefficient just-in-time liquidity.",
       titleSYMM: "SYMMIO",
       list_top: "",
       selector: ".section.one",

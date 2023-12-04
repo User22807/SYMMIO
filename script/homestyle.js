@@ -15,6 +15,19 @@ menuLinks.forEach((link) => {
   });
 });
 
+    // ---------------CaptionMobile visibility scroll
+    window.addEventListener("scroll", function () {
+      var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      var scrollThreshold1 = window.innerHeight * 0.2; // page number to lower oppacity
+
+      if (scrollPosition <= scrollThreshold1) {
+        // If scrolled 50% or more, hide the element with an ease-out effect
+        document.querySelector(".captionMobile").style.opacity = "1.0";
+      } else {
+        document.querySelector(".captionMobile").style.opacity = "0.0";
+      }
+    });
+    
 // ---------------CaptionMobile visibility scroll
 window.addEventListener("scroll", function () {
   var scrollPosition = window.scrollY || document.documentElement.scrollTop;
