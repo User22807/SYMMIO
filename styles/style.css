@@ -119,11 +119,11 @@ canvas {
 .captionMain {
 	align-self: center;
 	/* Set width to auto to allow the element to take its content's width */
-	font-size: 6em;
+	font-size: 5em;
 	position: fixed;
 	z-index: 2;
 	/* Use transform to horizontally center the element */
-	padding-top: 1em;
+	padding-top: 1.5em;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
 }
@@ -686,7 +686,7 @@ canvas {
 		position: fixed;
 		z-index: 2;
 		/* Use transform to horizontally center the element */
-		padding-top: 6em;
+		padding-top: 7em;
 		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 		/* Add transition for ease-out effect */
 	}
