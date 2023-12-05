@@ -25,24 +25,7 @@ function handleScrollVisibility(elementSelector, scrollThreshold, opacityThresho
   });
 }
 
-handleScrollVisibility(".captionMobile", window.innerHeight * 0.2, 0.0);
-handleScrollVisibility(".caption", window.innerHeight * 0.2, 0.0);
-
-// ScrollDown visibility on scroll
-window.addEventListener("scroll", () => {
-  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  const scrollThreshold1 = window.innerHeight * 0.5;
-  const scrollThreshold2 = window.innerHeight * 10.0;
-  const scrollDown = document.querySelector(".scrollDown");
-
-  if (scrollPosition <= scrollThreshold1) {
-    scrollDown.style.opacity = 1.0;
-  } else if (scrollPosition <= scrollThreshold2) {
-    scrollDown.style.opacity = 0.2;
-  } else {
-    scrollDown.style.opacity = 0.0;
-  }
-});
+handleScrollVisibility(".captionMain", window.innerHeight * 0.2, 0.0);
 
 // Smooth scroll to sections on click (both menu and buttons)
 $(document).on("click", 'a[href^="#"], button[href^="#"]', function (event) {

@@ -58,7 +58,7 @@ canvas {
 .box__text .subtitle {
 	padding-right: 20%;
 	padding-left: 20%;
-	padding-top: 9em;
+	padding-top: 12em;
 	font-size: 2em;
 	align-self: center;
 	text-align: center;
@@ -116,35 +116,22 @@ canvas {
 }
 
 
-.caption {
-	left: 50%;
-	transform: translateX(-70%);	/* Set width to auto to allow the element to take its content's width */
-	font-size: 5em;
-	position: fixed;
-	z-index: 2;
-	/* Use transform to horizontally center the element */
-	padding-top: 10vh;
-	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
-	/* Add transition for ease-out effect */
-	visibility: visible;
-
-}
-
-.captionMobile {
+.captionMain {
 	align-self: center;
 	/* Set width to auto to allow the element to take its content's width */
-	font-size: 3em;
+	font-size: 6em;
 	position: fixed;
 	z-index: 2;
 	/* Use transform to horizontally center the element */
-	padding-top: 7em;
+	padding-top: 1em;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
-	visibility: hidden;
 }
+
 .testmargin {
 	padding-right: 5.5em;
 }
+
 .text-box {
 	-webkit-text-fill-color: rgb(230, 92, 92) !important;
 	display: inline-block;
@@ -692,6 +679,21 @@ canvas {
 
 	/*---------------------Home----------------------  */
 
+	.captionMain {
+		align-self: center;
+		/* Set width to auto to allow the element to take its content's width */
+		font-size: 3em;
+		position: fixed;
+		z-index: 2;
+		/* Use transform to horizontally center the element */
+		padding-top: 6em;
+		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
+		/* Add transition for ease-out effect */
+	}
+
+	.testmargin {
+		padding-right: 5.5em;
+	}
 
 	.box__text .titleSYMM {
 		width: 100%;
@@ -701,19 +703,12 @@ canvas {
 		margin-top: 10vh;
 	}
 
-	.captionMobile {
-		visibility: visible;
-	}
-	
 	:root {
 		--textroll-top: -2.0em;
 		--textroll-mid: -1.07em;
 		--textroll-bot: -0.0em;
 	}
 
-	.caption {
-		visibility: hidden;
-	}
 
 	.box__text .subtitle {
 		padding-top: 32vh;
