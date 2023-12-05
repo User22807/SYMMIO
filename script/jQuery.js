@@ -1,6 +1,5 @@
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
-const overlay = document.querySelector(".overlay");
 const menuLinks = document.querySelectorAll(".menu-links li a");
 
 menuLinks.forEach((link) => {
