@@ -3,10 +3,8 @@
 html {
 	font-size: 1vh;
 	font-family: "Manrope", sans-serif;
-	scroll-snap-type: y mandatory;
 	overflow: auto;
 	overflow-x: hidden;
-	scroll-behavior: smooth;
 }
 
 body {

@@ -25,7 +25,7 @@ function handleScrollVisibility(elementSelector, scrollThreshold, opacityThresho
 }
 
 handleScrollVisibility(".captionMain", window.innerHeight * 0.2, 0.0);
-
+/*
 // Smooth scroll to sections on click (both menu and buttons)
 $(document).on("click", 'a[href^="#"], button[href^="#"]', function (event) {
   event.preventDefault();
@@ -35,7 +35,7 @@ $(document).on("click", 'a[href^="#"], button[href^="#"]', function (event) {
 function smoothScroll(target) {
   $("html, body").animate({ scrollTop: $(target).offset().top }, 500);
 }
-
+*/
 // Highlight current section in menu on scroll
 function activateMenuItem() {
   const scrollPosition = $(window).scrollTop();
