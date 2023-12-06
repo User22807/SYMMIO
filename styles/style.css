@@ -649,7 +649,10 @@ canvas {
 
 
 @media screen and (max-width: 1000px) {
-
+	html {
+		scroll-snap-type: y mandatory;
+		scroll-behavior:smooth;
+	}
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 25%;

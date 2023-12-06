@@ -28,7 +28,7 @@ function goToSection(i) {
     isScrolling = true;
     gsap.to(window, {
       scrollTo: { y: i * innerHeight, autoKill: false },
-      duration: 2.0,
+      duration: 1.2,
       onComplete: () => isScrolling = false
     });
   }
@@ -1491,8 +1491,8 @@ function goToSection(i) {
     // Add text to triangle
 
     // Triangle offset
-        p_left.x += iAnimProgress_3.z / 8.0 - iAnimProgress_4.x / 8.0;
-        p_right.x -= iAnimProgress_3.z / 8.0 - iAnimProgress_4.x / 8.0;
+        p_left.x += iAnimProgress_3.z / 8.0 - iAnimProgress_4.x / 7.9;
+        p_right.x -= iAnimProgress_3.z / 8.0 - iAnimProgress_4.x / 7.9;
 
         vec2 anim_time_1 = vec2(sin(iTime / 2.0), cos(iTime / 2.0));
         vec2 anim_time_x2 = vec2(sin(iTime), cos(iTime));
@@ -1589,15 +1589,15 @@ function goToSection(i) {
         vec3 la;  // Camera look at
         if(iResolution.x > 1250.0&&iResolution.x > iResolution.y) {
             // Camera location right - left
-            ro = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 - iAnimProgress_3.z * 0.9 - iAnimProgress_4.x * 1.0,
+            ro = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 + iAnimProgress_3.z * 1.0 - iAnimProgress_4.x * 1.0,
             //Camera location up - down
             0.5 + iAnimProgress_4.x * 0.5+ (iAnimProgress_4.z*2.0*(1.0-iAnimProgress_1.x)),
             //Camera location forth - back
             -5.0 - iAnimProgress_3.y * 0.5 + iAnimProgress_3.z * 0.5 + iAnimProgress_4.x * 5.6);
             // Camrea look right - left
-            la = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 - iAnimProgress_3.z * 0.9,
+            la = vec3(0.0 - iAnimProgress_1.x * 2.0 + iAnimProgress_3.y * 0.9 - iAnimProgress_3.z * 0.4,
             // Camrea look up - down
-            1.75 + iAnimProgress_3.y * 0.5 - iAnimProgress_3.z * 0.5 - iAnimProgress_4.x * 0.48,
+            1.75 + iAnimProgress_3.y * 0.5 - iAnimProgress_3.z * 0.9 - iAnimProgress_4.x * 0.48,
             // Camrea look forth - back
             0.0 + iAnimProgress_4.x * 10.0);
             // -------------------Vertical mode
