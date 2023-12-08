@@ -151,8 +151,8 @@ nav[role="custom-dropdown"] ul>li:hover {
   --number-of-links: 4;
   --hamburger-menu-width: 3.0vh;
   --hamburger-menu-height: 2vh;
-  --hamburger-menu-x-position: 4vh;
-  --hamburger-menu-y-position: 1vh;
+  --hamburger-menu-x-position: 5em;
+  --hamburger-menu-y-position: 2em;
   --hamburger-icon-background-color: linear-gradient(to right, #ffffff, #e75454);
   --hamburger-icon-width: 6vh;
   --hamburger-icon-height: 0.3vh;
