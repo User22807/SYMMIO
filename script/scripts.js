@@ -1,4 +1,5 @@
 let camera, scene, renderer, uniforms, scrollProgress;
+
 init();
 animate();
 setupContentScrollTrigger();
@@ -45,7 +46,6 @@ function onWindowResize() {
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
 // Update mouse position uniform
 function handleMouseMove(event) {
   uniforms.iMousePos.value.x = event.clientX;
@@ -189,20 +189,25 @@ function updateScrollProgress() {
 // Set up content scroll triggers
 function setupContentScrollTrigger() {
   gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin( ScrollToPlugin);
+
   
-  //snap scroll
-  let sections = gsap.utils.toArray(".section");
-  let isScrolling;
-  if (uniforms.iResolution.value.x > 1000.0) {
-    sections.forEach((eachPanel, i) => {
-      ScrollTrigger.create({
-        trigger: eachPanel,
-        start: "top bottom", // Adjusted the start value
-        end: "+=199%", // Adjusted the end value
-        onToggle: (self) => self.isActive && !isScrolling && goToSection(i),
-      });
-    });
-  }
+let sections = gsap.utils.toArray(".section");
+let isScrolling;
+
+sections.forEach((eachPanel, i) => {
+
+  ScrollTrigger.create({
+    trigger: eachPanel,
+      start: "top bottom", // Adjusted the start value
+      end: "+=199%", // Adjusted the end value
+      onToggle: (self) => self.isActive && !isScrolling && goToSection(i),
+    
+  });
+});
+
+
+
 
   const content = [
     {
