@@ -189,25 +189,6 @@ function updateScrollProgress() {
 // Set up content scroll triggers
 function setupContentScrollTrigger() {
   gsap.registerPlugin(ScrollTrigger);
-  gsap.registerPlugin( ScrollToPlugin);
-
-  
-let sections = gsap.utils.toArray(".section");
-let isScrolling;
-
-sections.forEach((eachPanel, i) => {
-
-  ScrollTrigger.create({
-    trigger: eachPanel,
-      start: "top bottom", // Adjusted the start value
-      end: "+=199%", // Adjusted the end value
-      onToggle: (self) => self.isActive && !isScrolling && goToSection(i),
-    
-  });
-});
-
-
-
 
   const content = [
     {
