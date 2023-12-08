@@ -192,14 +192,8 @@ function setupContentScrollTrigger() {
   
   //snap scroll
   let sections = gsap.utils.toArray(".section");
-  let isScrolling = ScrollTrigger.normalizeScroll(true),
-  scrollTween;
-  document.addEventListener("touchstart", e => {
-    if (scrollTween) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
-  }, {capture: true, passive: false})
+  let isScrolling;
+  if (uniforms.iResolution.value.x > 1000.0) {
     sections.forEach((eachPanel, i) => {
       ScrollTrigger.create({
         trigger: eachPanel,
@@ -208,6 +202,7 @@ function setupContentScrollTrigger() {
         onToggle: (self) => self.isActive && !isScrolling && goToSection(i),
       });
     });
+  }
 
   const content = [
     {
