@@ -1206,7 +1206,7 @@
     // Function for rendering the outer sky
     vec3 outerSkyRender(vec3 ro, vec3 rd) {
         vec3 col = HSV2RGB(vec3(1.0, 0.00, 0.008));
-        sunCol = HSV2RGB(vec3(0.01, 0.5, 0.0000005*iResolution.x-(iAnimProgress_4.z * (0.0000002*iResolution.x)*(1.0-iAnimProgress_1.x)) - (iAnimProgress_1.x * (0.0000005*iResolution.x)) + (iAnimProgress_3.y * 0.0002)));
+        sunCol = HSV2RGB(vec3(0.01, 0.5, 0.0000005*iResolution.x-(iAnimProgress_4.z * (0.0000002*iResolution.x)*(1.0-iAnimProgress_1.x)) - (iAnimProgress_1.x * (0.0000005*iResolution.x)) + (iAnimProgress_3.z * 0.0002)));
     //(iAnimProgress_1.x*0.002)+(iAnimProgress_3.y*0.0006);
     // Sun settings
         col += sunCol / pow((1.002 - dot(sunDir, rd)), 1.9);
@@ -1302,8 +1302,8 @@
         col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_hedger(p_hedger_text, vec2(0.0, -0.03)) * (fadein_fadeout.x - iAnimProgress_2.y));
         col = mix(col, HSV2RGB(vec3(0.0, 0.7 - (iAnimProgress_3.y), 1.0)), draw_text_party_b(p_hedger_text, vec2(0.1, -0.03)) * iAnimProgress_2.y);
 
-        col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_intent_b(p_hedger_text, vec2(-0.03 + (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_2.y - iAnimProgress_2.z));
-        col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_btc_short(p_hedger_text, vec2(+0.01 + (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_2.z - fadein_fadeout.y));
+        col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_intent_b(p_hedger_text, vec2(-0.03 + (sin(iAnimProgress_2.z * 3.142)) * 0.7, -0.25)) * (iAnimProgress_2.y - iAnimProgress_2.z));
+        col = mix(col, HSV2RGB(vec3(0.0, 0.7, 1.0)), draw_text_btc_short(p_hedger_text, vec2(+0.01 + (sin(iAnimProgress_2.z * 3.142)) * 0.7, -0.25)) * (iAnimProgress_2.z - fadein_fadeout.y));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 0.7)), draw_text_plus_onethousand(p_hedger_text, vec2(-0.23, -0.55)) * (iAnimProgress_3.x - fadein_fadeout.y));
 
         vec2 p_tri_you = p;
@@ -1326,8 +1326,8 @@
 
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_you(p_you_text, vec2(1.7, -0.03)) * (fadein_fadeout.x - iAnimProgress_1.z));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_party_a(p_you_text, vec2(2.1, -0.03)) * iAnimProgress_1.z);
-        col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_intent_a(p_you_text, vec2(1.97 - (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_1.y - iAnimProgress_2.z));
-        col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_btc_long(p_you_text, vec2(1.91 - (sin(iAnimProgress_2.z * 3.142)) * 0.5, -0.25)) * (iAnimProgress_2.z - fadein_fadeout.y));
+        col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_intent_a(p_you_text, vec2(1.97 - (sin(iAnimProgress_2.z * 3.142)) * 0.7, -0.25)) * (iAnimProgress_1.y - iAnimProgress_2.z));
+        col = mix(col, HSV2RGB(vec3(0.0, 0.0, 1.0)), draw_text_btc_long(p_you_text, vec2(1.91 - (sin(iAnimProgress_2.z * 3.142)) * 0.7, -0.25)) * (iAnimProgress_2.z - fadein_fadeout.y));
         col = mix(col, HSV2RGB(vec3(0.0, 0.0, 0.7)), draw_text_plus_onethousand(p_you_text, vec2(1.78, -0.55)) * (iAnimProgress_3.x - fadein_fadeout.y));
 
         return col;
