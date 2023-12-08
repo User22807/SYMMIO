@@ -30,7 +30,6 @@ html::-webkit-scrollbar-thumb {
 	background-color: rgb(255, 68, 68);
 }
 
-
 html .section {
 	scroll-snap-align: start;
 	height: 100vh;
