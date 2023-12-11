@@ -330,12 +330,9 @@ function setupContentScrollTrigger() {
       list_top:
         "<span class= head-span>PartyA and PartyB are SYMMETRICAL</span> " +
         "</br></br>" +
-        " <span class=active-span>Exact mirrors of the same position.</span></br>" +
         " <span class=active-span>One Side LONGs 1 BTC,</span></br>" +
         " <span class=active-span>Other side SHORTs 1 BTC,</span></br>" +
-        " <span class=active-span>No PartyA & B pair = no trade.</span></br>" +
-        " <span class=active-span>Loss of A = Win of B,</span></br>" +
-        " <span class=active-span>SYMMETRICAL TRADING.</span>",
+        " <span class=active-span>the loss of one side is the win of the other.</span></br>" ,
       selector: ".section.ten",
     },
     {
