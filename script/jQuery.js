@@ -1,3 +1,41 @@
+
+// ScrollDown rotation on scroll
+function handleRotate(elementSelector, scrollThreshold, rotationDegree) {
+  window.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    const element = document.querySelector(elementSelector);
+    var scrollButton = document.getElementById("scrollDown");
+
+    if (scrollPosition <= scrollThreshold) {
+      element.style.transform = `scaleY(1)`;
+
+      if (scrollButton) {
+        scrollButton.addEventListener("click", function () {
+          // Scroll down by 100vh
+          window.scrollTo({
+            top: window.scrollY + window.innerHeight,
+            behavior: "smooth",
+          });
+        });
+      }
+    } else {
+      element.style.transform = `scaleY(${rotationDegree})`;
+      var scrollButton = document.getElementById("scrollDown");
+      if (scrollButton) {
+        scrollButton.addEventListener("click", function () {
+          // Scroll down by 100vh
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      }
+    }
+  });
+}
+
+handleRotate(".scrollDown", window.innerHeight * 9.2, -1);
+
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
 const menuLinks = document.querySelectorAll(".menu-links li a");
@@ -11,7 +49,11 @@ menuLinks.forEach((link) => {
 });
 
 // Caption and ScrollDown visibility on scroll
-function handleScrollVisibility(elementSelector, scrollThreshold, opacityThreshold) {
+function handleScrollVisibility(
+  elementSelector,
+  scrollThreshold,
+  opacityThreshold
+) {
   window.addEventListener("scroll", () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const element = document.querySelector(elementSelector);
@@ -45,9 +87,14 @@ function activateMenuItem() {
     const sectionTop = $(this).offset().top;
     const sectionHeight = $(this).outerHeight();
 
-    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+    if (
+      scrollPosition >= sectionTop &&
+      scrollPosition < sectionTop + sectionHeight
+    ) {
       $(".menu__item").removeClass("menu__item--current");
-      $(".menu__link[href='#" + sectionId + "']").parent().addClass("menu__item--current");
+      $(".menu__link[href='#" + sectionId + "']")
+        .parent()
+        .addClass("menu__item--current");
     }
   });
 }
