@@ -1,4 +1,3 @@
-
 // ScrollDown rotation on scroll
 function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
   window.addEventListener("scroll", () => {
@@ -9,7 +8,6 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
     if (scrollPosition <= scrollThreshold) {
       element.style.transform = `scaleY(1)`;
 
-      if (scrollButton) {
         scrollButton.addEventListener("click", function () {
           // Scroll down by 100vh
           window.scrollTo({
@@ -24,11 +22,9 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
             behavior: "smooth",
           });
         });
-      }
     } else {
       element.style.transform = `scaleY(${rotationDegree})`;
       var scrollButton = document.getElementById("scrollDown");
-      if (scrollButton) {
         scrollButton.addEventListener("click", function () {
           // Scroll down by 100vh
           window.scrollTo({
@@ -43,7 +39,6 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
             behavior: "smooth",
           });
         });
-      }
     }
   });
 }
