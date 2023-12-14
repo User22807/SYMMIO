@@ -10,7 +10,6 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
       element.style.transform = `scaleY(1)`;
 
       if (scrollButton) {
-        // Click event for mouse
         scrollButton.addEventListener("click", function () {
           // Scroll down by 100vh
           window.scrollTo({
@@ -18,8 +17,6 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
             behavior: "smooth",
           });
         });
-
-        // Touch event for touch devices
         scrollButton.addEventListener("touchstart", function () {
           // Scroll down by 100vh
           window.scrollTo({
@@ -32,18 +29,15 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
       element.style.transform = `scaleY(${rotationDegree})`;
       var scrollButton = document.getElementById("scrollDown");
       if (scrollButton) {
-        // Click event for mouse
         scrollButton.addEventListener("click", function () {
-          // Scroll to the top
+          // Scroll down by 100vh
           window.scrollTo({
             top: 0,
             behavior: "smooth",
           });
         });
-
-        // Touch event for touch devices
         scrollButton.addEventListener("touchstart", function () {
-          // Scroll to the top
+          // Scroll down by 100vh
           window.scrollTo({
             top: 0,
             behavior: "smooth",
