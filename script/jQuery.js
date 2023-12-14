@@ -1,41 +1,43 @@
 // ScrollDown rotation on scroll
-function handleScrollDown(elementSelector, sectionId, rotationDegree) {
-  function scrollDownFunction() {
-    window.scrollTo({
-      top: window.scrollY + window.innerHeight,
-      behavior: "smooth",
-    });
-  }
-
-  function scrollToTopFunction() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-
-  function setEventListeners(scrollButton, scrollFunction) {
-    scrollButton.addEventListener("click", scrollFunction);
-    scrollButton.addEventListener("touchstart", scrollFunction);
-  }
-
+// ScrollDown rotation on scroll
+function handlScrollDown(elementSelector, sectionId) {
   window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const element = document.querySelector(elementSelector);
     const lastSection = document.getElementById(sectionId);
     var scrollButton = document.getElementById("scrollDown");
 
-    if (scrollPosition <= lastSection.offsetTop) {
+    if ( window.scrollY <= lastSection.offsetTop) {
       element.style.transform = `scaleY(1)`;
-      setEventListeners(scrollButton, scrollDownFunction);
+
+      scrollButton.addEventListener("click", function () {
+        // Scroll down by 100vh
+        window.scrollTo({
+          top: window.scrollY + window.innerHeight,
+        });
+      });
+      scrollButton.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: window.scrollY + window.innerHeight,
+        });
+      });
     } else {
-      element.style.transform = `scaleY(${rotationDegree})`;
-      setEventListeners(scrollButton, scrollToTopFunction);
+      element.style.transform = `scaleY(-1)`;
+      var scrollButton = document.getElementById("scrollDown");
+      scrollButton.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+        });
+      });
+      scrollButton.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: 0,
+        });
+      });
     }
   });
 }
-
-handleScrollDown(".scrollDown", "reachUs", -1); // Use the ID of the "section ten" element
+// Element selector , last section ID selector
+handlScrollDown(".scrollDown", "reachUs");
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
