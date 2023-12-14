@@ -15,13 +15,7 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
             behavior: "smooth",
           });
         });
-        scrollButton.addEventListener("touchstart", function () {
-          // Scroll down by 100vh
-          window.scrollTo({
-            top: window.scrollY + window.innerHeight,
-            behavior: "smooth",
-          });
-        });
+
     } else {
       element.style.transform = `scaleY(${rotationDegree})`;
       var scrollButton = document.getElementById("scrollDown");
@@ -32,13 +26,7 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
             behavior: "smooth",
           });
         });
-        scrollButton.addEventListener("touchstart", function () {
-          // Scroll down by 100vh
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        });
+
     }
   });
 }
