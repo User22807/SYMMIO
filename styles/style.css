@@ -692,7 +692,9 @@ canvas {
 
 
 @media screen and (max-width: 1000px) {
-
+	html {
+		font-size: calc(0.5vw + 0.5vh);
+	}
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 15em;
@@ -710,8 +712,9 @@ canvas {
 	}
 
 	.about_text {
-margin-top: 2em;
+		margin-top: 2em;
 	}
+
 	.button {
 		padding: 1em 4em 0em 4em;
 		text-align: left;
@@ -756,7 +759,7 @@ margin-top: 2em;
 		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 		/* Add transition for ease-out effect */
 	}
-	
+
 	.box__text .titleSYMM {
 		width: 100%;
 		letter-spacing: 0.5em;
@@ -786,7 +789,7 @@ margin-top: 2em;
 		height: 3em;
 		width: 100%;
 		right: 2.5em;
-		
+
 	}
 
 	.chevron {

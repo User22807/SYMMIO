@@ -1,3 +1,4 @@
+
 // ScrollDown rotation on scroll
 function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
   window.addEventListener("scroll", () => {
@@ -26,9 +27,7 @@ function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
       }
     } else {
       element.style.transform = `scaleY(${rotationDegree})`;
-
       var scrollButton = document.getElementById("scrollDown");
-
       if (scrollButton) {
         scrollButton.addEventListener("click", function () {
           // Scroll down by 100vh
