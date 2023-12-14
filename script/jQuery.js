@@ -27,7 +27,6 @@ function handlScrollDown(elementSelector, sectionId) {
       });
 
       element.addEventListener("touchstart", function (event) {
-        event.preventDefault(); // Prevent the default touch behavior
         window.scrollTo({
           top: 0,
         });
