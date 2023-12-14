@@ -1,37 +1,52 @@
-// ScrollDown rotation on scroll
-function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
-  window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+// ScrollDown button functions
+function handleScrollDown(elementSelector, scrollThreshold, rotationDegree) {
+  function handleButtonClick() {
+    // Scroll down by 100vh or scroll to top
+    const scrollDestination = window.scrollY <= scrollThreshold ? window.scrollY + window.innerHeight : 0;
+
+    window.scrollTo({
+      top: scrollDestination,
+      behavior: "smooth",
+    });
+  }
+
+  function handleButtonClickTouch() {
+    handleButtonClick();
+    // Remove touchstart event after execution to prevent glitches
+    scrollButton.removeEventListener("touchstart", handleButtonClickTouch);
+  }
+
+  function updateElementTransform(scrollPosition) {
     const element = document.querySelector(elementSelector);
-    var scrollButton = document.getElementById("scrollDown");
+    const scaleValue = scrollPosition <= scrollThreshold ? 1 : rotationDegree;
+    element.style.transform = `scaleY(${scaleValue})`;
+  }
 
-    if (scrollPosition <= scrollThreshold) {
-      element.style.transform = `scaleY(1)`;
+  function handleScroll() {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    updateElementTransform(scrollPosition);
+  }
 
-        scrollButton.addEventListener("click", function () {
-          // Scroll down by 100vh
-          window.scrollTo({
-            top: window.scrollY + window.innerHeight,
-            behavior: "smooth",
-          });
-        });
+  const scrollButton = document.getElementById("scrollDown");
+  window.addEventListener("scroll", handleScroll);
 
-    } else {
-      element.style.transform = `scaleY(${rotationDegree})`;
-      var scrollButton = document.getElementById("scrollDown");
-        scrollButton.addEventListener("click", function () {
-          // Scroll down by 100vh
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        });
+  if (scrollButton) {
+    scrollButton.addEventListener("click", handleButtonClick);
+    scrollButton.addEventListener("touchstart", handleButtonClickTouch);
 
-    }
-  });
+    // Add global click event listener to detect clicks outside the scroll button
+    document.addEventListener("click", function (event) {
+      const isOutsideButton = !event.target.closest(elementSelector);
+      if (isOutsideButton) {
+        // Remove touchstart event when clicked outside the button
+        scrollButton.removeEventListener("touchstart", handleButtonClickTouch);
+      }
+    });
+  }
 }
 
-handlScrollDown(".scrollDown", window.innerHeight * 9.2, -1);
+handleScrollDown(".scrollDown", window.innerHeight * 9.2, -1);
+
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
