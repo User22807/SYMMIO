@@ -1,34 +1,33 @@
 // ScrollDown rotation on scroll
-// ScrollDown rotation on scroll
-function handlScrollDown(elementSelector, sectionId) {
+function handlScrollDown(elementSelector, lastSectionId) {
   window.addEventListener("scroll", () => {
     const element = document.querySelector(elementSelector);
-    const lastSection = document.getElementById(sectionId);
-    var scrollButton = document.getElementById("scrollDown");
+    const lastSection = document.getElementById(lastSectionId);
 
-    if ( window.scrollY <= lastSection.offsetTop) {
+    if (window.scrollY <= lastSection.offsetTop) {
       element.style.transform = `scaleY(1)`;
 
-      scrollButton.addEventListener("click", function () {
-        // Scroll down by 100vh
+      element.addEventListener("click", function () {
         window.scrollTo({
           top: window.scrollY + window.innerHeight,
         });
       });
-      scrollButton.addEventListener("touchstart", function () {
+      element.addEventListener("touchstart", function () {
         window.scrollTo({
           top: window.scrollY + window.innerHeight,
         });
       });
+
+
     } else {
       element.style.transform = `scaleY(-1)`;
-      var scrollButton = document.getElementById("scrollDown");
-      scrollButton.addEventListener("click", function () {
+
+      element.addEventListener("click", function () {
         window.scrollTo({
           top: 0,
         });
       });
-      scrollButton.addEventListener("touchstart", function () {
+      element.addEventListener("touchstart", function () {
         window.scrollTo({
           top: 0,
         });
@@ -36,8 +35,10 @@ function handlScrollDown(elementSelector, sectionId) {
     }
   });
 }
-// Element selector , last section ID selector
+//Init scroll function Element selector , last section ID selector
 handlScrollDown(".scrollDown", "reachUs");
+
+
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
