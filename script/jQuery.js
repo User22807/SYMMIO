@@ -1,42 +1,44 @@
-// ScrollDown rotation on scroll
-function handlScrollDown(elementSelector, lastSectionId) {
+function handleScrollDown(elementSelector, sectionId) {
+  function scrollDownFunction() {
+    window.scrollBy({
+      top: window.innerHeight,
+    });
+  }
+
+  function scrollToTopFunction() {
+    window.scrollTo({
+      top: 0,
+    });
+  }
+
+  function setEventListeners(scrollButton, scrollFunction) {
+    scrollButton.addEventListener("click", scrollFunction);
+    scrollButton.addEventListener("touchstart", scrollFunction);
+  }
+
   window.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY ;
     const element = document.querySelector(elementSelector);
-    const lastSection = document.getElementById(lastSectionId);
+    const lastSection = document.getElementById(sectionId);
+    var scrollButton = document.getElementById("scrollDown");
 
-    if (window.scrollY <= lastSection.offsetTop) {
+    if (scrollPosition <= lastSection.offsetTop) {
       element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-        });
-      });
-
-
+      setEventListeners(scrollButton, scrollDownFunction);
     } else {
       element.style.transform = `scaleY(-1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: 0,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: 0,
-        });
-      });
+      setEventListeners(scrollButton, scrollToTopFunction);
     }
   });
+
 }
-//Init scroll function Element selector , last section ID selector
-handlScrollDown(".scrollDown", "reachUs");
+
+// button element selector, "last section" element ID
+handleScrollDown(".scrollDown", "reachUs");
+
+
+
+
 
 
 
