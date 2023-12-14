@@ -194,8 +194,7 @@ function setupContentScrollTrigger() {
     {
       list_top: "",
       title: "",
-      subtitle:
-        "Reimagining bilateral OTC Derivatives by combining them with Intent-Based execution.<br/>Allowing permissionless leverage trading of any asset, with hyperefficient just-in-time liquidity.",
+      subtitle: "Bilateral OTC Derivatives with Intent-Based execution.<br/>Leverage trade any asset permissionlessly with hyper-efficient liquidity.",
       titleSYMM: "SYMMIO",
       list_top: "",
       selector: ".section.one",
@@ -320,7 +319,8 @@ function setupContentScrollTrigger() {
       list_top:
         "<span class= head-span>Neutral Parties as Arbiters</span> " +
         "</br></br>" +
-        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. As both sides can be liquidated and dispute decisions, the system is trustless and highly capital efficient.</span></br>",
+        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br>"+
+        " <span class=active-span>Both sides can be liquidated and their actions disputed, creating a trustless and highly capital efficient system.</span></br>",
       selector: ".section.nine",
     },
     {
@@ -330,9 +330,9 @@ function setupContentScrollTrigger() {
       list_top:
         "<span class= head-span>PartyA and PartyB are SYMMETRICAL</span> " +
         "</br></br>" +
-        " <span class=active-span>One Side LONGs 1 BTC,</span></br>" +
-        " <span class=active-span>Other side SHORTs 1 BTC,</span></br>" +
-        " <span class=active-span>the loss of one side is the win of the other.</span></br>" ,
+        " <span class=active-span>One side LONGs 1 BTC.</span></br>" +
+        " <span class=active-span>The other side SHORTs 1 BTC.</span></br>" +
+        " <span class=active-span>The loss of one side is the win of the other.</span></br>" ,
       selector: ".section.ten",
     },
     {

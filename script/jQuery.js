@@ -1,6 +1,6 @@
 
 // ScrollDown rotation on scroll
-function handleRotate(elementSelector, scrollThreshold, rotationDegree) {
+function handlScrollDown(elementSelector, scrollThreshold, rotationDegree) {
   window.addEventListener("scroll", () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const element = document.querySelector(elementSelector);
@@ -10,7 +10,17 @@ function handleRotate(elementSelector, scrollThreshold, rotationDegree) {
       element.style.transform = `scaleY(1)`;
 
       if (scrollButton) {
+        // Click event for mouse
         scrollButton.addEventListener("click", function () {
+          // Scroll down by 100vh
+          window.scrollTo({
+            top: window.scrollY + window.innerHeight,
+            behavior: "smooth",
+          });
+        });
+
+        // Touch event for touch devices
+        scrollButton.addEventListener("touchstart", function () {
           // Scroll down by 100vh
           window.scrollTo({
             top: window.scrollY + window.innerHeight,
@@ -22,8 +32,18 @@ function handleRotate(elementSelector, scrollThreshold, rotationDegree) {
       element.style.transform = `scaleY(${rotationDegree})`;
       var scrollButton = document.getElementById("scrollDown");
       if (scrollButton) {
+        // Click event for mouse
         scrollButton.addEventListener("click", function () {
-          // Scroll down by 100vh
+          // Scroll to the top
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        // Touch event for touch devices
+        scrollButton.addEventListener("touchstart", function () {
+          // Scroll to the top
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -34,7 +54,7 @@ function handleRotate(elementSelector, scrollThreshold, rotationDegree) {
   });
 }
 
-handleRotate(".scrollDown", window.innerHeight * 9.2, -1);
+handlScrollDown(".scrollDown", window.innerHeight * 9.2, -1);
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
