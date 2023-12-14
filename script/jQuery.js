@@ -1,12 +1,9 @@
-
-
-// ScrollDown rotation on scroll
 function handlScrollDown(elementSelector, sectionId) {
   window.addEventListener("scroll", () => {
     const element = document.querySelector(elementSelector);
     const lastSection = document.getElementById(sectionId);
 
-    if ( window.scrollY <= lastSection.offsetTop) {
+    if (window.scrollY <= lastSection.offsetTop) {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -14,7 +11,9 @@ function handlScrollDown(elementSelector, sectionId) {
           top: window.scrollY + window.innerHeight,
         });
       });
-      element.addEventListener("touchstart", function () {
+
+      element.addEventListener("touchstart", function (event) {
+        event.preventDefault(); // Prevent the default touch behavior
         window.scrollTo({
           top: window.scrollY + window.innerHeight,
         });
@@ -26,7 +25,9 @@ function handlScrollDown(elementSelector, sectionId) {
           top: 0,
         });
       });
-      element.addEventListener("touchstart", function () {
+
+      element.addEventListener("touchstart", function (event) {
+        event.preventDefault(); // Prevent the default touch behavior
         window.scrollTo({
           top: 0,
         });
@@ -34,7 +35,8 @@ function handlScrollDown(elementSelector, sectionId) {
     }
   });
 }
-// Element selector , last section ID selector
+
+// Element selector, last section ID selector
 handlScrollDown(".scrollDown", "reachUs");
 
 
