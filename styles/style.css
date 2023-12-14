@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300&display=swap');
 
 html {
-	font-size: 0.5em;
+	font-size: 1vh;
 	font-family: "Manrope", sans-serif;
 	scroll-snap-type: y mandatory;
 	overflow: auto;
@@ -756,11 +756,7 @@ margin-top: 2em;
 		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 		/* Add transition for ease-out effect */
 	}
-
-	.testmargin {
-		padding-right: 5.5em;
-	}
-
+	
 	.box__text .titleSYMM {
 		width: 100%;
 		letter-spacing: 0.5em;
@@ -777,8 +773,8 @@ margin-top: 2em;
 
 
 	.box__text .subtitle {
-		padding-top: 18em;
 		font-size: 1.7em;
+		padding-top: 18em;
 		width: 90%;
 	}
 
