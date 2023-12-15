@@ -1,34 +1,179 @@
-function handlScrollDown(elementSelector, sectionId) {
+var scrollProgress;
+
+function handlScrollDown(elementSelector) {
   window.addEventListener("scroll", () => {
     const element = document.querySelector(elementSelector);
-    const lastSection = document.getElementById(sectionId);
+    const sectionOne = (document.querySelector('.section.one')).offsetTop;
+    const sectionTwo = (document.querySelector('.section.two')).offsetTop;
+    const sectionThree = (document.querySelector('.section.three')).offsetTop;
+    const sectionFour = (document.querySelector('.section.four')).offsetTop;
+    const sectionFive = (document.querySelector('.section.five')).offsetTop;
+    const sectionSix = (document.querySelector('.section.six')).offsetTop;
+    const sectionSeven = (document.querySelector('.section.seven')).offsetTop;
+    const sectionEight = (document.querySelector('.section.eight')).offsetTop;
+    const sectionNine = (document.querySelector('.section.nine')).offsetTop;
+    const sectionTen = (document.querySelector('.section.ten')).offsetTop;
+    const sectionEleven = (document.querySelector('.section.eleven')).offsetTop;
 
-    if (window.scrollY <= lastSection.offsetTop) {
+
+
+    
+    if (window.scrollY == sectionOne) {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
         window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-        });
-      });
 
-      element.addEventListener("touchstart", function (event) {
-        event.preventDefault(); // Prevent the default touch behavior
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
+          top: sectionTwo,
         });
       });
-    } else {
-      element.style.transform = `scaleY(-1)`;
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionTwo,
+        });
+      });
+    }
+    else if (window.scrollY == sectionTwo) {
+      element.style.transform = `scaleY(1)`;
+
       element.addEventListener("click", function () {
         window.scrollTo({
-          top: 0,
+
+          top: sectionThree,
         });
       });
-
-      element.addEventListener("touchstart", function (event) {
+      element.addEventListener("touchstart", function () {
         window.scrollTo({
-          top: 0,
+          top: sectionThree,
+        });
+      });
+    }
+    if (window.scrollY == sectionThree) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionFour,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionFour,
+        });
+      });
+    }
+    if (window.scrollY == sectionFour) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionFive,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionFive,
+        });
+      });
+    }
+    if (window.scrollY == sectionFive) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionSix,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionSix,
+        });
+      });
+    }    if (window.scrollY == sectionSix) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionSeven,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionSeven,
+        });
+      });
+    }    if (window.scrollY == sectionSeven) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionEight,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionEight,
+        });
+      });
+    }    if (window.scrollY == sectionEight) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionNine,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionNine,
+        });
+      });
+    }    if (window.scrollY == sectionNine) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionTen,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionTen,
+        });
+      });
+    }    if (window.scrollY == sectionTen) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionEleven,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionEleven,
+        });
+      });
+    }    if (window.scrollY == sectionEleven) {
+      element.style.transform = `scaleY(-1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+
+          top: sectionOne,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: sectionOne,
         });
       });
     }
@@ -36,10 +181,7 @@ function handlScrollDown(elementSelector, sectionId) {
 }
 
 // Element selector, last section ID selector
-handlScrollDown(".scrollDown", "reachUs");
-
-
-
+handlScrollDown(".scrollDown");
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
@@ -111,11 +253,7 @@ $(window).on("scroll", activateMenuItem);
 
 //***********     text gsap     ***********//
 
-function updateScrollProgress() {
-  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const currentScroll = window.scrollY;
-  scrollProgress = currentScroll / maxScroll;
-}
+
 
 // Set up content scroll triggers
 function setupContentScrollTrigger() {
