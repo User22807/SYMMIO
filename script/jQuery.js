@@ -1,187 +1,101 @@
-var scrollProgress;
+// Function to determine the current section based on scroll position
+function getCurrentSection() {
+  const sections = document.querySelectorAll(".section");
+  let currentSection = null;
 
-function handlScrollDown(elementSelector) {
-  window.addEventListener("scroll", () => {
-    const element = document.querySelector(elementSelector);
-    const sectionOne = (document.querySelector('.section.one')).offsetTop;
-    const sectionTwo = (document.querySelector('.section.two')).offsetTop;
-    const sectionThree = (document.querySelector('.section.three')).offsetTop;
-    const sectionFour = (document.querySelector('.section.four')).offsetTop;
-    const sectionFive = (document.querySelector('.section.five')).offsetTop;
-    const sectionSix = (document.querySelector('.section.six')).offsetTop;
-    const sectionSeven = (document.querySelector('.section.seven')).offsetTop;
-    const sectionEight = (document.querySelector('.section.eight')).offsetTop;
-    const sectionNine = (document.querySelector('.section.nine')).offsetTop;
-    const sectionTen = (document.querySelector('.section.ten')).offsetTop;
-    const sectionEleven = (document.querySelector('.section.eleven')).offsetTop;
+  sections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
 
+    if (
+      rect.top <= window.innerHeight / 2 &&
+      rect.bottom >= window.innerHeight / 2
+    ) {
+      currentSection = section.classList.item(1); // Get the second class (index 1) as we don't need the "section" class
+    }
+  });
 
+  return currentSection;
+}
 
-    
+// Function to log the current section to the console
+function logCurrentSection() {
+  const currentSection = getCurrentSection();
+
+  if (currentSection) {
+    console.log("Current Section:", currentSection);
+  }
+}
+
+// Event listener for scrolling
+window.addEventListener("scroll", logCurrentSection);
+
+// Initial log when the page loads
+logCurrentSection();
+
+document.addEventListener("scroll", function () {
+  const currentSection = getCurrentSection();
+
+  const element = document.querySelector(".scrollDown");
+  const sectionOne = document.querySelector(".section.one").offsetTop;
+  const sectionTwo = document.querySelector(".section.two").offsetTop;
+  const sectionThree = document.querySelector(".section.three").offsetTop;
+  const sectionFour = document.querySelector(".section.four").offsetTop;
+  const sectionFive = document.querySelector(".section.five").offsetTop;
+  const sectionSix = document.querySelector(".section.six").offsetTop;
+  const sectionSeven = document.querySelector(".section.seven").offsetTop;
+  const sectionEight = document.querySelector(".section.eight").offsetTop;
+  const sectionNine = document.querySelector(".section.nine").offsetTop;
+  const sectionTen = document.querySelector(".section.ten").offsetTop;
+  const sectionEleven = document.querySelector(".section.eleven").offsetTop;
+
+  element.addEventListener("click", function () {
     if (window.scrollY == sectionOne) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionTwo,
-        });
+      window.scrollTo({
+        top: sectionTwo,
       });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionTwo,
-        });
+    } else if (window.scrollY == sectionTwo) {
+      window.scrollTo({
+        top: sectionThree,
       });
-    }
-    else if (window.scrollY == sectionTwo) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionThree,
-        });
+    } else if (window.scrollY == sectionThree) {
+      window.scrollTo({
+        top: sectionFour,
       });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionThree,
-        });
+    } else if (window.scrollY == sectionFour) {
+      window.scrollTo({
+        top: sectionFive,
       });
-    }
-    if (window.scrollY == sectionThree) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionFour,
-        });
+    } else if (window.scrollY == sectionFive) {
+      window.scrollTo({
+        top: sectionSix,
       });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionFour,
-        });
+    } else if (window.scrollY == sectionSix) {
+      window.scrollTo({
+        top: sectionSeven,
       });
-    }
-    if (window.scrollY == sectionFour) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionFive,
-        });
+    } else if (window.scrollY == sectionSeven) {
+      window.scrollTo({
+        top: sectionEight,
       });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionFive,
-        });
+    } else if (window.scrollY == sectionEight) {
+      window.scrollTo({
+        top: sectionNine,
       });
-    }
-    if (window.scrollY == sectionFive) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionSix,
-        });
+    } else if (window.scrollY == sectionNine) {
+      window.scrollTo({
+        top: sectionTen,
       });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionSix,
-        });
+    } else if (window.scrollY == sectionTen) {
+      window.scrollTo({
+        top: sectionEleven,
       });
-    }    if (window.scrollY == sectionSix) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionSeven,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionSeven,
-        });
-      });
-    }    if (window.scrollY == sectionSeven) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionEight,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionEight,
-        });
-      });
-    }    if (window.scrollY == sectionEight) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionNine,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionNine,
-        });
-      });
-    }    if (window.scrollY == sectionNine) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionTen,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionTen,
-        });
-      });
-    }    if (window.scrollY == sectionTen) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionEleven,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionEleven,
-        });
-      });
-    }    if (window.scrollY == sectionEleven) {
-      element.style.transform = `scaleY(-1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-
-          top: sectionOne,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: sectionOne,
-        });
+    } else if (window.scrollY == sectionEleven) {
+      window.scrollTo({
+        top: sectionOne,
       });
     }
   });
-}
-
-// Element selector, last section ID selector
-handlScrollDown(".scrollDown");
+});
 
 // Hamburger menu
 const menuTrigger = document.querySelector(".menu-trigger");
@@ -249,11 +163,7 @@ function activateMenuItem() {
 activateMenuItem();
 $(window).on("scroll", activateMenuItem);
 
-
-
 //***********     text gsap     ***********//
-
-
 
 // Set up content scroll triggers
 function setupContentScrollTrigger() {
@@ -263,7 +173,8 @@ function setupContentScrollTrigger() {
     {
       list_top: "",
       title: "",
-      subtitle: "Bilateral OTC Derivatives with Intent-Based execution.<br/>Leverage trade any asset permissionlessly with hyper-efficient liquidity.",
+      subtitle:
+        "Bilateral OTC Derivatives with Intent-Based execution.<br/>Leverage trade any asset permissionlessly with hyper-efficient liquidity.",
       titleSYMM: "SYMMIO",
       list_top: "",
       selector: ".section.one",
@@ -388,7 +299,7 @@ function setupContentScrollTrigger() {
       list_top:
         "<span class= head-span>Neutral Parties as Arbiters</span> " +
         "</br></br>" +
-        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br>"+
+        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br>" +
         " <span class=active-span>Both sides can be liquidated and their actions disputed, creating a trustless and highly capital efficient system.</span></br>",
       selector: ".section.nine",
     },
@@ -401,7 +312,7 @@ function setupContentScrollTrigger() {
         "</br></br>" +
         " <span class=active-span>One side LONGs 1 BTC.</span></br>" +
         " <span class=active-span>The other side SHORTs 1 BTC.</span></br>" +
-        " <span class=active-span>The loss of one side is the win of the other.</span></br>" ,
+        " <span class=active-span>The loss of one side is the win of the other.</span></br>",
       selector: ".section.ten",
     },
     {
@@ -466,5 +377,3 @@ function setupContentScrollTrigger() {
     }
   });
 }
-
-
