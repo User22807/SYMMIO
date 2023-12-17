@@ -1,99 +1,50 @@
-// Function to determine the current section based on scroll position
-function getCurrentSection() {
+document.addEventListener('DOMContentLoaded', function () {
   const sections = document.querySelectorAll(".section");
-  let currentSection = null;
+  let currentSectionIndex = 0;
 
-  sections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
+  function scrollToSection(index) {
+    sections[index].scrollIntoView({ behavior: 'smooth' });
+  }
 
-    if (
-      rect.top <= window.innerHeight / 2 &&
-      rect.bottom >= window.innerHeight / 2
-    ) {
-      currentSection = section.classList.item(1); // Get the second class (index 1) as we don't need the "section" class
+  function handleScrollDownClick() {
+    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+    scrollToSection(currentSectionIndex);
+  }
+
+  function handleScroll() {
+    const currentSection = getCurrentSection();
+
+    if (currentSection !== null) {
+      const index = Array.from(sections).findIndex(section => section.classList.contains(currentSection));
+      if (index !== -1) {
+        currentSectionIndex = index;
+      }
     }
-  });
+  }
 
-  return currentSection;
-}
+  function getCurrentSection() {
+    let currentSection = null;
 
-// Initial log when the page loads
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
 
-document.addEventListener("touchstart", function () {
-  const currentSection = getCurrentSection();
+      if (
+        rect.top <= window.innerHeight / 2 &&
+        rect.bottom >= window.innerHeight / 2
+      ) {
+        currentSection = section.classList.item(1); // Get the second class (index 1) as we don't need the "section" class
+      }
+    });
 
-  const element = document.querySelector(".scrollDown");
-  const sectionOne = document.querySelector(".section.one").offsetTop;
-  const sectionTwo = document.querySelector(".section.two").offsetTop;
-  const sectionThree = document.querySelector(".section.three").offsetTop;
-  const sectionFour = document.querySelector(".section.four").offsetTop;
-  const sectionFive = document.querySelector(".section.five").offsetTop;
-  const sectionSix = document.querySelector(".section.six").offsetTop;
-  const sectionSeven = document.querySelector(".section.seven").offsetTop;
-  const sectionEight = document.querySelector(".section.eight").offsetTop;
-  const sectionNine = document.querySelector(".section.nine").offsetTop;
-  const sectionTen = document.querySelector(".section.ten").offsetTop;
-  const sectionEleven = document.querySelector(".section.eleven").offsetTop;
-  element.addEventListener("touchstart", function () {
+    return currentSection;
+  }
 
-    if (currentSection == "one") {
-      window.scrollTo({
-        top: sectionTwo,
-      });
-    } else if (currentSection == "two") {
-      window.scrollTo({
-        top: sectionThree,
-      });
-    } else if (currentSection == "three") {
-      window.scrollTo({
-        top: sectionFour,
-      });
-    } else if (currentSection == "four") {
-      window.scrollTo({
-        top: sectionFive,
-      });
-    } else if (currentSection == "five") {
-      window.scrollTo({
-        top: sectionSix,
-      });
-    } else if (currentSection == "six") {
-      window.scrollTo({
-        top: sectionSeven,
-      });
-    } else if (currentSection == "seven") {
-      window.scrollTo({
-        top: sectionEight,
-      });
-    } else if (currentSection == "eight") {
-      window.scrollTo({
-        top: sectionNine,
-      });
-    } else if (currentSection == "nine") {
-      window.scrollTo({
-        top: sectionTen,
-      });
-    } else if (currentSection == "ten") {
-      window.scrollTo({
-        top: sectionEleven,
-      });
-    } else if (currentSection == "eleven") {
-      window.scrollTo({
-        top: sectionOne,
-      });
-    }
-  });
-});
+  // Attach click event to the scrollDown button
+  const scrollDownButton = document.querySelector(".scrollDown");
+  scrollDownButton.addEventListener("click", handleScrollDownClick);
 
-// Hamburger menu
-const menuTrigger = document.querySelector(".menu-trigger");
-const menuLinks = document.querySelectorAll(".menu-links li a");
-
-menuLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    if (menuTrigger.checked) {
-      menuTrigger.checked = false;
-    }
-  });
+  // Attach scroll event to handle updating the current section
+  window.addEventListener("scroll", handleScroll);
 });
 
 // Caption and ScrollDown visibility on scroll
