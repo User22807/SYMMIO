@@ -4,22 +4,16 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 document.addEventListener("DOMContentLoaded", function() {
-  // Get all elements with the class "scrollDown"
+  var isTouchDevice = 'ontouchstart' in document.documentElement;
   var scrollDownButtons = document.getElementsByClassName("scrollDown");
 
-  // Add a click event listener to each button
   Array.from(scrollDownButtons).forEach(function(button) {
-    button.addEventListener("click", function() {
-      // Get the current scroll position
+    button.addEventListener(isTouchDevice ? "touchstart" : "click", function(event) {
+      event.preventDefault();
       var currentPosition = window.scrollY;
-
-      // Get the height of the viewport
       var viewportHeight = window.innerHeight;
-
-      // Calculate the target scroll position for the next section
       var targetPosition = currentPosition + viewportHeight;
 
-      // Scroll to the target position smoothly
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth"
@@ -27,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
 
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
