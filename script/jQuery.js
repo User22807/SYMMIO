@@ -1,44 +1,125 @@
 window.addEventListener("DOMContentLoaded", () => {
   window.scrollTo({
     top: 0,
-  })
+  });
 });
-
-// ScrollDown rotation on scroll
-function handlScrollDown(elementSelector, sectionId) {
-  window.addEventListener("click", () => {
+var currentScrollPosition = window.scrollY;
+document.addEventListener("touchend", () => {
+  currentScrollPosition = window.scrollY;
+});
+document.addEventListener("touchstart", () => {
+  currentScrollPosition = window.scrollY;
+});
+function handlScrollDown(elementSelector) {
+  currentScrollPosition = window.scrollY;
+  window.addEventListener("scroll", () => {
+  currentScrollPosition = window.scrollY;
     const element = document.querySelector(elementSelector);
-    const lastSection = document.getElementById(sectionId);
+    const sectionOne = document.querySelector(".section.one").offsetTop;
+    const sectionTwo = document.querySelector(".section.two").offsetTop;
+    const sectionThree = document.querySelector(".section.three").offsetTop;
+    const sectionFour = document.querySelector(".section.four").offsetTop;
+    const sectionFive = document.querySelector(".section.five").offsetTop;
+    const sectionSix = document.querySelector(".section.six").offsetTop;
+    const sectionSeven = document.querySelector(".section.seven").offsetTop;
+    const sectionEight = document.querySelector(".section.eight").offsetTop;
+    const sectionNine = document.querySelector(".section.nine").offsetTop;
+    const sectionTen = document.querySelector(".section.ten").offsetTop;
+    const sectionEleven = document.querySelector(".section.eleven").offsetTop;
 
-    if ( window.scrollY <= lastSection.offsetTop) {
+    if (currentScrollPosition == sectionOne) {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
         window.scrollTo({
-          top: window.scrollY + window.innerHeight,
+          top: sectionTwo,
         });
       });
-    } else {
-      element.style.transform = `scaleY(-1)`;
+    } else if (currentScrollPosition == sectionTwo) {
+      element.style.transform = `scaleY(1)`;
+
       element.addEventListener("click", function () {
         window.scrollTo({
-          top: 0,
+          top: sectionThree,
+        });
+      });
+    } else if (currentScrollPosition == sectionThree) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionFour,
+        });
+      });
+    } else if (currentScrollPosition == sectionFour) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionFive,
+        });
+      });
+    } else if (currentScrollPosition == sectionFive) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionSix,
+        });
+      });
+    } else if (currentScrollPosition == sectionSix) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionSeven,
+        });
+      });
+    } else if (currentScrollPosition == sectionSeven) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionEight,
+        });
+      });
+    } else if (currentScrollPosition == sectionEight) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionNine,
+        });
+      });
+    } else if (currentScrollPosition == sectionNine) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionTen,
+        });
+      });
+    } else if (currentScrollPosition == sectionTen) {
+      element.style.transform = `scaleY(1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionEleven,
+        });
+      });
+    } else if (currentScrollPosition == sectionEleven) {
+      element.style.transform = `scaleY(-1)`;
+
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionOne,
         });
       });
     }
   });
 }
-// Element selector , last section ID selector
-handlScrollDown(".scrollDown", "reachUs");
 
-
-
-
-
-
-
-
-
+handlScrollDown(".scrollDown");
 
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
