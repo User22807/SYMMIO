@@ -1,82 +1,93 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const sections = document.querySelectorAll(".section");
-  let currentSectionIndex = 0;
+document.addEventListener("DOMContentLoaded", function (event) {
+  event.preventDefault();
+  window.addEventListener("scroll", () => {
+    const element = document.querySelector(".scrollDown");
+    const sectionOne = document.querySelector(".section.one").offsetTop;
+    const sectionTwo = document.querySelector(".section.two").offsetTop;
+    const sectionThree = document.querySelector(".section.three").offsetTop;
+    const sectionFour = document.querySelector(".section.four").offsetTop;
+    const sectionFive = document.querySelector(".section.five").offsetTop;
+    const sectionSix = document.querySelector(".section.six").offsetTop;
+    const sectionSeven = document.querySelector(".section.seven").offsetTop;
+    const sectionEight = document.querySelector(".section.eight").offsetTop;
+    const sectionNine = document.querySelector(".section.nine").offsetTop;
+    const sectionTen = document.querySelector(".section.ten").offsetTop;
+    const sectionEleven = document.querySelector(".section.eleven").offsetTop;
+    element.addEventListener("click", function () {
+      if (window.scrollY == sectionOne) {
+        element.style.transform = `scaleY(1)`;
 
-  function scrollToSection(index) {
-    sections[index].scrollIntoView({ behavior: 'smooth' });
-  }
+        window.scrollTo({
+          top: sectionTwo,
+        });
+      } else if (window.scrollY == sectionTwo) {
+        element.style.transform = `scaleY(1)`;
 
-  function handleScrollDownClick() {
-    currentSectionIndex = (currentSectionIndex + 1) % sections.length;
-    scrollToSection(currentSectionIndex);
-  }
+        element.addEventListener("click", function () {
+          window.scrollTo({
+            top: sectionThree,
+          });
+        });
+      } else if (window.scrollY == sectionThree) {
+        element.style.transform = `scaleY(1)`;
 
-  function handleScroll() {
-    const currentSection = getCurrentSection();
+        element.addEventListener("click", function () {
+          window.scrollTo({
+            top: sectionFour,
+          });
+        });
+      } else if (window.scrollY == sectionFour) {
+        element.style.transform = `scaleY(1)`;
 
-    if (currentSection !== null) {
-      const index = Array.from(sections).findIndex(section => section.classList.contains(currentSection));
-      if (index !== -1) {
-        currentSectionIndex = index;
-      }
-    }
-  }
+        window.scrollTo({
+          top: sectionFive,
+        });
+      } else if (window.scrollY == sectionFive) {
+        element.style.transform = `scaleY(1)`;
 
-  function handleWheel(event) {
-    // Check the direction of the wheel scroll
-    const deltaY = event.deltaY;
-    if (deltaY > 0) {
-      // Scrolling down
-      currentSectionIndex = (currentSectionIndex + 1) % sections.length;
-    } else if (deltaY < 0) {
-      // Scrolling up
-      currentSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
-    }
+        window.scrollTo({
+          top: sectionSix,
+        });
+      } else if (window.scrollY == sectionSix) {
+        element.style.transform = `scaleY(1)`;
 
-    scrollToSection(currentSectionIndex);
-  }
+        window.scrollTo({
+          top: sectionSeven,
+        });
+      } else if (window.scrollY == sectionSeven) {
+        element.style.transform = `scaleY(1)`;
 
-  function getCurrentSection() {
-    let currentSection = null;
+        window.scrollTo({
+          top: sectionEight,
+        });
+      } else if (window.scrollY == sectionEight) {
+        element.style.transform = `scaleY(1)`;
 
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
+        window.scrollTo({
+          top: sectionNine,
+        });
+      } else if (window.scrollY == sectionNine) {
+        element.style.transform = `scaleY(1)`;
 
-      if (
-        rect.top <= window.innerHeight / 2 &&
-        rect.bottom >= window.innerHeight / 2
-      ) {
-        currentSection = section.classList.item(1); // Get the second class (index 1) as we don't need the "section" class
+        window.scrollTo({
+          top: sectionTen,
+        });
+      } else if (window.scrollY == sectionTen) {
+        element.style.transform = `scaleY(1)`;
+
+        window.scrollTo({
+          top: sectionEleven,
+        });
+      } else if (window.scrollY == sectionEleven) {
+        element.style.transform = `scaleY(-1)`;
+
+        window.scrollTo({
+          top: sectionOne,
+        });
       }
     });
-
-    return currentSection;
-  }
-
-  // Attach click event to the scrollDown button
-  const scrollDownButton = document.querySelector(".scrollDown");
-  scrollDownButton.addEventListener("click", handleScrollDownClick);
-
-  // Attach scroll event to handle updating the current section
-  window.addEventListener("scroll", handleScroll);
-
-  // Attach wheel event to handle touch interactions
-  window.addEventListener("wheel", handleWheel);
+  });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
