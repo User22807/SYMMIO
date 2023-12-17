@@ -19,7 +19,7 @@ function getCurrentSection() {
 
 // Initial log when the page loads
 
-document.addEventListener("click", function () {
+document.addEventListener("touchstart", function () {
   const currentSection = getCurrentSection();
 
   const element = document.querySelector(".scrollDown");
@@ -34,7 +34,7 @@ document.addEventListener("click", function () {
   const sectionNine = document.querySelector(".section.nine").offsetTop;
   const sectionTen = document.querySelector(".section.ten").offsetTop;
   const sectionEleven = document.querySelector(".section.eleven").offsetTop;
-  element.addEventListener("click", function () {
+  element.addEventListener("touchstart", function () {
 
     if (currentSection == "one") {
       window.scrollTo({
