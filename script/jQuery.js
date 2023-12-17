@@ -22,6 +22,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function handleWheel(event) {
+    // Check the direction of the wheel scroll
+    const deltaY = event.deltaY;
+    if (deltaY > 0) {
+      // Scrolling down
+      currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+    } else if (deltaY < 0) {
+      // Scrolling up
+      currentSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+    }
+
+    scrollToSection(currentSectionIndex);
+  }
+
   function getCurrentSection() {
     let currentSection = null;
 
@@ -45,7 +59,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Attach scroll event to handle updating the current section
   window.addEventListener("scroll", handleScroll);
+
+  // Attach wheel event to handle touch interactions
+  window.addEventListener("wheel", handleWheel);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
