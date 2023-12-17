@@ -17,22 +17,9 @@ function getCurrentSection() {
   return currentSection;
 }
 
-// Function to log the current section to the console
-function logCurrentSection() {
-  const currentSection = getCurrentSection();
-
-  if (currentSection) {
-    console.log("Current Section:", currentSection);
-  }
-}
-
-// Event listener for scrolling
-window.addEventListener("scroll", logCurrentSection);
-
 // Initial log when the page loads
-logCurrentSection();
 
-document.addEventListener("scroll", function () {
+document.addEventListener("click", function () {
   const currentSection = getCurrentSection();
 
   const element = document.querySelector(".scrollDown");
@@ -48,53 +35,51 @@ document.addEventListener("scroll", function () {
   const sectionTen = document.querySelector(".section.ten").offsetTop;
   const sectionEleven = document.querySelector(".section.eleven").offsetTop;
 
-  element.addEventListener("click", function () {
-    if (window.scrollY == sectionOne) {
+    if (currentSection == "one") {
       window.scrollTo({
         top: sectionTwo,
       });
-    } else if (window.scrollY == sectionTwo) {
+    } else if (currentSection == "two") {
       window.scrollTo({
         top: sectionThree,
       });
-    } else if (window.scrollY == sectionThree) {
+    } else if (currentSection == "three") {
       window.scrollTo({
         top: sectionFour,
       });
-    } else if (window.scrollY == sectionFour) {
+    } else if (currentSection == "four") {
       window.scrollTo({
         top: sectionFive,
       });
-    } else if (window.scrollY == sectionFive) {
+    } else if (currentSection == "five") {
       window.scrollTo({
         top: sectionSix,
       });
-    } else if (window.scrollY == sectionSix) {
+    } else if (currentSection == "six") {
       window.scrollTo({
         top: sectionSeven,
       });
-    } else if (window.scrollY == sectionSeven) {
+    } else if (currentSection == "seven") {
       window.scrollTo({
         top: sectionEight,
       });
-    } else if (window.scrollY == sectionEight) {
+    } else if (currentSection == "eight") {
       window.scrollTo({
         top: sectionNine,
       });
-    } else if (window.scrollY == sectionNine) {
+    } else if (currentSection == "nine") {
       window.scrollTo({
         top: sectionTen,
       });
-    } else if (window.scrollY == sectionTen) {
+    } else if (currentSection == "ten") {
       window.scrollTo({
         top: sectionEleven,
       });
-    } else if (window.scrollY == sectionEleven) {
+    } else if (currentSection == "eleven") {
       window.scrollTo({
         top: sectionOne,
       });
     }
-  });
 });
 
 // Hamburger menu
