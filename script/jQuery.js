@@ -1,3 +1,8 @@
+window.addEventListener("DOMContentLoaded", () => {
+  window.scrollTo({
+    top: 0,
+  })
+});
 
 // ScrollDown rotation on scroll
 function handlScrollDown(elementSelector, sectionId) {
