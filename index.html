@@ -58,49 +58,44 @@
     <main>
         <section class="container" id="container"></section>
 
-        <section class="section one">
-            <p>Home</p>
-            <a href="#" class="scrollDown" address="true"></a>
+        <section class="section one" id="Home">
+            <a class="scrollDown" id="scrollDown">
+                <span class="chevron"></span>
+                <span class="chevron"></span>
+                <span class="chevron"></span>
+            </a>
         </section>
 
         <section class="section two">
-            <p>SCROLL 2</p>
         </section>
 
         <section class="section three">
-            <p>SCROLL 3</p>
         </section>
 
         <section class="section four">
-            <p>SCROLL 4</p>
         </section>
         <section class="section five">
-            <p>SCROLL 5</p>
         </section>
         <section class="section six">
-            <p>SCROLL 6</p>
         </section>
         <section class="section seven">
-            <p>SCROLL 7</p>
         </section>
         <section class="section eight">
-            <p>SCROLL 8</p>
         </section>
         <section class="section nine">
-            <p>SCROLL 9</p>
         </section>
         <section class="section ten">
-            <p>SCROLL 10</p>
         </section>
         <section class="section eleven">
-            <p>SCROLL 11</p>
         </section>
     </main>
+
+
     <script id="vertexShader" type="x-shader/x-vertex">
         void main()	{
             gl_Position = vec4( position, 1.0 );
         }
-</script>
+    </script>
     <script id="fragmentShader" type="x-shader/x-fragment">
         uniform vec2 iResolution;
         uniform float iTime;
