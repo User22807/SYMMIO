@@ -464,7 +464,6 @@ canvas {
 	z-index: 9;
 	right: 7.0em;
 	transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-	text-decoration: none;
 	bottom: 5em;
 	height: 3em;
 	width: 3em;

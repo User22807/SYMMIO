@@ -170,7 +170,6 @@ $(window).on("scroll", activateMenuItem);
 //***********     text gsap     ***********//
 
 // Set up content scroll triggers
-function setupContentScrollTrigger() {
   gsap.registerPlugin(ScrollTrigger);
 
   const content = [
@@ -380,4 +379,3 @@ function setupContentScrollTrigger() {
       timeline.yoyo(true).repeat(1).repeatDelay(0.5);
     }
   });
-}
