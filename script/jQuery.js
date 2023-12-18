@@ -1,139 +1,115 @@
-$(document).ready(function () {
-  // Define the sections
-  var currentSection = null;
-  const element = document.querySelector(".scrollDown");
-  const sectionOne = document.querySelector(".section.one").offsetTop;
-  const sectionTwo = document.querySelector(".section.two").offsetTop;
-  const sectionThree = document.querySelector(".section.three").offsetTop;
-  const sectionFour = document.querySelector(".section.four").offsetTop;
-  const sectionFive = document.querySelector(".section.five").offsetTop;
-  const sectionSix = document.querySelector(".section.six").offsetTop;
-  const sectionSeven = document.querySelector(".section.seven").offsetTop;
-  const sectionEight = document.querySelector(".section.eight").offsetTop;
-  const sectionNine = document.querySelector(".section.nine").offsetTop;
-  const sectionTen = document.querySelector(".section.ten").offsetTop;
-  const sectionEleven = document.querySelector(".section.eleven").offsetTop;
+var currentSection = null;
 
-  const sections = $(".section");
-  $(document).on("click", ".scrollDown", function () {
-    // Set up the Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            currentSection = entry.target.classList[1];
-            console.log("Current Section:", currentSection);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    // Observe each section
-    sections.each(function () {
-      observer.observe(this);
+// Set up the Intersection Observer
+const sections = $(".section");
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        currentSection = entry.target.classList[1];
+        console.log("Current Section:", currentSection);
+      }
     });
+  },
+  { threshold: 0.5 }
+);
 
+// Observe each section
+sections.each(function () {
+  observer.observe(this);
+});
+
+$(function () {
+  $(".scrollDown").click(function () {
     if (currentSection == "one") {
-      element.style.transform = `scaleY(1)`;
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionTwo,
-        });
-      });
-    } else if (currentSection == "two") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionThree,
-        });
-      });
-    } else if (currentSection == "three") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionFour,
-        });
-      });
-    } else if (currentSection == "four") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionFive,
-        });
-      });
-    } else if (currentSection == "five") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionSix,
-        });
-      });
-    } else if (currentSection == "six") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionSeven,
-        });
-      });
-    } else if (currentSection == "seven") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionEight,
-        });
-      });
-    } else if (currentSection == "eight") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionNine,
-        });
-      });
-    } else if (currentSection == "nine") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionTen,
-        });
-      });
-    } else if (currentSection == "ten") {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionEleven,
-        });
-      });
-    } else if (currentSection == "eleven") {
-      element.style.transform = `scaleY(-1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: sectionOne,
-        });
-      });
+      $("html, body").animate(
+        {
+          scrollTop: $("section.two").offset().top,
+        },
+        "slow"
+      );
     }
-  });
-});
-var currentScrollPosition = window.scrollY;
-
-$(document).on("click", ".scrollDown", function () {
-  const element = document.querySelector(".scrollDown");
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-  currentScrollPosition = window.scrollY;
-  window.scrollTo({
-    top: 0,
+    if (currentSection == "two") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.three").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "three") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.four").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "four") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.five").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "five") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.six").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "six") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.seven").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "seven") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.eight").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "eight") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.nine").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "nine") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.ten").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "ten") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.eleven").offset().top,
+        },
+        "slow"
+      );
+    }
+    if (currentSection == "eleven") {
+      $("html, body").animate(
+        {
+          scrollTop: $("section.one").offset().top,
+        },
+        "slow"
+      );
+    }
+    return false;
   });
 });
 

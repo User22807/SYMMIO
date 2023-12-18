@@ -680,7 +680,27 @@ canvas {
 
 
 
+section.one {}
 
+section.two {}
+
+section.three {}
+
+section.four {}
+
+section.five {}
+
+section.six {}
+
+section.seven {}
+
+section.eight {}
+
+section.nine {}
+
+section.ten {}
+
+section.eleven {}
 
 /*------------------------- small screens -------------------------*/
 
@@ -788,6 +808,7 @@ canvas {
 		height: 3em;
 		width: 100%;
 		right: 2.5em;
+		display: block;
 
 	}
 

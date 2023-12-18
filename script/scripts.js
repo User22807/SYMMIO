@@ -3,7 +3,6 @@ let camera, scene, renderer, uniforms, scrollProgress;
 
 init();
 animate();
-setupContentScrollTrigger();
 
 function init() {
   const container = document.getElementById("container");
