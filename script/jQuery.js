@@ -1,36 +1,47 @@
-var currentScrollPosition = window.scrollY;
+$(document).ready(function () {
+  // Define the sections
+  var currentSection = null;
+  const element = document.querySelector(".scrollDown");
+  const sectionOne = document.querySelector(".section.one").offsetTop;
+  const sectionTwo = document.querySelector(".section.two").offsetTop;
+  const sectionThree = document.querySelector(".section.three").offsetTop;
+  const sectionFour = document.querySelector(".section.four").offsetTop;
+  const sectionFive = document.querySelector(".section.five").offsetTop;
+  const sectionSix = document.querySelector(".section.six").offsetTop;
+  const sectionSeven = document.querySelector(".section.seven").offsetTop;
+  const sectionEight = document.querySelector(".section.eight").offsetTop;
+  const sectionNine = document.querySelector(".section.nine").offsetTop;
+  const sectionTen = document.querySelector(".section.ten").offsetTop;
+  const sectionEleven = document.querySelector(".section.eleven").offsetTop;
 
-window.addEventListener("DOMContentLoaded", () => {
-  window.scrollTo({
-    top: 0,
-  });
-});
-document.addEventListener("scroll", () => {
-  currentScrollPosition = window.scrollY;
-});
-$(document).on("click", ".scrollDown", function() {
-    currentScrollPosition = window.scrollY;
-    const element = document.querySelector(".scrollDown");
-    const sectionOne = document.querySelector(".section.one").offsetTop;
-    const sectionTwo = document.querySelector(".section.two").offsetTop;
-    const sectionThree = document.querySelector(".section.three").offsetTop;
-    const sectionFour = document.querySelector(".section.four").offsetTop;
-    const sectionFive = document.querySelector(".section.five").offsetTop;
-    const sectionSix = document.querySelector(".section.six").offsetTop;
-    const sectionSeven = document.querySelector(".section.seven").offsetTop;
-    const sectionEight = document.querySelector(".section.eight").offsetTop;
-    const sectionNine = document.querySelector(".section.nine").offsetTop;
-    const sectionTen = document.querySelector(".section.ten").offsetTop;
-    const sectionEleven = document.querySelector(".section.eleven").offsetTop;
+  const sections = $(".section");
+  $(document).on("click", ".scrollDown", function () {
+    // Set up the Intersection Observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            currentSection = entry.target.classList[1];
+            console.log("Current Section:", currentSection);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-    element.addEventListener("click", function () {
-      window.scrollTo({
-        top: sectionTwo,
-      });
+    // Observe each section
+    sections.each(function () {
+      observer.observe(this);
     });
-    if (currentScrollPosition == sectionOne) {
+
+    if (currentSection == "one") {
       element.style.transform = `scaleY(1)`;
-    } else if (currentScrollPosition == sectionTwo) {
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: sectionTwo,
+        });
+      });
+    } else if (currentSection == "two") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -38,7 +49,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionThree,
         });
       });
-    } else if (currentScrollPosition == sectionThree) {
+    } else if (currentSection == "three") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -46,7 +57,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionFour,
         });
       });
-    } else if (currentScrollPosition == sectionFour) {
+    } else if (currentSection == "four") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -54,7 +65,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionFive,
         });
       });
-    } else if (currentScrollPosition == sectionFive) {
+    } else if (currentSection == "five") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -62,7 +73,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionSix,
         });
       });
-    } else if (currentScrollPosition == sectionSix) {
+    } else if (currentSection == "six") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -70,7 +81,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionSeven,
         });
       });
-    } else if (currentScrollPosition == sectionSeven) {
+    } else if (currentSection == "seven") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -78,7 +89,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionEight,
         });
       });
-    } else if (currentScrollPosition == sectionEight) {
+    } else if (currentSection == "eight") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -86,7 +97,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionNine,
         });
       });
-    } else if (currentScrollPosition == sectionNine) {
+    } else if (currentSection == "nine") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -94,7 +105,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionTen,
         });
       });
-    } else if (currentScrollPosition == sectionTen) {
+    } else if (currentSection == "ten") {
       element.style.transform = `scaleY(1)`;
 
       element.addEventListener("click", function () {
@@ -102,7 +113,7 @@ $(document).on("click", ".scrollDown", function() {
           top: sectionEleven,
         });
       });
-    } else if (currentScrollPosition == sectionEleven) {
+    } else if (currentSection == "eleven") {
       element.style.transform = `scaleY(-1)`;
 
       element.addEventListener("click", function () {
@@ -111,6 +122,19 @@ $(document).on("click", ".scrollDown", function() {
         });
       });
     }
+  });
+});
+var currentScrollPosition = window.scrollY;
+
+$(document).on("click", ".scrollDown", function () {
+  const element = document.querySelector(".scrollDown");
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  currentScrollPosition = window.scrollY;
+  window.scrollTo({
+    top: 0,
+  });
 });
 
 // Caption and ScrollDown visibility on scroll
