@@ -8,6 +8,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
+      scroll-snap-type: y mandatory; /* Enable scroll snap behavior */
     }
 
     section {
@@ -16,6 +17,7 @@
       align-items: center;
       justify-content: center;
       font-size: 2em;
+      scroll-snap-align: start; /* Snap sections to the start of the viewport */
     }
 
     #scrollButton {
@@ -42,7 +44,7 @@
         }
       }
 
-      function handleScroll() {
+      function handleWheel() {
         if (!isScrolling) {
           isScrolling = true;
           setTimeout(() => {
@@ -62,14 +64,13 @@
 
       // Add event listeners
       document.getElementById('scrollButton').addEventListener('click', handleButtonClick);
-      document.getElementById('scrollButton').addEventListener('touchend', handleButtonClick);
-      window.addEventListener('scroll', handleScroll);
+      window.addEventListener('wheel', handleWheel);
     });
   </script>
   <title>Scroll to Next Section</title>
 </head>
 <body>
-  <section style="background-color: rgb(255, 0, 191);">Section 1</section>
+  <section style="background-color: #f00;">Section 1</section>
   <section style="background-color: #0f0;">Section 2</section>
   <section style="background-color: #00f;">Section 3</section>
 
