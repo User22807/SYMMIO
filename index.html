@@ -60,9 +60,10 @@
         }
       }
 
-      // Add event listeners
+      // Add event listeners for both mouse and touch events
       document.getElementById('scrollButton').addEventListener('click', handleButtonClick);
       window.addEventListener('scroll', handleScroll);
+      window.addEventListener('touchmove', handleScroll); // Added touch event listener
     });
   </script>
   <title>Scroll to Next Section</title>
