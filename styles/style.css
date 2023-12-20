@@ -420,7 +420,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 .box__text .subtitle {
 	padding-right: 20%;
 	padding-left: 20%;
-	padding-top: 12%;
+	padding-top: 8em;
 	font-size: 3em;
 	align-self: center;
 	text-align: center;
