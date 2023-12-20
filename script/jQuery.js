@@ -338,7 +338,7 @@ $(window).on("scroll", activateMenuItem);
       list_top:
         "<span class= head-span>Neutral Parties as Arbiters</span> " +
         "</br></br>" +
-        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br>" +
+        " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br></br>" +
         " <span class=active-span>Both sides can be liquidated and their actions disputed, creating a trustless and highly capital efficient system.</span></br>",
       selector: ".section.nine",
     },

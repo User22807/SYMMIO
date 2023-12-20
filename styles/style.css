@@ -420,8 +420,8 @@ nav[role="custom-dropdown"] ul>li:hover {
 .box__text .subtitle {
 	padding-right: 20%;
 	padding-left: 20%;
-	padding-top: 12em;
-	font-size: 2em;
+	padding-top: 12%;
+	font-size: 3em;
 	align-self: center;
 	text-align: center;
 }
@@ -433,7 +433,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	position: fixed;
 	text-align: center;
 	font-size: 12em;
-	bottom: 0.05em;
+	bottom: 0%;
 }
 
 .box__text .list_top {
@@ -824,8 +824,8 @@ section.eleven {}
 	}
 
 	.box__text .subtitle {
-		font-size: 2em;
-		padding: 16em 0em 0em 0.0em;
+		font-size: 2.0em;
+		padding: 66% 0em 0em 0.0em;
 		width: 90%;
 	}
 
