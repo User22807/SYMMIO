@@ -30,7 +30,7 @@ body {
 	/* Fixed position */
 	z-index: 10;
 	/* Adjust the z-index as needed */
-    left: calc(43% - 30px); /* Adjust the value as needed */
+    left: calc(44.7% - 55px); /* Adjust the value as needed */
 	/* Center horizontally */
 	transform: translateX(-50%);
 	/* Center horizontally */
