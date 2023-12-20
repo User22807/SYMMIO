@@ -1,3 +1,38 @@
+   // Array of words for the changing word
+   const changingWords = ["CRYPTOS", "COMMODITIES", "AGREEMENTS", "FUTURES", "TRADING", "OPTIONS", "DERIVATIVES", "PERPETUALS", "BONDS", "STOCKS"];
+    
+   // Index to keep track of the current word
+   let currentIndex = 0;
+ 
+   // Function to update the changing word with an animation
+   function updateChangingWord() {
+     const changingWordElement = document.getElementById("changingWord");
+     const textContainerElement = document.getElementById("rollingTextContainer");
+     
+     textContainerElement.style.width = `${changingWordElement.offsetWidth}px`; // Set the width to the current word's width
+ 
+     changingWordElement.classList.remove("fade-in");
+     changingWordElement.classList.add("fade-out");
+     
+     setTimeout(() => {
+       changingWordElement.textContent = changingWords[currentIndex];
+       changingWordElement.classList.remove("fade-out");
+       changingWordElement.classList.add("fade-in");
+ 
+       // Update the container width after changing the word
+       textContainerElement.style.width = `${changingWordElement.offsetWidth}px`;
+ 
+       currentIndex = (currentIndex + 1) % changingWords.length;
+     }, 500); // Adjust the duration as needed
+   }
+ 
+   // Initial call to start the animation
+   updateChangingWord();
+ 
+   // Set up a timer to change the word at intervals
+   setInterval(updateChangingWord, 3000); // Change the word every 3 seconds, adjust as needed
+ 
+
 var currentSection = null;
 
 // Set up the Intersection Observer
@@ -20,7 +55,8 @@ sections.each(function () {
 });
 
 $(function () {
-  $(".scrollDown").click(function () {
+  $(".scrollDown").click(function (event) {
+  event.preventDefault();
     if (currentSection == "one") {
       $("html, body").animate(
         {
