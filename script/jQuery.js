@@ -33,121 +33,42 @@
    setInterval(updateChangingWord, 3000); // Change the word every 3 seconds, adjust as needed
  
 
-var currentSection = null;
+// ScrollDown rotation on scroll
+function handlScrollDown(elementSelector, sectionId) {
+  window.addEventListener("scroll", () => {
+    const element = document.querySelector(elementSelector);
+    const lastSection = document.getElementById(sectionId);
 
-// Set up the Intersection Observer
-const sections = $(".section");
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        currentSection = entry.target.classList[1];
-        console.log("Current Section:", currentSection);
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
+    if (window.scrollY-100.0 <= lastSection.offsetTop) {
+      element.style.transform = `scaleY(1)`;
 
-// Observe each section
-sections.each(function () {
-  observer.observe(this);
-});
-
-$(function () {
-  $(".scrollDown").click(function (event) {
-  event.preventDefault();
-    if (currentSection == "one") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.two").offset().top,
-        },
-        "slow"
-      );
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: window.scrollY + window.innerHeight,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: window.scrollY + window.innerHeight,
+        });
+      });
+    } else {
+      element.style.transform = `scaleY(-1)`;
+      element.addEventListener("click", function () {
+        window.scrollTo({
+          top: 0,
+        });
+      });
+      element.addEventListener("touchstart", function () {
+        window.scrollTo({
+          top: 0,
+        });
+      });
     }
-    if (currentSection == "two") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.three").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "three") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.four").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "four") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.five").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "five") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.six").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "six") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.seven").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "seven") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.eight").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "eight") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.nine").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "nine") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.ten").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "ten") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.eleven").offset().top,
-        },
-        "slow"
-      );
-    }
-    if (currentSection == "eleven") {
-      $("html, body").animate(
-        {
-          scrollTop: $("section.one").offset().top,
-        },
-        "slow"
-      );
-    }
-    return false;
   });
-});
+}
+// Element selector , last section ID selector
+handlScrollDown(".scrollDown", "reachUs");
 
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
