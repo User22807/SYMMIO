@@ -30,7 +30,7 @@ body {
 	/* Fixed position */
 	z-index: 10;
 	/* Adjust the z-index as needed */
-    left: calc(44.7% - 55px); /* Adjust the value as needed */
+    left: calc(50% - 3.5em); /* Adjust the value as needed */
 	/* Center horizontally */
 	transform: translateX(-50%);
 	/* Center horizontally */
@@ -418,9 +418,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .box__text .subtitle {
-	padding-right: 20%;
-	padding-left: 20%;
-	padding-top: 8em;
+	padding: 8em 20% 0em 20%;
 	font-size: 3em;
 	align-self: center;
 	text-align: center;
@@ -728,7 +726,6 @@ nav[role="custom-dropdown"] ul>li:hover {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
 	}
-
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 15em;
@@ -796,10 +793,11 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 	.box__text .titleSYMM {
 		letter-spacing: 0.8em;
-		font-size: 6em;
+		font-size: 5.5em;
 		top: 0;
-		padding: 2em 0em 0em 0.45em;
+		padding: 2em 0em 0em 0.33em;
 	}
+	
 
 	.box__text .subtitle {
 		font-size: 2.0em;
