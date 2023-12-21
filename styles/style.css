@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope');
-@import url('https://fonts.googleapis.com/css2?family=VT323');
 
 html {
 	font-size: 1vh;
@@ -31,17 +30,14 @@ body {
 	/* Fixed position */
 	z-index: 10;
 	/* Adjust the z-index as needed */
-	left: calc(49% - 140px);
-	/* Adjust the value as needed */
+    left: calc(44.7% - 55px); /* Adjust the value as needed */
 	/* Center horizontally */
 	transform: translateX(-50%);
 	/* Center horizontally */
 	color: transparent;
 	/* Make text transparent */
-	font-family: 'VT323', monospace;
-
-}
-
+  }
+  
 
 #changingWord {
 	background: linear-gradient(to right, #ff8b8b, #ff3434);
@@ -455,7 +451,6 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 
 .box__text .list_top .head-span {
-	font-family: 'VT323', monospace;
 	-webkit-text-fill-color: transparent;
 	background: linear-gradient(to right, #ffffff, #e75454);
 	background-clip: text;
@@ -463,8 +458,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 	-moz-background-clip: text;
 	/* Fallback color if gradient is not supported */
 	color: #e75454;
-	font-size: 3em;
-	line-height: 0.8em;
+	letter-spacing: 0.1em;
+	font-weight: 600;
+	font-size: 1.5em;
 	margin-top: 0;
 }
 
@@ -488,11 +484,11 @@ nav[role="custom-dropdown"] ul>li:hover {
 .captionMain {
 	align-self: center;
 	/* Set width to auto to allow the element to take its content's width */
-	font-size: 8em;
+	font-size: 5em;
 	position: fixed;
 	z-index: 2;
 	/* Use transform to horizontally center the element */
-	padding-top: 1em;
+	padding-top: 1.5em;
 	transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 	/* Add transition for ease-out effect */
 }
@@ -647,9 +643,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .about_text {
-	font-family: 'VT323', monospace;
-	font-size: 5em;
+	font-size: 3em;
 	letter-spacing: 0;
+	font-weight: 600;
 	line-height: 1.25;
 }
 
@@ -732,9 +728,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
 	}
-	#rollingTextContainer {
-		left: calc(33% - 30px);
-	}
+
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 15em;
@@ -783,7 +777,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 
 	.button_box .about_text {
-		font-size: 4em;
+		font-size: 2.5em;
 	}
 
 	/*---------------------Home----------------------  */
@@ -791,11 +785,11 @@ nav[role="custom-dropdown"] ul>li:hover {
 	.captionMain {
 		align-self: center;
 		/* Set width to auto to allow the element to take its content's width */
-		font-size: 5em;
+		font-size: 3em;
 		position: fixed;
 		z-index: 2;
 		/* Use transform to horizontally center the element */
-		padding-top: 4em;
+		padding-top: 7em;
 		transition: opacity 0.1s ease-out, transform 0.5s ease-out;
 		/* Add transition for ease-out effect */
 	}
@@ -838,7 +832,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 
 	.box__text .list_top .head-span {
-		font-size: 2em;
+		font-size: 1.3em;
 	}
 
 
