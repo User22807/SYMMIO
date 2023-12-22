@@ -43,7 +43,7 @@ $(window).scroll(function(){
  
    document.addEventListener("DOMContentLoaded", function () {
     var isTouchDevice = "ontouchstart" in document.documentElement;
-    var scrollDownButtons = document.getElementsByClassName("scrollDown");
+    var scrollDownButtons = document.getElementsByClassName("single-scroll-down-animation");
   
     Array.from(scrollDownButtons).forEach(function (button) {
       button.addEventListener(
@@ -112,7 +112,7 @@ $(window).scroll(function(){
     });
   }
   
-  handleScrollDown(".scrollDown");
+  handleScrollDown(".single-scroll-down-animation");
   
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
