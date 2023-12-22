@@ -41,44 +41,79 @@ $(window).scroll(function(){
    // Set up a timer to change the word at intervals
    setInterval(updateChangingWord, 3000); // Change the word every 3 seconds, adjust as needed
  
-
-// ScrollDown rotation on scroll
-function handlScrollDown(elementSelector, sectionId) {
-  window.addEventListener("scroll", () => {
-    const element = document.querySelector(elementSelector);
-    const lastSection = document.getElementById(sectionId);
-
-    if (window.scrollY-100.0 <= lastSection.offsetTop) {
-      element.style.transform = `scaleY(1)`;
-
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: window.scrollY + window.innerHeight,
-        });
-      });
-    } else {
-      element.style.transform = `scaleY(-1)`;
-      element.addEventListener("click", function () {
-        window.scrollTo({
-          top: 0,
-        });
-      });
-      element.addEventListener("touchstart", function () {
-        window.scrollTo({
-          top: 0,
-        });
-      });
-    }
+   document.addEventListener("DOMContentLoaded", function () {
+    var isTouchDevice = "ontouchstart" in document.documentElement;
+    var scrollDownButtons = document.getElementsByClassName("scrollDown");
+  
+    Array.from(scrollDownButtons).forEach(function (button) {
+      button.addEventListener(
+        isTouchDevice ? "touchstart" : "click",
+        function (event) {
+          event.preventDefault();
+          var currentPosition = window.scrollY;
+          var viewportHeight = window.innerHeight;
+          var targetPosition = currentPosition + viewportHeight;
+  
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      );
+    });
   });
-}
-// Element selector , last section ID selector
-handlScrollDown(".scrollDown", "reachUs");
-
+  
+  function handleScrollDown(elementSelector) {
+    const sectionNames = [
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "eleven",
+    ];
+  
+    window.addEventListener("scroll", () => {
+      const element = document.querySelector(elementSelector);
+      const currentSectionIndex = sectionNames.findIndex((sectionName) => {
+        const section = document.querySelector(`.section.${sectionName}`);
+        return window.scrollY === section.offsetTop;
+      });
+  
+      // Scroll when clicked or touched and scroll to top
+      if (currentSectionIndex !== -1) {
+        element.style.transform = `scaleY(1)`;
+  
+        function scrollToNextSection() {
+          const nextSectionIndex =
+            (currentSectionIndex + 1) % sectionNames.length;
+          const nextSection = document.querySelector(
+            `.section.${sectionNames[nextSectionIndex]}`
+          );
+  
+          window.scrollTo({
+            top: nextSection.offsetTop,
+          });
+        }
+  
+        element.addEventListener("click", scrollToNextSection);
+        element.addEventListener("touchstart", scrollToNextSection);
+      }
+  
+      // Flip the scroll button
+      if (currentSectionIndex >= sectionNames.length - 1) {
+        element.style.transform = `scaleY(-1)`;
+      }
+    });
+  }
+  
+  handleScrollDown(".scrollDown");
+  
 // Caption and ScrollDown visibility on scroll
 function handleScrollVisibility(
   elementSelector,
