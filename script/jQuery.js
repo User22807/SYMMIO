@@ -1,4 +1,13 @@
-   // Array of words for the changing word
+$(window).scroll(function(){
+  var scroll = $(window).scrollTop();
+  var dh = $(document).height();
+  var wh = $(window).height();
+  
+  var scrollPercent = (scroll / (dh - wh)) * wh;
+  $('#progressbar').css('height',scrollPercent + 'px')
+  
+});
+// Array of words for the changing word
    const changingWords = ["CRYPTOS", "COMMODITIES", "AGREEMENTS", "FUTURES", "TRADING", "OPTIONS", "DERIVATIVES", "PERPETUALS", "BONDS", "STOCKS"];
     
    // Index to keep track of the current word

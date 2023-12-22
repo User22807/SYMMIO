@@ -4,13 +4,22 @@ html {
 	font-size: 1vh;
 	font-family: "Manrope", sans-serif;
 	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
 	overflow: auto;
 	overflow-x: hidden;
-	scroll-behavior: smooth;
-	scrollbar-width: thick;
-	scrollbar-color: rgb(255, 68, 68) rgb(44, 32, 32);
 }
-
+::-webkit-scrollbar{
+	width: 0;
+  }
+  #progressbar{
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 5px;
+	height: 100%;
+	border-radius: 10px;
+	background: linear-gradient(to top, #ffffff, #ff8b8b);
+  }
 body {
 	margin: 0;
 	padding: 0;
@@ -105,7 +114,8 @@ html::-webkit-scrollbar-thumb {
 	background-color: rgb(255, 68, 68);
 }
 
-html .section {
+.section {
+	min-height: 100vh;
 	scroll-snap-align: start;
 	height: 100%;
 	width: 100%;
@@ -251,7 +261,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 .logo-smallscreen {
 	height: 2.5em;
 	position: fixed;
-	left: 1.25em;
+	left: 2em;
 	top: 1.25em;
 	display: block;
 }
@@ -259,7 +269,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 /* Variables */
 :root {
 	--number-of-links: 4;
-	--hamburger-menu-width: 1.0em;
+	--hamburger-menu-width: 2.0em;
 	--hamburger-menu-height: 2em;
 	--hamburger-menu-x-position: 4em;
 	--hamburger-menu-y-position: 1.5em;
@@ -728,7 +738,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 	/*---------------------About Us----------------------  */
 	.about_section {
-		padding-top: 15em;
+		padding-top: 5em;
 		z-index: 2;
 	}
 
