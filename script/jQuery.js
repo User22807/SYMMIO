@@ -357,17 +357,17 @@ $(window).on("scroll", activateMenuItem);
     })
       .to(
         `${item.selector} .title`,
-        { text: `${item.title}`, ease: "linear", duration: 0.125, onUpdate },
+        { text: `${item.title}`, ease: "linear", duration: 0.2, onUpdate },
         0
       )
       .to(
         `${item.selector} .titleSYMM`,
-        { text: `${item.titleSYMM}`, ease: "linear", duration: 0.0, onUpdate },
+        { text: `${item.titleSYMM}`, ease: "linear", duration: 0.2, onUpdate },
         0
       )
       .to(
         `${item.selector} .subtitle`,
-        { text: `${item.subtitle}`, ease: "linear", duration: 0.0, onUpdate },
+        { text: `${item.subtitle}`, ease: "linear", duration: 0.2, onUpdate },
         0
       )
       .to(

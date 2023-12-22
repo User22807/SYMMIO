@@ -5,21 +5,25 @@ html {
 	font-family: "Manrope", sans-serif;
 	scroll-snap-type: y mandatory;
 	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased !important;
 	overflow: auto;
 	overflow-x: hidden;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
 	width: 0;
-  }
-  #progressbar{
+}
+
+#progressbar {
 	position: fixed;
 	top: 0;
-	right: 0;
+	left: 0;
 	width: 5px;
 	height: 100%;
 	border-radius: 10px;
-	background: linear-gradient(to top, #ffffff, #ff4f4f);
-  }
+	background: linear-gradient(to top, #ffffff, #ff8b8b);
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -39,14 +43,15 @@ body {
 	/* Fixed position */
 	z-index: 10;
 	/* Adjust the z-index as needed */
-    left: calc(50% - 3.5em); /* Adjust the value as needed */
+	left: calc(50% - 3.5em);
+	/* Adjust the value as needed */
 	/* Center horizontally */
 	transform: translateX(-50%);
 	/* Center horizontally */
 	color: transparent;
 	/* Make text transparent */
-  }
-  
+}
+
 
 #changingWord {
 	background: linear-gradient(to right, #ff8b8b, #ff3434);
@@ -124,14 +129,10 @@ html::-webkit-scrollbar-thumb {
 
 /*------------------------- header menu */
 
-.logo {
-	height: 3em;
-	position: fixed;
-	left: 1.5rem;
-	display: block;
-}
+
 
 .red {
+	fill: rgb(255, 94, 94) !important;
 	-webkit-text-fill-color: rgb(255, 94, 94) !important;
 }
 
@@ -144,28 +145,35 @@ html::-webkit-scrollbar-thumb {
 
 /* Menu styles */
 .menu__list {
-	font-size: 1em;
 	position: fixed;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin-right: 1.5em;
+	padding: 1.5em 1.0em 1.5em 2.2em;
 	list-style: none;
 	z-index: 8;
 	right: 0;
 }
 
-.menu__item {
+.logo {
+	position: fixed;
+	left: 0;
+	height: 3em;
 	display: block;
-	margin: 0.33em 1em 0em 0em;
+	margin: -0.4em 0.0em 0.0em 2.7em;
+}
+
+.menu__item {
+	font-size: 1.8em;
+	display: block;
+	margin: 0.0em 1em 0em 0em;
 }
 
 /* Link and Reset button styles */
 nav[role="custom-dropdown"] ul>li>a,
 .menu__link {
-	font-weight: 300;
 	display: block;
-	padding: .2em .5em;
+	padding: .07em .4em .1em .35em;
 	cursor: pointer;
 	user-select: none;
 	-webkit-touch-callout: none;
@@ -179,8 +187,6 @@ nav[role="custom-dropdown"] ul>li>a,
 	text-decoration: none;
 	text-transform: uppercase;
 	transition: color 0.3s;
-	font-size: 1.5em;
-
 }
 
 .menu__link:hover,
@@ -223,31 +229,30 @@ nav[role="custom-dropdown"] ul>li:hover {
 .menu__link:before {
 	top: 0;
 	left: 0;
-	border-width: 0.2em 0 0 0.2em;
+	border-width: 0.1em 0 0 0.1em;
 	transform: translate3d(10px, 10px, 0);
 }
 
 .menu__link:after {
 	right: 0;
 	bottom: 0;
-	border-width: 0 0.2em 0.2em 0;
+	border-width: 0 0.1em 0.1em 0;
 	transform: translate3d(-10px, -10px, 0);
 }
 
 /* Reset button styles */
 .menubtn {
+	text-decoration: none;
 	text-transform: uppercase;
-	margin: .0em .5em;
 	background-color: #000000a5;
 	transition: all .2s ease-in-out;
 	position: relative;
-	padding: 0.4em 0.9em;
+	padding: 0.2em 1em;
 	border: solid 1px;
 	appearance: none;
 	cursor: pointer;
 	border-color: #FFF;
 	color: #fff;
-	font-size: 1.5em;
 
 }
 
@@ -736,6 +741,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
 	}
+
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 5em;
@@ -807,7 +813,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		top: 0;
 		padding: 2em 0em 0em 0.33em;
 	}
-	
+
 
 	.box__text .subtitle {
 		font-size: 2.0em;
