@@ -5,7 +5,7 @@ init();
 animate();
 
 function init() {
-  const container = document.getElementById("container");
+  const container = document.getElementById("webGLID");
 
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
