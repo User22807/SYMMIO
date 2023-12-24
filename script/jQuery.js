@@ -1,14 +1,138 @@
-//scrollbar style
+//***************scroll down button click listener
+$("#scrollDownID").on("click", function () {
+  // Get the current scroll position
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  // Get the total height of the document
+  const totalHeight =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  // Calculate scroll progress as a percentage
+  const scrollProgress = (scrollTop / totalHeight) * 100;
+
+  const sectionOne = document.querySelector(".sectionWrap.one").offsetTop;
+  const sectionTwo = document.querySelector(".sectionWrap.two").offsetTop;
+  const sectionThree = document.querySelector(".sectionWrap.three").offsetTop;
+  const sectionFour = document.querySelector(".sectionWrap.four").offsetTop;
+  const sectionFive = document.querySelector(".sectionWrap.five").offsetTop;
+  const sectionSix = document.querySelector(".sectionWrap.six").offsetTop;
+  const sectionSeven = document.querySelector(".sectionWrap.seven").offsetTop;
+  const sectionEight = document.querySelector(".sectionWrap.eight").offsetTop;
+  const sectionNine = document.querySelector(".sectionWrap.nine").offsetTop;
+  const sectionTen = document.querySelector(".sectionWrap.ten").offsetTop;
+  const sectionEleven = document.querySelector(".sectionWrap.eleven").offsetTop;
+
+  if (scrollProgress < 5.0) {
+    window.scrollTo({
+      top: sectionTwo,
+    });
+  } else if (scrollProgress < 15.0) {
+    window.scrollTo({
+      top: sectionThree,
+    });
+  } else if (scrollProgress < 25.0) {
+    window.scrollTo({
+      top: sectionFour,
+    });
+  } else if (scrollProgress < 35.0) {
+    window.scrollTo({
+      top: sectionFive,
+    });
+  } else if (scrollProgress < 45.0) {
+    window.scrollTo({
+      top: sectionSix,
+    });
+  } else if (scrollProgress < 55.0) {
+    window.scrollTo({
+      top: sectionSeven,
+    });
+  } else if (scrollProgress < 65.0) {
+    window.scrollTo({
+      top: sectionEight,
+    });
+  } else if (scrollProgress < 75.0) {
+    window.scrollTo({
+      top: sectionNine,
+    });
+  } else if (scrollProgress < 85.0) {
+    window.scrollTo({
+      top: sectionTen,
+    });
+  } else if (scrollProgress < 95.0) {
+    window.scrollTo({
+      top: sectionEleven,
+    });
+  } else if (scrollProgress < 105.0) {
+    window.scrollTo({
+      top: sectionOne,
+    });
+  }
+});
+
+// ******************** scroll functions ********************
 
 $(window).scroll(function () {
+  // Get the current scroll position
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+  // Get the total height of the document
+  const totalHeight =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  // Calculate scroll progress as a percentage
+  const scrollProgress = (scrollTop / totalHeight) * 100;
+
+  // Print the scroll progress to the console
+  console.log(scrollProgress);
+
+  //scroll down icon invertion
+  const scrollDownElement = document.querySelector(".scrollDown-wrapper");
+  const sectionEleven = document.querySelector(".sectionWrap.eleven").offsetTop;
+  if (window.scrollY == sectionEleven) {
+    scrollDownElement.style.transform = `scaleY(-1)`;
+  } else {
+    scrollDownElement.style.transform = `scaleY(1)`;
+  }
+
+  //caption visibility
+  var elementSelector = ".captionMain";
+  var scrollThreshold = window.innerHeight * 0.2;
+  var opacityThreshold = 0.0;
+  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+  const element = document.querySelector(elementSelector);
+  if (scrollPosition >= scrollThreshold) {
+    element.style.opacity = opacityThreshold;
+  } else {
+    element.style.opacity = 1 - opacityThreshold;
+  }
+
+  //scrollbar style
   var scroll = $(window).scrollTop();
   var dh = $(document).height();
   var wh = $(window).height();
-
   var scrollPercent = (scroll / (dh - wh)) * wh;
   $("#progressbar").css("height", scrollPercent + "px");
+
+  // Highlight current section in menu on scroll
+  $(".sectionWrap").each(function () {
+    const sectionId = $(this).attr("id");
+    const sectionTop = $(this).offset().top;
+    const sectionHeight = $(this).outerHeight();
+
+    if (
+      scrollPosition >= sectionTop &&
+      scrollPosition < sectionTop + sectionHeight
+    ) {
+      $(".menu__item").removeClass("menu__item--current");
+      $(".menu__link[href='#" + sectionId + "']")
+        .parent()
+        .addClass("menu__item--current");
+    }
+  });
 });
-// Array of words for the changing word
+
+// ******************** changing word ********************
+
 const changingWords = [
   "CRYPTOS",
   "COMMODITIES",
@@ -52,133 +176,6 @@ updateChangingWord();
 
 // Set up a timer to change the word at intervals
 setInterval(updateChangingWord, 3000); // Change the word every 3 seconds, adjust as needed
-
-// ScrollDown rotation on scroll
-function handlScrollDown() {
-  const element = document.querySelector(".scrollDown");
-  const sectionOne = document.querySelector(".sectionWrap.one").offsetTop;
-  const sectionTwo = document.querySelector(".sectionWrap.two").offsetTop;
-  const sectionThree = document.querySelector(".sectionWrap.three").offsetTop;
-  const sectionFour = document.querySelector(".sectionWrap.four").offsetTop;
-  const sectionFive = document.querySelector(".sectionWrap.five").offsetTop;
-  const sectionSix = document.querySelector(".sectionWrap.six").offsetTop;
-  const sectionSeven = document.querySelector(".sectionWrap.seven").offsetTop;
-  const sectionEight = document.querySelector(".sectionWrap.eight").offsetTop;
-  const sectionNine = document.querySelector(".sectionWrap.nine").offsetTop;
-  const sectionTen = document.querySelector(".sectionWrap.ten").offsetTop;
-  const sectionEleven = document.querySelector(".sectionWrap.eleven").offsetTop;
-
-  if (window.scrollY == sectionOne) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionTwo,
-    });
-  } else if (window.scrollY == sectionTwo) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionThree,
-    });
-  } else if (window.scrollY == sectionThree) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionFour,
-    });
-  } else if (window.scrollY == sectionFour) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionFive,
-    });
-  } else if (window.scrollY == sectionFive) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionSix,
-    });
-  } else if (window.scrollY == sectionSix) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionSeven,
-    });
-  } else if (window.scrollY == sectionSeven) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionEight,
-    });
-  } else if (window.scrollY == sectionEight) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionNine,
-    });
-  } else if (window.scrollY == sectionNine) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionTen,
-    });
-  } else if (window.scrollY == sectionTen) {
-    element.style.transform = `scaleY(1)`;
-    window.scrollTo({
-      top: sectionEleven,
-    });
-  } else if (window.scrollY == sectionEleven) {
-    element.style.transform = `scaleY(-1)`;
-    window.scrollTo({
-      top: sectionOne,
-    });
-  }
-}
-
-// Caption and ScrollDown visibility on scroll
-function handleScrollVisibility(
-  elementSelector,
-  scrollThreshold,
-  opacityThreshold
-) {
-  window.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-    const element = document.querySelector(elementSelector);
-
-    if (scrollPosition >= scrollThreshold) {
-      element.style.opacity = opacityThreshold;
-    } else {
-      element.style.opacity = 1 - opacityThreshold;
-    }
-  });
-}
-
-handleScrollVisibility(".captionMain", window.innerHeight * 0.2, 0.0);
-
-// Smooth SCROLL TO sections on click (both menu and buttons)
-$(document).on("click", 'a[href^="#"], button[href^="#"]', function (event) {
-  event.preventDefault();
-  smoothScroll($(event.target).attr("href"));
-});
-
-function smoothScroll(target) {
-  $("html, body").animate({ scrollTop: $(target).offset().top }, 500);
-}
-
-// Highlight current section in menu on scroll
-function activateMenuItem() {
-  const scrollPosition = $(window).scrollTop();
-
-  $(".sectionWrap").each(function () {
-    const sectionId = $(this).attr("id");
-    const sectionTop = $(this).offset().top;
-    const sectionHeight = $(this).outerHeight();
-
-    if (
-      scrollPosition >= sectionTop &&
-      scrollPosition < sectionTop + sectionHeight
-    ) {
-      $(".menu__item").removeClass("menu__item--current");
-      $(".menu__link[href='#" + sectionId + "']")
-        .parent()
-        .addClass("menu__item--current");
-    }
-  });
-}
-
-activateMenuItem();
-$(window).on("scroll", activateMenuItem);
 
 //***********     text gsap     ***********//
 

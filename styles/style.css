@@ -496,7 +496,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 
 /*-------------scroll down icon*/
-.scrollDown {
+.scrollDown-wrapper {
 	position: fixed;
 	z-index: 7;
 	right: 0;
@@ -781,7 +781,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		width: 90%;
 	}
 
-	.scrollDown {
+	.scrollDown-wrapper {
 		position: fixed;
 		z-index: 7;
 		right: calc(50% - 5em);
@@ -795,7 +795,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 	.scroll-down {
 		height: 60px;
-		width: 2em;
+		width: 1em;
 		margin-right: -1em;
 		background: transparent;
 		animation: scrollDown 2s ease infinite;
