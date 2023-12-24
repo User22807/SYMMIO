@@ -81,7 +81,7 @@ introTimeline.from(uniforms.iAnimProgress_4.value, {
 gsap.to(uniforms.iAnimProgress_1.value, {
   x: 1,
   scrollTrigger: {
-    trigger: ".section.one",
+    trigger: ".sectionWrap.one",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -90,7 +90,7 @@ gsap.to(uniforms.iAnimProgress_1.value, {
 gsap.to(uniforms.iAnimProgress_1.value, {
   y: 1,
   scrollTrigger: {
-    trigger: ".section.two",
+    trigger: ".sectionWrap.two",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -99,7 +99,7 @@ gsap.to(uniforms.iAnimProgress_1.value, {
 gsap.to(uniforms.iAnimProgress_1.value, {
   z: 1,
   scrollTrigger: {
-    trigger: ".section.three",
+    trigger: ".sectionWrap.three",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -108,7 +108,7 @@ gsap.to(uniforms.iAnimProgress_1.value, {
 gsap.to(uniforms.iAnimProgress_2.value, {
   x: 1,
   scrollTrigger: {
-    trigger: ".section.four",
+    trigger: ".sectionWrap.four",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -117,7 +117,7 @@ gsap.to(uniforms.iAnimProgress_2.value, {
 gsap.to(uniforms.iAnimProgress_2.value, {
   y: 1,
   scrollTrigger: {
-    trigger: ".section.five",
+    trigger: ".sectionWrap.five",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -126,7 +126,7 @@ gsap.to(uniforms.iAnimProgress_2.value, {
 gsap.to(uniforms.iAnimProgress_2.value, {
   z: 1,
   scrollTrigger: {
-    trigger: ".section.six",
+    trigger: ".sectionWrap.six",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -136,7 +136,7 @@ gsap.to(uniforms.iAnimProgress_2.value, {
 gsap.to(uniforms.iAnimProgress_3.value, {
   x: 1,
   scrollTrigger: {
-    trigger: ".section.seven",
+    trigger: ".sectionWrap.seven",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -145,7 +145,7 @@ gsap.to(uniforms.iAnimProgress_3.value, {
 gsap.to(uniforms.iAnimProgress_3.value, {
   y: 1,
   scrollTrigger: {
-    trigger: ".section.eight",
+    trigger: ".sectionWrap.eight",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -154,7 +154,7 @@ gsap.to(uniforms.iAnimProgress_3.value, {
 gsap.to(uniforms.iAnimProgress_3.value, {
   z: 1,
   scrollTrigger: {
-    trigger: ".section.nine",
+    trigger: ".sectionWrap.nine",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -163,7 +163,7 @@ gsap.to(uniforms.iAnimProgress_3.value, {
 gsap.to(uniforms.iAnimProgress_4.value, {
   x: 1,
   scrollTrigger: {
-    trigger: ".section.ten",
+    trigger: ".sectionWrap.ten",
     start: "0%",
     end: "100%",
     scrub: true,
@@ -172,7 +172,7 @@ gsap.to(uniforms.iAnimProgress_4.value, {
 gsap.to(uniforms.iAnimProgress_4.value, {
   y: 1,
   scrollTrigger: {
-    trigger: ".section.eleven",
+    trigger: ".sectionWrap.eleven",
     start: "0%",
     end: "100%",
     scrub: true,

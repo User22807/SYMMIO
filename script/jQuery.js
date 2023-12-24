@@ -81,7 +81,7 @@ $(window).scroll(function(){
     window.addEventListener("scroll", () => {
       const element = document.querySelector(elementSelector);
       const currentSectionIndex = sectionNames.findIndex((sectionName) => {
-        const section = document.querySelector(`.section.${sectionName}`);
+        const section = document.querySelector(`.sectionWrap.${sectionName}`);
         return window.scrollY === section.offsetTop;
       });
   
@@ -93,7 +93,7 @@ $(window).scroll(function(){
           const nextSectionIndex =
             (currentSectionIndex + 1) % sectionNames.length;
           const nextSection = document.querySelector(
-            `.section.${sectionNames[nextSectionIndex]}`
+            `.sectionWrap.${sectionNames[nextSectionIndex]}`
           );
   
           window.scrollTo({
@@ -148,7 +148,7 @@ function smoothScroll(target) {
 function activateMenuItem() {
   const scrollPosition = $(window).scrollTop();
 
-  $(".section").each(function () {
+  $(".sectionWrap").each(function () {
     const sectionId = $(this).attr("id");
     const sectionTop = $(this).offset().top;
     const sectionHeight = $(this).outerHeight();
@@ -181,7 +181,7 @@ $(window).on("scroll", activateMenuItem);
         "Bilateral OTC Derivatives with Intent-Based execution.<br/>Leverage trade any asset permissionlessly with hyper-efficient liquidity.",
       titleSYMM: "SYMMIO",
       list_top: "",
-      selector: ".section.one",
+      selector: ".sectionWrap.one",
     },
     {
       titleSYMM: "",
@@ -197,7 +197,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.two",
+      selector: ".sectionWrap.two",
     },
     {
       titleSYMM: "",
@@ -213,7 +213,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.three",
+      selector: ".sectionWrap.three",
     },
     {
       titleSYMM: "",
@@ -229,7 +229,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.four",
+      selector: ".sectionWrap.four",
     },
     {
       titleSYMM: "",
@@ -245,7 +245,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.five",
+      selector: ".sectionWrap.five",
     },
     {
       titleSYMM: "",
@@ -261,7 +261,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.six",
+      selector: ".sectionWrap.six",
     },
     {
       titleSYMM: "",
@@ -277,7 +277,7 @@ $(window).on("scroll", activateMenuItem);
         " <span class=active-span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.seven",
+      selector: ".sectionWrap.seven",
     },
     {
       titleSYMM: "",
@@ -293,7 +293,7 @@ $(window).on("scroll", activateMenuItem);
         " <span>• Claimed INTENTs CREATE a trade</span></br>" +
         " <span class=active-span>• Both parties LOCK collateral</span>",
 
-      selector: ".section.eight",
+      selector: ".sectionWrap.eight",
     },
     {
       titleSYMM: "",
@@ -305,7 +305,7 @@ $(window).on("scroll", activateMenuItem);
         "</br></br>" +
         " <span class=active-span>Arbiters are advanced liquidators ensuring all parties adhere to the rules and maintain solvency. </span></br></br>" +
         " <span class=active-span>Both sides can be liquidated and their actions disputed, creating a trustless and highly capital efficient system.</span></br>",
-      selector: ".section.nine",
+      selector: ".sectionWrap.nine",
     },
     {
       titleSYMM: "",
@@ -317,14 +317,14 @@ $(window).on("scroll", activateMenuItem);
         " <span class=active-span>One side LONGs 1 BTC.</span></br>" +
         " <span class=active-span>The other side SHORTs 1 BTC.</span></br>" +
         " <span class=active-span>The loss of one side is the win of the other.</span></br>",
-      selector: ".section.ten",
+      selector: ".sectionWrap.ten",
     },
     {
       titleSYMM: "",
       title: "",
       subtitle: "",
       list_top: "",
-      selector: ".section.eleven",
+      selector: ".sectionWrap.eleven",
     },
   ];
 
