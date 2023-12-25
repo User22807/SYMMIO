@@ -19,7 +19,7 @@ html {
 #progressbar {
 	position: fixed;
 	top: 0;
-	right: 0;
+	left: 0;
 	width: 3px;
 	height: 100%;
 	border-radius: 10px;
@@ -780,7 +780,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		z-index: 7;
 		right: 0;
 		padding: 0em 0em;
-		margin-right: -3em;
+		margin-right: -3.4em;
 		bottom: calc(50% - 230px);
 		height: 460px;
 		width: 4em;
@@ -788,7 +788,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 	.scroll-down {
 		height: 460px;
-		width: 0.5em;
+		width: 0.4em;
 		margin-right: -1em;
 		background: transparent;
 		animation: scrollDown 2s ease infinite;
