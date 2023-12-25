@@ -4,19 +4,22 @@ $(document).ready(function () {
   });
 
   function scrollDown() {
-    let currentSection = $('section.active');
-    let nextSection = currentSection.next('section');
+    let currentSection = $("section.active");
+    let nextSection = currentSection.next("section");
 
     // If there is a next section, or if it's the last section, go to the first section
-    let targetSection = nextSection.length ? nextSection : $('section:first');
+    let targetSection = nextSection.length ? nextSection : $("section:first");
 
-    $('body, html').animate({
-        scrollTop: targetSection.offset().top
-    }, 800);
+    $("body, html").animate(
+      {
+        scrollTop: targetSection.offset().top,
+      },
+      1800
+    );
 
-    currentSection.removeClass('active');
-    targetSection.addClass('active');
-}
+    currentSection.removeClass("active");
+    targetSection.addClass("active");
+  }
 
   //***************close menu when clicked
   var menuTrigger = document.getElementById("menu_trigger");
