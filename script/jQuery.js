@@ -8,36 +8,12 @@ $(document).ready(function () {
     snap: true,
     scrollSnapOffset: 0,
     easing: "easeInOutSine",
-    after: function (index, sections) {
-      updateCurrentSection(index);
+    after: function (index) {
+      // Update the active section when scrolling occurs
+      $("section").removeClass("active");
+      $("section").eq(index).addClass("active");
     },
   });
-
-  // Smooth scroll links click
-  $("#scrollDownID").on("click", function () {
-    scrollDown();
-  });
-
-  function scrollDown() {
-    let currentSection = $("section.active");
-    let nextSection = currentSection.next("section");
-
-    // If there is a next section, or if it's the last section, go to the first section
-    let targetSection = nextSection.length ? nextSection : $("section:first");
-
-    $("body, html").animate(
-      {
-        scrollTop: targetSection.offset().top,
-      },
-      1800
-    );
-
-    currentSection.removeClass("active");
-    targetSection.addClass("active");
-
-    // Update current section for synchronization
-    updateCurrentSection(targetSection.index());
-  }
 
   // Close menu when a link is clicked
   var menuTrigger = $("#menu_trigger");
@@ -47,6 +23,33 @@ $(document).ready(function () {
   menuLinks.on("click", function () {
     // Toggle the state of the menu trigger checkbox
     menuTrigger.prop("checked", !menuTrigger.prop("checked"));
+
+    // Update the active section based on the clicked link
+    let targetId = $(this).attr("href");
+    let targetSection = $(targetId);
+    $("section").removeClass("active");
+    targetSection.addClass("active");
+  });
+
+  // Set up smooth scroll effect for anchor links
+  $('a[href^="#"]').on("click", function (event) {
+    event.preventDefault();
+  });
+
+  // Close menu when a link is clicked
+  var menuTrigger = $("#menu_trigger");
+  var menuLinks = $(".menu-links li a");
+
+  // Add click event listener to each menu link
+  menuLinks.on("click", function () {
+    // Toggle the state of the menu trigger checkbox
+    menuTrigger.prop("checked", !menuTrigger.prop("checked"));
+
+    // Update the active section based on the clicked link
+    let targetId = $(this).attr("href");
+    let targetSection = $(targetId);
+    $("section").removeClass("active");
+    targetSection.addClass("active");
   });
 
   // Set up smooth scroll effect for anchor links
@@ -60,15 +63,17 @@ $(document).ready(function () {
         },
         1500
       );
-      // Update current section for synchronization
-      updateCurrentSection(target.index());
     }
   });
-
-  // Function to update the current active section
-  function updateCurrentSection(index) {
-    $("section").removeClass("active");
-    $("section").eq(index).addClass("active");
+});
+// Smooth scroll links click
+$("#scrollDownID").on("click", function () {
+  if (
+    window.scrollY == document.querySelector(".sectionWrap.eleven").offsetTop
+  ) {
+    $.scrollify.move("#1");
+  } else {
+    $.scrollify.next();
   }
 });
 
