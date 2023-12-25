@@ -1,4 +1,19 @@
 $(document).ready(function () {
+  // Initialize Scrollify with mandatory snap scrolling
+  $.scrollify({
+    section: "section",
+    scrollSpeed: 1500,
+    scrollbars: false,
+    setHeights: false,
+    snap: true,
+    scrollSnapOffset: 0,
+    easing: "easeInOutSine",
+    after: function (index, sections) {
+      updateCurrentSection(index);
+    },
+  });
+
+  // Smooth scroll links click
   $("#scrollDownID").on("click", function () {
     scrollDown();
   });
@@ -19,34 +34,25 @@ $(document).ready(function () {
 
     currentSection.removeClass("active");
     targetSection.addClass("active");
+
+    // Update current section for synchronization
+    updateCurrentSection(targetSection.index());
   }
 
-  //***************close menu when clicked
-  var menuTrigger = document.getElementById("menu_trigger");
-  var menuLinks = document.querySelectorAll(".menu-links li a");
+  // Close menu when a link is clicked
+  var menuTrigger = $("#menu_trigger");
+  var menuLinks = $(".menu-links li a");
 
   // Add click event listener to each menu link
-  menuLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      // Toggle the state of the menu trigger checkbox
-      menuTrigger.checked = !menuTrigger.checked;
-    });
+  menuLinks.on("click", function () {
+    // Toggle the state of the menu trigger checkbox
+    menuTrigger.prop("checked", !menuTrigger.prop("checked"));
   });
 
-  // Initialize Scrollify with mandatory snap scrolling
-  $.scrollify({
-    section: "section",
-    scrollSpeed: 1500,
-    scrollbars: false,
-    setHeights: false,
-    snap: true,
-    scrollSnapOffset: 0,
-    easing: "easeInOutSine",
-  });
   // Set up smooth scroll effect for anchor links
   $('a[href^="#"]').on("click", function (event) {
     event.preventDefault();
-    let target = $(this.getAttribute("href"));
+    let target = $($(this).attr("href"));
     if (target.length) {
       $("html, body").stop().animate(
         {
@@ -54,8 +60,16 @@ $(document).ready(function () {
         },
         1500
       );
+      // Update current section for synchronization
+      updateCurrentSection(target.index());
     }
   });
+
+  // Function to update the current active section
+  function updateCurrentSection(index) {
+    $("section").removeClass("active");
+    $("section").eq(index).addClass("active");
+  }
 });
 
 // ******************** scroll functions ********************
