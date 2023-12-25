@@ -1,25 +1,23 @@
 $(document).ready(function () {
-  $('#scrollDownID').on('click', function () {
+  $("#scrollDownID").on("click", function () {
     scrollDown();
-});
+  });
 
-function scrollDown() {
+  function scrollDown() {
     let currentSection = $('section.active');
     let nextSection = currentSection.next('section');
 
-    if (nextSection.length > 0) {
-        $('body, html').animate({
-            scrollTop: nextSection.offset().top
-        }, 800);
-        currentSection.removeClass('active');
-        nextSection.addClass('active');
-    } else {
-        // If the last section is reached, scroll to the top without smooth scroll
-        $('body, html').scrollTop(0);
-        $('section').removeClass('active');
-        $('section:first').addClass('active');
-    }
+    // If there is a next section, or if it's the last section, go to the first section
+    let targetSection = nextSection.length ? nextSection : $('section:first');
+
+    $('body, html').animate({
+        scrollTop: targetSection.offset().top
+    }, 800);
+
+    currentSection.removeClass('active');
+    targetSection.addClass('active');
 }
+
   //***************close menu when clicked
   var menuTrigger = document.getElementById("menu_trigger");
   var menuLinks = document.querySelectorAll(".menu-links li a");
@@ -56,7 +54,6 @@ function scrollDown() {
     }
   });
 });
-
 
 // ******************** scroll functions ********************
 
@@ -106,7 +103,6 @@ $(window).scroll(function () {
     }
   });
 });
-
 
 // ******************** changing word ********************
 

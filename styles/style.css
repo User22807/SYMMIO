@@ -777,11 +777,10 @@ nav[role="custom-dropdown"] ul>li:hover {
 		position: fixed;
 		z-index: 7;
 		right: 0;
-		padding: 0em 0em;
-		margin-right: -3.4em;
+		padding: 0em 6em;
+		margin-right: -9.5em;
 		bottom: calc(50% - 230px);
 		height: 460px;
-		width: 4em;
 		cursor: pointer;
 	}
 	.scroll-down {
