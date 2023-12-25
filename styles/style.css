@@ -781,7 +781,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		right: 0;
 		padding: 0em 0em;
 		margin-right: -3em;
-		bottom: calc(30%);
+		bottom: calc(50% - 230px);
 		height: 460px;
 		width: 4em;
 		cursor: pointer;
