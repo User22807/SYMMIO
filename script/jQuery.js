@@ -1,4 +1,37 @@
 $(document).ready(function () {
+  $('#scrollDownID').on('click', function () {
+    scrollDown();
+});
+
+function scrollDown() {
+    let currentSection = $('section.active');
+    let nextSection = currentSection.next('section');
+
+    if (nextSection.length > 0) {
+        $('body, html').animate({
+            scrollTop: nextSection.offset().top
+        }, 800);
+        currentSection.removeClass('active');
+        nextSection.addClass('active');
+    } else {
+        // If the last section is reached, scroll to the top without smooth scroll
+        $('body, html').scrollTop(0);
+        $('section').removeClass('active');
+        $('section:first').addClass('active');
+    }
+}
+  //***************close menu when clicked
+  var menuTrigger = document.getElementById("menu_trigger");
+  var menuLinks = document.querySelectorAll(".menu-links li a");
+
+  // Add click event listener to each menu link
+  menuLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      // Toggle the state of the menu trigger checkbox
+      menuTrigger.checked = !menuTrigger.checked;
+    });
+  });
+
   // Initialize Scrollify with mandatory snap scrolling
   $.scrollify({
     section: "section",
@@ -7,11 +40,8 @@ $(document).ready(function () {
     setHeights: false,
     snap: true,
     scrollSnapOffset: 0,
-    easing: "easeInOutExpo",
+    easing: "easeInOutSine",
   });
-  // Set up scroll snap
-  $("body").css("scroll-snap-type", "y mandatory");
-
   // Set up smooth scroll effect for anchor links
   $('a[href^="#"]').on("click", function (event) {
     event.preventDefault();
@@ -25,42 +55,12 @@ $(document).ready(function () {
       );
     }
   });
-
-  // Set the first section as active
-  $("section:first").addClass("active");
 });
 
-//***************close menu when clicked
-
-document.addEventListener("DOMContentLoaded", function () {
-  var menuTrigger = document.getElementById("menu_trigger");
-  var menuLinks = document.querySelectorAll(".menu-links li a");
-
-  // Add click event listener to each menu link
-  menuLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      // Toggle the state of the menu trigger checkbox
-      menuTrigger.checked = !menuTrigger.checked;
-    });
-  });
-});
 
 // ******************** scroll functions ********************
 
 $(window).scroll(function () {
-  /*/ Get the current scroll position
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-  // Get the total height of the document
-  const totalHeight =
-    document.documentElement.scrollHeight - window.innerHeight;
-
-  // Calculate scroll progress as a percentage
-  const scrollProgress = (scrollTop / totalHeight) * 100;
-
-  // Print the scroll progress to the console
-  console.log(scrollProgress);*/
-
   //scroll down icon invertion
   const scrollDownElement = document.querySelector(".scrollDown-wrapper");
   const sectionEleven = document.querySelector(".sectionWrap.eleven").offsetTop;
@@ -72,14 +72,14 @@ $(window).scroll(function () {
 
   //caption text visibility
   var elementSelector = ".captionMain";
+  const captionElement = document.querySelector(elementSelector);
   var scrollThreshold = window.innerHeight * 0.2;
   var opacityThreshold = 0.0;
   const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  const element = document.querySelector(elementSelector);
   if (scrollPosition >= scrollThreshold) {
-    element.style.opacity = opacityThreshold;
+    captionElement.style.opacity = opacityThreshold;
   } else {
-    element.style.opacity = 1 - opacityThreshold;
+    captionElement.style.opacity = 1 - opacityThreshold;
   }
 
   //scrollbar style
@@ -106,6 +106,7 @@ $(window).scroll(function () {
     }
   });
 });
+
 
 // ******************** changing word ********************
 
