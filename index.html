@@ -12,6 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
@@ -23,7 +26,7 @@
             <div class="navbar_wrapper">
                 <div class="navbar_col">
                     <li class="menu__item">
-                        <a class="menu__link" href="#"> <img href="#Home" src="./assets/SYMMIO-Logo.png"
+                        <a class="" href="#Home"> <img href="#Home" src="./assets/SYMMIO-Logo.png"
                                 class="menu__link logo" />
                         </a>
                     </li>
@@ -75,17 +78,13 @@
         </label>
     </nav>
 
-
+    <div class="webGL" id="webGLID"></div>
+    <div id="progressbar"></div>
+    <div class="scrollDown-wrapper" id="scrollDownID">
+        <div class="scroll-down"></div>
+    </div>
 
     <main>
-
-        <section class="webGL" id="webGLID"></section>
-        <div id="progressbar"></div>
-
-        <div class="scrollDown-wrapper" id="scrollDownID">
-            <div class="scroll-down"></div>
-        </div>
-
         <section class="sectionWrap one " id="Home">
 
             <div class="box__text">
@@ -1577,7 +1576,7 @@
 
         vec3 ro;  // Camera location
         vec3 la;  // Camera look at
-        if(iResolution.x > 1250.0) {
+        if(iResolution.x > 1250.0 && iResolution.x>iResolution.y) {
             // Camera location right - left
             ro = vec3(0.0 - iAnimProgress_1.x * 2.0  + iAnimProgress_3.z * 2.0 - iAnimProgress_4.x * 1.2,
             //Camera location up - down

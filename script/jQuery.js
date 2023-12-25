@@ -1,22 +1,54 @@
+$(document).ready(function () {
+  // Initialize Scrollify with mandatory snap scrolling
+  $.scrollify({
+    section: "section",
+    scrollSpeed: 1500,
+    scrollbars: false,
+    setHeights: false,
+    snap: true,
+    scrollSnapOffset: 0,
+    easing: "easeInOutExpo",
+  });
+  // Set up scroll snap
+  $("body").css("scroll-snap-type", "y mandatory");
+
+  // Set up smooth scroll effect for anchor links
+  $('a[href^="#"]').on("click", function (event) {
+    event.preventDefault();
+    let target = $(this.getAttribute("href"));
+    if (target.length) {
+      $("html, body").stop().animate(
+        {
+          scrollTop: target.offset().top,
+        },
+        1500
+      );
+    }
+  });
+
+  // Set the first section as active
+  $("section:first").addClass("active");
+});
+
 //***************close menu when clicked
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   var menuTrigger = document.getElementById("menu_trigger");
   var menuLinks = document.querySelectorAll(".menu-links li a");
 
   // Add click event listener to each menu link
-  menuLinks.forEach(function(link) {
-      link.addEventListener("click", function() {
-          // Toggle the state of the menu trigger checkbox
-          menuTrigger.checked = !menuTrigger.checked;
-      });
+  menuLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      // Toggle the state of the menu trigger checkbox
+      menuTrigger.checked = !menuTrigger.checked;
+    });
   });
 });
 
 // ******************** scroll functions ********************
 
 $(window).scroll(function () {
-  // Get the current scroll position
+  /*/ Get the current scroll position
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
   // Get the total height of the document
@@ -27,7 +59,7 @@ $(window).scroll(function () {
   const scrollProgress = (scrollTop / totalHeight) * 100;
 
   // Print the scroll progress to the console
-  console.log(scrollProgress);
+  console.log(scrollProgress);*/
 
   //scroll down icon invertion
   const scrollDownElement = document.querySelector(".scrollDown-wrapper");
