@@ -1,5 +1,17 @@
-//***************scroll down button click listener
+//***************close menu when clicked
 
+document.addEventListener("DOMContentLoaded", function() {
+  var menuTrigger = document.getElementById("menu_trigger");
+  var menuLinks = document.querySelectorAll(".menu-links li a");
+
+  // Add click event listener to each menu link
+  menuLinks.forEach(function(link) {
+      link.addEventListener("click", function() {
+          // Toggle the state of the menu trigger checkbox
+          menuTrigger.checked = !menuTrigger.checked;
+      });
+  });
+});
 
 // ******************** scroll functions ********************
 
@@ -26,7 +38,7 @@ $(window).scroll(function () {
     scrollDownElement.style.transform = `scaleY(1)`;
   }
 
-  //caption visibility
+  //caption text visibility
   var elementSelector = ".captionMain";
   var scrollThreshold = window.innerHeight * 0.2;
   var opacityThreshold = 0.0;
