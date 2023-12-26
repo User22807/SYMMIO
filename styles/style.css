@@ -350,13 +350,14 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*menu--small screens */
 @media screen and (max-width: 1000px) {
-	.menu__link:after,.menu__link:after {
-		opacity: 0;
+	.menu__link:before {
+		top: 0;
+		left: -10em;
+		border-width: 0 0 0 0.0em;
+		transform: translate3d(10px, 10px, 0);
+		visibility: hidden;
 	}
-	.menu-trigger:checked+.overlay .menu__link::before
-	.menu-trigger:checked+.overlay .menu__link::after {
-		opacity: 1;
-	}
+	
 
 	.menu__item {
 		letter-spacing: 0.1em;
