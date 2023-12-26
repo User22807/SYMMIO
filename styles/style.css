@@ -222,18 +222,19 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .menu__link:before {
-	top: -10em;
-	left: -10em;
+	top: 0;
+	left: 0;
 	border-width: 0 0 0 0.1em;
 	transform: translate3d(10px, 10px, 0);
 }
 
 .menu__link:after {
-	right: 0em;
+	right: 0;
 	bottom: 0;
 	border-width: 0 0 0.1em 0;
 	transform: translate3d(-10px, -10px, 0);
 }
+
 /* Reset button styles */
 .tradeBtn {
 	letter-spacing: 0.5em;
@@ -349,9 +350,14 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*menu--small screens */
 @media screen and (max-width: 1000px) {
-	.menu__link:after {
-		right: 0;
+	.menu__link:after,.menu__link:after {
+		opacity: 0;
 	}
+	.menu-trigger:checked+.overlay .menu__link::before
+	.menu-trigger:checked+.overlay .menu__link::after {
+		opacity: 1;
+	}
+
 	.menu__item {
 		letter-spacing: 0.1em;
 		font-size: 1.8em;
