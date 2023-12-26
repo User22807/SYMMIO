@@ -258,7 +258,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*------------------------- mobile menu */
 .logo-smallscreen {
-	height: 1.5em;
+	height: 2em;
 	position: fixed;
 	left: 1.0em;
 	top: 1.0em;
@@ -268,7 +268,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 /* Variables */
 :root {
 	--hamburger-menu-height: 2.5em;
-	--hamburger-icon-height: 0.1em;
+	--hamburger-icon-height: 0.3em;
 	--hamburger-icon-rotate-deg: 45deg;
 }
 
@@ -695,12 +695,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
 	}
-	.menu__link:before {
-		top: 0;
-		left: 0;
-		border-width: 0 0 0 0;
-		transform: translate3d(10px, 10px, 0);
-	}
+
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 5em;

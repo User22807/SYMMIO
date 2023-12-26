@@ -1,81 +1,15 @@
+// jQuery script to scroll to the first section on page refresh
 $(document).ready(function () {
-  // Initialize Scrollify with mandatory snap scrolling
-  $.scrollify({
-    section: "section",
-    scrollSpeed: 1500,
-    scrollbars: false,
-    setHeights: false,
-    snap: true,
-    scrollSnapOffset: 0,
-    easing: "easeInOutSine",
-    after: function (index) {
-      // Update the active section when scrolling occurs
-      $("section").removeClass("active");
-      $("section").eq(index).addClass("active");
+  // Scroll to the first section
+  $("html, body").animate(
+    {
+      scrollTop: $("#Home").offset().top,
     },
-  });
-
-  // Close menu when a link is clicked
-  var menuTrigger = $("#menu_trigger");
-  var menuLinks = $(".menu-links li a");
-
-  // Add click event listener to each menu link
-  menuLinks.on("click", function () {
-    // Toggle the state of the menu trigger checkbox
-    menuTrigger.prop("checked", !menuTrigger.prop("checked"));
-
-    // Update the active section based on the clicked link
-    let targetId = $(this).attr("href");
-    let targetSection = $(targetId);
-    $("section").removeClass("active");
-    targetSection.addClass("active");
-  });
-
-  // Set up smooth scroll effect for anchor links
-  $('a[href^="#"]').on("click", function (event) {
-    event.preventDefault();
-  });
-
-  // Close menu when a link is clicked
-  var menuTrigger = $("#menu_trigger");
-  var menuLinks = $(".menu-links li a");
-
-  // Add click event listener to each menu link
-  menuLinks.on("click", function () {
-    // Toggle the state of the menu trigger checkbox
-    menuTrigger.prop("checked", !menuTrigger.prop("checked"));
-
-    // Update the active section based on the clicked link
-    let targetId = $(this).attr("href");
-    let targetSection = $(targetId);
-    $("section").removeClass("active");
-    targetSection.addClass("active");
-  });
-
-  // Set up smooth scroll effect for anchor links
-  $('a[href^="#"]').on("click", function (event) {
-    event.preventDefault();
-    let target = $($(this).attr("href"));
-    if (target.length) {
-      $("html, body").stop().animate(
-        {
-          scrollTop: target.offset().top,
-        },
-        1500
-      );
-    }
-  });
-});
-// Handle link clicks and menu close
-$(".menu-links a").on("click", function () {
-  // Check if the menu trigger checkbox is checked
-  if ($("#menu_trigger").is(":checked")) {
-    // Uncheck the menu trigger checkbox to close the overlay
-    $("#menu_trigger").prop("checked", false);
-  }
+    "slow"
+  );
 });
 
-// Smooth scroll links click
+// Scroll Down button function
 $("#scrollDownID").on("click", function () {
   if (
     window.scrollY == document.querySelector(".sectionWrap.eleven").offsetTop
@@ -83,6 +17,52 @@ $("#scrollDownID").on("click", function () {
     $.scrollify.move("#1");
   } else {
     $.scrollify.next();
+  }
+});
+
+// Initialize Scrollify with mandatory snap scrolling
+$.scrollify({
+  section: "section",
+  scrollSpeed: 1500,
+  scrollbars: false,
+  setHeights: false,
+  snap: true,
+  scrollSnapOffset: 0,
+  easing: "easeInOutSine",
+  after: function (index) {
+    // Update the active section when scrolling occurs
+    $("section").removeClass("active");
+    $("section").eq(index).addClass("active");
+  },
+});
+
+// Close menu when a link is clicked
+var menuTrigger = $("#menu_trigger");
+var menuLinks = $(".menu-links li a");
+
+// Add click event listener to each menu link
+menuLinks.on("click", function () {
+  // Toggle the state of the menu trigger checkbox
+  menuTrigger.prop("checked", !menuTrigger.prop("checked"));
+
+  // Update the active section based on the clicked link
+  let targetId = $(this).attr("href");
+  let targetSection = $(targetId);
+  $("section").removeClass("active");
+  targetSection.addClass("active");
+});
+
+// Set up smooth scroll effect for anchor links
+$('a[href^="#"]').on("click", function (event) {
+  event.preventDefault();
+  let target = $($(this).attr("href"));
+  if (target.length) {
+    $("html, body").stop().animate(
+      {
+        scrollTop: target.offset().top,
+      },
+      1500
+    );
   }
 });
 
