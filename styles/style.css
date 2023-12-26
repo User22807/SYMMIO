@@ -695,7 +695,12 @@ nav[role="custom-dropdown"] ul>li:hover {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
 	}
-
+	.menu__link:before {
+		top: 0;
+		left: 0;
+		border-width: 0 0 0 0;
+		transform: translate3d(10px, 10px, 0);
+	}
 	/*---------------------About Us----------------------  */
 	.about_section {
 		padding-top: 5em;

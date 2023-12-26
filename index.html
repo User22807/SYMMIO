@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SYMMIO</title>
-    <link rel="icon" type="image/x-icon" href="/assets/Favicon.png">
+    <link rel="icon" type="image/x-icon" href="./assets/Favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
@@ -44,6 +44,13 @@
                 </div>
             </div>
         </ul>
+        
+        <label for="menu_trigger" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </label>
         <input type="checkbox" id="menu_trigger" class="menu-trigger" />
 
         <div class="overlay" id="overlayID">
@@ -70,12 +77,6 @@
             </ul>
         </div>
 
-        <label for="menu_trigger" class="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-
-        </label>
     </nav>
 
     <div class="webGL" id="webGLID"></div>

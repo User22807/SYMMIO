@@ -66,6 +66,15 @@ $(document).ready(function () {
     }
   });
 });
+// Handle link clicks and menu close
+$(".menu-links a").on("click", function () {
+  // Check if the menu trigger checkbox is checked
+  if ($("#menu_trigger").is(":checked")) {
+    // Uncheck the menu trigger checkbox to close the overlay
+    $("#menu_trigger").prop("checked", false);
+  }
+});
+
 // Smooth scroll links click
 $("#scrollDownID").on("click", function () {
   if (
