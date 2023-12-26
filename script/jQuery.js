@@ -1,16 +1,10 @@
-/*/ jQuery script to scroll to the first section on page refresh
+// scrollify script to scroll to the first section on page refresh
 $(document).ready(function () {
-  // Scroll to the first section
-  $("html, body").animate(
-    {
-      scrollTop: $("#Home").offset().top,
-    },
-    "slow"
-  );
+    // Scroll to the first section
+    $.scrollify.move("#1");
+});
 
-});*/
-
-// Scroll Down button function
+// scrollify Scroll Down button function
 $("#scrollDownID").on("click", function () {
   if (
     window.scrollY == document.querySelector(".sectionWrap.eleven").offsetTop
@@ -41,11 +35,12 @@ menuLinks.on("click", function () {
   // Toggle the state of the menu trigger checkbox
   menuTrigger.prop("checked", !menuTrigger.prop("checked"));
 
-  // Update the active section based on the clicked link
+  // Update the current section based on the clicked link
   let targetId = $(this).attr("href");
   let targetSection = $(targetId);
   $("section").removeClass("active");
   targetSection.addClass("active");
+  
 });
 
 // Set up smooth scroll effect for anchor links

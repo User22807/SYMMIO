@@ -234,7 +234,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 	border-width: 0 0 0.1em 0;
 	transform: translate3d(-10px, -10px, 0);
 }
-
+.menu__link:after:active {
+	visibility: hidden;
+}
 /* Reset button styles */
 .tradeBtn {
 	letter-spacing: 0.5em;
