@@ -1,13 +1,14 @@
-// jQuery script to scroll to the first section on page refresh
+/*/ jQuery script to scroll to the first section on page refresh
 $(document).ready(function () {
   // Scroll to the first section
   $("html, body").animate(
     {
       scrollTop: $("#Home").offset().top,
     },
-    "fast"
+    "slow"
   );
-});
+
+});*/
 
 // Scroll Down button function
 $("#scrollDownID").on("click", function () {
@@ -29,11 +30,6 @@ $.scrollify({
   snap: true,
   scrollSnapOffset: 0,
   easing: "easeInOutSine",
-  after: function (index) {
-    // Update the active section when scrolling occurs
-    $("section").removeClass("active");
-    $("section").eq(index).addClass("active");
-  },
 });
 
 // Close menu when a link is clicked
@@ -57,15 +53,13 @@ $('a[href^="#"]').on("click", function (event) {
   event.preventDefault();
   let target = $($(this).attr("href"));
   if (target.length) {
-    $("html, body").stop().animate(
-      {
-        scrollTop: target.offset().top,
-      },
-      1500
-    );
+    // Get the index of the target section
+    let index = target.index();
+
+    // Scroll to the target section using Scrollify
+    $.scrollify.move(index);
   }
 });
-
 // ******************** scroll functions ********************
 
 $(window).scroll(function () {
