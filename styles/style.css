@@ -350,12 +350,16 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*menu--small screens */
 @media screen and (max-width: 1000px) {
-	.menu__link:before,.menu__link::after {
+
+	.menu__link:before,
+	.menu__link::after {
 		visibility: hidden;
 	}
+
 	.menu__item--current .menu__link {
 		color: #ff4848;
 	}
+
 	.menu__item {
 		letter-spacing: 0.1em;
 		font-size: 2em;
@@ -498,11 +502,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 .scrollDown-wrapper {
 	position: fixed;
 	z-index: 7;
-	right: 95%;
+	right: 0em;
 	padding: 0em 4em;
-
-	bottom: calc(50% - 105px);
-	height: 210px;
+	bottom: calc(50% - 25em);
 	width: 4em;
 	margin-right: -2em;
 	cursor: pointer;
@@ -511,7 +513,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 /* Scroll animation-5 */
 .scroll-down {
 	width: 2px;
-	height: 210px;
+	height: 50em;
 	background: transparent;
 	animation: scrollDown 2s ease infinite;
 }
