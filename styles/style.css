@@ -222,20 +222,17 @@ nav[role="custom-dropdown"] ul>li:hover {
 }
 
 .menu__link:before {
-	top: 0;
-	left: 0;
+	top: -10em;
+	left: -10em;
 	border-width: 0 0 0 0.1em;
 	transform: translate3d(10px, 10px, 0);
 }
 
 .menu__link:after {
-	right: 0;
+	right: 0em;
 	bottom: 0;
 	border-width: 0 0 0.1em 0;
 	transform: translate3d(-10px, -10px, 0);
-}
-.menu__link:after:active {
-	visibility: hidden;
 }
 /* Reset button styles */
 .tradeBtn {
@@ -319,7 +316,6 @@ nav[role="custom-dropdown"] ul>li:hover {
 	justify-content: space-between;
 	cursor: pointer;
 	visibility: hidden;
-
 }
 
 .hamburger-menu span {
@@ -353,6 +349,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 
 /*menu--small screens */
 @media screen and (max-width: 1000px) {
+	.menu__link:after {
+		right: 0;
+	}
 	.menu__item {
 		letter-spacing: 0.1em;
 		font-size: 1.8em;
