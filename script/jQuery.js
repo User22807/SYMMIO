@@ -5,7 +5,7 @@ $(document).ready(function () {
     {
       scrollTop: $("#Home").offset().top,
     },
-    "slow"
+    "fast"
   );
 });
 
