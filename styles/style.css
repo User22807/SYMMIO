@@ -358,7 +358,8 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 	.menu__item {
 		letter-spacing: 0.1em;
-		font-size: 1.8em;
+		font-size: 2em;
+		font-weight: 600;
 		display: block;
 		margin: 2em 0em 0em -0.1em;
 	}
