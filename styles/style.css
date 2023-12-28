@@ -8,8 +8,11 @@ html {
 	text-rendering: optimizeLegibility;
 	overflow-x: hidden;
 	touch-action: none;
-	transition: filter 2s ease; /* Add transition for smooth effect */
-
+	transition: filter 2s ease; /* Standard syntax */
+	-webkit-transition: filter 2s ease; /* For Chrome and Safari */
+	-moz-transition: filter 2s ease; /* For Firefox */
+	-o-transition: filter 2s ease; /* For Opera */
+	
 }
 
 body {
@@ -246,9 +249,9 @@ nav[role="custom-dropdown"] ul>li:hover {
 	transition: all .2s ease-in-out;
 	position: relative;
 	padding: 0.2em 0.75em 0.2em 1em;
-	border: solid 1px;
 	appearance: none;
 	cursor: pointer;
+	border: solid 1px;
 	border-color: #FFF;
 	color: #fff;
 }
