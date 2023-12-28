@@ -82,6 +82,97 @@
         <div class="scroll-down"></div>
     </div>
 
+
+
+    <style>
+        [data-theme="dark"] {
+            --bg-color: #000;
+            --txt-color: #F5F6F9;
+        }
+
+        /* ↓ Minimal Switch -------------------- */
+
+        .minimal-switch {
+            position: absolute;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .minimal-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .minimal-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--txt-color, #000);
+            overflow: hidden;
+            border: 0px solid white;
+        }
+
+        .minimal-slider:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            left: 9px;
+            font-size: 13px;
+            background-color: var(--bg-color, #F5F6F9);
+            -webkit-transition: 1s;
+            transition: 1s;
+        }
+
+        input:checked+.minimal-slider {
+            filter: invert(0%);
+        }
+
+        input:checked+.minimal-slider:before {
+            filter: invert(100%);
+        }
+
+        input:checked+.minimal-slider:before {
+            -webkit-transform: translateX(15px);
+            -ms-transform: translateX(15px);
+            transform: translateX(15px);
+        }
+
+        .minimal-slider.round,
+        .minimal-slider.round:before {
+            border-radius: 10px;
+        }
+
+        .switchWrap {
+            position: fixed;
+            bottom: 5%;
+            left: 2%;
+            z-index: 10;
+        }
+
+        /*END: NAVIGATION*/
+    </style>
+    <!--  START: NAVIGATION  -->
+    <div class="switchWrap">
+        <label class="minimal-switch">
+            <input id="toggleSwitch" type="checkbox" checked>
+            <span class="minimal-slider round"></span>
+        </label>
+    </div>
+    <!--  END: NAVIGATION  -->
+    <script>
+        const toggleSwitch = document.getElementById('toggleSwitch');
+        const htmlElement = document.querySelector('html');
+        toggleSwitch.addEventListener('change', function () {
+            // Update filter property based on checkbox state
+            htmlElement.style.filter = toggleSwitch.checked ? 'invert(0%)' : 'invert(100%)';
+        });
+    </script>
     <main>
         <section class="sectionWrap one " id="Home">
 

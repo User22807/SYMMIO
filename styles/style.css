@@ -8,11 +8,14 @@ html {
 	text-rendering: optimizeLegibility;
 	overflow-x: hidden;
 	touch-action: none;
+	transition: filter 2s ease; /* Add transition for smooth effect */
+
 }
 
 body {
 	margin: 0;
 	padding: 0;
+
 }
 
 section {
