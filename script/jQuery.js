@@ -1,20 +1,3 @@
-// scrollify script to scroll to the first section on page refresh
-$(document).ready(function () {
-    // Scroll to the first section
-    $.scrollify.move("#1");
-});
-
-// scrollify Scroll Down button function
-$("#scrollDownID").on("click", function () {
-  if (
-    window.scrollY == document.querySelector(".sectionWrap.eleven").offsetTop
-  ) {
-    $.scrollify.move("#1");
-  } else {
-    $.scrollify.next();
-  }
-});
-
 // Initialize Scrollify with mandatory snap scrolling
 $.scrollify({
   section: "section",
@@ -23,24 +6,45 @@ $.scrollify({
   setHeights: false,
   snap: true,
   scrollSnapOffset: 0,
-  easing: "easeInOutSine",
+  easing: "easeOutSine",
 });
 
-// Close menu when a link is clicked
+// scrollify script to scroll to the first section on refresh
+$(document).ready(function () {
+  // Scroll to the first section
+  $.scrollify.move("#1");
+});
+
+// Scrollify Scroll Down button function with debounce
+$("#scrollDownID").on(
+  "click",
+  debounce(function () {
+    if (
+      window.scrollY == document.querySelector(".sectionWrap.eleven").offsetTop
+    ) {
+      $.scrollify.move("#1");
+    } else {
+      $.scrollify.next();
+    }
+  }, 500) // Adjust the delay (in milliseconds) as needed
+);
+// Debounce function to delay execution of the click function
+function debounce(func, delay) {
+  let timeout;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      func.apply(context, args);
+    }, delay);
+  };
+}
+// Toggle the state of the menu trigger checkbox
 var menuTrigger = $("#menu_trigger");
 var menuLinks = $(".menu-links li a");
-
-// Add click event listener to each menu link
 menuLinks.on("click", function () {
-  // Toggle the state of the menu trigger checkbox
   menuTrigger.prop("checked", !menuTrigger.prop("checked"));
-
-  // Update the current section based on the clicked link
-  let targetId = $(this).attr("href");
-  let targetSection = $(targetId);
-  $("section").removeClass("active");
-  targetSection.addClass("active");
-  
 });
 
 // Set up smooth scroll effect for anchor links
@@ -67,18 +71,6 @@ $(window).scroll(function () {
     scrollDownElement.style.transform = `scaleY(1)`;
   }
 
-  //caption text visibility
-  var elementSelector = ".captionMain";
-  const captionElement = document.querySelector(elementSelector);
-  var scrollThreshold = window.innerHeight * 0.2;
-  var opacityThreshold = 0.0;
-  const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-  if (scrollPosition >= scrollThreshold) {
-    captionElement.style.opacity = opacityThreshold;
-  } else {
-    captionElement.style.opacity = 1 - opacityThreshold;
-  }
-
   //scrollbar style
   var scroll = $(window).scrollTop();
   var dh = $(document).height();
@@ -86,15 +78,27 @@ $(window).scroll(function () {
   var scrollPercent = (scroll / (dh - wh)) * wh;
   $("#progressbar").css("height", scrollPercent + "px");
 
-  // Highlight current section in menu on scroll
-  $(".sectionWrap").each(function () {
-    const sectionId = $(this).attr("id");
-    const sectionTop = $(this).offset().top;
-    const sectionHeight = $(this).outerHeight();
+  //caption text visibility
+  const captionElement = document.querySelector(".captionMain");
+  var scrollThreshold = window.innerHeight * 0.2;
+  var opacityThreshold = 0.0;
+  const scrollPosition = $(this).scrollTop();
+  if (scrollPosition >= scrollThreshold) {
+    captionElement.style.opacity = opacityThreshold;
+  } else {
+    captionElement.style.opacity = 1 - opacityThreshold;
+  }
 
+  // Highlight current section in menu on scroll
+  $("section").each(function () {
+    var sectionTop = $(this).offset().top;
+    var sectionHeight = $(this).outerHeight();
+    var sectionId = $(this).attr("id");
+
+    // Check if the middle of the section is in the viewport
     if (
-      scrollPosition >= sectionTop &&
-      scrollPosition < sectionTop + sectionHeight
+      scrollPosition + window.innerHeight / 2 >= sectionTop &&
+      scrollPosition + window.innerHeight / 2 < sectionTop + sectionHeight
     ) {
       $(".menu__item").removeClass("menu__item--current");
       $(".menu__link[href='#" + sectionId + "']")

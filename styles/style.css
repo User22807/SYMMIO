@@ -365,7 +365,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		font-size: 2em;
 		font-weight: 600;
 		display: block;
-		margin: 2em 0em 0em -0.1em;
+		margin: 0em 0em 2em -0.1em;
 	}
 
 	/* Menu styles */
