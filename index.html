@@ -1366,8 +1366,8 @@
         col += smoothstep(0.015, 0.025, abs(sdEye));
     // Eye core creation and reposition
         vec2 diff = 2.0 * rotatedP;
-        diff.x += (iMousePos.y / iResolution.x) / 5.0;
-        diff.y -= (iMousePos.x / iResolution.y) / 5.0;
+        diff.x += (iMousePos.y / iResolution.x/ 2.0)-((iResolution.x/8.0)/iResolution.x) ;
+        diff.y -= (iMousePos.x / iResolution.y) / 2.0-((iResolution.y/1.8)/iResolution.y);
 
         float distance = length(diff) - 0.3 - 2.0 * smoothstep(0.895, 0.9, 0.0);
         float eyeMask = max(distance, sdEye);
