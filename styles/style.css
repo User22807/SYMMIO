@@ -96,13 +96,6 @@ section {
 	transition: 1s;
 }
 
-input:checked+.minimal-slider {
-	filter: invert(0%);
-}
-
-input:checked+.minimal-slider:before {
-	filter: invert(100%);
-}
 
 input:checked+.minimal-slider:before {
 	-webkit-transform: translateX(15px);

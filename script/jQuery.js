@@ -19,8 +19,8 @@ const toggleSwitch = document.getElementById("toggleSwitch");
 const htmlElement = document.querySelector("html");
 toggleSwitch.addEventListener("change", function () {
   htmlElement.style.filter = toggleSwitch.checked
-    ? "invert(0%)"
-    : "invert(100%)";
+    ? "invert(0%) hue-rotate(0deg)"
+    : "invert(100%) hue-rotate(180deg)";
 });
 
 // Scrollify Scroll Down button function with debounce
