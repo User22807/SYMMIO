@@ -9,10 +9,18 @@ $.scrollify({
   easing: "easeOutSine",
 });
 
-// scrollify script to scroll to the first section on refresh
+// scroll to the first section on refresh
 $(document).ready(function () {
-  // Scroll to the first section
   $.scrollify.move("#1");
+});
+
+// Dark/Light mode function
+const toggleSwitch = document.getElementById("toggleSwitch");
+const htmlElement = document.querySelector("html");
+toggleSwitch.addEventListener("change", function () {
+  htmlElement.style.filter = toggleSwitch.checked
+    ? "invert(0%)"
+    : "invert(100%)";
 });
 
 // Scrollify Scroll Down button function with debounce
@@ -79,14 +87,17 @@ $(window).scroll(function () {
   $("#progressbar").css("height", scrollPercent + "px");
 
   //caption text visibility
+  const toggleSwitch = document.querySelector(".minimal-switch");
   const captionElement = document.querySelector(".captionMain");
+
   var scrollThreshold = window.innerHeight * 0.2;
-  var opacityThreshold = 0.0;
   const scrollPosition = $(this).scrollTop();
   if (scrollPosition >= scrollThreshold) {
-    captionElement.style.opacity = opacityThreshold;
+    captionElement.style.opacity = 0.0;
+    toggleSwitch.style.opacity = 0.0;
   } else {
-    captionElement.style.opacity = 1 - opacityThreshold;
+    toggleSwitch.style.opacity = 1.0;
+    captionElement.style.opacity = 1.0;
   }
 
   // Highlight current section in menu on scroll
