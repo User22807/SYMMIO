@@ -8,7 +8,7 @@ $.scrollify({
   scrollSnapOffset: 0,
   easing: "easeOutSine",
 });
-//Trade switch functions 
+//Trade switch functions
 let isScrollLimited = false;
 const tradeToggleSwitch = document.getElementById("trade-switch");
 const tradeBtn = document.querySelector(".tradeBtn"); // Add this line to select the button
@@ -17,15 +17,15 @@ tradeToggleSwitch.addEventListener("change", function () {
     $.scrollify.enable(); // Enable Scrollify
     $.scrollify.move(0); // Scroll to the top
     tradeBtn.classList.remove("active"); // Corrected this line
-    
+
     isScrollLimited = false; // Disable scroll limit
   } else {
     $.scrollify.move(0); // Scroll to the top
     $.scrollify.disable(); // Disable Scrollify
     isScrollLimited = true; // Enable scroll limit
     tradeBtn.classList.add("active"); // Corrected this line
-    
-    const scrollLimit = $(".sectionWrap.three").offset().top/2.0;
+
+    const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
     $(window).on("scroll", function () {
       if (isScrollLimited) {
         const scrollTop = $(this).scrollTop();
@@ -36,7 +36,6 @@ tradeToggleSwitch.addEventListener("change", function () {
     });
   }
 });
-
 
 /* accordion */
 function triggerAccordion() {
@@ -67,18 +66,11 @@ function triggerAccordion() {
 /* init accordion logic if it exists on the page */
 $(".js-accordion") ? triggerAccordion() : false;
 
-
-
-
-
-
-
-$(document).ready(function() {
-
-  $(".toggle-accordion").on("click", function() {
+$(document).ready(function () {
+  $(".toggle-accordion").on("click", function () {
     var accordionId = $(this).attr("accordion-id"),
-      numPanelOpen = $(accordionId + ' .collapse.in').length;
-    
+      numPanelOpen = $(accordionId + " .collapse.in").length;
+
     $(this).toggleClass("active");
 
     if (numPanelOpen == 0) {
@@ -86,17 +78,16 @@ $(document).ready(function() {
     } else {
       closeAllPanels(accordionId);
     }
-  })
+  });
 
-  openAllPanels = function(aId) {
+  openAllPanels = function (aId) {
     console.log("setAllPanelOpen");
-    $(aId + ' .panel-collapse:not(".in")').collapse('show');
-  }
-  closeAllPanels = function(aId) {
+    $(aId + ' .panel-collapse:not(".in")').collapse("show");
+  };
+  closeAllPanels = function (aId) {
     console.log("setAllPanelclose");
-    $(aId + ' .panel-collapse.in').collapse('hide');
-  }
-     
+    $(aId + " .panel-collapse.in").collapse("hide");
+  };
 });
 // scroll to the first section on refresh
 $(document).ready(function () {
