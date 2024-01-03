@@ -24,76 +24,6 @@ function init() {
     iAnimProgress_4: { type: "v3", value: new THREE.Vector3() },
   };
 
-  // Trade switch functions
-  function handleTradeSwitchChange(toggleSwitch, btn) {
-    toggleSwitch.addEventListener("change", function () {
-      if (toggleSwitch.checked) {
-        $.scrollify.enable();
-        $.scrollify.move(0);
-        btn.classList.remove("active");
-        isScrollLimited = false;
-      } else {
-        $.scrollify.move(0);
-        $.scrollify.disable();
-        isScrollLimited = true;
-        btn.classList.add("active");
-
-        const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
-        $(window).on("scroll", function () {
-          if (isScrollLimited) {
-            const scrollTop = $(this).scrollTop();
-            if (scrollTop > scrollLimit) {
-              $(this).scrollTop(scrollLimit);
-            }
-          }
-        });
-      }
-    });
-  }
-
-  handleTradeSwitchChange(
-    document.getElementById("trade-switch-id"),
-    document.querySelector(".tradeBtn")
-  );
-  handleTradeSwitchChange(
-    document.getElementById("trade-switch2-id"),
-    document.querySelector(".tradeBtn2")
-  );
-
-  // Learn more animation mode function
-  function handleAnimationModeChange(toggleSwitch) {
-    toggleSwitch.addEventListener("change", function () {
-      const targetValue = toggleSwitch.checked ? 1.0 : 0.0;
-      // Use GSAP to tween the value gradually
-      gsap.to(uniforms["iClick"], {
-        duration: 1.5,
-        value: targetValue,
-        onUpdate: function () {},
-      });
-      // Tween the opacity of the element
-      gsap.to(document.getElementById("main"), {
-        duration: 1.5,
-        opacity: toggleSwitch.checked ? 1 : 0,
-        ease: "power2.inOut",
-      });
-      // Tween the opacity of the element
-      gsap.to(document.getElementById("mainMenuWrap"), {
-        duration: 1.5,
-        opacity: toggleSwitch.checked ? 1 : 0,
-        ease: "power2.inOut",
-      });
-      // Tween the opacity of the element
-      gsap.to(document.querySelector(".frontSection"), {
-        duration: 1.5,
-        opacity: toggleSwitch.checked ? 0 : 1,
-        ease: "power2.inOut",
-      });
-    });
-  }
-
-  handleAnimationModeChange(document.getElementById("trade-switch-id"));
-  handleAnimationModeChange(document.getElementById("trade-switch2-id"));
-
   const material = new THREE.ShaderMaterial({
     uniforms: uniforms,
     vertexShader: document.getElementById("vertexShader").textContent,
@@ -252,6 +182,7 @@ gsap.to(uniforms.iAnimProgress_4.value, {
 
 //***********     Other functions     ***********//
 
+
 // Initialize Scrollify with mandatory snap scrolling
 $.scrollify({
   section: "section",
@@ -262,6 +193,75 @@ $.scrollify({
   scrollSnapOffset: 0,
   easing: "easeOutSine",
 });
+// Trade switch functions
+function handleTradeSwitchChange(toggleSwitch, btn) {
+  toggleSwitch.addEventListener("change", function () {
+    if (toggleSwitch.checked) {
+      $.scrollify.enable();
+      $.scrollify.move(0);
+      btn.classList.remove("active");
+      isScrollLimited = false;
+    } else {
+      $.scrollify.move(0);
+      $.scrollify.disable();
+      isScrollLimited = true;
+      btn.classList.add("active");
+
+      const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
+      $(window).on("scroll", function () {
+        if (isScrollLimited) {
+          const scrollTop = $(this).scrollTop();
+          if (scrollTop > scrollLimit) {
+            $(this).scrollTop(scrollLimit);
+          }
+        }
+      });
+    }
+  });
+}
+
+handleTradeSwitchChange(
+  document.getElementById("trade-switch-id"),
+  document.querySelector(".tradeBtn")
+);
+handleTradeSwitchChange(
+  document.getElementById("trade-switch2-id"),
+  document.querySelector(".tradeBtn2")
+);
+
+// Learn more animation mode function
+function handleAnimationModeChange(toggleSwitch) {
+  toggleSwitch.addEventListener("change", function () {
+    const targetValue = toggleSwitch.checked ? 1.0 : 0.0;
+    // Use GSAP to tween the value gradually
+    gsap.to(uniforms["iClick"], {
+      duration: 1.5,
+      value: targetValue,
+      onUpdate: function () {},
+    });
+    // Tween the opacity of the element
+    gsap.to(document.getElementById("main"), {
+      duration: 1.5,
+      opacity: toggleSwitch.checked ? 1 : 0,
+      ease: "power2.inOut",
+    });
+    // Tween the opacity of the element
+    gsap.to(document.getElementById("mainMenuWrap"), {
+      duration: 1.5,
+      opacity: toggleSwitch.checked ? 1 : 0,
+      ease: "power2.inOut",
+    });
+    // Tween the opacity of the element
+    gsap.to(document.querySelector(".frontSection"), {
+      duration: 1.5,
+      opacity: toggleSwitch.checked ? 0 : 1,
+      ease: "power2.inOut",
+    });
+  });
+}
+
+handleAnimationModeChange(document.getElementById("trade-switch-id"));
+handleAnimationModeChange(document.getElementById("trade-switch2-id"));
 
 /* accordion */
 function triggerAccordion() {
