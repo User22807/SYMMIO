@@ -582,7 +582,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	height: 0;
 }
 
-.tradeBtn {
+.tradeBtn , .tradeBtn2 {
 	letter-spacing: 0.5em;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -596,7 +596,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 	color: #fff;
 }
 
-.tradeBtn.active {
+.tradeBtn.active , .tradeBtn2.active {
 	border-color: rgb(255, 92, 92);
 	color: #ffbaba;
 }
@@ -734,7 +734,7 @@ nav[role="custom-dropdown"] ul>li:hover {
 		flex-direction: column;
 	}
 
-	.tradeBtn {
+	.tradeBtn2 {
 		margin: 0 0 0 0.5em;
 		font-size: 2em;
 	}

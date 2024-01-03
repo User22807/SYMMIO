@@ -1,3 +1,257 @@
+//////////////////////////////THREE.JS(core)
+let camera, scene, renderer, uniforms, scrollProgress;
+
+init();
+animate();
+
+function init() {
+  const container = document.getElementById("webGLID");
+
+  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  scene = new THREE.Scene();
+
+  const geometry = new THREE.PlaneGeometry(2, 2);
+
+  uniforms = {
+    iClick: { value: 1.0 },
+    iTime: { value: 1.0 },
+    iResolution: { type: "v2", value: new THREE.Vector2() },
+    iMousePos: { type: "v2", value: new THREE.Vector2() },
+    iAnimProgress_1: { type: "v3", value: new THREE.Vector3() },
+    iAnimProgress_2: { type: "v3", value: new THREE.Vector3() },
+    iAnimProgress_3: { type: "v3", value: new THREE.Vector3() },
+    iAnimProgress_4: { type: "v3", value: new THREE.Vector3() },
+  };
+
+  // Trade switch functions
+  function handleTradeSwitchChange(toggleSwitch, btn) {
+    toggleSwitch.addEventListener("change", function () {
+      if (toggleSwitch.checked) {
+        $.scrollify.enable();
+        $.scrollify.move(0);
+        btn.classList.remove("active");
+        isScrollLimited = false;
+      } else {
+        $.scrollify.move(0);
+        $.scrollify.disable();
+        isScrollLimited = true;
+        btn.classList.add("active");
+
+        const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
+        $(window).on("scroll", function () {
+          if (isScrollLimited) {
+            const scrollTop = $(this).scrollTop();
+            if (scrollTop > scrollLimit) {
+              $(this).scrollTop(scrollLimit);
+            }
+          }
+        });
+      }
+    });
+  }
+
+  handleTradeSwitchChange(
+    document.getElementById("trade-switch-id"),
+    document.querySelector(".tradeBtn")
+  );
+  handleTradeSwitchChange(
+    document.getElementById("trade-switch2-id"),
+    document.querySelector(".tradeBtn2")
+  );
+
+  // Learn more animation mode function
+  function handleAnimationModeChange(toggleSwitch) {
+    toggleSwitch.addEventListener("change", function () {
+      const targetValue = toggleSwitch.checked ? 1.0 : 0.0;
+      // Use GSAP to tween the value gradually
+      gsap.to(uniforms["iClick"], {
+        duration: 1.5,
+        value: targetValue,
+        onUpdate: function () {},
+      });
+      // Tween the opacity of the element
+      gsap.to(document.getElementById("main"), {
+        duration: 1.5,
+        opacity: toggleSwitch.checked ? 1 : 0,
+        ease: "power2.inOut",
+      });
+      // Tween the opacity of the element
+      gsap.to(document.getElementById("mainMenuWrap"), {
+        duration: 1.5,
+        opacity: toggleSwitch.checked ? 1 : 0,
+        ease: "power2.inOut",
+      });
+      // Tween the opacity of the element
+      gsap.to(document.querySelector(".frontSection"), {
+        duration: 1.5,
+        opacity: toggleSwitch.checked ? 0 : 1,
+        ease: "power2.inOut",
+      });
+    });
+  }
+
+  handleAnimationModeChange(document.getElementById("trade-switch-id"));
+  handleAnimationModeChange(document.getElementById("trade-switch2-id"));
+
+  const material = new THREE.ShaderMaterial({
+    uniforms: uniforms,
+    vertexShader: document.getElementById("vertexShader").textContent,
+    fragmentShader: document.getElementById("fragmentShader").textContent,
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  renderer = new THREE.WebGLRenderer();
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("resize", onWindowResize);
+}
+
+function onWindowResize() {
+  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
+  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+// Update mouse position uniform
+function handleMouseMove(event) {
+  uniforms.iMousePos.value.x = event.clientX;
+  uniforms.iMousePos.value.y = window.innerHeight - event.clientY;
+}
+
+//
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Update time
+  uniforms["iTime"].value = performance.now() / 1000;
+
+  // Update resolution if needed
+  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
+  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  renderer.render(scene, camera);
+}
+
+// Create a timeline for the intro animation
+const introTimeline = gsap.timeline();
+
+// Add an initial state for iAnimProgress_4.z
+introTimeline.from(uniforms.iAnimProgress_4.value, {
+  z: 2, // Set the initial value
+  duration: 3.0, // Adjust the duration as needed
+});
+
+gsap.to(uniforms.iAnimProgress_1.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.one",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_1.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.two",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_1.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.three",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.four",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.five",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_2.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.six",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+
+gsap.to(uniforms.iAnimProgress_3.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.seven",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_3.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.eight",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_3.value, {
+  z: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.nine",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_4.value, {
+  x: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.ten",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+gsap.to(uniforms.iAnimProgress_4.value, {
+  y: 1,
+  scrollTrigger: {
+    trigger: ".sectionWrap.eleven",
+    start: "0%",
+    end: "100%",
+    scrub: true,
+  },
+});
+
+//***********     Other functions     ***********//
+
 // Initialize Scrollify with mandatory snap scrolling
 $.scrollify({
   section: "section",
@@ -7,34 +261,6 @@ $.scrollify({
   snap: true,
   scrollSnapOffset: 0,
   easing: "easeOutSine",
-});
-//Trade switch functions
-let isScrollLimited = false;
-const tradeToggleSwitch = document.getElementById("trade-switch");
-const tradeBtn = document.querySelector(".tradeBtn"); // Add this line to select the button
-tradeToggleSwitch.addEventListener("change", function () {
-  if (tradeToggleSwitch.checked) {
-    $.scrollify.enable(); // Enable Scrollify
-    $.scrollify.move(0); // Scroll to the top
-    tradeBtn.classList.remove("active"); // Corrected this line
-
-    isScrollLimited = false; // Disable scroll limit
-  } else {
-    $.scrollify.move(0); // Scroll to the top
-    $.scrollify.disable(); // Disable Scrollify
-    isScrollLimited = true; // Enable scroll limit
-    tradeBtn.classList.add("active"); // Corrected this line
-
-    const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
-    $(window).on("scroll", function () {
-      if (isScrollLimited) {
-        const scrollTop = $(this).scrollTop();
-        if (scrollTop > scrollLimit) {
-          $(this).scrollTop(scrollLimit);
-        }
-      }
-    });
-  }
 });
 
 /* accordion */
@@ -454,215 +680,4 @@ content.forEach((item, i, arr) => {
   if (i < arr.length - 1) {
     timeline.yoyo(true).repeat(1).repeatDelay(0.5);
   }
-});
-
-//////////////////////////////THREE.JS(core)
-let camera, scene, renderer, uniforms, scrollProgress;
-
-init();
-animate();
-
-function init() {
-  const container = document.getElementById("webGLID");
-
-  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-  scene = new THREE.Scene();
-
-  const geometry = new THREE.PlaneGeometry(2, 2);
-
-  uniforms = {
-    iClick: { value: 1.0 },
-    iTime: { value: 1.0 },
-    iResolution: { type: "v2", value: new THREE.Vector2() },
-    iMousePos: { type: "v2", value: new THREE.Vector2() },
-    iAnimProgress_1: { type: "v3", value: new THREE.Vector3() },
-    iAnimProgress_2: { type: "v3", value: new THREE.Vector3() },
-    iAnimProgress_3: { type: "v3", value: new THREE.Vector3() },
-    iAnimProgress_4: { type: "v3", value: new THREE.Vector3() },
-  };
-  // Leanr more animation mode function
-  const toggleSwitch = document.getElementById("trade-switch");
-  toggleSwitch.addEventListener("change", function () {
-    const targetValue = toggleSwitch.checked ? 1.0 : 0.0;
-    // Use GSAP to tween the value gradually
-    gsap.to(uniforms["iClick"], {
-      duration: 1.5, // Adjust the duration as needed
-      value: targetValue,
-      onUpdate: function () {},
-    });
-    // Tween the opacity of the element
-    gsap.to(document.getElementById("main"), {
-      duration: 1.5, // Adjust the duration to match the duration above
-      opacity: toggleSwitch.checked ? 1 : 0, // Set the target opacity based on the toggle state
-      ease: "power2.inOut", // Use an easing function for a smoother transition
-    });
-    // Tween the opacity of the element
-    gsap.to(document.getElementById("mainMenuWrap"), {
-      duration: 1.5, // Adjust the duration to match the duration above
-      opacity: toggleSwitch.checked ? 1 : 0, // Set the target opacity based on the toggle state
-      ease: "power2.inOut", // Use an easing function for a smoother transition
-    });
-    // Tween the opacity of the element
-    gsap.to(document.querySelector(".frontSection"), {
-      duration: 1.5, // Adjust the duration to match the duration above
-      opacity: toggleSwitch.checked ? 0 : 1, // Set the target opacity based on the toggle state
-      ease: "power2.inOut", // Use an easing function for a smoother transition
-    });
-  });
-
-  const material = new THREE.ShaderMaterial({
-    uniforms: uniforms,
-    vertexShader: document.getElementById("vertexShader").textContent,
-    fragmentShader: document.getElementById("fragmentShader").textContent,
-  });
-
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  container.appendChild(renderer.domElement);
-  window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("resize", onWindowResize);
-}
-
-function onWindowResize() {
-  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
-  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-// Update mouse position uniform
-function handleMouseMove(event) {
-  uniforms.iMousePos.value.x = event.clientX;
-  uniforms.iMousePos.value.y = window.innerHeight - event.clientY;
-}
-
-//
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  // Update time
-  uniforms["iTime"].value = performance.now() / 1000;
-
-  // Update resolution if needed
-  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
-  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  renderer.render(scene, camera);
-}
-
-// Create a timeline for the intro animation
-const introTimeline = gsap.timeline();
-
-// Add an initial state for iAnimProgress_4.z
-introTimeline.from(uniforms.iAnimProgress_4.value, {
-  z: 2, // Set the initial value
-  duration: 3.0, // Adjust the duration as needed
-});
-
-gsap.to(uniforms.iAnimProgress_1.value, {
-  x: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.one",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_1.value, {
-  y: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.two",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_1.value, {
-  z: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.three",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_2.value, {
-  x: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.four",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_2.value, {
-  y: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.five",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_2.value, {
-  z: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.six",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-
-gsap.to(uniforms.iAnimProgress_3.value, {
-  x: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.seven",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_3.value, {
-  y: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.eight",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_3.value, {
-  z: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.nine",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_4.value, {
-  x: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.ten",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
-});
-gsap.to(uniforms.iAnimProgress_4.value, {
-  y: 1,
-  scrollTrigger: {
-    trigger: ".sectionWrap.eleven",
-    start: "0%",
-    end: "100%",
-    scrub: true,
-  },
 });
