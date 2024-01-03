@@ -7,7 +7,6 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	overflow-x: hidden;
-	touch-action: none;
 	transition: filter 2s ease;
 	/* Standard syntax */
 	-webkit-transition: filter 2s ease;
@@ -16,7 +15,6 @@ html {
 	/* For Firefox */
 	-o-transition: filter 2s ease;
 	/* For Opera */
-
 }
 
 body {
