@@ -39,7 +39,7 @@ section {
 
 .frontSection {
 	color: #F5F6F9;
-	width: 70%; 
+	width: 70%;
 	padding: 12em 15% 0em 15%;
 	opacity: 0.0;
 	position: absolute;
@@ -168,6 +168,7 @@ a {
 	border-color: rgb(255, 92, 92);
 	color: #ffbaba;
 }
+
 /* Email button styles */
 .emailBtn {
 	width: 40%;
@@ -187,10 +188,12 @@ a {
 	color: #fff;
 	margin-bottom: 1em;
 }
+
 .emailBtn:hover {
 	border-color: rgb(255, 92, 92);
 	color: #ffbaba;
 }
+
 .accordion-forms {
 	font-size: 2em;
 	padding-right: 0 !important;
@@ -571,18 +574,21 @@ nav[role="custom-dropdown"] ul>li:hover {
 	border-width: 0 0 0.1em 0;
 	transform: translate3d(-10px, -10px, 0);
 }
+
 /* Trade button styles */
 .trade-switch {
 	width: 20px;
 	height: 20px;
 }
+
 .trade-switch input {
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
 
-.tradeBtn , .tradeBtn2 {
+.tradeBtn,
+.tradeBtn2 {
 	letter-spacing: 0.5em;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -596,7 +602,8 @@ nav[role="custom-dropdown"] ul>li:hover {
 	color: #fff;
 }
 
-.tradeBtn.active , .tradeBtn2.active {
+.tradeBtn.active,
+.tradeBtn2.active {
 	border-color: rgb(255, 92, 92);
 	color: #ffbaba;
 }
@@ -1030,6 +1037,26 @@ nav[role="custom-dropdown"] ul>li:hover {
 @media screen and (max-width: 1000px) {
 	html {
 		font-size: calc(0.5vw + 0.7vh);
+	}
+
+	.frontSection {
+		width: 80%;
+		padding: 12em 10% 0em 10%;
+	}
+
+	.frontssubtitle {
+		margin: 2em 0;
+		font-size: 2em;
+	}
+
+	.frontSectionCardHeader {
+		margin: 2em 0em 0.5em 0em;
+		font-size: 3em;
+	}
+
+	.frontSectionCard {
+		font-size: 1.5em;
+		flex-direction: row;
 	}
 
 	/*---------------------About Us----------------------  */
