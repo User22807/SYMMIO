@@ -182,7 +182,6 @@ gsap.to(uniforms.iAnimProgress_4.value, {
 
 //***********     Other functions     ***********//
 
-
 // Initialize Scrollify with mandatory snap scrolling
 $.scrollify({
   section: "section",
@@ -201,11 +200,13 @@ function handleTradeSwitchChange(toggleSwitch, btn) {
       $.scrollify.move(0);
       btn.classList.remove("active");
       isScrollLimited = false;
+      btn.textContent = "Trade";
     } else {
       $.scrollify.move(0);
       $.scrollify.disable();
       isScrollLimited = true;
       btn.classList.add("active");
+      btn.textContent = "Home";
 
       const scrollLimit = $(".sectionWrap.three").offset().top / 1.5;
       $(window).on("scroll", function () {
@@ -228,7 +229,6 @@ handleTradeSwitchChange(
   document.getElementById("trade-switch2-id"),
   document.querySelector(".tradeBtn2")
 );
-
 // Learn more animation mode function
 function handleAnimationModeChange(toggleSwitch) {
   toggleSwitch.addEventListener("change", function () {
@@ -255,6 +255,12 @@ function handleAnimationModeChange(toggleSwitch) {
     gsap.to(document.querySelector(".frontSection"), {
       duration: 1.5,
       opacity: toggleSwitch.checked ? 0 : 1,
+      ease: "power2.inOut",
+    });
+    // Tween the opacity of the element
+    gsap.to(document.querySelector(".tradeSection"), {
+      duration: 1.5,
+      opacity: toggleSwitch.checked ? 1 : 0,
       ease: "power2.inOut",
     });
   });
