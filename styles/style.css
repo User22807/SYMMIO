@@ -29,8 +29,7 @@ section {
 	position: relative;
 }
 
-.tradeSection {
-}
+.tradeSection {}
 
 .inquire {
 	margin-top: 10em;
@@ -203,7 +202,7 @@ a {
 @media (max-width: 800px) {
 	.accordion-forms {
 		padding: 0 10px !important;
-		margin: 25px 0;
+		margin: 0;
 	}
 }
 
@@ -743,7 +742,12 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 
 	.tradeBtn2 {
-		margin: 0 0 0 0.5em;
+		margin: 0 0 0 0.1em;
+		font-size: 2em;
+	}
+
+	.tradeBtn2.active {
+		margin: 0 0 0 0.3em;
 		font-size: 2em;
 	}
 
@@ -920,6 +924,10 @@ nav[role="custom-dropdown"] ul>li:hover {
 	flex-direction: row;
 }
 
+.accordion-block__btn {
+	font-size: 1.2em;
+}
+
 .button_spilit {
 	display: flex;
 	flex-direction: row;
@@ -1040,13 +1048,18 @@ nav[role="custom-dropdown"] ul>li:hover {
 		font-size: calc(0.5vw + 0.7vh);
 	}
 
+	.emailBtn {
+		font-size: 2em;
+
+	}
+
 	.frontSection {
 		width: 80%;
 		padding: 12em 10% 0em 10%;
 	}
 
 	.frontssubtitle {
-		margin: 2em 0;
+		margin: 2em 1em;
 		font-size: 2em;
 	}
 
