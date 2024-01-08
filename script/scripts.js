@@ -369,10 +369,13 @@ menuLinks.on("click", function () {
 // Set up smooth scroll effect for anchor links
 $('a[href^="#"]').on("click", function (event) {
   event.preventDefault();
-  let target = $($(this).attr("href"));
+  let targetId = $(this).attr("href");
+  let target = $(targetId);
+
   if (target.length) {
-    // Get the index of the target section
-    let index = target.index();
+    // Get the index of the target section based on its ID
+    let index = $("section").index(target);
+
     // Scroll to the target section using Scrollify
     $.scrollify.move(index);
   }
