@@ -185,7 +185,7 @@ gsap.to(uniforms.iAnimProgress_4.value, {
 // Initialize Scrollify with mandatory snap scrolling
 $.scrollify({
   section: "section",
-  scrollSpeed: 1500,
+  scrollSpeed: 500,
   scrollbars: false,
   setHeights: false,
   snap: true,
