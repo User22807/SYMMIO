@@ -267,7 +267,7 @@ float sunAnimTimer= sin(iTime/8.0);
 
     vec3 sunCol = HSV2RGB(vec3(0.01, 0.5, 0.0002 * smoothstep(1.0, 4.0, iTime) ));
     
- sunDir =  normalize(vec3(0.0, 0.2+sunAnimTimer/3.0, 1.0));
+ sunDir =  vec3(-0.0, 0.0+sunAnimTimer/4.0, 1.0);
  vec3 center = ro+vec3(-100.0, 40.0, 100.0);
   vec4 sdim = vec4(center, 50);
   vec2 pi = raySphere(ro, rd, sdim);
@@ -381,7 +381,8 @@ vec3 groundRender2(vec3 col, vec3 ro, vec3 rd, vec2 p) {
     gpfre *= gpfre;    
     gpfre *= gpfre;
     gpfre *= gpfre;
-    gpfre *=0.5;
+    
+    gpfre *=0.2;
 
 
     vec3 grr = reflect(rd, gpn);
