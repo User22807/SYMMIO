@@ -1,17 +1,75 @@
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
 <script src="https://unpkg.com/gsap@3.5.1/dist/gsap.min.js"></script>
 <script src="https://unpkg.com/gsap@3.5.1/dist/ScrollTrigger.min.js"></script>
-
-<div id="webgl-container"></div>
 <style>
-    body {
-	margin: 0;
-	padding: 0;
+  @import url('https://fonts.googleapis.com/css2?family=Manrope');
+
+  body {
+    font-family: "Manrope", sans-serif;
+    margin: 0;
+    padding: 0;
+
+  }
+.logo{
+  position: fixed;
+  height: 30px;
+  margin: 30px;
 }
+  .box404 {
+    position: fixed;
+    z-index: 2;
+    bottom: 10%;
+    width: 60%;
+    margin-left: 20%;
+  }
+
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  }
+
+  .header1 {
+    font-weight: 800;
+    font-size: 8em;
+    color: aliceblue;
+    text-align: center;
+    line-height: 110%;
+  }
+
+  .header2 {
+    line-height: 140%;
+    font-weight: 800;
+    font-size: 2em;
+    color: aliceblue;
+    text-align: center;
+  }
+  .header3 {
+    font-size: 1em;
+    color: aliceblue;
+    text-align: center;
+    line-height: 160%;
+
+  }
+  #webgl-container {
+    position: fixed;
+    z-index: 0;
+  }
 </style>
+<div id="webgl-container"></div>
+<a  href="./index.html"> <img src="./assets/SYMMIO-Logo.png"
+  class=" logo" />
+</a>
+<div class="box404">
+  <div class="textContainer">
+  <a class="header1">404 : </a>
+  <a class="header2">Symmetrical Anomaly Detected</a>
+  <a class="header3">Page Not Found. But perhaps, the page was never meant to be found in the first place. This is not a linear, central web you're traversing, friend. This is an open, ever-shifting lattice of possibilities. Retrace your steps, or forge a new path. The destination might surprise you.</a>
+
+</div>
+</div>
 <script id="fragmentShader" type="x-shader/x-fragment">
-  
+
   #extension GL_OES_standard_derivatives : enable
 
   uniform sampler2D myTexture;
@@ -396,78 +454,78 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 </script>
 
 <script>
-  
+
   let canvas;
-let camera, scene, renderer;
-let uniforms;
-let startTime;
+  let camera, scene, renderer;
+  let uniforms;
+  let startTime;
 
-init();
-animate();
+  init();
+  animate();
 
-function init() {
-  console.log('init');
-  container = document.getElementById("webgl-container");
-  
-  startTime = Date.now();
-  
-  camera = new THREE.OrthographicCamera(0, window.innerWidth, 0, window.innerHeight, 0, 0);
-  
-  scene = new THREE.Scene();
-  
-  const geometry = new THREE.PlaneBufferGeometry(window.innerWidth, window.innerHeight);
-  
-uniforms = {
-  iTime: {type: "f", value: 1.0},
-  iResolution: {type: "v2", value: new THREE.Vector2()},
-  iMousePos: {type: "v2", value: new THREE.Vector2()},
-  iScrollProgress: { type: "f" },
-}
+  function init() {
+    console.log('init');
+    container = document.getElementById("webgl-container");
 
-  
-  // Retrieve the vertex shader code from the script tag with the specified ID
-  const vertexShaderCode = document.getElementById("vertexShader").textContent;
+    startTime = Date.now();
 
-// Inside the init() function, use the vertexShaderCode in ShaderMaterial
-const material = new THREE.ShaderMaterial({
-  uniforms: uniforms,
-  vertexShader: vertexShaderCode, // Use the vertex shader code from the variable
-  fragmentShader: document.getElementById("fragmentShader").textContent,
-});
-  
-  var mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-  
-  renderer = new THREE.WebGLRenderer({
-    precision: "lowp", // Set precision to "highp" for smooth gradients and better precision
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement);
-  
- gsap.registerPlugin(ScrollTrigger);
+    camera = new THREE.OrthographicCamera(0, window.innerWidth, 0, window.innerHeight, 0, 0);
 
-function updateScrollProgress() {
-  const currentScroll = window.scrollY;
-}
-   
-  handleResize();
-  window.addEventListener("resize", handleResize);
+    scene = new THREE.Scene();
 
-  
-  // Call the updateScrollProgress function when the page loads and when scrolling occurs
-  window.addEventListener("mousemove", handleMouseMove);
+    const geometry = new THREE.PlaneBufferGeometry(window.innerWidth, window.innerHeight);
+
+    uniforms = {
+      iTime: { type: "f", value: 1.0 },
+      iResolution: { type: "v2", value: new THREE.Vector2() },
+      iMousePos: { type: "v2", value: new THREE.Vector2() },
+      iScrollProgress: { type: "f" },
+    }
+
+
+    // Retrieve the vertex shader code from the script tag with the specified ID
+    const vertexShaderCode = document.getElementById("vertexShader").textContent;
+
+    // Inside the init() function, use the vertexShaderCode in ShaderMaterial
+    const material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: vertexShaderCode, // Use the vertex shader code from the variable
+      fragmentShader: document.getElementById("fragmentShader").textContent,
+    });
+
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    renderer = new THREE.WebGLRenderer({
+      precision: "lowp", // Set precision to "highp" for smooth gradients and better precision
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function updateScrollProgress() {
+      const currentScroll = window.scrollY;
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+
+    // Call the updateScrollProgress function when the page loads and when scrolling occurs
+    window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", updateScrollProgress);
-}
- 
-function handleResize() {
-  uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
-  uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
-  
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
+  }
 
- 
-  
+  function handleResize() {
+    uniforms.iResolution.value.x = window.innerWidth * window.devicePixelRatio;
+    uniforms.iResolution.value.y = window.innerHeight * window.devicePixelRatio;
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+
+
   function handleMouseMove(event) {
     // Update mouse position
     uniforms.iMousePos.value.x = event.clientX * window.devicePixelRatio;
@@ -475,14 +533,14 @@ function handleResize() {
   }
 
 
-function animate() {
-  render();
-  requestAnimationFrame(animate);
-}
+  function animate() {
+    render();
+    requestAnimationFrame(animate);
+  }
 
-function render() {
-  const currentTime = Date.now();
-  uniforms.iTime.value = (currentTime - startTime) * 0.001;
-  renderer.render(scene, camera);
-}
+  function render() {
+    const currentTime = Date.now();
+    uniforms.iTime.value = (currentTime - startTime) * 0.001;
+    renderer.render(scene, camera);
+  }
 </script>
