@@ -276,6 +276,7 @@ float sunAnimTimer= sin(iTime/8.0);
   float ri = rayPlane(ro, rd, pdim);
 
   vec3 col = vec3(0.0);
+  col += HSV2RGB(vec3(0.97, 0.0, 0.1 * smoothstep(1.0, 4.0, iTime)));
   
   col += sunCol/pow((1.001-((dot(sunDir, rd)))), 2.0);
 
@@ -306,7 +307,6 @@ float sunAnimTimer= sin(iTime/8.0);
   float rw = 0.1*sdim.w;
   
   //atmosphere light
-   col += HSV2RGB(vec3(0.97, 0.0, 0.1 * smoothstep(1.0, 4.0, iTime)));
 
   col += gcol/max(abs(rd.y), 0.0033);
 
