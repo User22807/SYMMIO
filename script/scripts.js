@@ -102,6 +102,21 @@ function resetCounter() {
   // Reset colors to the initial state
   updateColors();
 }
+function animCounter() {
+  // Check if iAnimProgress_1.x is more than 0.1 and iAnimProgress_1.y is less than 0.9
+  if (
+    uniforms.iAnimProgress_1.value.x > 0.1 &&
+    uniforms.iAnimProgress_1.value.y < 0.9
+  ) {
+    // Start counting if not already counting
+    if (!counterInterval) {
+      startCounter();
+    }
+  } else {
+    // Reset and stop counting if conditions are not met
+    resetCounter();
+  }
+}
 // Check conditions using ScrollTrigger
 gsap.to(uniforms.iAnimProgress_1.value, {
   x: 1,
@@ -127,21 +142,7 @@ gsap.to(uniforms.iAnimProgress_1.value, {
 
 // Function to check conditions and start/stop counting
 // Function to check conditions and start/stop counting
-function animCounter() {
-  // Check if iAnimProgress_1.x is more than 0.1 and iAnimProgress_1.y is less than 0.9
-  if (
-    uniforms.iAnimProgress_1.value.x > 0.1 &&
-    uniforms.iAnimProgress_1.value.y < 0.9
-  ) {
-    // Start counting if not already counting
-    if (!counterInterval) {
-      startCounter();
-    }
-  } else {
-    // Reset and stop counting if conditions are not met
-    resetCounter();
-  }
-}
+
 // Function to update colors based on the counter value
 function updateColors() {
   const colorList = document.getElementById("colorList");

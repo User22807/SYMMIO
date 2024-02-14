@@ -92,8 +92,28 @@
             <div class="box__text one" id="text1">
                 <div class="captionMain">
                     <div class="">A protocol for</div>
+                    <style>
+                        #rollingTextContainer {
+                            text-align: center;
+                            white-space: nowrap;
+                            /* Prevent line break */
+                            transition: width 0.5s ease-in-out;
+                            /* Add transition for smooth width change */
+                            position: fixed;
+                            /* Fixed position */
+                            z-index: 10;
+                            /* Adjust the z-index as needed */
+                            left: calc(50% - 3.5em);
+                            /* Adjust the value as needed */
+                            /* Center horizontally */
+                            transform: translateX(-50%);
+                            /* Center horizontally */
+                            color: transparent;
+                            cursor: default;
+                        }
+                    </style>
                     <div id="rollingTextContainer">
-                        <span id="staticWord">SYMMETRICAL</span> <span id="changingWord" class="fade-in"></span>
+                        <span style="">SYMMETRICAL</span> <span id="changingWord" class="fade-in"></span>
                     </div>
                 </div>
                 <div class="titleSYMM ">SYMMIO</div>
@@ -214,9 +234,10 @@
                     <div class="about">
                         <div class="button_box">
                             <div class="button_spilit">
-                            <div class="about_text gradiant" style="font-size: 5em; cursor: pointer;"><a href="https://user228.xyz/blog">Blog</a> </div>
+                                <div class="about_text gradiant" style="font-size: 5em; cursor: pointer;"><a
+                                        href="https://user228.xyz/blog">Blog</a> </div>
 
-                            
+
                             </div>
                         </div>
                         <div class="button_box">

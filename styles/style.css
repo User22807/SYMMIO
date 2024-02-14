@@ -149,43 +149,14 @@ input:checked+.minimal-slider:before {
 }
 
 
-#rollingTextContainer {
-	text-align: center;
-	white-space: nowrap;
-	/* Prevent line break */
-	transition: width 0.5s ease-in-out;
-	/* Add transition for smooth width change */
-	position: fixed;
-	/* Fixed position */
-	z-index: 10;
-	/* Adjust the z-index as needed */
-	left: calc(50% - 3.5em);
-	/* Adjust the value as needed */
-	/* Center horizontally */
-	transform: translateX(-50%);
-	/* Center horizontally */
-	color: transparent;
-	cursor: default;
-}
+
 
 
 #changingWord {
 	background: linear-gradient(to right, #ff8b8b, #ff3434);
 	/* Gradient for the words */
-	-webkit-background-clip: text;
+	background-clip: text;
 	/* Apply gradient to text */
-	display: inline-block;
-	transition: opacity 0.5s ease-in-out;
-	/* Add transition for smooth opacity change */
-	cursor: default;
-}
-
-#staticWord {
-	background: linear-gradient(to right, #ffffff, #ff8b8b);
-	/* Gradient for the words */
-	-webkit-background-clip: text;
-	/* Apply gradient to text */
-	display: inline-block;
 	transition: opacity 0.5s ease-in-out;
 	/* Add transition for smooth opacity change */
 	cursor: default;
@@ -878,7 +849,6 @@ nav[role="custom-dropdown"] ul>li:hover {
 	}
 	#staticWord {
 		font-weight: 100;
-
 		background: var(--mobile-red);
 		-webkit-background-clip: text;
 		-moz-background-clip: text;
